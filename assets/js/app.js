@@ -1,5 +1,6 @@
 import { createRouter } from './router.js';
 import { createChip, createModal, showToast } from './components.js';
+import { showDisclaimerOnLoad } from './disclaimer.js';
 
 const views = {
   home: document.getElementById('view-home'),
@@ -451,6 +452,7 @@ function init() {
   initBannerTooltip();
   handleNavButtons();
   setupRouter();
+  showDisclaimerOnLoad();
 }
 
 document.addEventListener('DOMContentLoaded', init);

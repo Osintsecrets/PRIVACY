@@ -12,5 +12,11 @@
   "settings.language": "שפה",
   "settings.reducedMotion": "הפחתת תנועה",
   "settings.install": "התקנת האפליקציה",
-  "settings.offline": "סטטוס לא מקוון"
+  "settings.offline": "סטטוס לא מקוון",
+  "disclaimer": {
+    "title": "הצהרה משפטית, אתית ומוסרית מקיפה",
+    "agree": "אני מסכים/ה",
+    "disagree": "אינני מסכים/ה",
+    "leave": "עזוב את האתר"
+  }
 }

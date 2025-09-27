@@ -12,5 +12,11 @@
   "settings.language": "Language",
   "settings.reducedMotion": "Reduced motion",
   "settings.install": "Install App",
-  "settings.offline": "Offline status"
+  "settings.offline": "Offline status",
+  "disclaimer": {
+    "title": "Comprehensive Legal, Ethical, and Moral Disclaimer",
+    "agree": "I Agree",
+    "disagree": "I Do Not Agree",
+    "leave": "Leave site"
+  }
 }
