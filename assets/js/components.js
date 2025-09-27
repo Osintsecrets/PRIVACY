@@ -1,3 +1,126 @@
+let searchId = 0;
+
+export function debounce(fn, wait = 220) {
+  let timer = null;
+  return (...args) => {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      fn.apply(undefined, args);
+    }, wait);
+  };
+}
+
+export function createSearchField({ id, label, placeholder = '', onChange, delay = 220 } = {}) {
+  const fieldId = id || `search-field-${searchId += 1}`;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'search-field';
+
+  const labelEl = document.createElement('label');
+  labelEl.className = 'search-label';
+  labelEl.setAttribute('for', fieldId);
+  labelEl.textContent = label;
+
+  const input = document.createElement('input');
+  input.type = 'search';
+  input.id = fieldId;
+  input.className = 'search-input';
+  input.placeholder = placeholder;
+  input.autocomplete = 'off';
+  input.spellcheck = false;
+
+  if (typeof onChange === 'function') {
+    const debounced = debounce((event) => {
+      onChange(event.target.value);
+    }, delay);
+    input.addEventListener('input', debounced);
+  }
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && input.value) {
+      event.preventDefault();
+      input.value = '';
+      if (typeof onChange === 'function') {
+        onChange('');
+      }
+    }
+  });
+
+  wrapper.appendChild(labelEl);
+  wrapper.appendChild(input);
+
+  return { wrapper, input };
+}
+
+export function setupRovingTabIndex(container, selector, { orientation = 'horizontal', loop = true } = {}) {
+  if (!container) return () => {};
+
+  function items() {
+    return Array.from(container.querySelectorAll(selector)).filter((item) => !item.disabled);
+  }
+
+  function focusItem(nextIndex, list) {
+    const focusList = list || items();
+    if (!focusList.length) return;
+    const index = Math.max(0, Math.min(nextIndex, focusList.length - 1));
+    focusList.forEach((item, itemIndex) => {
+      item.tabIndex = itemIndex === index ? 0 : -1;
+    });
+    const target = focusList[index];
+    if (target) {
+      target.focus();
+    }
+  }
+
+  function handleKeyDown(event) {
+    const focusList = items();
+    if (!focusList.length) return;
+    const currentIndex = focusList.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
+
+    const forwardKeys = orientation === 'vertical'
+      ? ['ArrowDown']
+      : orientation === 'both'
+        ? ['ArrowRight', 'ArrowDown']
+        : ['ArrowRight'];
+    const backwardKeys = orientation === 'vertical'
+      ? ['ArrowUp']
+      : orientation === 'both'
+        ? ['ArrowLeft', 'ArrowUp']
+        : ['ArrowLeft'];
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      focusItem(0, focusList);
+      return;
+    }
+    if (event.key === 'End') {
+      event.preventDefault();
+      focusItem(focusList.length - 1, focusList);
+      return;
+    }
+    if (forwardKeys.includes(event.key)) {
+      event.preventDefault();
+      const nextIndex = currentIndex + 1;
+      if (nextIndex >= focusList.length) {
+        focusItem(loop ? 0 : focusList.length - 1, focusList);
+      } else {
+        focusItem(nextIndex, focusList);
+      }
+    } else if (backwardKeys.includes(event.key)) {
+      event.preventDefault();
+      const nextIndex = currentIndex - 1;
+      if (nextIndex < 0) {
+        focusItem(loop ? focusList.length - 1 : 0, focusList);
+      } else {
+        focusItem(nextIndex, focusList);
+      }
+    }
+  }
+
+  container.addEventListener('keydown', handleKeyDown);
+  return () => container.removeEventListener('keydown', handleKeyDown);
+}
+
 export function mountToPortal(el) {
   if (!el) return;
   const portal = document.getElementById('ui-portal');
@@ -33,7 +156,7 @@ export function showToast(root, message, { timeout = 4000 } = {}) {
   }, timeout);
 }
 
-export function createModal({ title, subtitle, content, actions = [], onClose }) {
+export function createModal({ title, subtitle, content, actions = [], onClose, closeOnEscape = false }) {
   const backdrop = document.createElement('div');
   backdrop.className = 'modal-backdrop';
 
@@ -97,7 +220,7 @@ export function createModal({ title, subtitle, content, actions = [], onClose })
 
   function trapFocus(event) {
     if (event.key !== 'Tab') return;
-    const focusable = Array.from(modal.querySelectorAll(focusableSelectors)).filter(el => !el.disabled && el.offsetParent !== null);
+    const focusable = Array.from(modal.querySelectorAll(focusableSelectors)).filter((el) => !el.disabled && el.offsetParent !== null);
     if (!focusable.length) {
       event.preventDefault();
       return;
@@ -114,9 +237,10 @@ export function createModal({ title, subtitle, content, actions = [], onClose })
   }
 
   function handleKeyDown(event) {
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && closeOnEscape) {
       event.preventDefault();
       close();
+      return;
     }
     trapFocus(event);
   }
@@ -150,9 +274,9 @@ export function createModal({ title, subtitle, content, actions = [], onClose })
       const host = portal || targetRoot || document.body;
       host.appendChild(backdrop);
       window.requestAnimationFrame(() => {
-        const firstFocusable = modal.querySelector(focusableSelectors);
-        if (firstFocusable) {
-          firstFocusable.focus();
+        const focusable = Array.from(modal.querySelectorAll(focusableSelectors)).filter((el) => !el.disabled && el.offsetParent !== null);
+        if (focusable.length) {
+          focusable[0].focus();
         } else {
           closeBtn.focus();
         }
@@ -200,21 +324,9 @@ export function createPopover({ html, onClose }) {
   });
 
   function close() {
-    try {
-      backdrop.remove();
-    } catch (error) {
-      // ignore removal errors
-    }
-    document.removeEventListener('keydown', handleKeydown);
+    backdrop.remove();
     if (typeof onClose === 'function') {
       onClose();
-    }
-  }
-
-  function handleKeydown(event) {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      close();
     }
   }
 
@@ -224,34 +336,15 @@ export function createPopover({ html, onClose }) {
     }
   });
 
-  document.addEventListener('keydown', handleKeydown);
+  panel.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      close();
+    }
+  });
 
-  return { close, el: panel, backdrop };
-}
-
-export function showTooltip(target, text) {
-  if (!target) return () => {};
-  const tip = document.createElement('div');
-  tip.className = 'tooltip layer-popover';
-  tip.setAttribute('role', 'tooltip');
-  tip.textContent = text;
-  tip.style.position = 'fixed';
-  tip.style.padding = '8px 10px';
-  tip.style.borderRadius = '8px';
-  tip.style.background = 'rgba(0,0,0,.85)';
-  tip.style.color = '#fff';
-  tip.style.fontSize = '12px';
-  tip.style.lineHeight = '1.4';
-  tip.style.pointerEvents = 'auto';
-
-  const rect = target.getBoundingClientRect();
-  const maxLeft = Math.max(12, Math.min(rect.left, window.innerWidth - 220));
-  tip.style.top = `${Math.min(window.innerHeight - 40, rect.bottom + 8)}px`;
-  tip.style.left = `${maxLeft}px`;
-
-  mountToPortal(tip);
-
-  return () => {
-    tip.remove();
+  return {
+    close,
+    el: panel,
   };
 }
