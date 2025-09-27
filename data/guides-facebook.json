@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "updated": "2025-09-27",
+  "categories": [
+    {
+      "id": "account-security",
+      "title": "Account & Security",
+      "guides": [
+        { "id": "enable-2fa", "title": "Enable two-factor authentication" }
+      ]
+    },
+    {
+      "id": "posts-photos",
+      "title": "Posts & Photos",
+      "guides": [
+        { "id": "delete-photo", "title": "Delete a Photo" },
+        { "id": "hide-old-posts", "title": "Hide old posts" }
+      ]
+    },
+    {
+      "id": "visibility-audience",
+      "title": "Visibility & Audience",
+      "guides": [
+        { "id": "review-audience", "title": "Review audience defaults" }
+      ]
+    },
+    {
+      "id": "apps-ads",
+      "title": "Apps & Ads",
+      "guides": [
+        { "id": "audit-apps", "title": "Audit connected apps" }
+      ]
+    }
+  ],
+  "guides": [
+    {
+      "id": "delete-photo",
+      "title": "Delete a Photo",
+      "category": "Posts & Photos",
+      "steps": [
+        { "id": 1, "title": "Open your profile", "body": "Tap your profile picture to open your profile page." },
+        { "id": 2, "title": "Go to Photos", "body": "Select Photos → Albums or Your Photos." },
+        { "id": 3, "title": "Find the photo", "body": "Scroll to the photo you want to remove and open it." },
+        { "id": 4, "title": "Open options", "body": "Tap the ••• menu next to the photo." },
+        { "id": 5, "title": "Delete", "body": "Choose Delete and confirm. The photo is removed." }
+      ]
+    }
+  ]
+}

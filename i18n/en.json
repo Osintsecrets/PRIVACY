@@ -1,0 +1,16 @@
+{
+  "app.title": "Social Risk Audit",
+  "nav.home": "Home",
+  "nav.guides": "Guides",
+  "nav.tools": "Tools",
+  "nav.about": "About",
+  "nav.settings": "Settings",
+  "home.awareness": "Be aware of fast-moving risks on your social platforms.",
+  "home.cta": "Open Guides",
+  "guides.heading": "Guides",
+  "guides.detail": "Guide detail",
+  "settings.language": "Language",
+  "settings.reducedMotion": "Reduced motion",
+  "settings.install": "Install App",
+  "settings.offline": "Offline status"
+}
