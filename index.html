@@ -10,10 +10,11 @@
 </head>
 <body>
   <div id="bg-rain" aria-hidden="true"></div>
+  <div id="ui-portal" aria-hidden="true"></div>
   <div id="app" class="app-shell">
     <header class="app-header" id="awareness-banner">
       <p class="banner-text">Be aware of fast-moving risks on your social platforms.</p>
-      <button class="banner-info" aria-label="Learn what this means" data-banner-tooltip>
+      <button class="banner-info info-trigger" aria-label="Learn what this means" data-banner-tooltip aria-describedby="banner-tooltip">
         <span class="info-icon" aria-hidden="true">i</span>
       </button>
       <span class="banner-tooltip" role="tooltip" id="banner-tooltip">We surface quick actions to keep your presence safer.</span>
@@ -108,7 +109,7 @@
     <div id="modal-root"></div>
     <div id="toast-root" class="toast-root" aria-live="assertive"></div>
 
-    <nav class="floating-dock" aria-label="Primary">
+    <nav class="floating-dock app-dock" aria-label="Primary">
       <a class="dock-item" href="#/" data-dock="/" aria-label="Home">
         <span class="dock-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" focusable="false"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-8.5z"/></svg>

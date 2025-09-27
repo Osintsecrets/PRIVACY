@@ -1,3 +1,13 @@
+export function mountToPortal(el) {
+  if (!el) return;
+  const portal = document.getElementById('ui-portal');
+  if (portal) {
+    portal.appendChild(el);
+  } else {
+    document.body.appendChild(el);
+  }
+}
+
 export function createChip(label, { onClick } = {}) {
   const chip = document.createElement('button');
   chip.type = 'button';
@@ -136,7 +146,9 @@ export function createModal({ title, subtitle, content, actions = [], onClose })
   return {
     element: backdrop,
     open(targetRoot = document.body) {
-      targetRoot.appendChild(backdrop);
+      const portal = document.getElementById('ui-portal');
+      const host = portal || targetRoot || document.body;
+      host.appendChild(backdrop);
       window.requestAnimationFrame(() => {
         const firstFocusable = modal.querySelector(focusableSelectors);
         if (firstFocusable) {
@@ -152,5 +164,94 @@ export function createModal({ title, subtitle, content, actions = [], onClose })
     header,
     footer,
     closeBtn,
+  };
+}
+
+export function createPopover({ html, onClose }) {
+  const backdrop = document.createElement('div');
+  backdrop.className = 'ui-backdrop';
+  backdrop.style.background = 'transparent';
+  backdrop.style.backdropFilter = 'none';
+  backdrop.style.zIndex = 'var(--z-popover)';
+  backdrop.style.display = 'flex';
+  backdrop.style.alignItems = 'center';
+  backdrop.style.justifyContent = 'center';
+
+  const panel = document.createElement('div');
+  panel.className = 'popover-panel layer-popover';
+  panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-modal', 'true');
+  panel.style.position = 'relative';
+  panel.style.maxWidth = 'min(640px, 92vw)';
+  panel.style.maxHeight = '80vh';
+  panel.style.overflow = 'auto';
+  panel.style.padding = '16px';
+  panel.style.background = 'rgba(255,255,255,0.06)';
+  panel.style.border = '1px solid rgba(255,255,255,0.12)';
+  panel.style.borderRadius = '16px';
+  panel.style.boxShadow = '0 20px 60px rgba(0,0,0,.6)';
+  panel.innerHTML = html;
+  panel.tabIndex = -1;
+
+  backdrop.appendChild(panel);
+  mountToPortal(backdrop);
+  window.requestAnimationFrame(() => {
+    panel.focus({ preventScroll: true });
+  });
+
+  function close() {
+    try {
+      backdrop.remove();
+    } catch (error) {
+      // ignore removal errors
+    }
+    document.removeEventListener('keydown', handleKeydown);
+    if (typeof onClose === 'function') {
+      onClose();
+    }
+  }
+
+  function handleKeydown(event) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      close();
+    }
+  }
+
+  backdrop.addEventListener('click', (event) => {
+    if (event.target === backdrop) {
+      close();
+    }
+  });
+
+  document.addEventListener('keydown', handleKeydown);
+
+  return { close, el: panel, backdrop };
+}
+
+export function showTooltip(target, text) {
+  if (!target) return () => {};
+  const tip = document.createElement('div');
+  tip.className = 'tooltip layer-popover';
+  tip.setAttribute('role', 'tooltip');
+  tip.textContent = text;
+  tip.style.position = 'fixed';
+  tip.style.padding = '8px 10px';
+  tip.style.borderRadius = '8px';
+  tip.style.background = 'rgba(0,0,0,.85)';
+  tip.style.color = '#fff';
+  tip.style.fontSize = '12px';
+  tip.style.lineHeight = '1.4';
+  tip.style.pointerEvents = 'auto';
+
+  const rect = target.getBoundingClientRect();
+  const maxLeft = Math.max(12, Math.min(rect.left, window.innerWidth - 220));
+  tip.style.top = `${Math.min(window.innerHeight - 40, rect.bottom + 8)}px`;
+  tip.style.left = `${maxLeft}px`;
+
+  mountToPortal(tip);
+
+  return () => {
+    tip.remove();
   };
 }

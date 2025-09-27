@@ -86,29 +86,14 @@ body.no-scroll {
 
 .banner-tooltip {
   position: absolute;
-  bottom: -12px;
-  right: 16px;
-  transform: translateY(100%);
-  background: rgba(12, 18, 24, 0.9);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 8px 12px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-fast);
-  width: max-content;
-  max-width: 220px;
-}
-
-.banner-info:focus + .banner-tooltip,
-.banner-info:hover + .banner-tooltip {
-  opacity: 1;
-}
-
-.banner-tooltip.visible {
-  opacity: 1;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .view-root {
@@ -347,7 +332,6 @@ select {
   border-radius: 999px;
   padding: 10px 18px;
   backdrop-filter: blur(14px);
-  z-index: 50;
 }
 
 .dock-item {
@@ -382,7 +366,7 @@ select {
   transform: translateX(-50%);
   display: grid;
   gap: 8px;
-  z-index: 100;
+  z-index: var(--z-toast);
 }
 
 .toast {
@@ -409,7 +393,7 @@ select {
 #disclaimer-overlay {
   position: fixed;
   inset: 0;
-  z-index: 999999;
+  z-index: var(--z-disclaimer);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -523,14 +507,13 @@ select {
 /* === Global animated background (neon rain) === */
 :root {
   --rain-cyan: #09f;           /* can be tuned toward #0FF0FC later */
-  --rain-z: -1;                /* ensure behind everything */
 }
 
 /* Fixed, full-viewport background layer */
 #bg-rain {
   position: fixed;
   inset: 0;
-  z-index: var(--rain-z);
+  z-index: var(--z-bg);
   pointer-events: none;        /* never block UI */
   /* Create a new stacking context to isolate any pseudo elements */
   transform: translateZ(0);
@@ -662,7 +645,7 @@ select {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  z-index: 100;
+  z-index: var(--z-overlay);
 }
 
 .modal {
@@ -674,6 +657,8 @@ select {
   display: grid;
   grid-template-rows: auto 1fr auto;
   overflow: hidden;
+  position: relative;
+  z-index: var(--z-modal);
 }
 
 .modal-header,
@@ -754,4 +739,53 @@ select {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ===== Global layering scale ===== */
+:root{
+  --z-bg: -1;             /* animated wallpaper */
+  --z-base: 0;            /* normal page content */
+  --z-sticky: 10;         /* sticky header/dock */
+  --z-popover: 2000;      /* dropdowns, info popovers, tooltips */
+  --z-toast: 4000;        /* toasts / update banners */
+  --z-modal: 10000;       /* generic modals */
+  --z-overlay: 15000;     /* modal backdrops */
+  --z-disclaimer: 20000;  /* disclaimer gate overlay */
+}
+
+/* Portal lives above app content by default */
+#ui-portal{ position:fixed; inset:0; pointer-events:none; z-index:var(--z-popover); }
+
+/* Background layer (already present) */
+#bg-rain{ z-index:var(--z-bg); }
+
+/* Utilities to assign layers */
+.layer-base   { position:relative; z-index:var(--z-base); }
+.layer-sticky { position:relative; z-index:var(--z-sticky); }
+.layer-popover{ position:relative; z-index:var(--z-popover); }
+.layer-toast  { position:relative; z-index:var(--z-toast); }
+.layer-modal  { position:relative; z-index:var(--z-modal);  }
+
+/* Backdrops should sit below their modal dialog but above app */
+.ui-backdrop {
+  position:fixed; inset:0;
+  z-index:var(--z-overlay);
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+}
+
+/* Disclaimer overlay must be top-most */
+#disclaimer-overlay{ z-index:var(--z-disclaimer); }
+
+/* Ensure the bottom dock floats above base content */
+.app-dock{ z-index:var(--z-sticky); position:sticky; bottom:0; }
+.floating-dock.app-dock{ position:fixed; bottom:24px; }
+
+/* Tooltips/popovers rendered inside #ui-portal are pointer-enabled */
+#ui-portal > *{ pointer-events:auto; }
+
+/* Avoid accidental stacking contexts on content containers */
+.content, .card, .grid {
+  /* DO NOT assign transform/filter/perspective unless intentional */
+  will-change: auto;
 }
