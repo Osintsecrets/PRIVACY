@@ -36,7 +36,7 @@ body.no-scroll {
   width: 100%;
   max-width: 1280px;
   min-height: 100vh;
-  padding: 24px 16px 120px;
+  padding: 24px 16px calc(120px + env(safe-area-inset-bottom));
   position: relative;
 }
 
@@ -496,7 +496,7 @@ select {
 .floating-dock {
   position: fixed;
   left: 50%;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom));
   transform: translateX(-50%);
   display: grid;
   grid-auto-flow: column;
@@ -505,6 +505,7 @@ select {
   border: 1px solid var(--glass-border);
   border-radius: 999px;
   padding: 10px 18px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
   backdrop-filter: blur(14px);
 }
 
@@ -535,7 +536,7 @@ select {
 
 .toast-root {
   position: fixed;
-  bottom: 120px;
+  bottom: calc(120px + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   display: grid;
@@ -967,7 +968,7 @@ select {
 
 /* Ensure the bottom dock floats above base content */
 .app-dock{ z-index:var(--z-sticky); position:sticky; bottom:0; }
-.floating-dock.app-dock{ position:fixed; bottom:24px; }
+.floating-dock.app-dock{ position:fixed; bottom:calc(24px + env(safe-area-inset-bottom)); }
 
 /* Tooltips/popovers rendered inside #ui-portal are pointer-enabled */
 #ui-portal > *{ pointer-events:auto; }
