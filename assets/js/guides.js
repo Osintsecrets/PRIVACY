@@ -4,6 +4,8 @@ import {
   showToast,
   createSearchField,
   setupRovingTabIndex,
+  svgPhoneFrame,
+  svgDesktopFrame,
 } from './components.js';
 
 const STRINGS = {
@@ -417,7 +419,21 @@ function openGuideWizard(guide, initialIndex, originButton) {
     subtitle.className = 'modal-subtitle';
     subtitle.textContent = step.title;
     modal.header.appendChild(subtitle);
-    bodyCopy.innerHTML = `<p>${formatRichText(step.body)}</p>`;
+    bodyCopy.innerHTML = '';
+    if (step.schematic) {
+      let schematicEl = null;
+      if (step.schematic.type === 'phone') {
+        schematicEl = svgPhoneFrame({ ...step.schematic });
+      } else if (step.schematic.type === 'desktop') {
+        schematicEl = svgDesktopFrame({ ...step.schematic });
+      }
+      if (schematicEl) {
+        bodyCopy.appendChild(schematicEl);
+      }
+    }
+    const text = document.createElement('p');
+    text.innerHTML = formatRichText(step.body);
+    bodyCopy.appendChild(text);
     prevBtn.disabled = current === 0;
     nextBtn.textContent = current === total - 1 ? STRINGS.finish : STRINGS.next;
   }
