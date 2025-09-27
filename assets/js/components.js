@@ -291,6 +291,64 @@ export function createModal({ title, subtitle, content, actions = [], onClose, c
   };
 }
 
+export function svgPhoneFrame({ title = 'Step diagram', highlight = { x: 56, y: 120, w: 240, h: 48 }, note = '' } = {}) {
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${title}" viewBox="0 0 360 720" width="100%" height="auto">
+    <title>${title}</title>
+    <defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <linearGradient id="chrome" x1="0" x2="1">
+        <stop offset="0" stop-color="#C8CDD4"/><stop offset="1" stop-color="#9EA4AD"/>
+      </linearGradient>
+    </defs>
+    <!-- device bezel -->
+    <rect x="8" y="8" rx="36" ry="36" width="344" height="704" fill="rgba(255,255,255,0.06)" stroke="url(#chrome)" stroke-width="2"/>
+    <!-- screen -->
+    <rect x="24" y="64" width="312" height="632" rx="18" fill="rgba(0,0,0,0.65)" stroke="rgba(255,255,255,0.1)"/>
+    <!-- highlight target -->
+    <rect x="${highlight.x}" y="${highlight.y}" width="${highlight.w}" height="${highlight.h}"
+          rx="10" fill="none" stroke="#0FF0FC" stroke-width="3" filter="url(#glow)"/>
+    <!-- arrow -->
+    <path d="M ${highlight.x + highlight.w / 2} ${highlight.y - 40} v 30" stroke="#0FF0FC" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#0FF0FC"/>
+      </marker>
+    </defs>
+    ${note ? `<text x="180" y="${highlight.y - 52}" text-anchor="middle" fill="#C8CDD4" font-size="14">${note}</text>` : ``}
+  </svg>`;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'schematic';
+  wrapper.innerHTML = svg;
+  return wrapper;
+}
+
+export function svgDesktopFrame({ title = 'Step diagram', highlight = { x: 120, y: 60, w: 520, h: 48 }, note = '' } = {}) {
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${title}" viewBox="0 0 800 480" width="100%" height="auto">
+    <title>${title}</title>
+    <defs>
+      <linearGradient id="deskChrome" x1="0" x2="1">
+        <stop offset="0" stop-color="#C8CDD4"/><stop offset="1" stop-color="#9EA4AD"/>
+      </linearGradient>
+      <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <rect x="6" y="6" width="788" height="468" rx="16" fill="rgba(255,255,255,0.06)" stroke="url(#deskChrome)" stroke-width="2"/>
+    <rect x="20" y="40" width="760" height="424" rx="10" fill="rgba(0,0,0,0.65)" stroke="rgba(255,255,255,0.1)"/>
+    <rect x="${highlight.x}" y="${highlight.y}" width="${highlight.w}" height="${highlight.h}" rx="8"
+          fill="none" stroke="#0FF0FC" stroke-width="3" filter="url(#glow2)"/>
+  </svg>`;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'schematic';
+  wrapper.innerHTML = svg;
+  return wrapper;
+}
+
 export function createPopover({ html, onClose }) {
   const backdrop = document.createElement('div');
   backdrop.className = 'ui-backdrop';

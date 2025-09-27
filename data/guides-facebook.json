@@ -55,7 +55,7 @@
       "steps": [
         {"id":1, "title":"Security & Login", "body":"Open **Settings** → **Security and Login**."},
         {"id":2, "title":"Start 2FA", "body":"Click **Use two‑factor authentication**."},
-        {"id":3, "title":"Pick a method", "body":"Choose SMS, **Authenticator app (recommended)**, or **Security key**."},
+        {"id":3, "title":"Pick a method", "body":"Choose SMS, **Authenticator app (recommended)**, or **Security key**.", "schematic": {"type":"desktop", "title":"Choose 2FA method", "highlight": {"x":180, "y":90, "w":480, "h":48}}},
         {"id":4, "title":"Finish", "body":"Follow the prompts to complete setup."}
       ]
     },
@@ -94,7 +94,7 @@
       "category": "posts-content",
       "steps": [
         {"id":1, "title":"Find the post", "body":"Go to your profile and scroll to the post."},
-        {"id":2, "title":"Open menu", "body":"Tap the ⋯ (three dots) on the post."},
+        {"id":2, "title":"Open menu", "body":"Tap the ⋯ (three dots) on the post.", "schematic": {"type":"phone", "title":"Post options menu", "highlight": {"x":220, "y":140, "w":40, "h":40}, "note":"Tap the three dots"}},
         {"id":3, "title":"Move to Trash", "body":"Select **Move to Trash** → **Move** to confirm (kept for 30 days)."}
       ]
     },
