@@ -150,6 +150,96 @@ export function mountToPortal(el) {
   }
 }
 
+export function showTooltip(trigger, text, { placement = 'top', offset = 12 } = {}) {
+  if (!trigger || !text) return () => {};
+
+  const tooltip = document.createElement('div');
+  tooltip.className = 'ui-tooltip layer-popover';
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.dataset.placement = placement;
+  tooltip.textContent = text;
+
+  let isDestroyed = false;
+  let animationFrame = null;
+
+  function destroy() {
+    if (isDestroyed) return;
+    isDestroyed = true;
+    window.removeEventListener('resize', updatePosition);
+    window.removeEventListener('orientationchange', updatePosition);
+    document.removeEventListener('scroll', updatePosition, true);
+    if (resizeObserver) {
+      resizeObserver.disconnect();
+    }
+    if (animationFrame !== null) {
+      window.cancelAnimationFrame(animationFrame);
+    }
+    tooltip.remove();
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function updatePosition() {
+    if (isDestroyed) return;
+    if (!trigger.isConnected) {
+      destroy();
+      return;
+    }
+
+    const triggerRect = trigger.getBoundingClientRect();
+    const tooltipRect = tooltip.getBoundingClientRect();
+    const margin = 8;
+    let top = triggerRect.top - tooltipRect.height - offset;
+    let left = triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
+
+    switch (placement) {
+      case 'bottom':
+        top = triggerRect.bottom + offset;
+        break;
+      case 'left':
+        top = triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
+        left = triggerRect.left - tooltipRect.width - offset;
+        break;
+      case 'right':
+        top = triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
+        left = triggerRect.right + offset;
+        break;
+      case 'top':
+      default:
+        break;
+    }
+
+    const maxLeft = window.innerWidth - tooltipRect.width - margin;
+    const maxTop = window.innerHeight - tooltipRect.height - margin;
+
+    tooltip.style.left = `${Math.round(clamp(left, margin, Math.max(margin, maxLeft)))}px`;
+    tooltip.style.top = `${Math.round(clamp(top, margin, Math.max(margin, maxTop)))}px`;
+  }
+
+  mountToPortal(tooltip);
+
+  const resizeObserver = typeof ResizeObserver === 'function'
+    ? new ResizeObserver(() => updatePosition())
+    : null;
+
+  if (resizeObserver) {
+    resizeObserver.observe(trigger);
+  }
+
+  document.addEventListener('scroll', updatePosition, true);
+  window.addEventListener('resize', updatePosition);
+  window.addEventListener('orientationchange', updatePosition);
+
+  animationFrame = window.requestAnimationFrame(() => {
+    updatePosition();
+    tooltip.dataset.visible = 'true';
+  });
+
+  return destroy;
+}
+
 export function createChip(label, { onClick } = {}) {
   const chip = document.createElement('button');
   chip.type = 'button';

@@ -994,3 +994,26 @@ body.prefers-reduced-motion {
   /* DO NOT assign transform/filter/perspective unless intentional */
   will-change: auto;
 }
+
+.ui-tooltip {
+  position: fixed;
+  z-index: var(--z-popover);
+  pointer-events: none;
+  background: rgba(11, 12, 16, 0.92);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  max-width: 280px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.ui-tooltip[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
