@@ -39,6 +39,12 @@ const state = {
 let router = null;
 let guidesModule = null;
 
+function applyReducedMotionPreference() {
+  if (!document.body) return;
+  const shouldReduce = Boolean(state.preferences.reducedMotion);
+  document.body.classList.toggle('prefers-reduced-motion', shouldReduce);
+}
+
 function setActiveView(viewKey) {
   Object.values(views).forEach((view) => {
     view.classList.remove('active');
@@ -122,6 +128,7 @@ function handleNavButtons() {
 function initSettings() {
   languageSelect.value = state.preferences.language;
   reducedMotionToggle.checked = state.preferences.reducedMotion;
+  applyReducedMotionPreference();
 
   languageSelect.addEventListener('change', () => {
     state.preferences.language = languageSelect.value;
@@ -132,6 +139,7 @@ function initSettings() {
   reducedMotionToggle.addEventListener('change', () => {
     state.preferences.reducedMotion = reducedMotionToggle.checked;
     localStorage.setItem('sra:reduced-motion', String(state.preferences.reducedMotion));
+    applyReducedMotionPreference();
     showToast(toastRoot, state.preferences.reducedMotion ? 'Reduced motion enabled.' : 'Reduced motion disabled.');
   });
 

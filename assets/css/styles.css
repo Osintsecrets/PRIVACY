@@ -820,6 +820,22 @@ select {
   }
 }
 
+body.prefers-reduced-motion #bg-rain::before {
+  animation: none !important;
+}
+
+body.prefers-reduced-motion *,
+body.prefers-reduced-motion *::before,
+body.prefers-reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+body.prefers-reduced-motion {
+  scroll-behavior: auto !important;
+}
+
 .disclaimer-card button {
   min-width: 140px;
 }
