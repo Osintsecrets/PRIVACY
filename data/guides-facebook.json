@@ -44,7 +44,7 @@
       "steps": [
         {"id":1, "title":"Open Settings", "body":"Profile picture → **Settings & Privacy** → **Settings**."},
         {"id":2, "title":"Security and Login", "body":"Choose **Security and Login**."},
-        {"id":3, "title":"Change Password", "body":"Under **Login**, click **Change Password** and save."}
+        {"id":3, "title":"Change Password", "body":"Under **Login**, click **Change Password** and save.", "schematic": {"type":"desktop", "title":"Change Password", "highlight": {"x":200, "y":180, "w":420, "h":56}}}
       ]
     },
     {
@@ -65,7 +65,7 @@
       "category": "privacy-security",
       "steps": [
         {"id":1, "title":"Open Where You’re Logged In", "body":"Settings → **Security and Login**."},
-        {"id":2, "title":"See more", "body":"Click **See More** to view all devices."},
+        {"id":2, "title":"See more", "body":"Click **See More** to view all devices.", "schematic": {"type":"desktop", "title":"Where you’re logged in", "highlight": {"x":160, "y":150, "w":520, "h":220}, "note":"Expand to view all devices"}},
         {"id":3, "title":"Log out suspicious devices", "body":"Use the ⋯ menu next to a device → **Log Out**."}
       ]
     },
@@ -75,7 +75,7 @@
       "category": "privacy-security",
       "steps": [
         {"id":1, "title":"Open About", "body":"Go to your profile → **About** → **Contact and Basic Info**."},
-        {"id":2, "title":"Edit item", "body":"Hover and click the pencil icon on phone or email."},
+        {"id":2, "title":"Edit item", "body":"Hover and click the pencil icon on phone or email.", "schematic": {"type":"phone", "title":"Edit contact info", "highlight": {"x":70, "y":160, "w":220, "h":44}}},
         {"id":3, "title":"Hide or remove", "body":"Set audience to **Only Me** or choose **Remove**, then **Save**."}
       ]
     },
@@ -114,7 +114,7 @@
       "category": "posts-content",
       "steps": [
         {"id":1, "title":"Open Privacy settings", "body":"Settings → **Privacy**."},
-        {"id":2, "title":"Limit Past Posts", "body":"Under **Your Activity**, click **Limit Past Posts** and confirm (cannot be undone in one click)."}
+        {"id":2, "title":"Limit Past Posts", "body":"Under **Your Activity**, click **Limit Past Posts** and confirm (cannot be undone in one click).", "schematic": {"type":"desktop", "title":"Limit Past Posts", "highlight": {"x":180, "y":120, "w":460, "h":56}, "note":"Applies to previous posts"}}
       ]
     },
     {
@@ -144,7 +144,7 @@
       "category": "tagging-discovery",
       "steps": [
         {"id":1, "title":"Profile and Tagging", "body":"Settings → **Profile and Tagging**."},
-        {"id":2, "title":"Adjust Tagging", "body":"Set who can tag you in posts."}
+        {"id":2, "title":"Adjust Tagging", "body":"Set who can tag you in posts.", "schematic": {"type":"phone", "title":"Who can tag you", "highlight": {"x":60, "y":180, "w":240, "h":48}}}
       ]
     },
     {
@@ -153,7 +153,7 @@
       "category": "tagging-discovery",
       "steps": [
         {"id":1, "title":"Profile and Tagging", "body":"Settings → **Profile and Tagging**."},
-        {"id":2, "title":"Audience for tagged posts", "body":"Set who can see posts you’re tagged in on your profile."}
+        {"id":2, "title":"Audience for tagged posts", "body":"Set who can see posts you’re tagged in on your profile.", "schematic": {"type":"phone", "title":"Who can see posts you’re tagged in", "highlight": {"x":56, "y":210, "w":248, "h":48}}}
       ]
     },
     {
@@ -190,7 +190,7 @@
       "category": "apps-ads",
       "steps": [
         {"id":1, "title":"Apps and Websites", "body":"Settings → **Apps and Websites**."},
-        {"id":2, "title":"Review & remove", "body":"Under **Active**, remove apps you don’t use; optionally delete content posted by them."}
+        {"id":2, "title":"Review & remove", "body":"Under **Active**, remove apps you don’t use; optionally delete content posted by them.", "schematic": {"type":"desktop", "title":"Apps and Websites - Active", "highlight": {"x":160, "y":150, "w":500, "h":70}, "note":"Remove unused apps"}}
       ]
     },
     {
@@ -199,9 +199,9 @@
       "category": "apps-ads",
       "steps": [
         {"id":1, "title":"Open Ads settings", "body":"Settings → **Ads**."},
-        {"id":2, "title":"Partners data", "body":"Set **Ads based on data from partners** to **Not Allowed**."},
+        {"id":2, "title":"Partners data", "body":"Set **Ads based on data from partners** to **Not Allowed**.", "schematic": {"type":"desktop", "title":"Ads based on partner data", "highlight": {"x":140, "y":110, "w":520, "h":48}, "note":"Set to Not Allowed"}},
         {"id":3, "title":"Off‑platform activity", "body":"Turn off **Activity on Facebook products used elsewhere** for ad targeting."},
-        {"id":4, "title":"Sensitive categories", "body":"Remove sensitive categories under **Categories used to reach you**."},
+        {"id":4, "title":"Sensitive categories", "body":"Remove sensitive categories under **Categories used to reach you**.", "schematic": {"type":"desktop", "title":"Categories used to reach you", "highlight": {"x":150, "y":200, "w":520, "h":56}}},
         {"id":5, "title":"Advertisers", "body":"Review advertisers you’ve interacted with and hide those you don’t want."}
       ]
     },
