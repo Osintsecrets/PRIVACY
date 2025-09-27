@@ -1,0 +1,16 @@
+{
+  "app.title": "ביקורת סיכוני רשת",
+  "nav.home": "בית",
+  "nav.guides": "מדריכים",
+  "nav.tools": "כלים",
+  "nav.about": "אודות",
+  "nav.settings": "הגדרות",
+  "home.awareness": "שימו לב לסיכונים המתרחשים במהירות ברשתות החברתיות שלכם.",
+  "home.cta": "לפתיחת מדריכים",
+  "guides.heading": "מדריכים",
+  "guides.detail": "פרטי מדריך",
+  "settings.language": "שפה",
+  "settings.reducedMotion": "הפחתת תנועה",
+  "settings.install": "התקנת האפליקציה",
+  "settings.offline": "סטטוס לא מקוון"
+}

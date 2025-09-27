@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B0C10">
+  <title>Social Risk Audit</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="app-header" id="awareness-banner">
+      <p class="banner-text">Be aware of fast-moving risks on your social platforms.</p>
+      <button class="banner-info" aria-label="Learn what this means" data-banner-tooltip>
+        <span class="info-icon" aria-hidden="true">i</span>
+      </button>
+      <span class="banner-tooltip" role="tooltip" id="banner-tooltip">We surface quick actions to keep your presence safer.</span>
+    </header>
+
+    <main id="view-root" class="view-root" tabindex="-1">
+      <section id="view-home" class="view" data-route="/">
+        <div class="section-heading">
+          <h1>Social Risk Audit</h1>
+          <p class="lede">Spot trouble early. Take action before it spreads.</p>
+        </div>
+        <div class="platform-grid" id="platform-grid" aria-live="polite"></div>
+        <div class="quick-actions" aria-label="Quick actions">
+          <h2>Top Facebook fixes</h2>
+          <div class="chip-row" id="quick-action-chips"></div>
+        </div>
+      </section>
+
+      <section id="view-guides" class="view" data-route="/guides" aria-labelledby="guides-title">
+        <div class="section-heading">
+          <h1 id="guides-title">Guides</h1>
+          <p class="lede">Deep dives to neutralize risks step-by-step.</p>
+        </div>
+        <div class="guide-categories" id="guide-categories" aria-live="polite"></div>
+      </section>
+
+      <section id="view-guide-detail" class="view" data-route="/guides/:slug" aria-labelledby="guide-detail-title">
+        <button class="link-button" data-nav="/guides">&larr; Back to guides</button>
+        <div class="section-heading">
+          <h1 id="guide-detail-title">Guide detail</h1>
+          <p class="lede" id="guide-detail-summary"></p>
+        </div>
+        <ol class="step-list" id="guide-step-list"></ol>
+      </section>
+
+      <section id="view-tools" class="view" data-route="/tools" aria-labelledby="tools-title">
+        <div class="section-heading">
+          <h1 id="tools-title">Tools</h1>
+          <ul class="placeholder-list">
+            <li>Automated checks (coming soon)</li>
+            <li>Platform configuration scans</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="view-about" class="view" data-route="/about" aria-labelledby="about-title">
+        <div class="section-heading">
+          <h1 id="about-title">About</h1>
+          <ul class="placeholder-list">
+            <li>Our mission: reduce social risk exposure.</li>
+            <li>Built for journalists, advocates, and teams.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="view-settings" class="view" data-route="/settings" aria-labelledby="settings-title">
+        <div class="section-heading">
+          <h1 id="settings-title">Settings</h1>
+          <p class="lede">Tune preferences for your workspace.</p>
+        </div>
+        <form class="settings-form" aria-describedby="settings-description">
+          <fieldset>
+            <legend id="settings-description">Language</legend>
+            <div class="control">
+              <label for="language-select">Choose language</label>
+              <select id="language-select">
+                <option value="en">English</option>
+                <option value="he">עברית</option>
+              </select>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Accessibility</legend>
+            <div class="control switch">
+              <input type="checkbox" id="reduced-motion-toggle">
+              <label for="reduced-motion-toggle">Reduced motion</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Installation</legend>
+            <button type="button" id="install-button">Install App</button>
+            <p class="install-hint" id="install-hint">Installation prompt appears when available.</p>
+          </fieldset>
+          <fieldset>
+            <legend>Offline status</legend>
+            <p class="offline-indicator" id="offline-indicator">Status: Checking...</p>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+
+    <div id="modal-root"></div>
+    <div id="toast-root" class="toast-root" aria-live="assertive"></div>
+
+    <nav class="floating-dock" aria-label="Primary">
+      <a class="dock-item" href="#/" data-dock="/" aria-label="Home">
+        <span class="dock-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-8.5z"/></svg>
+        </span>
+        <span class="dock-label">Home</span>
+      </a>
+      <a class="dock-item" href="#/guides" data-dock="/guides" aria-label="Guides">
+        <span class="dock-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M5 4h6a3 3 0 0 1 3 3v13h-6a3 3 0 0 1-3-3V4zm8 0h6v13a3 3 0 0 1-3 3h-3V4z"/></svg>
+        </span>
+        <span class="dock-label">Guides</span>
+      </a>
+      <a class="dock-item" href="#/tools" data-dock="/tools" aria-label="Tools">
+        <span class="dock-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M14.7 6.3a1 1 0 0 1 1.4 0l1.6 1.6 2-2a4 4 0 0 1 1.3 4.2l-4 10.8a1 1 0 0 1-.94.66H4a1 1 0 0 1-.95-1.32l4-11a4 4 0 0 1 3.77-2.67 4 4 0 0 1 2.83 1.17l1.05 1.05 1.9-1.9z"/></svg>
+        </span>
+        <span class="dock-label">Tools</span>
+      </a>
+      <a class="dock-item" href="#/about" data-dock="/about" aria-label="About">
+        <span class="dock-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 15v-6h-2v6h2zm0-8V7h-2v2h2z"/></svg>
+        </span>
+        <span class="dock-label">About</span>
+      </a>
+      <a class="dock-item" href="#/settings" data-dock="/settings" aria-label="Settings">
+        <span class="dock-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M19.14 12.94c.04-.3.06-.62.06-.94s-.02-.64-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.63-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.8a.5.5 0 0 0-.5.42l-.36 2.54a7 7 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 8.22a.5.5 0 0 0 .12.64L4.85 10.4c-.04.3-.06.62-.06.94s.02.64.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.38 1.05.7 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.8a.5.5 0 0 0 .5-.42l.36-2.54a7 7 0 0 0 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+        </span>
+        <span class="dock-label">Settings</span>
+      </a>
+    </nav>
+  </div>
+
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>
