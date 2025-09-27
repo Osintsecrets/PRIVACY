@@ -141,6 +141,30 @@
     </nav>
   </div>
 
+  <div
+    id="disclaimer-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="disclaimer-title"
+    aria-describedby="disclaimer-content"
+    hidden
+  >
+    <div class="disclaimer-backdrop" aria-hidden="true"></div>
+    <div class="disclaimer-card" role="document">
+      <header class="disclaimer-header">
+        <h2 id="disclaimer-title" tabindex="-1" data-i18n="disclaimer.title">Comprehensive Legal, Ethical, and Moral Disclaimer</h2>
+      </header>
+      <div id="disclaimer-content" class="disclaimer-content" tabindex="0">
+        <p>Loading disclaimer...</p>
+      </div>
+      <div class="disclaimer-actions">
+        <button type="button" id="btn-disagree" data-i18n="disclaimer.disagree">I Do Not Agree</button>
+        <a id="disclaimer-leave" class="disclaimer-leave" href="about:blank" hidden data-i18n="disclaimer.leave">Leave site</a>
+        <button type="button" id="btn-agree" disabled data-i18n="disclaimer.agree">I Agree</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="./assets/js/app.js"></script>
 </body>
 </html>
