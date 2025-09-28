@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const CORE_CACHE = `sra-core-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `sra-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = './offline.html';
@@ -18,7 +18,8 @@ const PRECACHE_URLS = [
   './assets/js/utils/tooltip.js',
   './data/guides.json',
   './data/disclaimer.txt',
-  './data/ethics.md',
+  './data/ethics.en.md',
+  './data/ethics.he.md',
   './i18n/en.json',
   './i18n/he.json',
   './icons-s/1.png',

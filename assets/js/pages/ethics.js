@@ -1,7 +1,11 @@
-import { translate, applyTranslations } from '../i18n.js';
+import { translate, applyTranslations, getCurrentLanguage, onLanguageChange } from '../i18n.js';
 
-const SOURCE_URL = new URL('./data/ethics.md', window.location.href).toString();
-let cachedMarkdown = null;
+const LANGUAGE_SOURCES = {
+  en: new URL('./data/ethics.en.md', window.location.href).toString(),
+  he: new URL('./data/ethics.he.md', window.location.href).toString(),
+};
+
+const cachedMarkdown = new Map();
 
 function normalizeText(text) {
   return text.replace(/\r\n/g, '\n');
@@ -64,17 +68,42 @@ function transformMarkdown(markdown) {
   return fragment;
 }
 
-async function loadMarkdown() {
-  if (cachedMarkdown) {
-    return cachedMarkdown;
+function getSourceForLanguage(language) {
+  if (language && LANGUAGE_SOURCES[language]) {
+    return LANGUAGE_SOURCES[language];
   }
-  const response = await fetch(SOURCE_URL);
-  if (!response.ok) {
-    throw new Error('Failed to load ethics document');
-  }
-  cachedMarkdown = await response.text();
-  return cachedMarkdown;
+  return LANGUAGE_SOURCES.en;
 }
+
+async function fetchMarkdown(source, code) {
+  const response = await fetch(source);
+  if (!response.ok) {
+    throw new Error(`Failed to load ethics document for ${code}`);
+  }
+  const text = await response.text();
+  cachedMarkdown.set(code, text);
+  return text;
+}
+
+async function loadMarkdown(language) {
+  const candidates = [language, 'en'].filter(Boolean);
+  for (const code of candidates) {
+    if (cachedMarkdown.has(code)) {
+      return cachedMarkdown.get(code);
+    }
+    const source = getSourceForLanguage(code);
+    try {
+      return await fetchMarkdown(source, code);
+    } catch (error) {
+      if (code === 'en') {
+        throw error;
+      }
+    }
+  }
+  throw new Error('Failed to load ethics document');
+}
+
+let renderToken = 0;
 
 export async function renderEthics(root) {
   if (!root) return;
@@ -111,18 +140,36 @@ export async function renderEthics(root) {
   root.appendChild(main);
   applyTranslations(card);
 
-  try {
-    const markdown = await loadMarkdown();
-    content.innerHTML = '';
-    content.appendChild(transformMarkdown(markdown));
-  } catch (error) {
-    console.error(error);
-    content.innerHTML = '';
-    const paragraph = createParagraph(translate('pages.ethics.loadError'));
-    paragraph.dataset.i18n = 'pages.ethics.loadError';
-    content.appendChild(paragraph);
-    applyTranslations(content);
+  if (root._ethicsUnsubscribe) {
+    root._ethicsUnsubscribe();
+    delete root._ethicsUnsubscribe;
   }
+
+  const updateContent = async () => {
+    const token = ++renderToken;
+    try {
+      const language = getCurrentLanguage();
+      const markdown = await loadMarkdown(language);
+      if (token !== renderToken) {
+        return;
+      }
+      content.innerHTML = '';
+      content.appendChild(transformMarkdown(markdown));
+    } catch (error) {
+      console.error(error);
+      content.innerHTML = '';
+      const paragraph = createParagraph(translate('pages.ethics.loadError'));
+      paragraph.dataset.i18n = 'pages.ethics.loadError';
+      content.appendChild(paragraph);
+      applyTranslations(content);
+    }
+  };
+
+  await updateContent();
+
+  root._ethicsUnsubscribe = onLanguageChange(() => {
+    updateContent();
+  });
 
   requestAnimationFrame(() => {
     heading.focus({ preventScroll: true });

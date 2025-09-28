@@ -95,6 +95,14 @@
     "message": "Reconnect to reload the full privacy guide.",
     "cta": "Try again"
   },
+  "pages": {
+    "ethics": {
+      "title": "Our Ethics Promise",
+      "intro": "See the guardrails that guide every investigation we run.",
+      "back": "Back to About",
+      "loadError": "We could not load the ethics promise. Please refresh."
+    }
+  },
   "common": {
     "close": "Close",
     "updated": "Updated {date}",
