@@ -1,104 +1,103 @@
 {
-  "app.title": "ביקורת סיכוני רשת",
-  "nav.home": "בית",
-  "nav.guides": "מדריכים",
-  "nav.tools": "כלים",
-  "nav.about": "אודות",
-  "nav.settings": "הגדרות",
-
-  "home.awareness": "שימו לב לסיכונים המתרחשים במהירות ברשתות החברתיות שלכם.",
-  "home.bannerInfo": "למידע נוסף",
-  "home.bannerTooltip": "אנחנו מציעים פעולות מהירות כדי לשמור על הנוכחות שלכם בטוחה יותר.",
-  "home.lede": "זהו סיכונים מוקדם. פעלו לפני שהם מתפשטים.",
-  "home.quickActions": "הפעולות המובילות בפייסבוק",
-  "home.quickActionsAria": "פעולות מהירות",
-  "home.platformDescription": "זהו סיכוני תוכן ופרטיות ייחודיים לפייסבוק.",
-  "home.quickFix.lockProfile": "נעילת הגדרות הפרופיל",
-  "home.quickFix.cleanPhotos": "ניקוי תמונות ישנות",
-  "home.quickFix.reviewAccess": "בדיקת הרשאות אפליקציות",
-  "home.cta": "לפתיחת מדריכים",
-  "home.loadError": "לא ניתן לטעון את הפלטפורמות.",
-  "home.popoverTitle": "שימו לב לסיכונים מהירים",
-  "home.popoverBody": "אנחנו מציגים סיכונים מתפתחים בפרטיות, תוכן וגישה כדי שתוכלו להגיב מהר.",
-
-  "guides.heading": "מדריכים",
-  "guides.detail": "פרטי מדריך",
-  "guides.lede": "מדריכים מעמיקים לנטרול סיכונים צעד אחר צעד.",
-  "guides.searchLabel": "חיפוש מדריכי פייסבוק",
-  "guides.searchPlaceholder": "הקלידו משימה או סיכון",
-  "guides.allCategories": "כל הקטגוריות",
-  "guides.empty": "אין מדריכים מתאימים למסננים עדיין.",
-  "guides.view": "פתחו מדריך",
-  "guides.openStep": "פתחו שלב",
-  "guides.stepProgress": "שלב {current} מתוך {total}",
-  "guides.previous": "הקודם",
-  "guides.next": "הבא",
-  "guides.finish": "סיום",
-  "guides.closeWizard": "סגירת אשף",
-  "guides.chipsAria": "סינון מדריכים לפי קטגוריה",
-  "guides.stepsCount": "{count} שלבים",
-  "guides.toastLoadError": "לא ניתן לטעון את מדריכי פייסבוק.",
-  "guides.cardAriaLabel": "מדריך {title}",
-  "guides.backToList": "← חזרה למדריכים",
-  "guides.notFound": "המדריך לא נמצא",
-  "guides.notFoundBody": "לא הצלחנו למצוא את המדריך הזה. נסו לבחור אחר.",
-  "guides.noSteps": "אין שלבים זמינים במדריך.",
-
-  "settings.language": "שפה",
-  "settings.languageLegend": "שפה",
-  "settings.languageLabel": "בחרו שפה",
-  "settings.languageEnglish": "English",
-  "settings.languageHebrew": "עברית",
-  "settings.reducedMotion": "הפחתת תנועה",
-  "settings.install": "התקנת האפליקציה",
-  "settings.offline": "סטטוס לא מקוון",
-  "settings.lede": "התאימו העדפות לסביבת העבודה שלכם.",
-  "settings.accessibility": "נגישות",
-  "settings.installation": "התקנה",
-  "settings.installHint": "בקשת התקנה תופיע כאשר תהיה זמינה.",
-  "settings.installReady": "מוכן להתקנה.",
-  "settings.installUnavailable": "בקשת התקנה עדיין לא זמינה.",
-  "settings.installStarted": "תהליך ההתקנה התחיל.",
-  "settings.installDismissed": "בקשת ההתקנה בוטלה.",
-  "settings.installComplete": "היישום הותקן בהצלחה.",
-  "settings.languageToast": "השפה הוגדרה ל-{language}.",
-  "settings.languageError": "לא ניתן לשנות שפה. נסו שוב.",
-  "settings.motionEnabled": "הפחתת תנועה הופעלה.",
-  "settings.motionDisabled": "הפחתת תנועה בוטלה.",
-  "settings.offlineChecking": "מצב: בודק...",
-  "settings.offlineStatusOnline": "מצב: מקוון",
-  "settings.offlineStatusOffline": "מצב: לא מקוון (מנסה שוב...)",
-
-  "app.updateReady": "עדכון זמין. רעננו כדי להחיל.",
-  "app.updateAvailable": "גרסה חדשה זמינה. רעננו כדי לעדכן.",
-
+  "app": {
+    "title": "ביקורת סיכוני רשת",
+    "tagline": "מדריכי פרטיות פשוטים לפייסבוק.",
+    "updateReady": "גרסה חדשה מוכנה. רעננו לעדכון.",
+    "reload": "רענון כעת",
+    "installHint": "התקינו את האפליקציה לגישה קלה.",
+    "offline": "אין חיבור לרשת. השינויים יסונכרנו כשיתחדש הקשר."
+  },
+  "nav": {
+    "home": "בית",
+    "guides": "מדריכים",
+    "ethics": "אתיקה",
+    "about": "אודות",
+    "settings": "הגדרות"
+  },
+  "home": {
+    "headline": "קחו שליטה על הפרטיות בפייסבוק",
+    "lede": "התקדמו בצעדים פשוטים ובטוחים שמחזקים את החשבון.",
+    "cta": "התחלת תיקון",
+    "quickActions": "תיקונים פופולריים",
+    "quickActionLock": "נעילת פרופיל",
+    "quickAction2fa": "הפעלת אימות כפול",
+    "quickActionPosts": "הגבלת פוסטים ישנים"
+  },
+  "guides": {
+    "heading": "תיקונים מודרכים",
+    "lede": "חפשו, סננו ופעלו לפי שלבים קלים להגנה על החשבון.",
+    "searchLabel": "חיפוש מדריכים",
+    "searchPlaceholder": "מה תרצו לתקן?",
+    "filtersLabel": "סינון לפי רמה",
+    "filterAll": "כל הרמות",
+    "filterBasic": "בסיסי",
+    "filterIntermediate": "ביניים",
+    "filterAdvanced": "מתקדם",
+    "resultsCount": "תוצאות: {count}",
+    "noResults": "אין מדריכים תואמים לחיפוש.",
+    "cardLevel": "רמה: {level}",
+    "cardUpdated": "עודכן {date}",
+    "cardTags": "תגיות: {tags}",
+    "startGuide": "פתיחת מדריך",
+    "detailsToggleExpand": "הצגת הערות",
+    "detailsToggleCollapse": "הסתרת הערות",
+    "stepCount": "{count} שלבים",
+    "wizardProgress": "שלב {current} מתוך {total}",
+    "wizardBack": "אחורה",
+    "wizardNext": "הלאה",
+    "wizardDone": "סיום",
+    "wizardNotes": "הערות חשובות",
+    "resume": "המשך מדריך",
+    "toastLoadError": "לא הצלחנו לטעון את המדריכים. רעננו בבקשה.",
+    "resultAnnouncement": "מוצגות {count} מדריכים."
+  },
+  "settings": {
+    "heading": "הגדרות",
+    "lede": "בחרו שפה והעדפות נוחות.",
+    "languageLabel": "בחירת שפה",
+    "languageEnglish": "English",
+    "languageHebrew": "עברית",
+    "reducedMotion": "צמצום תנועה",
+    "toastMotionOn": "צמצום תנועה הופעל.",
+    "toastMotionOff": "צמצום תנועה בוטל.",
+    "toastLanguage": "השפה הוגדרה ל-{language}.",
+    "install": "התקנת אפליקציה",
+    "installUnavailable": "בקשת התקנה תופיע כשזמין.",
+    "installReady": "בקשת התקנה מוכנה.",
+    "installComplete": "האפליקציה הותקנה בהצלחה.",
+    "offlineStatus": "מצב: {status}",
+    "statusOnline": "מקוון",
+    "statusOffline": "לא מקוון"
+  },
   "disclaimer": {
-    "title": "הצהרה משפטית, אתית ומוסרית מקיפה",
-    "agree": "אני מסכים/ה",
-    "disagree": "אינני מסכים/ה",
-    "leave": "צא/י מהאתר",
-    "loading": "טוען את ההצהרה...",
+    "title": "חשוב לקרוא לפני שממשיכים",
+    "loading": "טוען הצהרה...",
+    "agree": "קראתי והבנתי",
+    "disagree": "לא מסכימ/ה",
+    "leave": "יציאה מהאתר",
     "empty": "אין טקסט הצהרה זמין.",
-    "loadError": "לא ניתן לטעון את ההצהרה. רעננו את העמוד."
+    "error": "לא ניתן לטעון את ההצהרה. רעננו את הדף."
   },
-
-  "pages": {
-    "ethics": {
-      "title": "אתיקה ומוסר",
-      "intro": "העבודה שלנו שומרת על פרטיות, מבוססת הסכמה, ולעולם אינה פוגעת. כאן מפורטים הסטנדרטים.",
-      "back": "חזרה לעמוד אודות",
-      "loadError": "לא הצלחנו לטעון את הצהרת האתיקה. נסו שוב מאוחר יותר."
-    }
+  "ethics": {
+    "title": "האתיקה וההבטחה שלנו",
+    "lede": "אנחנו מגינים על אנשים לפני הכל. קראו כיצד אנו שומרים על הנתונים שלכם.",
+    "loading": "טוען את מסמך האתיקה...",
+    "error": "לא הצלחנו לטעון את מסמך האתיקה."
   },
-
-  "tools.placeholderAutomation": "בדיקות אוטומטיות (בקרוב)",
-  "tools.placeholderScans": "סריקות תצורה של הפלטפורמה",
-  "about.mission": "המשימה שלנו: להפחית חשיפה לסיכונים חברתיים.",
-  "about.audience": "מיועד לעיתונאים, פעילים וצוותים.",
-
-  "links": {
-    "ethics": "אתיקה"
+  "about": {
+    "heading": "אודות ביקורת סיכוני רשת",
+    "mission": "אנחנו יוצרים כלים ידידותיים למשפחות, פעילים ועיתונאים.",
+    "values": "ללא פרסומות, ללא מעקב, ללא טריקים.",
+    "roadmap": "פלטפורמות נוספות בדרך."
   },
-
-  "common.close": "סגירה"
+  "offline": {
+    "title": "אין חיבור",
+    "message": "התחברו מחדש כדי לטעון את מדריך הפרטיות.",
+    "cta": "ניסיון נוסף"
+  },
+  "common": {
+    "close": "סגירה",
+    "updated": "עודכן {date}",
+    "tagJoin": ", "
+  }
 }

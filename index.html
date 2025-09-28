@@ -1,178 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0B0C10">
-  <title>Social Risk Audit</title>
-  <meta name="title" content="Social Risk Audit">
-  <meta name="description" content="Your step-by-step Facebook privacy toolkit. Learn it. Fix it. Own it.">
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://osintsecrets.github.io/PRIVACY/">
-  <meta property="og:title" content="Social Risk Audit">
-  <meta property="og:description" content="Your step-by-step Facebook privacy toolkit. Learn it. Fix it. Own it.">
-  <meta property="og:image" content="https://osintsecrets.github.io/PRIVACY/icons-s/1.png">
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Social Risk Audit">
-  <meta name="twitter:description" content="Your step-by-step Facebook privacy toolkit. Learn it. Fix it. Own it.">
-  <meta name="twitter:image" content="https://osintsecrets.github.io/PRIVACY/icons-s/1.png">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icons-s/1.png">
-  <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="./icons-s/2.png">
-  <link rel="stylesheet" href="./assets/css/styles.css">
-</head>
-<body>
-  <div id="bg-rain" aria-hidden="true"></div>
-  <div id="ui-portal"></div>
-  <div id="app" class="app-shell">
-
-    <!-- Awareness banner with tooltip -->
-    <header class="app-header" id="awareness-banner">
-      <p class="banner-text" data-i18n="home.awareness">
-        Be aware of fast-moving risks on your social platforms.
-      </p>
-      <button
-        class="banner-info info-trigger"
-        data-i18n-attr-aria-label="home.bannerInfo"
-        data-banner-tooltip
-        aria-describedby="banner-tooltip"
-        type="button"
-      >
-        <span class="info-icon" aria-hidden="true">i</span>
-      </button>
-      <span class="banner-tooltip" role="tooltip" id="banner-tooltip" data-i18n="home.bannerTooltip">
-        We surface quick actions to keep your presence safer.
-      </span>
-    </header>
-
-    <main id="view-root" class="view-root" tabindex="-1">
-      <section id="view-home" class="view" data-route="/">
-        <div class="section-heading">
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#05070c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Social Risk Audit</title>
+    <meta
+      name="description"
+      content="Grandma-proof Facebook privacy guide with installable PWA, accessibility-first."
+    />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons-s/1.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./icons-s/2.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="./icons-s/1.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="./icons-s/2.png" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <div id="ui-portal"></div>
+    <div id="app" class="app-shell">
+      <header class="top-bar" role="banner">
+        <div class="branding">
           <h1 data-i18n="app.title">Social Risk Audit</h1>
-          <p class="lede" data-i18n="home.lede">Spot trouble early. Take action before it spreads.</p>
+          <p data-i18n="app.tagline">Grandma-proof privacy fixes for Facebook.</p>
         </div>
-        <div class="platform-grid" id="platform-grid" aria-live="polite"></div>
-        <div class="quick-actions" data-i18n-attr-aria-label="home.quickActionsAria" aria-label="Quick actions">
-          <h2 data-i18n="home.quickActions">Top Facebook fixes</h2>
-          <div class="chip-row" id="quick-action-chips"></div>
-        </div>
-      </section>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a href="#/" data-nav="/" data-tooltip="Home" data-i18n="nav.home">Home</a>
+          <a href="#/guides" data-nav="/guides" data-tooltip="Guides" data-i18n="nav.guides">Guides</a>
+          <a href="#/ethics" data-nav="/ethics" data-tooltip="Ethics" data-i18n="nav.ethics">Ethics</a>
+          <a href="#/about" data-nav="/about" data-tooltip="About" data-i18n="nav.about">About</a>
+          <a href="#/settings" data-nav="/settings" data-tooltip="Settings" data-i18n="nav.settings">Settings</a>
+        </nav>
+      </header>
 
-      <section id="view-guides" class="view" data-route="/guides" aria-labelledby="guides-title">
-        <div class="section-heading">
-          <h1 id="guides-title" data-i18n="guides.heading">Guides</h1>
-          <p class="lede" data-i18n="guides.lede">Deep dives to neutralize risks step-by-step.</p>
-        </div>
-        <div class="guide-categories" id="guide-categories" aria-live="polite"></div>
-      </section>
+      <div id="offline-banner" class="offline-banner" aria-hidden="true" role="status"></div>
 
-      <section id="view-guide-detail" class="view" data-route="/guides/:slug" aria-labelledby="guide-detail-title">
-        <button class="link-button" data-nav="/guides" data-i18n="guides.backToList">&larr; Back to guides</button>
-        <div class="section-heading">
-          <h1 id="guide-detail-title" data-i18n="guides.detail">Guide detail</h1>
-          <p class="lede" id="guide-detail-summary"></p>
-        </div>
-        <ol class="step-list" id="guide-step-list"></ol>
-      </section>
+      <main id="view-root" tabindex="-1">
+        <section id="view-home" class="view active" data-route="/">
+          <div class="section-heading home-hero">
+            <div>
+              <h2 data-i18n="home.headline">Take control of your Facebook privacy</h2>
+              <p data-i18n="home.lede">
+                Follow gentle, trusted steps that make your account safer in minutes.
+              </p>
+              <a href="#/guides" class="primary-button" data-i18n="home.cta">Start fixing</a>
+            </div>
+            <div class="quick-actions">
+              <h3 data-i18n="home.quickActions">Popular fixes</h3>
+              <div class="quick-actions-list">
+                <span class="chip" data-i18n="home.quickActionLock">Lock profile</span>
+                <span class="chip" data-i18n="home.quickAction2fa">Turn on 2FA</span>
+                <span class="chip" data-i18n="home.quickActionPosts">Limit past posts</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      <section id="view-tools" class="view" data-route="/tools" aria-labelledby="tools-title">
-        <div class="section-heading">
-          <h1 id="tools-title" data-i18n="nav.tools">Tools</h1>
-          <ul class="placeholder-list">
-            <li data-i18n="tools.placeholderAutomation">Automated checks (coming soon)</li>
-            <li data-i18n="tools.placeholderScans">Platform configuration scans</li>
-          </ul>
-        </div>
-      </section>
+        <section id="view-guides" class="view" data-route="/guides">
+          <div class="section-heading">
+            <h2 data-i18n="guides.heading">Guided fixes</h2>
+            <p data-i18n="guides.lede">
+              Search, filter, and follow easy steps to lock down your account.
+            </p>
+          </div>
+          <div class="guides-controls" id="guides-controls">
+            <div class="search-field">
+              <label for="guides-search" data-i18n="guides.searchLabel">Search guides</label>
+              <input
+                id="guides-search"
+                type="search"
+                autocomplete="off"
+                spellcheck="false"
+                data-i18n-attr-placeholder="guides.searchPlaceholder"
+                aria-controls="guides-grid"
+              />
+            </div>
+            <div class="results-meta">
+              <p id="guides-result-count" aria-live="polite">Results: 0</p>
+              <div
+                class="filter-chips"
+                id="guide-filters"
+                role="toolbar"
+                data-i18n-attr-aria-label="guides.filtersLabel"
+                aria-label="Filter by level"
+              ></div>
+              <button
+                type="button"
+                id="resume-guide"
+                class="button"
+                hidden
+                aria-hidden="true"
+                data-i18n="guides.resume"
+              >
+                Resume guide
+              </button>
+            </div>
+          </div>
+          <div class="guides-grid" id="guides-grid" role="list"></div>
+          <p id="guides-empty" class="guides-empty" hidden data-i18n="guides.noResults">
+            No guides match your search yet.
+          </p>
+        </section>
 
-      <section id="view-about" class="view" data-route="/about" aria-labelledby="about-title">
-        <div class="section-heading">
-          <h1 id="about-title" data-i18n="nav.about">About</h1>
-          <ul class="placeholder-list">
-            <li data-i18n="about.mission">Our mission: reduce social risk exposure.</li>
-            <li data-i18n="about.audience">Built for journalists, advocates, and teams.</li>
-            <li><a href="#/ethics" class="link" data-i18n="links.ethics">Ethics</a></li>
-          </ul>
-        </div>
-      </section>
+        <section id="view-ethics" class="view" data-route="/ethics">
+          <div class="section-heading">
+            <h2 data-i18n="ethics.title">Ethics &amp; Promise</h2>
+            <p data-i18n="ethics.lede">We protect people before profits.</p>
+          </div>
+          <article id="ethics-content"></article>
+        </section>
 
-      <section id="view-ethics" class="view page-ethics" data-route="/ethics" aria-labelledby="ethics-title"></section>
+        <section id="view-about" class="view" data-route="/about">
+          <div class="section-heading">
+            <h2 data-i18n="about.heading">About Social Risk Audit</h2>
+            <p data-i18n="about.mission">We build human-friendly privacy tools.</p>
+          </div>
+          <div class="card">
+            <p data-i18n="about.values">No ads, no trackers, no tricks—ever.</p>
+            <p data-i18n="about.roadmap">More platforms coming soon.</p>
+          </div>
+        </section>
 
-      <section id="view-settings" class="view" data-route="/settings" aria-labelledby="settings-title">
-        <div class="section-heading">
-          <h1 id="settings-title" data-i18n="nav.settings">Settings</h1>
-          <p class="lede" data-i18n="settings.lede">Tune preferences for your workspace.</p>
-        </div>
-        <form class="settings-form" aria-describedby="settings-description">
-          <fieldset>
-            <legend id="settings-description" data-i18n="settings.languageLegend">Language</legend>
-            <div class="control">
-              <label for="language-select" data-i18n="settings.languageLabel">Choose language</label>
+        <section id="view-settings" class="view" data-route="/settings">
+          <div class="section-heading">
+            <h2 data-i18n="settings.heading">Settings</h2>
+            <p data-i18n="settings.lede">Pick your language and comfort preferences.</p>
+          </div>
+          <form class="settings-form">
+            <fieldset class="language-select">
+              <legend data-i18n="settings.languageLabel">Choose language</legend>
+              <label for="language-select" class="visually-hidden" data-i18n="settings.languageLabel"
+                >Choose language</label
+              >
               <select id="language-select">
                 <option value="en" data-i18n="settings.languageEnglish">English</option>
                 <option value="he" data-i18n="settings.languageHebrew">עברית</option>
               </select>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend data-i18n="settings.accessibility">Accessibility</legend>
-            <div class="control switch">
-              <input type="checkbox" id="reduced-motion-toggle">
-              <label for="reduced-motion-toggle" data-i18n="settings.reducedMotion">Reduced motion</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend data-i18n="settings.installation">Installation</legend>
-            <button type="button" id="install-button" data-i18n="settings.install">Install App</button>
-            <p class="install-hint" id="install-hint" data-i18n="settings.installHint">Installation prompt appears when available.</p>
-          </fieldset>
-          <fieldset>
-            <legend data-i18n="settings.offline">Offline status</legend>
-            <p class="offline-indicator" id="offline-indicator" data-i18n="settings.offlineChecking">Status: Checking...</p>
-          </fieldset>
-        </form>
-      </section>
-    </main>
+            </fieldset>
 
-    <div id="modal-root"></div>
-    <div id="toast-root" class="toast-root" aria-live="assertive"></div>
+            <fieldset>
+              <legend data-i18n="settings.reducedMotion">Reduced motion</legend>
+              <div class="reduced-motion-toggle">
+                <input type="checkbox" id="reduced-motion-toggle" />
+                <label for="reduced-motion-toggle" data-i18n="settings.reducedMotion">
+                  Reduced motion
+                </label>
+              </div>
+            </fieldset>
 
-    <nav class="floating-dock app-dock" aria-label="Primary">
-      <a class="dock-item" href="#/" data-dock="/" aria-label="Home" data-i18n-attr-aria-label="nav.home">
-        <span class="dock-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-8.5z"/></svg>
-        </span>
-        <span class="dock-label" data-i18n="nav.home">Home</span>
-      </a>
-      <a class="dock-item" href="#/guides" data-dock="/guides" aria-label="Guides" data-i18n-attr-aria-label="nav.guides">
-        <span class="dock-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false"><path d="M5 4h6a3 3 0 0 1 3 3v13h-6a3 3 0 0 1-3-3V4zm8 0h6v13a3 3 0 0 1-3 3h-3V4z"/></svg>
-        </span>
-        <span class="dock-label" data-i18n="nav.guides">Guides</span>
-      </a>
-      <a class="dock-item" href="#/tools" data-dock="/tools" aria-label="Tools" data-i18n-attr-aria-label="nav.tools">
-        <span class="dock-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false"><path d="M14.7 6.3a1 1 0 0 1 1.4 0l1.6 1.6 2-2a4 4 0 0 1 1.3 4.2l-4 10.8a1 1 0 0 1-.94.66H4a1 1 0 0 1-.95-1.32l4-11a4 4 0 0 1 3.77-2.67 4 4 0 0 1 2.83 1.17ל1.05 1.05 1.9-1.9z"/></svg>
-        </span>
-        <span class="dock-label" data-i18n="nav.tools">Tools</span>
-      </a>
-      <a class="dock-item" href="#/about" data-dock="/about" aria-label="About" data-i18n-attr-aria-label="nav.about">
-        <span class="dock-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 15v-6h-2v6h2zm0-8V7h-2v2h2z"/></svg>
-        </span>
-        <span class="dock-label" data-i18n="nav.about">About</span>
-      </a>
-      <a class="dock-item" href="#/settings" data-dock="/settings" aria-label="Settings" data-i18n-attr-aria-label="nav.settings">
-        <span class="dock-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false"><path d="M19.14 12.94c.04-.3.06-.62.06-.94s-.02-.64-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.63-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.8a.5.5 0 0 0-.5.42l-.36 2.54a7 7 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.7 8.22a.5.5 0 0 0 .12.64L4.85 10.4c-.04.3-.06.62-.06.94s.02.64.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.38 1.05.7 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.8a.5.5 0 0 0 .5-.42l.36-2.54a7 7 0 0 0 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-        </span>
-        <span class="dock-label" data-i18n="nav.settings">Settings</span>
-      </a>
-    </nav>
-  </div>
+            <fieldset>
+              <legend data-i18n="settings.install">Install app</legend>
+              <button type="button" id="install-button" class="button" data-i18n="settings.install">
+                Install app
+              </button>
+              <p id="install-hint" data-i18n="settings.installUnavailable">
+                Install prompt will appear when supported.
+              </p>
+            </fieldset>
 
-  <script type="module" src="./assets/js/app.js"></script>
-</body>
+            <fieldset>
+              <legend id="offline-status-label">Status</legend>
+              <p id="offline-indicator">Status: Offline</p>
+            </fieldset>
+          </form>
+        </section>
+      </main>
+
+      <div id="toast-root" class="toast-root" aria-live="assertive"></div>
+
+      <nav class="floating-dock" aria-label="Primary">
+        <a class="dock-item" href="#/" data-dock="/" data-tooltip="Home" data-i18n-attr-aria-label="nav.home">
+          <span aria-hidden="true">🏠</span>
+          <span data-i18n="nav.home">Home</span>
+        </a>
+        <a
+          class="dock-item"
+          href="#/guides"
+          data-dock="/guides"
+          data-tooltip="Guides"
+          data-i18n-attr-aria-label="nav.guides"
+        >
+          <span aria-hidden="true">📘</span>
+          <span data-i18n="nav.guides">Guides</span>
+        </a>
+        <a
+          class="dock-item"
+          href="#/ethics"
+          data-dock="/ethics"
+          data-tooltip="Ethics"
+          data-i18n-attr-aria-label="nav.ethics"
+        >
+          <span aria-hidden="true">🛡️</span>
+          <span data-i18n="nav.ethics">Ethics</span>
+        </a>
+        <a
+          class="dock-item"
+          href="#/about"
+          data-dock="/about"
+          data-tooltip="About"
+          data-i18n-attr-aria-label="nav.about"
+        >
+          <span aria-hidden="true">ℹ️</span>
+          <span data-i18n="nav.about">About</span>
+        </a>
+        <a
+          class="dock-item"
+          href="#/settings"
+          data-dock="/settings"
+          data-tooltip="Settings"
+          data-i18n-attr-aria-label="nav.settings"
+        >
+          <span aria-hidden="true">⚙️</span>
+          <span data-i18n="nav.settings">Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
 </html>

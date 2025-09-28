@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "platform": "facebook",
+  "updated": "2024-04-01",
+  "topics": [
+    {
+      "id": "lock-profile",
+      "title": "Lock your profile",
+      "level": "basic",
+      "tags": ["privacy", "profile"],
+      "summary": "Stop strangers from seeing more than the basics of your profile.",
+      "steps": [
+        { "id": "open-app", "text": "Open the Facebook app.", "platform": "android|ios" },
+        { "id": "menu", "text": "Tap your profile picture or name to open your profile.", "platform": "android|ios" },
+        { "id": "lock", "text": "Tap the three dots → Tap Lock profile." },
+        { "id": "confirm", "text": "Review the summary then tap Lock your profile." }
+      ],
+      "notes": "Lock profile keeps future posts limited to friends but does not change past public posts.",
+      "updated": "2024-03-14"
+    },
+    {
+      "id": "review-post-privacy",
+      "title": "Review who can see your posts",
+      "level": "basic",
+      "tags": ["posts", "audience"],
+      "summary": "Make sure only the right audience can see what you share.",
+      "steps": [
+        { "id": "privacy-shortcut", "text": "Open Facebook → tap Menu → Settings & privacy → Privacy shortcuts." },
+        { "id": "your-activity", "text": "Under Your Activity, tap Who can see your future posts?" },
+        { "id": "select-audience", "text": "Choose Friends (recommended) or a custom list." },
+        { "id": "limit-past", "text": "Tap Limit who can see past posts → Confirm." }
+      ],
+      "notes": "Limiting past posts is permanent. Download anything important first.",
+      "updated": "2024-02-28"
+    },
+    {
+      "id": "enable-2fa",
+      "title": "Enable two-factor authentication",
+      "level": "advanced",
+      "tags": ["security", "login"],
+      "summary": "Add a second step when you log in so attackers can’t reuse your password.",
+      "steps": [
+        { "id": "menu", "text": "Open Facebook → tap Menu → Settings & privacy → Settings." },
+        { "id": "security", "text": "Tap Accounts Center → Password and security." },
+        { "id": "2fa", "text": "Tap Two-factor authentication → Choose Continue." },
+        { "id": "select-method", "text": "Pick an authenticator app (recommended) or SMS and follow the prompts." }
+      ],
+      "notes": "Authenticator apps are safer than SMS. Write down backup codes and store them safely.",
+      "updated": "2024-03-02"
+    },
+    {
+      "id": "review-apps",
+      "title": "Remove risky apps",
+      "level": "intermediate",
+      "tags": ["apps", "permissions"],
+      "summary": "Disconnect games and websites that you no longer trust.",
+      "steps": [
+        { "id": "menu", "text": "Open Facebook → tap Menu → Settings & privacy → Settings." },
+        { "id": "apps", "text": "Tap Permissions → Apps and websites." },
+        { "id": "review", "text": "Tap the app you want to remove → Tap Remove." },
+        { "id": "confirm", "text": "Confirm by tapping Remove again and check Delete posts box if needed." }
+      ],
+      "notes": "Removing an app does not delete what you shared inside that app. Visit the app to delete data.",
+      "updated": "2024-01-18"
+    }
+  ]
+}

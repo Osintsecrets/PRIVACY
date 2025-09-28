@@ -1,60 +1,60 @@
-# Social Risk Audit — Repository Review
+# Social Risk Audit — Remediation Audit
 
-## Summary of Findings
+## Summary of Actions
 
 | Severity | Area | File | Line(s) | Description | Status | Recommendation |
 | --- | --- | --- | --- | --- | --- | --- |
-| High | PWA | sw.js | 1-142 | Service worker shipped as placeholder with no caching or offline support. | Fixed | Implemented versioned precache/runtime caches with offline fallback and client update messaging. |
-| High | PWA | manifest.json | 1-26 | Manifest icons missing 192px variants causing install prompt failures on some devices. | Fixed | Added 192×192 entries pointing at existing artwork and clarified purposes. |
-| Medium | Accessibility | assets/js/components.js | 118-135 | `mountToPortal` toggled `aria-hidden` on the portal container, hiding active dialogs from assistive tech. | Fixed | Removed automatic aria-hidden management; dialogs now declare semantics individually. |
-| Medium | Documentation | README.md | 1-27 | README contained placeholder text, offering no setup or contribution guidance. | Fixed | Replaced with deployment, structure, and local dev instructions. |
-| Low | Offline UX | offline.html | 1-36 | No branded offline fallback was provided, leading to browser error screens. | Fixed | Added neon glass-styled offline landing page with accessible controls. |
-| Medium | Repo Hygiene | N/A | — | Missing contributing guide and `.gitignore`. | Fixed | Added contributing standards and ignored common OS/editor artifacts. |
-| Medium | Assets | icons-s | — | No dedicated maskable icon assets beyond reused square art. | Open | Create purpose-built maskable PNGs sized 192×192 and 512×512; update manifest once available. |
+| High | Modal accessibility | assets/js/disclaimer.js | 85-214 | Disclaimer rebuilt with modal manager, scroll-gate, and ESC lock per requirements.【F:assets/js/disclaimer.js†L85-L214】 | ✅ Fixed | — |
+| High | Guides UX | assets/js/pages/guides.js | 14-477 | New JSON-driven guides loader with search, filters, wizard, and session resume.【F:assets/js/pages/guides.js†L14-L477】 | ✅ Fixed | — |
+| High | Reduced motion | assets/js/app.js<br>assets/css/styles.css | 55-100<br>35-81 | Preference now stored under `sra_rm`, applied via `<html data-rm>`, and CSS/JS guard animations.【F:assets/js/app.js†L55-L100】【F:assets/css/styles.css†L35-L81】 | ✅ Fixed | — |
+| High | PWA caching | sw.js | 1-133 | Versioned precache/runtime caches with offline fallback and update broadcast.【F:sw.js†L1-L133】 | ✅ Fixed | — |
+| Medium | Safe-area layout | assets/css/styles.css | 1-47 | Header/body/dock honour iOS/Android safe areas and maintain 44×44 tap targets.【F:assets/css/styles.css†L1-L47】【F:assets/css/styles.css†L123-L145】 | ✅ Fixed | — |
+| Medium | i18n | assets/js/app.js<br>i18n/{en,he}.json | 182-214<br>1-103 | Language toggle persists, flips `dir`, and re-renders strings.【F:assets/js/app.js†L182-L214】【F:i18n/en.json†L1-L103】【F:i18n/he.json†L1-L103】 | ✅ Fixed | — |
+| Low | Maskable icon coverage | manifest.json | 1-24 | Manifest still references square icons only.【F:manifest.json†L1-L24】 | ⚠️ Open | Create maskable 192/512px art and update manifest `purpose: "any maskable"`. |
+| Low | Security headers | index.html | 4-20 | No CSP meta yet; add documentation for downstream hardening.【F:index.html†L4-L19】 | ⚠️ Open | Document CSP snippet for GitHub Pages deployment. |
 
 ## Accessibility
+- Tooltips now use a shared utility that respects the reduced-motion flag and attaches `aria-describedby` only while visible.【F:assets/js/utils/tooltip.js†L1-L172】
+- Modal manager sets `inert` on background containers without forcefully toggling `aria-hidden`, preserving assistive tech visibility.【F:assets/js/utils/modal.js†L1-L124】
+- Guides result counts announce via a dedicated `aria-live` region and resume button exposes stored progress for keyboard users.【F:assets/js/pages/guides.js†L140-L205】
+- Outstanding: create maskable icons (visual) and run full contrast audit with tools like axe or Accessibility Insights.
 
-- **Portal visibility:** Removing the automatic `aria-hidden` toggling on `#ui-portal` ensures dialogs and popovers manage their own accessibility attributes without being hidden from assistive technology.【F:assets/js/components.js†L118-L135】
-- **Focusable offline actions:** The offline fallback keeps interactive targets ≥44px with visible focus outlines, matching mobile accessibility guidance.【F:offline.html†L18-L35】
-- **Outstanding:** Need a full sweep of color contrast for all focus states and dynamic overlays. Recommend using axe/Accessibility Insights in follow-up Issue.
+## Progressive Web App
+- Manifest updated with `/PRIVACY/` scope/start URL, consistent theme colours, and install copy.【F:manifest.json†L1-L24】
+- Service worker precaches shell assets/data, applies stale-while-revalidate for JSON/media, and replies with `offline.html` during outages.【F:sw.js†L1-L125】
+- Clients receive `updateavailable` messages; app renders reload CTA so updates are discoverable.【F:sw.js†L38-L55】【F:assets/js/app.js†L142-L178】
+- Outstanding: ship maskable icons for adaptive installs.
 
-## PWA
+## Guides System
+- `data/guides.json` defines version/platform metadata and four Facebook tasks with steps, notes, levels, and tags.【F:data/guides.json†L1-L66】
+- UI renders filter chips (`basic/intermediate/advanced`), debounced search, and aria-live result announcement.【F:assets/js/pages/guides.js†L266-L306】【F:assets/js/pages/guides.js†L140-L161】
+- Wizard modal stores per-guide progress in `sessionStorage` to offer a single-click resume entry point.【F:assets/js/pages/guides.js†L322-L414】【F:assets/js/pages/guides.js†L35-L90】
 
-- **Caching strategy:** Added a versioned service worker that precaches the application shell, caches runtime requests, and responds with a branded offline page when navigation fails.【F:sw.js†L1-L141】
-- **Update notifications:** Service worker now broadcasts `updateavailable` to prompt the in-app toast logic when a new version activates.【F:sw.js†L43-L57】
-- **Manifest health:** Introduced 192×192 icons and clarified purposes to satisfy install criteria on Android and desktop Chromium.【F:manifest.json†L1-L26】
-- **Outstanding:** Dedicated maskable icon assets are not yet available; filed as Issue for follow-up.
+## Mobile & Layout
+- Body/header/dock apply `env(safe-area-inset-*)` padding and keep floating dock above gesture home indicator.【F:assets/css/styles.css†L35-L44】【F:assets/css/styles.css†L318-L356】
+- Buttons and chips enforce `min-height: 44px` and neon focus outlines for touch compliance.【F:assets/css/styles.css†L123-L145】【F:assets/css/styles.css†L202-L240】
+- Offline fallback styled to match glassmorphism theme with accessible refresh button.【F:offline.html†L1-L40】
 
-## Performance
+## Internationalisation
+- `initI18n` loads fallback bundle, then preferred language, updating `<html lang dir>` automatically.【F:assets/js/i18n.js†L1-L108】【F:assets/js/app.js†L182-L214】
+- Language switcher persists choice, shows toast, and rerenders DOM nodes via `applyTranslations`.【F:assets/js/app.js†L182-L214】
+- Hebrew bundle mirrors all new guide strings; layout flips RTL safely with existing CSS grid/flex layouts.【F:i18n/he.json†L1-L103】
 
-- **Static precache:** Core CSS/JS/data assets precached during install to reduce repeat fetches and speed up navigation restores.【F:sw.js†L12-L33】
-- **Runtime caching:** Implemented stale-while-revalidate logic for imagery/fonts/json to balance freshness and bandwidth.【F:sw.js†L79-L98】
+## Outstanding Issues to File
+1. **Maskable icons for PWA install (pwa, enhancement)** — Generate 192×192 and 512×512 maskable PNGs, reference them with `purpose: "any maskable"` in `manifest.json`, and re-run install tests.
+2. **Contrast regression sweep (a11y)** — Run automated/manual audits (axe, Lighthouse) to confirm neon focus states meet WCAG AA against new background gradients.
+3. **Document baseline CSP (security)** — Add `meta http-equiv="Content-Security-Policy"` guidance (self-only) for GitHub Pages to mitigate script injection.
+4. **Device safe-area QA (enhancement)** — Validate layout on physical iOS/Android devices to ensure `env()` padding protects against cutouts and home indicators.
 
-## Mobile UX
-
-- **Offline fallback:** Visitors now see a responsive, neon-themed offline card rather than the default browser error, preserving brand aesthetic.【F:offline.html†L1-L36】
-- **Outstanding:** Need to validate safe-area spacing on a variety of iOS/Android devices—CSS guards exist but require device QA.
-
-## SEO / Meta
-
-- Existing metadata and Open Graph tags remain unchanged. Recommend future enhancement: add structured data for guides once schema stabilizes.
-
-## Privacy / Security
-
-- No trackers were introduced. Service worker caches only local assets and sanitizes errors. Continue monitoring for third-party script inclusion.
-
-## Code Health
-
-- Added README, CONTRIBUTING, and `.gitignore` to document workflows and prevent editor cruft from entering the repo.【F:README.md†L1-L27】【F:CONTRIBUTING.md†L1-L36】【F:.gitignore†L1-L11】
-- Service worker cache version constant documented for future deployments.【F:sw.js†L1-L8】
-
-## Content & i18n
-
-- No text translations were altered. i18n bundles still need auditing for missing keys and Hebrew layout direction—recommend follow-up Issue.
-
-## Deferred / Follow-up Issues
-
-1. **`enhancement: Add dedicated maskable icons`** — Provide 192×192 and 512×512 maskable PNGs and update manifest accordingly.
-2. **`a11y: Audit neon focus and contrast states`** — Run automated/manual accessibility testing to confirm all focus/hover states meet WCAG 2.2 AA.
-3. **`pwa: Add in-app SW update toast UI`** — Expand on update messaging by wiring a visible reload prompt when `updateavailable` fires.
-4. **`content: Expand guides schema coverage`** — Align `guides-facebook.json` with proposed schema and add cross-platform stubs.
+## Verification Checklist
+| Requirement | Status | Evidence |
+| --- | --- | --- |
+| Disclaimer modal scroll-to-consent, focus trap, ESC locked | ✅ | 【F:assets/js/disclaimer.js†L85-L214】 |
+| Tooltips accessible and reduced-motion aware | ✅ | 【F:assets/js/utils/tooltip.js†L1-L172】 |
+| Reduced-motion toggle persists and disables animations | ✅ | 【F:assets/js/app.js†L55-L100】【F:assets/css/styles.css†L35-L81】 |
+| Safe-area padding keeps dock/header clear on mobile | ✅ | 【F:assets/css/styles.css†L1-L47】【F:assets/css/styles.css†L318-L356】 |
+| PWA manifest valid, icons load, install prompt surfaces | ✅ | 【F:manifest.json†L1-L24】【F:assets/js/app.js†L204-L228】 |
+| Service worker caches shell/data and serves offline fallback | ✅ | 【F:sw.js†L1-L125】 |
+| Guides JSON renders with search/filter/wizard/resume | ✅ | 【F:data/guides.json†L1-L66】【F:assets/js/pages/guides.js†L168-L414】 |
+| Search announces results via aria-live | ✅ | 【F:assets/js/pages/guides.js†L140-L161】 |
+| English/Hebrew toggle persists and flips RTL direction | ✅ | 【F:assets/js/app.js†L182-L214】【F:i18n/he.json†L1-L103】 |

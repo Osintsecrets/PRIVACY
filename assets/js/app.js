@@ -1,479 +1,295 @@
-// assets/js/app.js
-
 import { createRouter, handleEthicsRoute } from './router.js';
-import { createChip, showToast, showTooltip, createPopover } from './components.js';
-import { initGuidesModule } from './guides.js';
-import { showDisclaimerOnLoad } from './disclaimer.js';
 import { initTooltips } from './utils/tooltip.js';
-import { initI18n, setLanguage, getCurrentLanguage, translate, applyTranslations, onLanguageChange } from './i18n.js';
+import { showDisclaimerOnLoad } from './disclaimer.js';
+import {
+  initI18n,
+  setLanguage,
+  getCurrentLanguage,
+  translate,
+  applyTranslations,
+  onLanguageChange,
+} from './i18n.js';
+import { showToast } from './components.js';
+import { initGuidesPage } from './pages/guides.js';
+
+const STORAGE_KEYS = {
+  language: 'sra:language',
+  reducedMotion: 'sra_rm',
+};
 
 const views = {
   home: document.getElementById('view-home'),
   guides: document.getElementById('view-guides'),
-  guideDetail: document.getElementById('view-guide-detail'),
-  tools: document.getElementById('view-tools'),
-  about: document.getElementById('view-about'),
   ethics: document.getElementById('view-ethics'),
+  about: document.getElementById('view-about'),
   settings: document.getElementById('view-settings'),
 };
 
-const dockItems = Array.from(document.querySelectorAll('.dock-item'));
 const viewRoot = document.getElementById('view-root');
-const platformGrid = document.getElementById('platform-grid');
-const quickChipRow = document.getElementById('quick-action-chips');
-const guideIndexContainer = document.getElementById('guide-categories');
-const guideDetailTitle = document.getElementById('guide-detail-title');
-const guideDetailSummary = document.getElementById('guide-detail-summary');
-const guideStepList = document.getElementById('guide-step-list');
+const offlineBanner = document.getElementById('offline-banner');
 const toastRoot = document.getElementById('toast-root');
+const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+const dockItems = Array.from(document.querySelectorAll('.dock-item'));
+const languageSelect = document.getElementById('language-select');
+const reducedMotionToggle = document.getElementById('reduced-motion-toggle');
 const installButton = document.getElementById('install-button');
 const installHint = document.getElementById('install-hint');
 const offlineIndicator = document.getElementById('offline-indicator');
-const languageSelect = document.getElementById('language-select');
-const reducedMotionToggle = document.getElementById('reduced-motion-toggle');
+const offlineStatusLabel = document.getElementById('offline-status-label');
 
-const storedLanguage = localStorage.getItem('sra:language');
-const storedReducedMotion = localStorage.getItem('sra:reduced-motion');
-const prefersReducedMotion =
-  storedReducedMotion === null
-    ? Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-    : storedReducedMotion === 'true';
-
-const state = {
-  platforms: null,
-  preferences: {
-    language: storedLanguage || 'en',
-    reducedMotion: prefersReducedMotion,
-  },
-  deferredPrompt: null,
-};
+const html = document.documentElement;
+const storedLanguage = localStorage.getItem(STORAGE_KEYS.language) || 'en';
+const storedReducedMotion = localStorage.getItem(STORAGE_KEYS.reducedMotion);
+const motionQuery = typeof window.matchMedia === 'function'
+  ? window.matchMedia('(prefers-reduced-motion: reduce)')
+  : null;
+const prefersReducedMotion = storedReducedMotion
+  ? storedReducedMotion === 'on'
+  : Boolean(motionQuery?.matches);
 
 let router = null;
-let guidesModule = null;
-let updateConnectivityStatus = null;
-let languageSubscription = null;
+let deferredPrompt = null;
+let guidesController = null;
+let unsubscribeLanguage = null;
 
-function getBaseTitle() {
-  return translate('app.title');
+function setReducedMotionPreference(enabled) {
+  html.dataset.rm = enabled ? 'on' : 'off';
+  localStorage.setItem(STORAGE_KEYS.reducedMotion, enabled ? 'on' : 'off');
 }
 
-function updateDocumentTitle(segment) {
-  const base = getBaseTitle();
-  const value = segment ? `${segment} — ${base}` : base;
-  document.title = value;
-}
-
-function applyReducedMotionPreference() {
-  if (!document.body) return;
-  const shouldReduce = Boolean(state.preferences.reducedMotion);
-  document.body.classList.toggle('prefers-reduced-motion', shouldReduce);
-  document.documentElement.classList.toggle('prefers-reduced-motion', shouldReduce);
-  document.documentElement.style.scrollBehavior = shouldReduce ? 'auto' : 'smooth';
-}
-
-function setActiveView(viewKey) {
-  Object.values(views).forEach((view) => view.classList.remove('active'));
-  if (viewKey && views[viewKey]) {
-    views[viewKey].classList.add('active');
+function applyReducedMotionUI() {
+  const enabled = html.dataset.rm === 'on';
+  reducedMotionToggle.checked = enabled;
+  if (enabled) {
+    html.style.scrollBehavior = 'auto';
+  } else {
+    html.style.scrollBehavior = 'smooth';
   }
-  if (viewRoot) {
-    viewRoot.focus({ preventScroll: true });
-  }
-  const scrollBehavior = state.preferences.reducedMotion ? 'auto' : 'smooth';
-  window.requestAnimationFrame(() => {
-    if (typeof window.scrollTo === 'function') {
-      try {
-        window.scrollTo({ top: 0, behavior: scrollBehavior });
-      } catch {
-        window.scrollTo(0, 0);
-      }
-    }
+}
+
+function updateOfflineStatus() {
+  const online = navigator.onLine;
+  offlineBanner.textContent = online ? '' : translate('app.offline');
+  offlineBanner.setAttribute('aria-hidden', online ? 'true' : 'false');
+  const statusText = translate('settings.offlineStatus', {
+    status: online ? translate('settings.statusOnline') : translate('settings.statusOffline'),
+  });
+  offlineIndicator.textContent = statusText;
+  offlineStatusLabel.textContent = translate('settings.offlineStatus', {
+    status: online ? translate('settings.statusOnline') : translate('settings.statusOffline'),
   });
 }
 
-function setActiveDock(path) {
+function setActiveView(path) {
+  Object.values(views).forEach((view) => view?.classList.remove('active'));
+  if (path.startsWith('/guides')) {
+    views.guides?.classList.add('active');
+  } else if (path.startsWith('/ethics')) {
+    views.ethics?.classList.add('active');
+  } else if (path.startsWith('/about')) {
+    views.about?.classList.add('active');
+  } else if (path.startsWith('/settings')) {
+    views.settings?.classList.add('active');
+  } else {
+    views.home?.classList.add('active');
+  }
+  requestAnimationFrame(() => {
+    viewRoot?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: html.dataset.rm === 'on' ? 'auto' : 'smooth' });
+  });
+}
+
+function updateNavState(path) {
+  navLinks.forEach((link) => {
+    const target = link.dataset.nav || '/';
+    link.classList.toggle('active', path === target || path.startsWith(`${target}/`));
+  });
   dockItems.forEach((item) => {
-    const target = item.dataset.dock;
-    if (path.startsWith(target)) item.classList.add('active');
-    else item.classList.remove('active');
+    const target = item.dataset.dock || '/';
+    item.classList.toggle('active', path === target || path.startsWith(`${target}/`));
   });
 }
 
-async function loadPlatforms() {
-  if (state.platforms) return state.platforms;
-  try {
-    const response = await fetch('./data/platforms.json');
-    const data = await response.json();
-    state.platforms = data.platforms || [];
-  } catch (error) {
-    console.error('Failed to load platforms', error);
-    showToast(toastRoot, translate('home.loadError'));
-    state.platforms = [];
-  }
-  return state.platforms;
-}
-
-function renderHome() {
-  loadPlatforms().then((platforms) => {
-    platformGrid.innerHTML = '';
-    platforms
-      .filter((platform) => platform.enabled)
-      .forEach((platform) => {
-        if (platform.id !== 'facebook') return;
-        const card = document.createElement('article');
-        card.className = 'platform-card';
-        const heading = document.createElement('h2');
-        heading.textContent = platform.label;
-        const description = document.createElement('p');
-        description.dataset.i18n = 'home.platformDescription';
-        description.textContent = translate('home.platformDescription');
-        card.append(heading, description);
-        const action = document.createElement('a');
-        action.href = '#/guides';
-        action.className = 'primary-button';
-        action.dataset.i18n = 'home.cta';
-        action.textContent = translate('home.cta');
-        card.appendChild(action);
-        platformGrid.appendChild(card);
-        applyTranslations(card);
-      });
-  });
-
-  quickChipRow.innerHTML = '';
-  ['home.quickFix.lockProfile', 'home.quickFix.cleanPhotos', 'home.quickFix.reviewAccess'].forEach((key) => {
-    const chip = createChip(translate(key));
-    chip.setAttribute('aria-disabled', 'true');
-    chip.disabled = true;
-    chip.dataset.i18n = key;
-    quickChipRow.appendChild(chip);
-    applyTranslations(chip);
-  });
-}
-
-function handleNavButtons() {
-  document.querySelectorAll('[data-nav]').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      const target = button.dataset.nav;
-      if (target) {
-        event.preventDefault();
-        router.navigate(target);
-      }
+function bindNavigation() {
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const target = link.dataset.nav || '/';
+      router.navigate(target);
     });
   });
 }
 
-function initSettings() {
-  languageSelect.value = getCurrentLanguage();
-  reducedMotionToggle.checked = state.preferences.reducedMotion;
-  applyReducedMotionPreference();
-
-  languageSelect.addEventListener('change', async () => {
-    const nextLanguage = languageSelect.value;
-    try {
-      const resolved = await setLanguage(nextLanguage);
-      state.preferences.language = resolved;
-      localStorage.setItem('sra:language', state.preferences.language);
-      const label = languageSelect.options[languageSelect.selectedIndex]?.textContent?.trim() || resolved;
-      showToast(toastRoot, translate('settings.languageToast', { language: label }));
-    } catch (error) {
-      console.error('Failed to change language', error);
-      showToast(toastRoot, translate('settings.languageError'));
-      languageSelect.value = getCurrentLanguage();
-    }
+function initializeGuides(routerInstance) {
+  const controls = document.getElementById('guides-controls');
+  const cards = document.getElementById('guides-grid');
+  const resultCount = document.getElementById('guides-result-count');
+  const emptyState = document.getElementById('guides-empty');
+  const filterContainer = document.getElementById('guide-filters');
+  const resumeButton = document.getElementById('resume-guide');
+  guidesController = initGuidesPage({
+    router: routerInstance,
+    controls,
+    cards,
+    resultCount,
+    emptyState,
+    filterContainer,
+    resumeButton,
+    toastRoot,
   });
+}
 
-  reducedMotionToggle.addEventListener('change', () => {
-    state.preferences.reducedMotion = reducedMotionToggle.checked;
-    localStorage.setItem('sra:reduced-motion', String(state.preferences.reducedMotion));
-    applyReducedMotionPreference();
-    showToast(
-      toastRoot,
-      translate(state.preferences.reducedMotion ? 'settings.motionEnabled' : 'settings.motionDisabled'),
-    );
-  });
+function registerServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker
+    .register('./sw.js')
+    .then((registration) => {
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        newWorker?.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            showToast(toastRoot, translate('app.updateReady'));
+          }
+        });
+      });
+    })
+    .catch((error) => console.error('SW registration failed', error));
 
-  installButton.disabled = true;
-  installButton.addEventListener('click', async () => {
-    if (state.deferredPrompt) {
-      state.deferredPrompt.prompt();
-      const choice = await state.deferredPrompt.userChoice;
-      showToast(
-        toastRoot,
-        translate(choice.outcome === 'accepted' ? 'settings.installStarted' : 'settings.installDismissed'),
-      );
-      state.deferredPrompt = null;
-      installButton.disabled = true;
-    } else {
-      showToast(toastRoot, translate('settings.installUnavailable'));
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    if (event.data?.type === 'updateavailable') {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.setAttribute('role', 'status');
+      const message = document.createElement('p');
+      message.textContent = translate('app.updateReady');
+      const action = document.createElement('button');
+      action.type = 'button';
+      action.className = 'button';
+      action.textContent = translate('app.reload');
+      action.addEventListener('click', () => {
+        navigator.serviceWorker.getRegistration().then((registration) => {
+          registration?.waiting?.postMessage({ type: 'SKIP_WAITING' });
+          window.location.reload();
+        });
+      });
+      toast.append(message, action);
+      toastRoot.appendChild(toast);
     }
   });
 }
 
-function initPWA() {
+function handleLanguageChange() {
+  languageSelect.addEventListener('change', async () => {
+    const nextLanguage = languageSelect.value;
+    try {
+      await setLanguage(nextLanguage);
+      localStorage.setItem(STORAGE_KEYS.language, nextLanguage);
+      showToast(toastRoot, translate('settings.toastLanguage', { language: languageSelect.options[languageSelect.selectedIndex].textContent }));
+    } catch (error) {
+      console.error('Failed to switch language', error);
+      showToast(toastRoot, translate('settings.toastLanguage', { language: translate('settings.languageEnglish') }));
+    }
+  });
+}
+
+function handleReducedMotionToggle() {
+  reducedMotionToggle.addEventListener('change', () => {
+    const enabled = reducedMotionToggle.checked;
+    setReducedMotionPreference(enabled);
+    applyReducedMotionUI();
+    showToast(toastRoot, translate(enabled ? 'settings.toastMotionOn' : 'settings.toastMotionOff'));
+  });
+}
+
+function handleInstallPrompt() {
+  installButton.disabled = true;
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
-    state.deferredPrompt = event;
+    deferredPrompt = event;
     installButton.disabled = false;
-    installHint.dataset.i18n = 'settings.installReady';
     installHint.textContent = translate('settings.installReady');
   });
 
   window.addEventListener('appinstalled', () => {
+    installHint.textContent = translate('settings.installComplete');
     showToast(toastRoot, translate('settings.installComplete'));
+  });
+
+  installButton.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const choice = await deferredPrompt.userChoice;
+    if (choice.outcome === 'accepted') {
+      showToast(toastRoot, translate('settings.installComplete'));
+    }
+    deferredPrompt = null;
     installButton.disabled = true;
   });
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('./sw.js')
-        .then((registration) => {
-          if (registration.waiting) {
-            showToast(toastRoot, translate('app.updateReady'));
-          }
-        })
-        .catch((error) => {
-          console.error('Service worker registration failed', error);
-        });
-
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        if (event.data && event.data.type === 'updateavailable') {
-          showToast(toastRoot, translate('app.updateAvailable'));
-        }
-      });
-    });
-  }
 }
 
-function initConnectivity() {
-  function updateStatus() {
-    const isOnline = navigator.onLine;
-    const key = isOnline ? 'settings.offlineStatusOnline' : 'settings.offlineStatusOffline';
-    offlineIndicator.dataset.i18n = key;
-    offlineIndicator.textContent = translate(key);
-  }
-  updateConnectivityStatus = updateStatus;
-  window.addEventListener('online', updateStatus);
-  window.addEventListener('offline', updateStatus);
-  updateStatus();
-}
-
-/**
- * Optional UX helpers (tooltip/popover) — safe no-ops if markup is missing.
- * Requires showTooltip/createPopover from components.js.
- */
-function initBannerTooltip() {
-  const bannerButton = document.querySelector('[data-banner-tooltip]');
-  const tooltip = document.getElementById('banner-tooltip');
-  if (!bannerButton || !tooltip || typeof showTooltip !== 'function') return;
-
-  let removeTooltip = null;
-  const getTooltipText = () => translate('home.bannerTooltip');
-
-  const show = () => {
-    const tooltipText = getTooltipText();
-    if (!tooltipText) return;
-    if (typeof removeTooltip === 'function') removeTooltip();
-    removeTooltip = showTooltip(bannerButton, tooltipText);
-  };
-
-  const hide = () => {
-    if (typeof removeTooltip === 'function') {
-      removeTooltip();
-      removeTooltip = null;
-    }
-  };
-
-  bannerButton.addEventListener('focus', show);
-  bannerButton.addEventListener('blur', hide);
-  bannerButton.addEventListener('mouseenter', show);
-  bannerButton.addEventListener('mouseleave', hide);
-  bannerButton.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') hide();
-  });
-}
-
-function initInfoPopover() {
-  if (typeof createPopover !== 'function') return;
-
-  let activePopover = null;
-
-  document.addEventListener('click', (event) => {
-    const trigger = event.target.closest('.info-trigger');
-    if (!trigger) return;
-
-    event.preventDefault();
-
-    if (activePopover) {
-      activePopover.close();
-      activePopover = null;
-    }
-
-    activePopover = createPopover({
-      html: `
-        <h3 class="h3" data-i18n="home.popoverTitle">${translate('home.popoverTitle')}</h3>
-        <p data-i18n="home.popoverBody">${translate('home.popoverBody')}</p>
-        <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
-          <button data-close type="button" data-i18n="common.close">${translate('common.close')}</button>
-        </div>
-      `,
-      onClose: () => {
-        activePopover = null;
-        if (document.contains(trigger)) {
-          trigger.focus();
-        }
-      },
-    });
-  });
-
-  // Apply translations after the popover is injected
-  document.addEventListener('click', (event) => {
-    const pop = document.querySelector('.popover'); // depends on your createPopover impl
-    if (pop) applyTranslations(pop);
-  });
-
-  // Close button handler (delegated)
-  document.addEventListener('click', (event) => {
-    const closeBtn = event.target.closest('[data-close]');
-    const pop = document.querySelector('.popover');
-    if (closeBtn && pop && typeof pop.close === 'function') {
-      pop.close();
-    }
-  });
+function watchConnectivity() {
+  window.addEventListener('online', updateOfflineStatus);
+  window.addEventListener('offline', updateOfflineStatus);
+  updateOfflineStatus();
 }
 
 function setupRouter() {
-  router.addRoute('/', ({ path }) => {
-    setActiveView('home');
-    setActiveDock(path);
-    updateDocumentTitle();
-    renderHome();
+  router.addRoute('/', async () => {
+    setActiveView('/');
+    updateNavState('/');
   });
-
-  router.addRoute('/guides', ({ query }) => {
-    setActiveView('guides');
-    setActiveDock('/guides');
-    updateDocumentTitle(translate('guides.heading'));
-    guidesModule.showIndex({ query });
+  router.addRoute('/guides', async () => {
+    setActiveView('/guides');
+    updateNavState('/guides');
+    await guidesController?.show();
   });
-
-  router.addRoute('/guides/:slug', ({ params, query }) => {
-    setActiveView('guideDetail');
-    setActiveDock('/guides');
-    updateDocumentTitle(translate('guides.heading'));
-    guidesModule.showDetail({ slug: params.slug, query });
+  router.addRoute('/ethics', async () => {
+    setActiveView('/ethics');
+    updateNavState('/ethics');
+    await handleEthicsRoute(document.getElementById('ethics-content'));
   });
-
-  router.addRoute('/tools', ({ path }) => {
-    setActiveView('tools');
-    setActiveDock(path);
-    updateDocumentTitle(translate('nav.tools'));
+  router.addRoute('/about', async () => {
+    setActiveView('/about');
+    updateNavState('/about');
   });
-
-  router.addRoute('/about', ({ path }) => {
-    setActiveView('about');
-    setActiveDock(path);
-    updateDocumentTitle(translate('nav.about'));
+  router.addRoute('/settings', async () => {
+    setActiveView('/settings');
+    updateNavState('/settings');
   });
-
-  router.addRoute('/ethics', async ({ path }) => {
-    setActiveView('ethics');
-    setActiveDock('/about');
-    await handleEthicsRoute(views.ethics);
-  });
-
-  router.addRoute('/settings', ({ path }) => {
-    setActiveView('settings');
-    setActiveDock(path);
-    updateDocumentTitle(translate('nav.settings'));
-  });
-
   router.setNotFound(() => {
-    setActiveView('home');
-    setActiveDock('/');
-    updateDocumentTitle();
+    router.navigate('/', { replace: true });
   });
-
   router.start();
 }
 
-function handleLanguageChange() {
-  applyTranslations(document);
-  renderHome();
-  if (typeof updateConnectivityStatus === 'function') {
-    updateConnectivityStatus();
-  }
-  if (router) {
-    const current = router.getCurrent();
-    if (current) {
-      switch (current.path) {
-        case '/guides':
-        case '/guides/':
-          updateDocumentTitle(translate('guides.heading'));
-          break;
-        default:
-          if (current.path.startsWith('/guides/')) {
-            updateDocumentTitle(translate('guides.heading'));
-          } else if (current.path.startsWith('/tools')) {
-            updateDocumentTitle(translate('nav.tools'));
-          } else if (current.path.startsWith('/about')) {
-            updateDocumentTitle(translate('nav.about'));
-          } else if (current.path.startsWith('/settings')) {
-            updateDocumentTitle(translate('nav.settings'));
-          } else if (current.path.startsWith('/ethics')) {
-            updateDocumentTitle(translate('pages.ethics.title'));
-          } else {
-            updateDocumentTitle();
-          }
-      }
-    } else {
-      updateDocumentTitle();
-    }
-  } else {
-    updateDocumentTitle();
-  }
-}
+async function bootstrap() {
+  html.dataset.rm = prefersReducedMotion ? 'on' : 'off';
+  applyReducedMotionUI();
 
-async function init() {
-  await initI18n(state.preferences.language);
-  state.preferences.language = getCurrentLanguage();
-  applyTranslations(document);
-  languageSubscription = onLanguageChange(handleLanguageChange);
+  initTooltips();
+
+  await initI18n(storedLanguage);
+  languageSelect.value = getCurrentLanguage();
+  applyTranslations(document.body);
+  if (!unsubscribeLanguage) {
+    unsubscribeLanguage = onLanguageChange(() => {
+      applyTranslations(document.body);
+      updateOfflineStatus();
+    });
+  }
 
   router = createRouter();
-  guidesModule = initGuidesModule({
-    router,
-    indexContainer: guideIndexContainer,
-    detail: {
-      title: guideDetailTitle,
-      summary: guideDetailSummary,
-      steps: guideStepList,
-      section: views.guideDetail,
-    },
-    toastRoot,
-  });
-
-  initSettings();
-  initPWA();
-  initConnectivity();
-  handleNavButtons();
+  initializeGuides(router);
   setupRouter();
+  bindNavigation();
   handleLanguageChange();
-  initBannerTooltip();
-  initInfoPopover();
+  handleReducedMotionToggle();
+  handleInstallPrompt();
+  watchConnectivity();
+  registerServiceWorker();
   showDisclaimerOnLoad();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // boot app
-  init().catch((error) => {
-    console.error('App failed to initialize', error);
-  });
-
-  // initialize generic tooltip system (if present)
-  try {
-    if (typeof initTooltips === 'function') initTooltips();
-  } catch (err) {
-    console.warn('Tooltip system failed to initialize:', err);
-  }
+document.addEventListener('DOMContentLoaded', async () => {
+  await bootstrap();
 });

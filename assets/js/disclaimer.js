@@ -150,7 +150,7 @@ function buildDisclaimerModal() {
         if (contentElement.dataset.status === 'loading') {
           contentElement.innerHTML = `<p>${translate('disclaimer.loading')}</p>`;
         } else if (contentElement.dataset.status === 'error') {
-          contentElement.innerHTML = `<p>${translate('disclaimer.loadError')}</p>`;
+          contentElement.innerHTML = `<p>${translate('disclaimer.error')}</p>`;
         }
       }
     }
@@ -211,7 +211,7 @@ function loadDisclaimerText() {
       handleContentScroll();
     })
     .catch(() => {
-      contentElement.innerHTML = `<p>${translate('disclaimer.loadError')}</p>`;
+      contentElement.innerHTML = `<p>${translate('disclaimer.error')}</p>`;
       contentElement.scrollTop = 0;
       contentElement.dataset.status = 'error';
       hasLoadedDisclaimer = true;
