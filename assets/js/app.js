@@ -1,5 +1,5 @@
 import { createRouter, handleEthicsRoute } from './router.js';
-import { createChip, showToast, createPopover, showTooltip } from './components.js';
+import { createChip, showToast } from './components.js';
 import { initGuidesModule } from './guides.js';
 import { showDisclaimerOnLoad } from './disclaimer.js';
 
@@ -209,77 +209,6 @@ function initConnectivity() {
   updateStatus();
 }
 
-function initBannerTooltip() {
-  const bannerButton = document.querySelector('[data-banner-tooltip]');
-  const tooltip = document.getElementById('banner-tooltip');
-  if (!bannerButton || !tooltip) return;
-
-  let removeTooltip = null;
-  const tooltipText = tooltip.textContent.trim();
-
-  const show = () => {
-    if (!tooltipText) return;
-    if (typeof removeTooltip === 'function') {
-      removeTooltip();
-    }
-    removeTooltip = showTooltip(bannerButton, tooltipText);
-  };
-
-  const hide = () => {
-    if (typeof removeTooltip === 'function') {
-      removeTooltip();
-      removeTooltip = null;
-    }
-  };
-
-  bannerButton.addEventListener('focus', show);
-  bannerButton.addEventListener('blur', hide);
-  bannerButton.addEventListener('mouseenter', show);
-  bannerButton.addEventListener('mouseleave', hide);
-  bannerButton.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      hide();
-    }
-  });
-}
-
-function initInfoPopover() {
-  let activePopover = null;
-
-  document.addEventListener('click', (event) => {
-    const trigger = event.target.closest('.info-trigger');
-    if (!trigger) return;
-
-    event.preventDefault();
-
-    if (activePopover) {
-      activePopover.close();
-      activePopover = null;
-    }
-
-    activePopover = createPopover({
-      html: `
-        <h3 class="h3">Be aware of fast-moving risks</h3>
-        <p>We surface emerging content, privacy, and access risks so you can respond quickly.</p>
-        <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
-          <button data-close type="button">Close</button>
-        </div>
-      `,
-      onClose: () => {
-        activePopover = null;
-        if (document.contains(trigger)) {
-          trigger.focus();
-        }
-      },
-    });
-
-    const closeButton = activePopover.el.querySelector('[data-close]');
-    if (closeButton) {
-      closeButton.addEventListener('click', () => activePopover?.close());
-    }
-  });
-}
-
 function setupRouter() {
   router.addRoute('/', ({ path }) => {
     setActiveView('home');
@@ -352,8 +281,6 @@ function init() {
   initSettings();
   initPWA();
   initConnectivity();
-  initBannerTooltip();
-  initInfoPopover();
   handleNavButtons();
   setupRouter();
   showDisclaimerOnLoad();
