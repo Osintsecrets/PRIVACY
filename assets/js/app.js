@@ -28,11 +28,17 @@ const offlineIndicator = document.getElementById('offline-indicator');
 const languageSelect = document.getElementById('language-select');
 const reducedMotionToggle = document.getElementById('reduced-motion-toggle');
 
+const storedLanguage = localStorage.getItem('sra:language');
+const storedReducedMotion = localStorage.getItem('sra:reduced-motion');
+const prefersReducedMotion = storedReducedMotion === null
+  ? Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  : storedReducedMotion === 'true';
+
 const state = {
   platforms: null,
   preferences: {
-    language: localStorage.getItem('sra:language') || 'en',
-    reducedMotion: localStorage.getItem('sra:reduced-motion') === 'true',
+    language: storedLanguage || 'en',
+    reducedMotion: prefersReducedMotion,
   },
   deferredPrompt: null,
 };
@@ -50,6 +56,8 @@ function applyReducedMotionPreference() {
   if (!document.body) return;
   const shouldReduce = Boolean(state.preferences.reducedMotion);
   document.body.classList.toggle('prefers-reduced-motion', shouldReduce);
+  document.documentElement.classList.toggle('prefers-reduced-motion', shouldReduce);
+  document.documentElement.style.scrollBehavior = shouldReduce ? 'auto' : 'smooth';
 }
 
 function setActiveView(viewKey) {
@@ -62,6 +70,16 @@ function setActiveView(viewKey) {
   if (viewRoot) {
     viewRoot.focus({ preventScroll: true });
   }
+  const scrollBehavior = state.preferences.reducedMotion ? 'auto' : 'smooth';
+  window.requestAnimationFrame(() => {
+    if (typeof window.scrollTo === 'function') {
+      try {
+        window.scrollTo({ top: 0, behavior: scrollBehavior });
+      } catch (error) {
+        window.scrollTo(0, 0);
+      }
+    }
+  });
 }
 
 function setActiveDock(path) {
