@@ -12,7 +12,7 @@ export function debounce(fn, wait = 220) {
   };
 }
 
-export function createSearchField({ id, label, placeholder = '', onChange, delay = 220 } = {}) {
+export function createSearchField({ id, label, labelKey, placeholder = '', placeholderKey, onChange, delay = 220 } = {}) {
   const fieldId = id || `search-field-${searchId += 1}`;
   const wrapper = document.createElement('div');
   wrapper.className = 'search-field';
@@ -20,15 +20,21 @@ export function createSearchField({ id, label, placeholder = '', onChange, delay
   const labelEl = document.createElement('label');
   labelEl.className = 'search-label';
   labelEl.setAttribute('for', fieldId);
-  labelEl.textContent = label;
+  labelEl.textContent = label || '';
+  if (labelKey) {
+    labelEl.dataset.i18n = labelKey;
+  }
 
   const input = document.createElement('input');
   input.type = 'search';
   input.id = fieldId;
   input.className = 'search-input';
-  input.placeholder = placeholder;
+  input.placeholder = placeholder || '';
   input.autocomplete = 'off';
   input.spellcheck = false;
+  if (placeholderKey) {
+    input.dataset.i18nAttrPlaceholder = placeholderKey;
+  }
 
   if (typeof onChange === 'function') {
     const debounced = debounce((event) => {

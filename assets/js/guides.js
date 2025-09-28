@@ -7,20 +7,32 @@ import {
   svgPhoneFrame,
   svgDesktopFrame,
 } from './components.js';
+import { translate, onLanguageChange, applyTranslations } from './i18n.js';
 
-const STRINGS = {
-  searchLabel: 'Search Facebook guides',
-  searchPlaceholder: 'Type a task or risk',
-  allCategories: 'All categories',
-  emptyState: 'No guides match your filters yet.',
-  viewGuide: 'Open guide',
-  openStep: 'Open step',
-  stepProgress: (current, total) => `Step ${current} of ${total}`,
-  previous: 'Previous',
-  next: 'Next',
-  finish: 'Finish',
-  closeWizard: 'Close wizard',
-};
+function createStrings() {
+  return {
+    searchLabel: translate('guides.searchLabel'),
+    searchPlaceholder: translate('guides.searchPlaceholder'),
+    allCategories: translate('guides.allCategories'),
+    emptyState: translate('guides.empty'),
+    viewGuide: translate('guides.view'),
+    openStep: translate('guides.openStep'),
+    stepProgress: (current, total) => translate('guides.stepProgress', { current, total }),
+    previous: translate('guides.previous'),
+    next: translate('guides.next'),
+    finish: translate('guides.finish'),
+    closeWizard: translate('guides.closeWizard'),
+    chipsAria: translate('guides.chipsAria'),
+    stepsCount: (count) => translate('guides.stepsCount', { count }),
+    cardAriaLabel: (title) => translate('guides.cardAriaLabel', { title }),
+    loadError: translate('guides.toastLoadError'),
+    notFoundTitle: translate('guides.notFound'),
+    notFoundBody: translate('guides.notFoundBody'),
+    noSteps: translate('guides.noSteps'),
+  };
+}
+
+let STRINGS = createStrings();
 
 const state = {
   router: null,
@@ -42,7 +54,50 @@ const state = {
   restoreFocusAction: 'card',
   hasInitializedIndex: false,
   hasVisitedIndex: false,
+  currentGuide: null,
 };
+
+let unsubscribeLanguage = null;
+
+function refreshLocalizedContent() {
+  STRINGS = createStrings();
+  if (state.hasInitializedIndex && state.indexContainer) {
+    renderCategoryChips();
+    updateChipSelection();
+    renderGuideCards();
+  } else if (state.indexContainer) {
+    applyTranslations(state.indexContainer);
+  }
+
+  if (state.detail?.section) {
+    if (state.currentGuide) {
+      state.detail.title.textContent = state.currentGuide.title;
+      state.detail.title.removeAttribute('data-i18n');
+      state.detail.summary.innerHTML = state.currentGuide.why ? formatRichText(state.currentGuide.why) : '';
+      state.detail.summary.removeAttribute('data-i18n');
+      if (state.detailMetaRow) {
+        state.detailMetaRow.innerHTML = '';
+        if (state.currentGuide.category) {
+          const badge = document.createElement('span');
+          badge.className = 'guide-badge';
+          badge.textContent = state.categoryMap.get(state.currentGuide.category)?.label || state.currentGuide.category;
+          state.detailMetaRow.appendChild(badge);
+        }
+        const stepsBadge = document.createElement('span');
+        stepsBadge.className = 'guide-badge';
+        stepsBadge.textContent = STRINGS.stepsCount(state.currentGuide.steps.length);
+        state.detailMetaRow.appendChild(stepsBadge);
+      }
+      buildDetailSteps(state.currentGuide);
+    } else {
+      applyTranslations(state.detail.section);
+    }
+  }
+
+  if (state.emptyStateEl) {
+    state.emptyStateEl.textContent = STRINGS.emptyState;
+  }
+}
 
 function escapeHtml(text = '') {
   return text
@@ -103,7 +158,9 @@ function ensureIndexLayout() {
   const { wrapper: searchField, input } = createSearchField({
     id: 'guides-search',
     label: STRINGS.searchLabel,
+    labelKey: 'guides.searchLabel',
     placeholder: STRINGS.searchPlaceholder,
+    placeholderKey: 'guides.searchPlaceholder',
     onChange: handleSearchChange,
     delay: 180,
   });
@@ -113,7 +170,8 @@ function ensureIndexLayout() {
   const chips = document.createElement('div');
   chips.className = 'guide-category-chips';
   chips.setAttribute('role', 'radiogroup');
-  chips.setAttribute('aria-label', 'Filter guides by category');
+  chips.setAttribute('aria-label', STRINGS.chipsAria);
+  chips.dataset.i18nAttrAriaLabel = 'guides.chipsAria';
   state.chipsContainer = chips;
   controls.appendChild(chips);
 
@@ -128,6 +186,7 @@ function ensureIndexLayout() {
   const empty = document.createElement('p');
   empty.className = 'guides-empty';
   empty.textContent = STRINGS.emptyState;
+  empty.dataset.i18n = 'guides.empty';
   empty.hidden = true;
   state.emptyStateEl = empty;
   indexWrapper.appendChild(empty);
@@ -141,6 +200,8 @@ function ensureIndexLayout() {
       loop: true,
     });
   }
+
+  applyTranslations(state.indexContainer);
 }
 
 function syncIndexQuery() {
@@ -202,6 +263,7 @@ function renderCategoryChips() {
   allChip.setAttribute('role', 'radio');
   allChip.setAttribute('aria-checked', state.activeCategory === 'all' ? 'true' : 'false');
   allChip.tabIndex = state.activeCategory === 'all' ? 0 : -1;
+  allChip.dataset.i18n = 'guides.allCategories';
   allChip.addEventListener('click', () => setActiveCategory('all', { fromUser: true }));
   allChip.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -228,6 +290,8 @@ function renderCategoryChips() {
     });
     state.chipsContainer.appendChild(chip);
   });
+
+  applyTranslations(state.chipsContainer);
 }
 
 function matchesFilters(guide) {
@@ -250,7 +314,7 @@ function createGuideCard(guide) {
   card.dataset.slug = guide.id;
   card.tabIndex = 0;
   card.setAttribute('role', 'button');
-  card.setAttribute('aria-label', `${guide.title} guide`);
+  card.setAttribute('aria-label', STRINGS.cardAriaLabel(guide.title));
 
   const header = document.createElement('div');
   header.className = 'guide-card-header';
@@ -278,7 +342,7 @@ function createGuideCard(guide) {
 
   const meta = document.createElement('p');
   meta.className = 'guide-card-meta';
-  meta.textContent = `${guide.steps.length} steps`;
+  meta.textContent = STRINGS.stepsCount(guide.steps.length);
   card.appendChild(meta);
 
   const actionRow = document.createElement('div');
@@ -287,6 +351,7 @@ function createGuideCard(guide) {
   actionBtn.type = 'button';
   actionBtn.className = 'guide-card-cta';
   actionBtn.textContent = STRINGS.viewGuide;
+  actionBtn.dataset.i18n = 'guides.view';
   actionBtn.addEventListener('click', (event) => {
     event.stopPropagation();
     goToGuideDetail(guide.id, actionBtn, 'cta');
@@ -305,6 +370,7 @@ function createGuideCard(guide) {
     }
   });
 
+  applyTranslations(card);
   return card;
 }
 
@@ -321,6 +387,7 @@ function renderGuideCards() {
     const card = createGuideCard(guide);
     state.resultsContainer.appendChild(card);
   });
+  applyTranslations(state.resultsContainer);
   if (!state.hasVisitedIndex && state.searchInput) {
     state.searchInput.focus({ preventScroll: true });
     state.hasVisitedIndex = true;
@@ -379,10 +446,12 @@ function openGuideWizard(guide, initialIndex, originButton) {
   });
 
   modal.closeBtn.setAttribute('aria-label', STRINGS.closeWizard);
+  modal.closeBtn.dataset.i18nAttrAriaLabel = 'guides.closeWizard';
 
   const prevBtn = document.createElement('button');
   prevBtn.type = 'button';
   prevBtn.textContent = STRINGS.previous;
+  prevBtn.dataset.i18n = 'guides.previous';
   const nextBtn = document.createElement('button');
   nextBtn.type = 'button';
   nextBtn.textContent = STRINGS.next;
@@ -435,7 +504,11 @@ function openGuideWizard(guide, initialIndex, originButton) {
     text.innerHTML = formatRichText(step.body);
     bodyCopy.appendChild(text);
     prevBtn.disabled = current === 0;
-    nextBtn.textContent = current === total - 1 ? STRINGS.finish : STRINGS.next;
+    const isLastStep = current === total - 1;
+    nextBtn.textContent = isLastStep ? STRINGS.finish : STRINGS.next;
+    nextBtn.dataset.i18n = isLastStep ? 'guides.finish' : 'guides.next';
+    applyTranslations(modal.header);
+    applyTranslations(modal.footer);
   }
 
   update();
@@ -474,6 +547,7 @@ function buildDetailSteps(guide) {
     openBtn.type = 'button';
     openBtn.className = 'step-open';
     openBtn.textContent = STRINGS.openStep;
+    openBtn.dataset.i18n = 'guides.openStep';
     openBtn.dataset.stepIndex = String(index);
     openBtn.addEventListener('click', () => {
       state.router.navigate(`/guides/${guide.id}?step=${index + 1}`, { replace: true, silent: true });
@@ -484,6 +558,7 @@ function buildDetailSteps(guide) {
 
     state.detail.steps.appendChild(item);
   });
+  applyTranslations(state.detail.steps);
 }
 
 async function ensureDataLoaded() {
@@ -493,7 +568,7 @@ async function ensureDataLoaded() {
   } catch (error) {
     console.error(error);
     if (state.toastRoot) {
-      showToast(state.toastRoot, 'Unable to load Facebook guides.');
+      showToast(state.toastRoot, STRINGS.loadError);
     }
   }
 }
@@ -521,8 +596,15 @@ export function initGuidesModule({ router, indexContainer, detail, toastRoot }) 
   state.toastRoot = toastRoot;
   ensureDetailMeta(detail.section);
 
+  if (!unsubscribeLanguage) {
+    unsubscribeLanguage = onLanguageChange(() => {
+      refreshLocalizedContent();
+    });
+  }
+
   return {
     async showIndex({ query }) {
+      state.currentGuide = null;
       await ensureDataLoaded();
       ensureIndexLayout();
       applyQueryToState(query || new URLSearchParams());
@@ -532,16 +614,28 @@ export function initGuidesModule({ router, indexContainer, detail, toastRoot }) 
       await ensureDataLoaded();
       const guide = (state.guidesData?.guides || []).find((item) => item.id === slug);
       if (!guide) {
-        state.detail.title.textContent = 'Guide not found';
-        state.detail.summary.textContent = '';
-        state.detail.steps.innerHTML = '<li class="step-card">No guide steps available.</li>';
+        state.detail.title.textContent = STRINGS.notFoundTitle;
+        state.detail.title.dataset.i18n = 'guides.notFound';
+        state.detail.summary.textContent = STRINGS.notFoundBody;
+        state.detail.summary.dataset.i18n = 'guides.notFoundBody';
+        state.detail.steps.innerHTML = '';
+        const emptyItem = document.createElement('li');
+        emptyItem.className = 'step-card';
+        emptyItem.textContent = STRINGS.noSteps;
+        emptyItem.dataset.i18n = 'guides.noSteps';
+        state.detail.steps.appendChild(emptyItem);
         if (state.detailMetaRow) {
           state.detailMetaRow.innerHTML = '';
         }
+        state.currentGuide = null;
         return;
       }
+      state.currentGuide = guide;
       state.detail.title.textContent = guide.title;
+      delete state.detail.title.dataset.i18n;
+      state.detail.title.removeAttribute('data-i18n');
       state.detail.summary.innerHTML = guide.why ? formatRichText(guide.why) : '';
+      state.detail.summary.removeAttribute('data-i18n');
       if (state.detailMetaRow) {
         state.detailMetaRow.innerHTML = '';
         if (guide.category) {
@@ -552,7 +646,7 @@ export function initGuidesModule({ router, indexContainer, detail, toastRoot }) 
         }
         const stepsBadge = document.createElement('span');
         stepsBadge.className = 'guide-badge';
-        stepsBadge.textContent = `${guide.steps.length} steps`;
+        stepsBadge.textContent = STRINGS.stepsCount(guide.steps.length);
         state.detailMetaRow.appendChild(stepsBadge);
       }
       buildDetailSteps(guide);
