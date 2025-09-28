@@ -10,6 +10,7 @@
 | High | PWA caching | sw.js | 1-133 | Versioned precache/runtime caches with offline fallback and update broadcast.【F:sw.js†L1-L133】 | ✅ Fixed | — |
 | Medium | Safe-area layout | assets/css/styles.css | 1-47 | Header/body/dock honour iOS/Android safe areas and maintain 44×44 tap targets.【F:assets/css/styles.css†L1-L47】【F:assets/css/styles.css†L123-L145】 | ✅ Fixed | — |
 | Medium | i18n | assets/js/app.js<br>i18n/{en,he}.json | 182-214<br>1-103 | Language toggle persists, flips `dir`, and re-renders strings.【F:assets/js/app.js†L182-L214】【F:i18n/en.json†L1-L103】【F:i18n/he.json†L1-L103】 | ✅ Fixed | — |
+| Medium | Manual experience | assets/js/pages/manual.js<br>index.html | 1-240<br>1-120 | Added long-form manual route that renders audit narrative and guides dataset.【F:assets/js/pages/manual.js†L1-L240】【F:index.html†L52-L94】 | ✅ Fixed | — |
 | Low | Maskable icon coverage | manifest.json | 1-24 | Manifest still references square icons only.【F:manifest.json†L1-L24】 | ⚠️ Open | Create maskable 192/512px art and update manifest `purpose: "any maskable"`. |
 | Low | Security headers | index.html | 4-20 | No CSP meta yet; add documentation for downstream hardening.【F:index.html†L4-L19】 | ⚠️ Open | Document CSP snippet for GitHub Pages deployment. |
 
@@ -29,6 +30,7 @@
 - `data/guides.json` defines version/platform metadata and four Facebook tasks with steps, notes, levels, and tags.【F:data/guides.json†L1-L66】
 - UI renders filter chips (`basic/intermediate/advanced`), debounced search, and aria-live result announcement.【F:assets/js/pages/guides.js†L266-L306】【F:assets/js/pages/guides.js†L140-L161】
 - Wizard modal stores per-guide progress in `sessionStorage` to offer a single-click resume entry point.【F:assets/js/pages/guides.js†L322-L414】【F:assets/js/pages/guides.js†L35-L90】
+- New manual view merges `data/manual.en.json` metadata with `data/guides-facebook.json` tasks to provide a narrative companion.【F:assets/js/pages/manual.js†L1-L240】【F:data/manual.en.json†L1-L66】【F:data/guides-facebook.json†L1-L220】
 
 ## Mobile & Layout
 - Body/header/dock apply `env(safe-area-inset-*)` padding and keep floating dock above gesture home indicator.【F:assets/css/styles.css†L35-L44】【F:assets/css/styles.css†L318-L356】

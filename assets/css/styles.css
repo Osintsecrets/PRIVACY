@@ -482,6 +482,193 @@ select:disabled {
   transform: translateY(14px);
 }
 
+.page-manual {
+  display: block;
+}
+
+.manual-card {
+  display: grid;
+  gap: 24px;
+  padding: clamp(20px, 4vw, 36px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--stroke-soft);
+  background: rgba(8, 18, 28, 0.86);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow);
+}
+
+.manual-card h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+}
+
+.manual-lede {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.manual-updated {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.manual-intro h2,
+.manual-overview h2,
+.manual-final h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+}
+
+.manual-intro p,
+.manual-overview p,
+.manual-final p {
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.manual-principle {
+  color: var(--text-muted);
+}
+
+.manual-overview-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.manual-overview-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.manual-overview-item a:hover,
+.manual-overview-item a:focus-visible {
+  text-decoration: underline;
+}
+
+.manual-sections {
+  display: grid;
+  gap: 32px;
+}
+
+.manual-section {
+  border-top: 1px solid rgba(0, 255, 255, 0.18);
+  padding-top: 24px;
+  display: grid;
+  gap: 20px;
+}
+
+.manual-section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.manual-section h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+.manual-section-prefix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.manual-section-description {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.manual-guide {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--stroke-soft);
+  background: rgba(12, 26, 38, 0.75);
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.manual-guide-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.manual-guide-why {
+  margin: 0;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.manual-label {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.manual-label-inline {
+  margin: 0;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.manual-step-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 14px;
+}
+
+.manual-step {
+  line-height: 1.5;
+}
+
+.manual-step-title {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.manual-step-body {
+  margin: 0;
+}
+
+.manual-step-note {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .manual-card {
+    padding: 20px;
+  }
+
+  .manual-section {
+    gap: 16px;
+  }
+
+  .manual-step-list {
+    padding-left: 1rem;
+  }
+}
+
 .menu-overlay {
   position: fixed;
   inset: 0;

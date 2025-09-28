@@ -5,6 +5,7 @@ A grandma-proof privacy companion for Facebook. The site runs entirely client-si
 ## Features
 
 - **Guided fixes:** Searchable, filterable tasks backed by `data/guides.json`, complete with step-by-step wizard and session resume.
+- **Manual companion:** Long-form manual stitches the full audit narrative together with every remediation task.
 - **Ethics-first onboarding:** Mandatory scroll-to-consent disclaimer with focus trap and inert background every visit.
 - **Accessibility:** Fully keyboard navigable, screen-reader friendly tooltips, 44×44 touch targets, RTL-safe English/Hebrew toggle that persists.
 - **Comfort controls:** Global reduced-motion toggle stored in `localStorage` and enforced across CSS and JS.

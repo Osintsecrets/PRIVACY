@@ -10,12 +10,23 @@
   "nav": {
     "home": "Home",
     "guides": "Guides",
+    "manual": "Manual",
     "ethics": "Ethics",
     "about": "About",
     "settings": "Settings",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "menuLabel": "Navigation"
+  },
+  "manual": {
+    "title": "Facebook Privacy Manual",
+    "subtitle": "Explore every recommendation from the audit in one place.",
+    "heading": "Facebook Privacy Manual",
+    "pageTitle": "Facebook Privacy Manual",
+    "lede": "Work through a comprehensive playbook to harden your Facebook account.",
+    "purposeLabel": "Purpose",
+    "stepsLabel": "Steps",
+    "loadError": "We could not load the manual. Please refresh."
   },
   "home": {
     "headline": "Take control of your Facebook privacy",
