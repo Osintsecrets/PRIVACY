@@ -1,8 +1,11 @@
+// assets/js/app.js
+
 import { createRouter, handleEthicsRoute } from './router.js';
-import { createChip, showToast } from './components.js';
+import { createChip, showToast, showTooltip, createPopover } from './components.js';
 import { initGuidesModule } from './guides.js';
 import { showDisclaimerOnLoad } from './disclaimer.js';
 import { initTooltips } from './utils/tooltip.js';
+import { initI18n, setLanguage, getCurrentLanguage, translate, applyTranslations, onLanguageChange } from './i18n.js';
 
 const views = {
   home: document.getElementById('view-home'),
@@ -31,9 +34,10 @@ const reducedMotionToggle = document.getElementById('reduced-motion-toggle');
 
 const storedLanguage = localStorage.getItem('sra:language');
 const storedReducedMotion = localStorage.getItem('sra:reduced-motion');
-const prefersReducedMotion = storedReducedMotion === null
-  ? Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  : storedReducedMotion === 'true';
+const prefersReducedMotion =
+  storedReducedMotion === null
+    ? Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    : storedReducedMotion === 'true';
 
 const state = {
   platforms: null,
@@ -46,11 +50,17 @@ const state = {
 
 let router = null;
 let guidesModule = null;
+let updateConnectivityStatus = null;
+let languageSubscription = null;
 
-const BASE_TITLE = 'Social Risk Audit';
+function getBaseTitle() {
+  return translate('app.title');
+}
 
 function updateDocumentTitle(segment) {
-  document.title = segment ? `${segment} — ${BASE_TITLE}` : BASE_TITLE;
+  const base = getBaseTitle();
+  const value = segment ? `${segment} — ${base}` : base;
+  document.title = value;
 }
 
 function applyReducedMotionPreference() {
@@ -62,9 +72,7 @@ function applyReducedMotionPreference() {
 }
 
 function setActiveView(viewKey) {
-  Object.values(views).forEach((view) => {
-    view.classList.remove('active');
-  });
+  Object.values(views).forEach((view) => view.classList.remove('active'));
   if (viewKey && views[viewKey]) {
     views[viewKey].classList.add('active');
   }
@@ -76,7 +84,7 @@ function setActiveView(viewKey) {
     if (typeof window.scrollTo === 'function') {
       try {
         window.scrollTo({ top: 0, behavior: scrollBehavior });
-      } catch (error) {
+      } catch {
         window.scrollTo(0, 0);
       }
     }
@@ -86,11 +94,8 @@ function setActiveView(viewKey) {
 function setActiveDock(path) {
   dockItems.forEach((item) => {
     const target = item.dataset.dock;
-    if (path.startsWith(target)) {
-      item.classList.add('active');
-    } else {
-      item.classList.remove('active');
-    }
+    if (path.startsWith(target)) item.classList.add('active');
+    else item.classList.remove('active');
   });
 }
 
@@ -102,7 +107,7 @@ async function loadPlatforms() {
     state.platforms = data.platforms || [];
   } catch (error) {
     console.error('Failed to load platforms', error);
-    showToast(toastRoot, 'Unable to load platforms.');
+    showToast(toastRoot, translate('home.loadError'));
     state.platforms = [];
   }
   return state.platforms;
@@ -117,25 +122,31 @@ function renderHome() {
         if (platform.id !== 'facebook') return;
         const card = document.createElement('article');
         card.className = 'platform-card';
-        card.innerHTML = `
-          <h2>${platform.label}</h2>
-          <p>Identify content and privacy risks unique to Facebook.</p>
-        `;
+        const heading = document.createElement('h2');
+        heading.textContent = platform.label;
+        const description = document.createElement('p');
+        description.dataset.i18n = 'home.platformDescription';
+        description.textContent = translate('home.platformDescription');
+        card.append(heading, description);
         const action = document.createElement('a');
         action.href = '#/guides';
         action.className = 'primary-button';
-        action.textContent = 'Open Guides';
+        action.dataset.i18n = 'home.cta';
+        action.textContent = translate('home.cta');
         card.appendChild(action);
         platformGrid.appendChild(card);
+        applyTranslations(card);
       });
   });
 
   quickChipRow.innerHTML = '';
-  ['Lock profile settings', 'Clean up old photos', 'Review app access'].forEach((label) => {
-    const chip = createChip(label);
+  ['home.quickFix.lockProfile', 'home.quickFix.cleanPhotos', 'home.quickFix.reviewAccess'].forEach((key) => {
+    const chip = createChip(translate(key));
     chip.setAttribute('aria-disabled', 'true');
     chip.disabled = true;
+    chip.dataset.i18n = key;
     quickChipRow.appendChild(chip);
+    applyTranslations(chip);
   });
 }
 
@@ -152,21 +163,33 @@ function handleNavButtons() {
 }
 
 function initSettings() {
-  languageSelect.value = state.preferences.language;
+  languageSelect.value = getCurrentLanguage();
   reducedMotionToggle.checked = state.preferences.reducedMotion;
   applyReducedMotionPreference();
 
-  languageSelect.addEventListener('change', () => {
-    state.preferences.language = languageSelect.value;
-    localStorage.setItem('sra:language', state.preferences.language);
-    showToast(toastRoot, `Language set to ${languageSelect.options[languageSelect.selectedIndex].text}`);
+  languageSelect.addEventListener('change', async () => {
+    const nextLanguage = languageSelect.value;
+    try {
+      const resolved = await setLanguage(nextLanguage);
+      state.preferences.language = resolved;
+      localStorage.setItem('sra:language', state.preferences.language);
+      const label = languageSelect.options[languageSelect.selectedIndex]?.textContent?.trim() || resolved;
+      showToast(toastRoot, translate('settings.languageToast', { language: label }));
+    } catch (error) {
+      console.error('Failed to change language', error);
+      showToast(toastRoot, translate('settings.languageError'));
+      languageSelect.value = getCurrentLanguage();
+    }
   });
 
   reducedMotionToggle.addEventListener('change', () => {
     state.preferences.reducedMotion = reducedMotionToggle.checked;
     localStorage.setItem('sra:reduced-motion', String(state.preferences.reducedMotion));
     applyReducedMotionPreference();
-    showToast(toastRoot, state.preferences.reducedMotion ? 'Reduced motion enabled.' : 'Reduced motion disabled.');
+    showToast(
+      toastRoot,
+      translate(state.preferences.reducedMotion ? 'settings.motionEnabled' : 'settings.motionDisabled'),
+    );
   });
 
   installButton.disabled = true;
@@ -174,11 +197,14 @@ function initSettings() {
     if (state.deferredPrompt) {
       state.deferredPrompt.prompt();
       const choice = await state.deferredPrompt.userChoice;
-      showToast(toastRoot, choice.outcome === 'accepted' ? 'App install started.' : 'Install dismissed.');
+      showToast(
+        toastRoot,
+        translate(choice.outcome === 'accepted' ? 'settings.installStarted' : 'settings.installDismissed'),
+      );
       state.deferredPrompt = null;
       installButton.disabled = true;
     } else {
-      showToast(toastRoot, 'Install prompt not available yet.');
+      showToast(toastRoot, translate('settings.installUnavailable'));
     }
   });
 }
@@ -188,11 +214,12 @@ function initPWA() {
     event.preventDefault();
     state.deferredPrompt = event;
     installButton.disabled = false;
-    installHint.textContent = 'Ready to install.';
+    installHint.dataset.i18n = 'settings.installReady';
+    installHint.textContent = translate('settings.installReady');
   });
 
   window.addEventListener('appinstalled', () => {
-    showToast(toastRoot, 'App installed successfully.');
+    showToast(toastRoot, translate('settings.installComplete'));
     installButton.disabled = true;
   });
 
@@ -202,7 +229,7 @@ function initPWA() {
         .register('./sw.js')
         .then((registration) => {
           if (registration.waiting) {
-            showToast(toastRoot, 'Update ready. Refresh to apply.');
+            showToast(toastRoot, translate('app.updateReady'));
           }
         })
         .catch((error) => {
@@ -211,7 +238,7 @@ function initPWA() {
 
       navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'updateavailable') {
-          showToast(toastRoot, 'New version ready. Refresh to update.');
+          showToast(toastRoot, translate('app.updateAvailable'));
         }
       });
     });
@@ -221,11 +248,98 @@ function initPWA() {
 function initConnectivity() {
   function updateStatus() {
     const isOnline = navigator.onLine;
-    offlineIndicator.textContent = `Status: ${isOnline ? 'Online' : 'Offline (retrying...)'}`;
+    const key = isOnline ? 'settings.offlineStatusOnline' : 'settings.offlineStatusOffline';
+    offlineIndicator.dataset.i18n = key;
+    offlineIndicator.textContent = translate(key);
   }
+  updateConnectivityStatus = updateStatus;
   window.addEventListener('online', updateStatus);
   window.addEventListener('offline', updateStatus);
   updateStatus();
+}
+
+/**
+ * Optional UX helpers (tooltip/popover) — safe no-ops if markup is missing.
+ * Requires showTooltip/createPopover from components.js.
+ */
+function initBannerTooltip() {
+  const bannerButton = document.querySelector('[data-banner-tooltip]');
+  const tooltip = document.getElementById('banner-tooltip');
+  if (!bannerButton || !tooltip || typeof showTooltip !== 'function') return;
+
+  let removeTooltip = null;
+  const getTooltipText = () => translate('home.bannerTooltip');
+
+  const show = () => {
+    const tooltipText = getTooltipText();
+    if (!tooltipText) return;
+    if (typeof removeTooltip === 'function') removeTooltip();
+    removeTooltip = showTooltip(bannerButton, tooltipText);
+  };
+
+  const hide = () => {
+    if (typeof removeTooltip === 'function') {
+      removeTooltip();
+      removeTooltip = null;
+    }
+  };
+
+  bannerButton.addEventListener('focus', show);
+  bannerButton.addEventListener('blur', hide);
+  bannerButton.addEventListener('mouseenter', show);
+  bannerButton.addEventListener('mouseleave', hide);
+  bannerButton.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') hide();
+  });
+}
+
+function initInfoPopover() {
+  if (typeof createPopover !== 'function') return;
+
+  let activePopover = null;
+
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('.info-trigger');
+    if (!trigger) return;
+
+    event.preventDefault();
+
+    if (activePopover) {
+      activePopover.close();
+      activePopover = null;
+    }
+
+    activePopover = createPopover({
+      html: `
+        <h3 class="h3" data-i18n="home.popoverTitle">${translate('home.popoverTitle')}</h3>
+        <p data-i18n="home.popoverBody">${translate('home.popoverBody')}</p>
+        <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+          <button data-close type="button" data-i18n="common.close">${translate('common.close')}</button>
+        </div>
+      `,
+      onClose: () => {
+        activePopover = null;
+        if (document.contains(trigger)) {
+          trigger.focus();
+        }
+      },
+    });
+  });
+
+  // Apply translations after the popover is injected
+  document.addEventListener('click', (event) => {
+    const pop = document.querySelector('.popover'); // depends on your createPopover impl
+    if (pop) applyTranslations(pop);
+  });
+
+  // Close button handler (delegated)
+  document.addEventListener('click', (event) => {
+    const closeBtn = event.target.closest('[data-close]');
+    const pop = document.querySelector('.popover');
+    if (closeBtn && pop && typeof pop.close === 'function') {
+      pop.close();
+    }
+  });
 }
 
 function setupRouter() {
@@ -239,27 +353,27 @@ function setupRouter() {
   router.addRoute('/guides', ({ query }) => {
     setActiveView('guides');
     setActiveDock('/guides');
-    updateDocumentTitle('Guides');
+    updateDocumentTitle(translate('guides.heading'));
     guidesModule.showIndex({ query });
   });
 
   router.addRoute('/guides/:slug', ({ params, query }) => {
     setActiveView('guideDetail');
     setActiveDock('/guides');
-    updateDocumentTitle('Guides');
+    updateDocumentTitle(translate('guides.heading'));
     guidesModule.showDetail({ slug: params.slug, query });
   });
 
   router.addRoute('/tools', ({ path }) => {
     setActiveView('tools');
     setActiveDock(path);
-    updateDocumentTitle('Tools');
+    updateDocumentTitle(translate('nav.tools'));
   });
 
   router.addRoute('/about', ({ path }) => {
     setActiveView('about');
     setActiveDock(path);
-    updateDocumentTitle('About');
+    updateDocumentTitle(translate('nav.about'));
   });
 
   router.addRoute('/ethics', async ({ path }) => {
@@ -271,7 +385,7 @@ function setupRouter() {
   router.addRoute('/settings', ({ path }) => {
     setActiveView('settings');
     setActiveDock(path);
-    updateDocumentTitle('Settings');
+    updateDocumentTitle(translate('nav.settings'));
   });
 
   router.setNotFound(() => {
@@ -283,7 +397,49 @@ function setupRouter() {
   router.start();
 }
 
-function init() {
+function handleLanguageChange() {
+  applyTranslations(document);
+  renderHome();
+  if (typeof updateConnectivityStatus === 'function') {
+    updateConnectivityStatus();
+  }
+  if (router) {
+    const current = router.getCurrent();
+    if (current) {
+      switch (current.path) {
+        case '/guides':
+        case '/guides/':
+          updateDocumentTitle(translate('guides.heading'));
+          break;
+        default:
+          if (current.path.startsWith('/guides/')) {
+            updateDocumentTitle(translate('guides.heading'));
+          } else if (current.path.startsWith('/tools')) {
+            updateDocumentTitle(translate('nav.tools'));
+          } else if (current.path.startsWith('/about')) {
+            updateDocumentTitle(translate('nav.about'));
+          } else if (current.path.startsWith('/settings')) {
+            updateDocumentTitle(translate('nav.settings'));
+          } else if (current.path.startsWith('/ethics')) {
+            updateDocumentTitle(translate('pages.ethics.title'));
+          } else {
+            updateDocumentTitle();
+          }
+      }
+    } else {
+      updateDocumentTitle();
+    }
+  } else {
+    updateDocumentTitle();
+  }
+}
+
+async function init() {
+  await initI18n(state.preferences.language);
+  state.preferences.language = getCurrentLanguage();
+  applyTranslations(document);
+  languageSubscription = onLanguageChange(handleLanguageChange);
+
   router = createRouter();
   guidesModule = initGuidesModule({
     router,
@@ -302,10 +458,22 @@ function init() {
   initConnectivity();
   handleNavButtons();
   setupRouter();
+  handleLanguageChange();
+  initBannerTooltip();
+  initInfoPopover();
   showDisclaimerOnLoad();
 }
 
-document.addEventListener('DOMContentLoaded', init);
 document.addEventListener('DOMContentLoaded', () => {
-  initTooltips();
+  // boot app
+  init().catch((error) => {
+    console.error('App failed to initialize', error);
+  });
+
+  // initialize generic tooltip system (if present)
+  try {
+    if (typeof initTooltips === 'function') initTooltips();
+  } catch (err) {
+    console.warn('Tooltip system failed to initialize:', err);
+  }
 });

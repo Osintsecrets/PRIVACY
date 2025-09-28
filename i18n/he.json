@@ -5,37 +5,100 @@
   "nav.tools": "כלים",
   "nav.about": "אודות",
   "nav.settings": "הגדרות",
+
+  "home.awareness": "שימו לב לסיכונים המתרחשים במהירות ברשתות החברתיות שלכם.",
+  "home.bannerInfo": "למידע נוסף",
+  "home.bannerTooltip": "אנחנו מציעים פעולות מהירות כדי לשמור על הנוכחות שלכם בטוחה יותר.",
+  "home.lede": "זהו סיכונים מוקדם. פעלו לפני שהם מתפשטים.",
+  "home.quickActions": "הפעולות המובילות בפייסבוק",
+  "home.quickActionsAria": "פעולות מהירות",
+  "home.platformDescription": "זהו סיכוני תוכן ופרטיות ייחודיים לפייסבוק.",
+  "home.quickFix.lockProfile": "נעילת הגדרות הפרופיל",
+  "home.quickFix.cleanPhotos": "ניקוי תמונות ישנות",
+  "home.quickFix.reviewAccess": "בדיקת הרשאות אפליקציות",
   "home.cta": "לפתיחת מדריכים",
+  "home.loadError": "לא ניתן לטעון את הפלטפורמות.",
+  "home.popoverTitle": "שימו לב לסיכונים מהירים",
+  "home.popoverBody": "אנחנו מציגים סיכונים מתפתחים בפרטיות, תוכן וגישה כדי שתוכלו להגיב מהר.",
+
   "guides.heading": "מדריכים",
   "guides.detail": "פרטי מדריך",
-  "guides.searchLabel": "Search Facebook guides",
-  "guides.searchPlaceholder": "Type a task or risk",
-  "guides.allCategories": "All categories",
-  "guides.empty": "No guides match your filters yet.",
-  "guides.view": "Open guide",
-  "guides.openStep": "Open step",
-  "guides.stepProgress": "Step {current} of {total}",
-  "guides.previous": "Previous",
-  "guides.next": "Next",
-  "guides.finish": "Finish",
-  "guides.closeWizard": "Close wizard",
+  "guides.lede": "מדריכים מעמיקים לנטרול סיכונים צעד אחר צעד.",
+  "guides.searchLabel": "חיפוש מדריכי פייסבוק",
+  "guides.searchPlaceholder": "הקלידו משימה או סיכון",
+  "guides.allCategories": "כל הקטגוריות",
+  "guides.empty": "אין מדריכים מתאימים למסננים עדיין.",
+  "guides.view": "פתחו מדריך",
+  "guides.openStep": "פתחו שלב",
+  "guides.stepProgress": "שלב {current} מתוך {total}",
+  "guides.previous": "הקודם",
+  "guides.next": "הבא",
+  "guides.finish": "סיום",
+  "guides.closeWizard": "סגירת אשף",
+  "guides.chipsAria": "סינון מדריכים לפי קטגוריה",
+  "guides.stepsCount": "{count} שלבים",
+  "guides.toastLoadError": "לא ניתן לטעון את מדריכי פייסבוק.",
+  "guides.cardAriaLabel": "מדריך {title}",
+  "guides.backToList": "← חזרה למדריכים",
+  "guides.notFound": "המדריך לא נמצא",
+  "guides.notFoundBody": "לא הצלחנו למצוא את המדריך הזה. נסו לבחור אחר.",
+  "guides.noSteps": "אין שלבים זמינים במדריך.",
+
   "settings.language": "שפה",
+  "settings.languageLegend": "שפה",
+  "settings.languageLabel": "בחרו שפה",
+  "settings.languageEnglish": "English",
+  "settings.languageHebrew": "עברית",
   "settings.reducedMotion": "הפחתת תנועה",
   "settings.install": "התקנת האפליקציה",
   "settings.offline": "סטטוס לא מקוון",
+  "settings.lede": "התאימו העדפות לסביבת העבודה שלכם.",
+  "settings.accessibility": "נגישות",
+  "settings.installation": "התקנה",
+  "settings.installHint": "בקשת התקנה תופיע כאשר תהיה זמינה.",
+  "settings.installReady": "מוכן להתקנה.",
+  "settings.installUnavailable": "בקשת התקנה עדיין לא זמינה.",
+  "settings.installStarted": "תהליך ההתקנה התחיל.",
+  "settings.installDismissed": "בקשת ההתקנה בוטלה.",
+  "settings.installComplete": "היישום הותקן בהצלחה.",
+  "settings.languageToast": "השפה הוגדרה ל-{language}.",
+  "settings.languageError": "לא ניתן לשנות שפה. נסו שוב.",
+  "settings.motionEnabled": "הפחתת תנועה הופעלה.",
+  "settings.motionDisabled": "הפחתת תנועה בוטלה.",
+  "settings.offlineChecking": "מצב: בודק...",
+  "settings.offlineStatusOnline": "מצב: מקוון",
+  "settings.offlineStatusOffline": "מצב: לא מקוון (מנסה שוב...)",
+
+  "app.updateReady": "עדכון זמין. רעננו כדי להחיל.",
+  "app.updateAvailable": "גרסה חדשה זמינה. רעננו כדי לעדכן.",
+
   "disclaimer": {
     "title": "הצהרה משפטית, אתית ומוסרית מקיפה",
     "agree": "אני מסכים/ה",
     "disagree": "אינני מסכים/ה",
-    "leave": "עזוב את האתר"
+    "leave": "צא/י מהאתר",
+    "loading": "טוען את ההצהרה...",
+    "empty": "אין טקסט הצהרה זמין.",
+    "loadError": "לא ניתן לטעון את ההצהרה. רעננו את העמוד."
   },
+
   "pages": {
     "ethics": {
-      "title": "Ethics & Morality",
-      "intro": "Our work is privacy-first, consent-based, and never used to harm. This page states the standards."
+      "title": "אתיקה ומוסר",
+      "intro": "העבודה שלנו שומרת על פרטיות, מבוססת הסכמה, ולעולם אינה פוגעת. כאן מפורטים הסטנדרטים.",
+      "back": "חזרה לעמוד אודות",
+      "loadError": "לא הצלחנו לטעון את הצהרת האתיקה. נסו שוב מאוחר יותר."
     }
   },
+
+  "tools.placeholderAutomation": "בדיקות אוטומטיות (בקרוב)",
+  "tools.placeholderScans": "סריקות תצורה של הפלטפורמה",
+  "about.mission": "המשימה שלנו: להפחית חשיפה לסיכונים חברתיים.",
+  "about.audience": "מיועד לעיתונאים, פעילים וצוותים.",
+
   "links": {
-    "ethics": "Ethics"
-  }
+    "ethics": "אתיקה"
+  },
+
+  "common.close": "סגירה"
 }

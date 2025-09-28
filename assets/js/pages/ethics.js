@@ -1,3 +1,5 @@
+import { translate, applyTranslations } from '../i18n.js';
+
 const SOURCE_URL = new URL('./data/ethics.md', window.location.href).toString();
 let cachedMarkdown = null;
 
@@ -89,11 +91,11 @@ export async function renderEthics(root) {
   heading.id = 'ethics-title';
   heading.tabIndex = -1;
   heading.dataset.i18n = 'pages.ethics.title';
-  heading.textContent = 'Ethics & Morality';
+  heading.textContent = translate('pages.ethics.title');
 
   const intro = document.createElement('p');
   intro.dataset.i18n = 'pages.ethics.intro';
-  intro.textContent = 'Our work is privacy-first, consent-based, and never used to harm. This page states the standards.';
+  intro.textContent = translate('pages.ethics.intro');
 
   const content = document.createElement('div');
   content.className = 'ethics-content';
@@ -101,11 +103,13 @@ export async function renderEthics(root) {
   const backLink = document.createElement('a');
   backLink.href = '#/about';
   backLink.classList.add('link', 'back-link');
-  backLink.textContent = 'Back to About';
+  backLink.dataset.i18n = 'pages.ethics.back';
+  backLink.textContent = translate('pages.ethics.back');
 
   card.append(heading, intro, content, backLink);
   main.appendChild(card);
   root.appendChild(main);
+  applyTranslations(card);
 
   try {
     const markdown = await loadMarkdown();
@@ -114,7 +118,10 @@ export async function renderEthics(root) {
   } catch (error) {
     console.error(error);
     content.innerHTML = '';
-    content.appendChild(createParagraph('We could not load the ethics statement. Please try again later.'));
+    const paragraph = createParagraph(translate('pages.ethics.loadError'));
+    paragraph.dataset.i18n = 'pages.ethics.loadError';
+    content.appendChild(paragraph);
+    applyTranslations(content);
   }
 
   requestAnimationFrame(() => {

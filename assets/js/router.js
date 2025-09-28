@@ -1,4 +1,5 @@
 import { renderEthics } from './pages/ethics.js';
+import { translate } from './i18n.js';
 
 export function createRouter() {
   const routes = [];
@@ -133,6 +134,6 @@ export function createRouter() {
 }
 
 export async function handleEthicsRoute(root) {
-  document.title = 'Ethics — Social Risk Audit';
+  document.title = `${translate('pages.ethics.title')} — ${translate('app.title')}`;
   await renderEthics(root);
 }

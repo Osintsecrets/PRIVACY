@@ -5,9 +5,25 @@
   "nav.tools": "Tools",
   "nav.about": "About",
   "nav.settings": "Settings",
+
+  "home.awareness": "Be aware of fast-moving risks on your social platforms.",
+  "home.bannerInfo": "Learn what this means",
+  "home.bannerTooltip": "We surface quick actions to keep your presence safer.",
+  "home.lede": "Spot trouble early. Take action before it spreads.",
+  "home.quickActions": "Top Facebook fixes",
+  "home.quickActionsAria": "Quick actions",
+  "home.platformDescription": "Identify content and privacy risks unique to Facebook.",
+  "home.quickFix.lockProfile": "Lock profile settings",
+  "home.quickFix.cleanPhotos": "Clean up old photos",
+  "home.quickFix.reviewAccess": "Review app access",
   "home.cta": "Open Guides",
+  "home.loadError": "Unable to load platforms.",
+  "home.popoverTitle": "Be aware of fast-moving risks",
+  "home.popoverBody": "We surface emerging content, privacy, and access risks so you can respond quickly.",
+
   "guides.heading": "Guides",
   "guides.detail": "Guide detail",
+  "guides.lede": "Deep dives to neutralize risks step-by-step.",
   "guides.searchLabel": "Search Facebook guides",
   "guides.searchPlaceholder": "Type a task or risk",
   "guides.allCategories": "All categories",
@@ -19,23 +35,70 @@
   "guides.next": "Next",
   "guides.finish": "Finish",
   "guides.closeWizard": "Close wizard",
+  "guides.chipsAria": "Filter guides by category",
+  "guides.stepsCount": "{count} steps",
+  "guides.toastLoadError": "Unable to load Facebook guides.",
+  "guides.cardAriaLabel": "{title} guide",
+  "guides.backToList": "← Back to guides",
+  "guides.notFound": "Guide not found",
+  "guides.notFoundBody": "We couldn't locate this guide. Try another one.",
+  "guides.noSteps": "No guide steps available.",
+
   "settings.language": "Language",
+  "settings.languageLegend": "Language",
+  "settings.languageLabel": "Choose language",
+  "settings.languageEnglish": "English",
+  "settings.languageHebrew": "עברית",
   "settings.reducedMotion": "Reduced motion",
   "settings.install": "Install App",
   "settings.offline": "Offline status",
+  "settings.lede": "Tune preferences for your workspace.",
+  "settings.accessibility": "Accessibility",
+  "settings.installation": "Installation",
+  "settings.installHint": "Installation prompt appears when available.",
+  "settings.installReady": "Ready to install.",
+  "settings.installUnavailable": "Install prompt not available yet.",
+  "settings.installStarted": "App install started.",
+  "settings.installDismissed": "Install dismissed.",
+  "settings.installComplete": "App installed successfully.",
+  "settings.languageToast": "Language set to {language}.",
+  "settings.languageError": "Unable to change language. Please try again.",
+  "settings.motionEnabled": "Reduced motion enabled.",
+  "settings.motionDisabled": "Reduced motion disabled.",
+  "settings.offlineChecking": "Status: Checking...",
+  "settings.offlineStatusOnline": "Status: Online",
+  "settings.offlineStatusOffline": "Status: Offline (retrying...)",
+
+  "app.updateReady": "Update ready. Refresh to apply.",
+  "app.updateAvailable": "New version ready. Refresh to update.",
+
   "disclaimer": {
     "title": "Comprehensive Legal, Ethical, and Moral Disclaimer",
     "agree": "I Agree",
     "disagree": "I Do Not Agree",
-    "leave": "Leave site"
+    "leave": "Leave site",
+    "loading": "Loading disclaimer...",
+    "empty": "No disclaimer text available.",
+    "loadError": "Unable to load the disclaimer text. Please refresh the page."
   },
+
   "pages": {
     "ethics": {
       "title": "Ethics & Morality",
-      "intro": "Our work is privacy-first, consent-based, and never used to harm. This page states the standards."
+      "intro": "Our work is privacy-first, consent-based, and never used to harm. This page states the standards.",
+      "back": "Back to About",
+      "loadError": "We could not load the ethics statement. Please try again later."
     }
   },
+
+  "tools.placeholderAutomation": "Automated checks (coming soon)",
+  "tools.placeholderScans": "Platform configuration scans",
+  "about.mission": "Our mission: reduce social risk exposure.",
+  "about.audience": "Built for journalists, advocates, and teams.",
+
   "links": {
     "ethics": "Ethics"
-  }
+  },
+
+  "common.close": "Close"
 }
