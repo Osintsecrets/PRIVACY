@@ -8,11 +8,23 @@
   --focus-ring: rgba(111, 243, 255, 0.35);
   --text-primary: #E4E8EE;
   --text-muted: #9EA4AD;
-  --transition-fast: 200ms ease;
+  --transition-fast: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 560ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 html, body {
@@ -51,11 +63,16 @@ body.no-scroll {
   border: 1px solid var(--glass-border);
   padding: 24px;
   backdrop-filter: blur(18px);
-  transition: opacity var(--transition-fast);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
+  will-change: opacity, transform;
 }
 
 .view.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-heading {
@@ -87,6 +104,7 @@ body.no-scroll {
   flex-direction: column;
   gap: 12px;
   min-height: 180px;
+  transition: transform var(--transition-medium), border var(--transition-fast), box-shadow var(--transition-medium);
 }
 
 .platform-card h2 {
@@ -248,7 +266,7 @@ select:focus-visible,
   flex-direction: column;
   gap: 12px;
   cursor: pointer;
-  transition: transform var(--transition-fast), border var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform var(--transition-medium), border var(--transition-fast), box-shadow var(--transition-medium);
 }
 
 .guide-card:hover {
@@ -495,7 +513,7 @@ select {
   padding: 12px 18px;
   color: var(--text-primary);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  transition: opacity var(--transition-medium), transform var(--transition-medium);
   opacity: 1;
   transform: translateY(0);
 }
@@ -777,7 +795,8 @@ body.prefers-reduced-motion *::after {
   transition-duration: 0.001ms !important;
 }
 
-body.prefers-reduced-motion {
+body.prefers-reduced-motion,
+html.prefers-reduced-motion {
   scroll-behavior: auto !important;
 }
 
