@@ -952,6 +952,24 @@ html.prefers-reduced-motion {
 /* Tooltips/popovers rendered inside #ui-portal are pointer-enabled */
 #ui-portal > *{ pointer-events:auto; }
 
+/* Tooltip styles */
+.sra-tooltip {
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  color: #ccfaff;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 0 32px rgba(0, 255, 255, 0.06);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sra-tooltip {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
 /* Avoid accidental stacking contexts on content containers */
 .content, .card, .grid {
   /* DO NOT assign transform/filter/perspective unless intentional */

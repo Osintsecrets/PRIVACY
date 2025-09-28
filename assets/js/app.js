@@ -4,6 +4,7 @@ import { createRouter, handleEthicsRoute } from './router.js';
 import { createChip, showToast, showTooltip, createPopover } from './components.js';
 import { initGuidesModule } from './guides.js';
 import { showDisclaimerOnLoad } from './disclaimer.js';
+import { initTooltips } from './utils/tooltip.js';
 import { initI18n, setLanguage, getCurrentLanguage, translate, applyTranslations, onLanguageChange } from './i18n.js';
 
 const views = {
@@ -33,9 +34,10 @@ const reducedMotionToggle = document.getElementById('reduced-motion-toggle');
 
 const storedLanguage = localStorage.getItem('sra:language');
 const storedReducedMotion = localStorage.getItem('sra:reduced-motion');
-const prefersReducedMotion = storedReducedMotion === null
-  ? Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  : storedReducedMotion === 'true';
+const prefersReducedMotion =
+  storedReducedMotion === null
+    ? Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    : storedReducedMotion === 'true';
 
 const state = {
   platforms: null,
@@ -70,9 +72,7 @@ function applyReducedMotionPreference() {
 }
 
 function setActiveView(viewKey) {
-  Object.values(views).forEach((view) => {
-    view.classList.remove('active');
-  });
+  Object.values(views).forEach((view) => view.classList.remove('active'));
   if (viewKey && views[viewKey]) {
     views[viewKey].classList.add('active');
   }
@@ -84,7 +84,7 @@ function setActiveView(viewKey) {
     if (typeof window.scrollTo === 'function') {
       try {
         window.scrollTo({ top: 0, behavior: scrollBehavior });
-      } catch (error) {
+      } catch {
         window.scrollTo(0, 0);
       }
     }
@@ -94,11 +94,8 @@ function setActiveView(viewKey) {
 function setActiveDock(path) {
   dockItems.forEach((item) => {
     const target = item.dataset.dock;
-    if (path.startsWith(target)) {
-      item.classList.add('active');
-    } else {
-      item.classList.remove('active');
-    }
+    if (path.startsWith(target)) item.classList.add('active');
+    else item.classList.remove('active');
   });
 }
 
@@ -327,11 +324,20 @@ function initInfoPopover() {
         }
       },
     });
-    applyTranslations(activePopover.el);
+  });
 
-    const closeButton = activePopover.el.querySelector('[data-close]');
-    if (closeButton) {
-      closeButton.addEventListener('click', () => activePopover?.close());
+  // Apply translations after the popover is injected
+  document.addEventListener('click', (event) => {
+    const pop = document.querySelector('.popover'); // depends on your createPopover impl
+    if (pop) applyTranslations(pop);
+  });
+
+  // Close button handler (delegated)
+  document.addEventListener('click', (event) => {
+    const closeBtn = event.target.closest('[data-close]');
+    const pop = document.querySelector('.popover');
+    if (closeBtn && pop && typeof pop.close === 'function') {
+      pop.close();
     }
   });
 }
@@ -459,7 +465,15 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // boot app
   init().catch((error) => {
     console.error('App failed to initialize', error);
   });
+
+  // initialize generic tooltip system (if present)
+  try {
+    if (typeof initTooltips === 'function') initTooltips();
+  } catch (err) {
+    console.warn('Tooltip system failed to initialize:', err);
+  }
 });
