@@ -1,20 +1,20 @@
 {
   "name": "Social Risk Audit",
   "short_name": "Risk Audit",
-  "start_url": "/#/",
-  "scope": "/",
+  "start_url": "./#/",
+  "scope": "./",
   "display": "standalone",
   "theme_color": "#0B0C10",
   "background_color": "#0B0C10",
   "icons": [
     {
-      "src": "/icons-s/1.png",
+      "src": "./icons-s/1.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "/icons-s/2.png",
+      "src": "./icons-s/2.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
