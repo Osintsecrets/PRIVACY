@@ -29,5 +29,14 @@
     "agree": "I Agree",
     "disagree": "I Do Not Agree",
     "leave": "Leave site"
+  },
+  "pages": {
+    "ethics": {
+      "title": "Ethics & Morality",
+      "intro": "Our work is privacy-first, consent-based, and never used to harm. This page states the standards."
+    }
+  },
+  "links": {
+    "ethics": "Ethics"
   }
 }

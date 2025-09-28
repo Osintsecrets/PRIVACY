@@ -1,3 +1,5 @@
+import { renderEthics } from './pages/ethics.js';
+
 export function createRouter() {
   const routes = [];
   let notFoundHandler = null;
@@ -128,4 +130,9 @@ export function createRouter() {
     navigate,
     getCurrent,
   };
+}
+
+export async function handleEthicsRoute(root) {
+  document.title = 'Ethics — Social Risk Audit';
+  await renderEthics(root);
 }

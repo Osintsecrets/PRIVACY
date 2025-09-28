@@ -1,4 +1,4 @@
-import { createRouter } from './router.js';
+import { createRouter, handleEthicsRoute } from './router.js';
 import { createChip, showToast, createPopover, showTooltip } from './components.js';
 import { initGuidesModule } from './guides.js';
 import { showDisclaimerOnLoad } from './disclaimer.js';
@@ -9,6 +9,7 @@ const views = {
   guideDetail: document.getElementById('view-guide-detail'),
   tools: document.getElementById('view-tools'),
   about: document.getElementById('view-about'),
+  ethics: document.getElementById('view-ethics'),
   settings: document.getElementById('view-settings'),
 };
 
@@ -38,6 +39,12 @@ const state = {
 
 let router = null;
 let guidesModule = null;
+
+const BASE_TITLE = 'Social Risk Audit';
+
+function updateDocumentTitle(segment) {
+  document.title = segment ? `${segment} — ${BASE_TITLE}` : BASE_TITLE;
+}
 
 function applyReducedMotionPreference() {
   if (!document.body) return;
@@ -277,39 +284,52 @@ function setupRouter() {
   router.addRoute('/', ({ path }) => {
     setActiveView('home');
     setActiveDock(path);
+    updateDocumentTitle();
     renderHome();
   });
 
   router.addRoute('/guides', ({ query }) => {
     setActiveView('guides');
     setActiveDock('/guides');
+    updateDocumentTitle('Guides');
     guidesModule.showIndex({ query });
   });
 
   router.addRoute('/guides/:slug', ({ params, query }) => {
     setActiveView('guideDetail');
     setActiveDock('/guides');
+    updateDocumentTitle('Guides');
     guidesModule.showDetail({ slug: params.slug, query });
   });
 
   router.addRoute('/tools', ({ path }) => {
     setActiveView('tools');
     setActiveDock(path);
+    updateDocumentTitle('Tools');
   });
 
   router.addRoute('/about', ({ path }) => {
     setActiveView('about');
     setActiveDock(path);
+    updateDocumentTitle('About');
+  });
+
+  router.addRoute('/ethics', async ({ path }) => {
+    setActiveView('ethics');
+    setActiveDock('/about');
+    await handleEthicsRoute(views.ethics);
   });
 
   router.addRoute('/settings', ({ path }) => {
     setActiveView('settings');
     setActiveDock(path);
+    updateDocumentTitle('Settings');
   });
 
   router.setNotFound(() => {
     setActiveView('home');
     setActiveDock('/');
+    updateDocumentTitle();
   });
 
   router.start();
