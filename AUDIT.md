@@ -6,9 +6,9 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | High | Modal accessibility | assets/js/disclaimer.js | 85-214 | Disclaimer rebuilt with modal manager, scroll-gate, and ESC lock per requirements.【F:assets/js/disclaimer.js†L85-L214】 | ✅ Fixed | — |
 | High | Guides UX | assets/js/pages/guides.js | 14-477 | New JSON-driven guides loader with search, filters, wizard, and session resume.【F:assets/js/pages/guides.js†L14-L477】 | ✅ Fixed | — |
-| High | Reduced motion | assets/js/app.js<br>assets/css/styles.css | 55-100<br>35-81 | Preference now stored under `sra_rm`, applied via `<html data-rm>`, and CSS/JS guard animations.【F:assets/js/app.js†L55-L100】【F:assets/css/styles.css†L35-L81】 | ✅ Fixed | — |
+| High | Reduced motion | assets/js/app.js<br>assets/css/tokens.css | 55-100<br>45-72 | Preference now stored under `sra_rm`, applied via `<html data-rm>`, and CSS/JS guard animations.【F:assets/js/app.js†L55-L100】【F:assets/css/tokens.css†L45-L72】 | ✅ Fixed | — |
 | High | PWA caching | sw.js | 1-133 | Versioned precache/runtime caches with offline fallback and update broadcast.【F:sw.js†L1-L133】 | ✅ Fixed | — |
-| Medium | Safe-area layout | assets/css/styles.css | 1-47 | Header/body/dock honour iOS/Android safe areas and maintain 44×44 tap targets.【F:assets/css/styles.css†L1-L47】【F:assets/css/styles.css†L123-L145】 | ✅ Fixed | — |
+| Medium | Safe-area layout | assets/css/tokens.css<br>assets/css/components.css | 1-44<br>1-88 | Header/body/dock honour iOS/Android safe areas and maintain 44×44 tap targets.【F:assets/css/tokens.css†L25-L44】【F:assets/css/components.css†L1-L88】 | ✅ Fixed | — |
 | Medium | i18n | assets/js/app.js<br>i18n/{en,he}.json | 182-214<br>1-103 | Language toggle persists, flips `dir`, and re-renders strings.【F:assets/js/app.js†L182-L214】【F:i18n/en.json†L1-L103】【F:i18n/he.json†L1-L103】 | ✅ Fixed | — |
 | Medium | Manual experience | assets/js/pages/manual.js<br>index.html | 1-240<br>1-120 | Added long-form manual route that renders audit narrative and guides dataset.【F:assets/js/pages/manual.js†L1-L240】【F:index.html†L52-L94】 | ✅ Fixed | — |
 | Low | Maskable icon coverage | manifest.json | 1-24 | Manifest still references square icons only.【F:manifest.json†L1-L24】 | ⚠️ Open | Create maskable 192/512px art and update manifest `purpose: "any maskable"`. |
@@ -33,8 +33,8 @@
 - New manual view merges `data/manual.en.json` metadata with `data/guides-facebook.json` tasks to provide a narrative companion.【F:assets/js/pages/manual.js†L1-L240】【F:data/manual.en.json†L1-L66】【F:data/guides-facebook.json†L1-L220】
 
 ## Mobile & Layout
-- Body/header/dock apply `env(safe-area-inset-*)` padding and keep floating dock above gesture home indicator.【F:assets/css/styles.css†L35-L44】【F:assets/css/styles.css†L318-L356】
-- Buttons and chips enforce `min-height: 44px` and neon focus outlines for touch compliance.【F:assets/css/styles.css†L123-L145】【F:assets/css/styles.css†L202-L240】
+- Body/header/dock apply `env(safe-area-inset-*)` padding and keep floating dock above gesture home indicator.【F:assets/css/tokens.css†L25-L44】【F:assets/css/components.css†L1-L88】
+- Buttons and chips enforce `min-height: 44px` and neon focus outlines for touch compliance.【F:assets/css/components.css†L140-L209】
 - Offline fallback styled to match glassmorphism theme with accessible refresh button.【F:offline.html†L1-L40】
 
 ## Internationalisation
@@ -53,8 +53,8 @@
 | --- | --- | --- |
 | Disclaimer modal scroll-to-consent, focus trap, ESC locked | ✅ | 【F:assets/js/disclaimer.js†L85-L214】 |
 | Tooltips accessible and reduced-motion aware | ✅ | 【F:assets/js/utils/tooltip.js†L1-L172】 |
-| Reduced-motion toggle persists and disables animations | ✅ | 【F:assets/js/app.js†L55-L100】【F:assets/css/styles.css†L35-L81】 |
-| Safe-area padding keeps dock/header clear on mobile | ✅ | 【F:assets/css/styles.css†L1-L47】【F:assets/css/styles.css†L318-L356】 |
+| Reduced-motion toggle persists and disables animations | ✅ | 【F:assets/js/app.js†L55-L100】【F:assets/css/tokens.css†L45-L72】 |
+| Safe-area padding keeps dock/header clear on mobile | ✅ | 【F:assets/css/tokens.css†L25-L44】【F:assets/css/components.css†L1-L88】 |
 | PWA manifest valid, icons load, install prompt surfaces | ✅ | 【F:manifest.json†L1-L24】【F:assets/js/app.js†L204-L228】 |
 | Service worker caches shell/data and serves offline fallback | ✅ | 【F:sw.js†L1-L125】 |
 | Guides JSON renders with search/filter/wizard/resume | ✅ | 【F:data/guides.json†L1-L66】【F:assets/js/pages/guides.js†L168-L414】 |

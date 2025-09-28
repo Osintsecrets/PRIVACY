@@ -18,7 +18,11 @@ A grandma-proof privacy companion for Facebook. The site runs entirely client-si
 .
 ├── index.html              # Application shell and layout
 ├── assets/
-│   ├── css/styles.css      # Theme tokens, safe-area rules, glassmorphism styles
+│   ├── css/
+│   │   ├── reset.css       # Modern reset with focus-visible and motion guardrails
+│   │   ├── tokens.css      # Design tokens, safe-area insets, typography scales
+│   │   ├── components.css  # Glassmorphism components, neon accents, utilities
+│   │   └── responsive.css  # Breakpoints and safe-area responsive tweaks
 │   └── js/
 │       ├── app.js          # Bootstraps router, i18n, settings, SW, tooltips
 │       ├── pages/guides.js # Guides loader, filters, wizard
