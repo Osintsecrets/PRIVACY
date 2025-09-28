@@ -1,4 +1,4 @@
-const SOURCE_URL = '/data/ethics.md';
+const SOURCE_URL = new URL('./data/ethics.md', window.location.href).toString();
 let cachedMarkdown = null;
 
 function normalizeText(text) {
