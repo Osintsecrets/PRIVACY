@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <title>Offline — Social Risk Audit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <style>
+    body { display:flex; min-height:100vh; align-items:center; justify-content:center; padding:24px; background:radial-gradient(circle at 20% 20%, rgba(0,255,255,0.15), transparent 55%), #05080d; color:#e6f6ff; text-align:center; }
+    main { max-width:420px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(0,255,255,0.25); border-radius:20px; padding:32px 28px; background:rgba(8,18,28,0.85); box-shadow:0 20px 60px rgba(0,40,60,0.55); }
+    h1 { font-size:1.6rem; margin-bottom:12px; }
+    p { line-height:1.5; font-size:1rem; color:#b8ddee; }
+    a { color:#41e5ff; text-decoration:none; }
+    a:focus-visible { outline:2px solid #41e5ff; outline-offset:4px; border-radius:6px; }
+    .actions { margin-top:24px; display:flex; flex-direction:column; gap:12px; }
+    .actions a { display:inline-flex; justify-content:center; align-items:center; min-height:44px; padding:0 18px; border-radius:999px; background:linear-gradient(135deg, rgba(65,229,255,0.25), rgba(65,229,255,0)); border:1px solid rgba(65,229,255,0.45); font-weight:600; }
+  </style>
+</head>
+<body>
+  <main role="main">
+    <h1>You're offline</h1>
+    <p>
+      Social Risk Audit couldn't reach the network. Reconnect to load live guides, or keep exploring
+      cached content and settings.
+    </p>
+    <div class="actions">
+      <a href="./#/" rel="noopener">Return to home</a>
+      <a href="./" rel="noopener">Reload when you're back online</a>
+    </div>
+  </main>
+</body>
+</html>

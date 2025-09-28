@@ -1,6 +1,4 @@
 let searchId = 0;
-const PORTAL_ARIA_OBSERVER_KEY = '__portalAriaObserver';
-const PORTAL_ARIA_UPDATE_KEY = '__portalAriaUpdate';
 
 export function debounce(fn, wait = 220) {
   let timer = null;
@@ -133,24 +131,7 @@ export function mountToPortal(el) {
   if (!el) return;
   const portal = document.getElementById('ui-portal');
   if (portal) {
-    if (!portal[PORTAL_ARIA_UPDATE_KEY]) {
-      portal[PORTAL_ARIA_UPDATE_KEY] = () => {
-        if (portal.childElementCount === 0) {
-          portal.setAttribute('aria-hidden', 'true');
-        } else {
-          portal.removeAttribute('aria-hidden');
-        }
-      };
-    }
-
-    if (!portal[PORTAL_ARIA_OBSERVER_KEY]) {
-      portal[PORTAL_ARIA_OBSERVER_KEY] = new MutationObserver(portal[PORTAL_ARIA_UPDATE_KEY]);
-      portal[PORTAL_ARIA_OBSERVER_KEY].observe(portal, { childList: true });
-      portal[PORTAL_ARIA_UPDATE_KEY]();
-    }
-
     portal.appendChild(el);
-    portal[PORTAL_ARIA_UPDATE_KEY]();
   } else {
     document.body.appendChild(el);
   }
