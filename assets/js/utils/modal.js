@@ -1,97 +1,76 @@
 export class ModalManager {
-  constructor({ portalSelector = '#ui-portal', inertSelectors = ['#app', 'main', '#app-root'] } = {}) {
-    this.portal = document.querySelector(portalSelector) || this._ensurePortal(portalSelector);
+  constructor({ portalSelector = '#ui-portal', inertSelectors = ['#app', 'main', 'body'] } = {}) {
+    this.portal = document.querySelector(portalSelector) || this._createPortal(portalSelector);
     this.inertSelectors = inertSelectors;
     this.activeDialog = null;
-    this.lastFocused = null;
-    this.keydownHandler = this._onKeydown.bind(this);
+    this.previousActive = null;
+    this.keydownHandler = this._handleKeydown.bind(this);
+    this.focusTrapCleanup = null;
   }
 
-  _ensurePortal(selector) {
+  _createPortal(selector) {
     const el = document.createElement('div');
     el.id = selector.replace('#', '');
     document.body.appendChild(el);
     return el;
   }
 
-  open(dialogEl, { restoreFocusTo = document.activeElement, trap = true, escToClose = true } = {}) {
-    if (!dialogEl) return;
-    this.lastFocused = restoreFocusTo || document.activeElement;
-
-    dialogEl.setAttribute('role', 'dialog');
-    dialogEl.setAttribute('aria-modal', 'true');
-
-    this.portal.appendChild(dialogEl);
-    this.activeDialog = dialogEl;
-
-    this._setInert(true);
-
-    document.documentElement.style.overflow = 'hidden';
-
-    if (trap) {
-      this._trapFocus(dialogEl);
-      document.addEventListener('keydown', this.keydownHandler, true);
-    }
-
-    dialogEl.dataset.escToClose = String(!!escToClose);
-  }
-
-  close() {
-    const dlg = this.activeDialog;
-    if (!dlg) return;
-
-    this._setInert(false);
-    document.documentElement.style.overflow = '';
-
-    document.removeEventListener('keydown', this.keydownHandler, true);
-
-    dlg.remove();
-    this.activeDialog = null;
-
-    if (this.lastFocused && typeof this.lastFocused.focus === 'function') {
-      this.lastFocused.focus({ preventScroll: true });
-    }
-  }
-
-  _onKeydown(event) {
-    if (!this.activeDialog) return;
-    if (event.key === 'Escape' && this.activeDialog.dataset.escToClose === 'true') {
-      event.stopPropagation();
-      event.preventDefault();
-      this.close();
-      return;
-    }
-    if (event.key === 'Tab') {
-      this._maintainFocus(event);
-    }
-  }
-
-  _focusables(container) {
+  _getFocusable(container) {
     if (!container) return [];
     return Array.from(
       container.querySelectorAll(
-        'a[href], button:not([disabled]), textarea, input, select, summary, [tabindex]:not([tabindex="-1"])'
-      )
-    ).filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+        'a[href], button:not([disabled]), textarea, input:not([type="hidden"]), select, [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((node) => !node.hasAttribute('disabled') && node.getAttribute('aria-hidden') !== 'true');
   }
 
-  _trapFocus(container) {
-    const focusables = this._focusables(container);
-    if (focusables.length === 0) {
-      container.tabIndex = -1;
-      container.focus({ preventScroll: true });
+  _setInert(state) {
+    const elements = this.inertSelectors.flatMap((selector) => Array.from(document.querySelectorAll(selector)));
+    elements.forEach((element) => {
+      if (!element || (this.activeDialog && element.contains(this.activeDialog))) return;
+      if (state) {
+        element.setAttribute('inert', '');
+      } else {
+        element.removeAttribute('inert');
+      }
+    });
+  }
+
+  _focusFirst(container) {
+    const focusable = this._getFocusable(container);
+    if (focusable.length) {
+      focusable[0].focus({ preventScroll: true });
+      return () => {};
+    }
+    container.tabIndex = -1;
+    container.focus({ preventScroll: true });
+    return () => {
+      container.removeAttribute('tabindex');
+    };
+  }
+
+  _handleKeydown(event) {
+    if (!this.activeDialog) return;
+    if (event.key === 'Escape') {
+      const allowEscape = this.activeDialog.dataset.escToClose === 'true';
+      if (allowEscape) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.close();
+      }
       return;
     }
-    focusables[0].focus({ preventScroll: true });
-  }
 
-  _maintainFocus(event) {
-    const focusables = this._focusables(this.activeDialog);
-    if (focusables.length === 0) return;
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
+    if (event.key !== 'Tab') return;
+    const focusable = this._getFocusable(this.activeDialog);
+    if (!focusable.length) {
+      event.preventDefault();
+      this.activeDialog.focus({ preventScroll: true });
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
     const active = document.activeElement;
-
     if (event.shiftKey && active === first) {
       event.preventDefault();
       last.focus();
@@ -101,20 +80,46 @@ export class ModalManager {
     }
   }
 
-  _setInert(state) {
-    this.inertSelectors.forEach((selector) => {
-      document.querySelectorAll(selector).forEach((element) => {
-        if (!element) return;
-        if (this.activeDialog && element.contains(this.activeDialog)) return;
-        if (state) {
-          element.setAttribute('inert', '');
-          element.setAttribute('aria-hidden', 'true');
-        } else {
-          element.removeAttribute('inert');
-          element.removeAttribute('aria-hidden');
-        }
-      });
-    });
+  open(dialogEl, { restoreFocusTo = document.activeElement, trap = true, escToClose = true } = {}) {
+    if (!dialogEl || this.activeDialog === dialogEl) return;
+    this.previousActive = restoreFocusTo || document.activeElement;
+
+    dialogEl.setAttribute('role', 'dialog');
+    dialogEl.setAttribute('aria-modal', 'true');
+    dialogEl.dataset.escToClose = escToClose ? 'true' : 'false';
+
+    this.portal.appendChild(dialogEl);
+    this.activeDialog = dialogEl;
+
+    this._setInert(true);
+    document.documentElement.style.overflow = 'hidden';
+
+    if (trap) {
+      this.focusTrapCleanup = this._focusFirst(dialogEl);
+      document.addEventListener('keydown', this.keydownHandler, true);
+    }
+  }
+
+  close() {
+    if (!this.activeDialog) return;
+    const dialog = this.activeDialog;
+
+    document.removeEventListener('keydown', this.keydownHandler, true);
+    this._setInert(false);
+    document.documentElement.style.overflow = '';
+
+    if (typeof this.focusTrapCleanup === 'function') {
+      this.focusTrapCleanup();
+      this.focusTrapCleanup = null;
+    }
+
+    dialog.remove();
+    this.activeDialog = null;
+
+    if (this.previousActive && typeof this.previousActive.focus === 'function') {
+      this.previousActive.focus({ preventScroll: true });
+    }
+    this.previousActive = null;
   }
 }
 

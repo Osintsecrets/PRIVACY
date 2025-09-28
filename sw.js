@@ -1,24 +1,22 @@
-const CACHE_VERSION = 'v2';
-const STATIC_CACHE = `sra-static-${CACHE_VERSION}`;
+const CACHE_VERSION = 'v3';
+const CORE_CACHE = `sra-core-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `sra-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = './offline.html';
 
-const APP_SHELL = [
+const PRECACHE_URLS = [
+  './',
   './index.html',
-  OFFLINE_URL,
+  './offline.html',
   './manifest.json',
   './assets/css/styles.css',
   './assets/js/app.js',
   './assets/js/components.js',
   './assets/js/disclaimer.js',
-  './assets/js/guides.js',
-  './assets/js/i18n.js',
   './assets/js/router.js',
-  './assets/js/pages/ethics.js',
+  './assets/js/pages/guides.js',
+  './assets/js/utils/modal.js',
   './assets/js/utils/tooltip.js',
-  './data/categories.json',
-  './data/platforms.json',
-  './data/guides-facebook.json',
+  './data/guides.json',
   './data/disclaimer.txt',
   './data/ethics.md',
   './i18n/en.json',
@@ -27,19 +25,10 @@ const APP_SHELL = [
   './icons-s/2.png',
 ];
 
-const BASE_URL = (self.registration && self.registration.scope) || self.location.origin + '/';
-const APP_SHELL_ABSOLUTE = new Set(APP_SHELL.map((path) => new URL(path, BASE_URL).href));
-
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches
-      .open(STATIC_CACHE)
-      .then((cache) => cache.addAll(APP_SHELL))
-      .catch((error) => {
-        console.error('[SW] Failed to precache', error);
-      }),
+    caches.open(CORE_CACHE).then((cache) => cache.addAll(PRECACHE_URLS)).then(() => self.skipWaiting()),
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -49,41 +38,31 @@ self.addEventListener('activate', (event) => {
       .then((keys) =>
         Promise.all(
           keys
-            .filter((key) => key.startsWith('sra-') && key !== STATIC_CACHE && key !== RUNTIME_CACHE)
+            .filter((key) => key.startsWith('sra-') && key !== CORE_CACHE && key !== RUNTIME_CACHE)
             .map((key) => caches.delete(key)),
         ),
       )
       .then(() => self.clients.claim())
-      .then(() => notifyClientsAboutUpdate()),
+      .then(() => notifyClients()),
   );
 });
 
-function notifyClientsAboutUpdate() {
+function notifyClients() {
   return self.clients
-    .matchAll({ type: 'window', includeUncontrolled: true })
+    .matchAll({ includeUncontrolled: true, type: 'window' })
     .then((clients) => {
       clients.forEach((client) => client.postMessage({ type: 'updateavailable' }));
     })
-    .catch((error) => console.error('[SW] Failed to notify clients', error));
+    .catch((error) => console.error('[SW] notify error', error));
 }
 
 async function cacheFirst(request) {
-  const cache = await caches.open(STATIC_CACHE);
+  const cache = await caches.open(CORE_CACHE);
   const cached = await cache.match(request);
-  if (cached) {
-    return cached;
-  }
-  try {
-    const networkResponse = await fetch(request);
-    cache.put(request, networkResponse.clone());
-    return networkResponse;
-  } catch (error) {
-    if (request.mode === 'navigate') {
-      const offlineCache = await cache.match(OFFLINE_URL);
-      if (offlineCache) return offlineCache;
-    }
-    throw error;
-  }
+  if (cached) return cached;
+  const response = await fetch(request);
+  cache.put(request, response.clone());
+  return response;
 }
 
 async function staleWhileRevalidate(request) {
@@ -96,41 +75,46 @@ async function staleWhileRevalidate(request) {
       }
       return response;
     })
-    .catch(() => null);
-  return cached || fetchPromise.then((response) => response || cached);
+    .catch(() => undefined);
+  return cached || fetchPromise;
 }
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
-  const url = new URL(request.url);
-
   if (request.method !== 'GET') return;
+
+  const url = new URL(request.url);
 
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
         .then((response) => {
           const copy = response.clone();
-          caches.open(STATIC_CACHE).then((cache) => cache.put(request, copy));
+          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
           return response;
         })
         .catch(async () => {
-          const cache = await caches.open(STATIC_CACHE);
-          const cached = await cache.match(request);
+          const cached = await caches.match(request);
           if (cached) return cached;
-          const offline = await cache.match(OFFLINE_URL);
+          const offline = await caches.match(OFFLINE_URL);
           return offline || Response.error();
         }),
     );
     return;
   }
 
-  if (APP_SHELL_ABSOLUTE.has(request.url)) {
-    event.respondWith(cacheFirst(request));
-    return;
+  if (url.origin === self.location.origin) {
+    if (PRECACHE_URLS.some((path) => url.pathname.endsWith(path.replace('./', '/')))) {
+      event.respondWith(cacheFirst(request));
+      return;
+    }
+    if (request.destination === 'script' || request.destination === 'style') {
+      event.respondWith(cacheFirst(request));
+      return;
+    }
   }
 
-  if (request.destination === 'style' || request.destination === 'script' || request.destination === 'document') {
+  if (request.destination === 'document') {
     event.respondWith(cacheFirst(request));
     return;
   }
@@ -141,7 +125,9 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('message', (event) => {
-  if (event.data === 'skipWaiting') {
+  const { data } = event;
+  if (!data) return;
+  if (data.type === 'skipWaiting' || data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
