@@ -1,3 +1,5 @@
+import { translate } from './i18n.js';
+
 const focusableSelector = 'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 let overlay;
@@ -28,7 +30,7 @@ function formatDisclaimerText(raw) {
   const normalized = raw.replace(/\r\n/g, '\n');
   const trimmed = normalized.trim();
   if (!trimmed) {
-    return '<p>No disclaimer text available.</p>';
+    return `<p>${translate('disclaimer.empty')}</p>`;
   }
   return trimmed
     .split(/\n\s*\n/g)
@@ -181,7 +183,7 @@ function loadDisclaimerText() {
       handleContentScroll();
     })
     .catch(() => {
-      content.innerHTML = '<p>Unable to load the disclaimer text. Please refresh the page.</p>';
+      content.innerHTML = `<p>${translate('disclaimer.loadError')}</p>`;
       content.scrollTop = 0;
       hasLoadedDisclaimer = true;
       handleContentScroll();
