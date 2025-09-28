@@ -1,17 +1,5 @@
-import { translate } from './i18n.js';
-
-const focusableSelector = 'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])';
-
-let overlay;
-let content;
-let agreeButton;
-let disagreeButton;
-let leaveLink;
-let titleNode;
-let lastFocusedElement = null;
-let isOpen = false;
-let hasInitialized = false;
-let hasLoadedDisclaimer = false;
+import { translate, applyTranslations, onLanguageChange } from './i18n.js';
+import { modalManager } from './utils/modal.js';
 
 function escapeHTML(value) {
   return value.replace(/[&<>"']+/g, (match) => {
@@ -38,83 +26,25 @@ function formatDisclaimerText(raw) {
     .join('');
 }
 
-function setBodyScrollLocked(locked) {
-  document.body.classList.toggle('no-scroll', locked);
-}
-
-function setAppInert(isInert) {
-  const appRoot = document.getElementById('app');
-  if (!appRoot) return;
-  if (isInert) {
-    appRoot.setAttribute('aria-hidden', 'true');
-    if ('inert' in appRoot) {
-      appRoot.inert = true;
-    } else {
-      appRoot.setAttribute('inert', '');
-    }
-  } else {
-    appRoot.removeAttribute('aria-hidden');
-    if ('inert' in appRoot) {
-      appRoot.inert = false;
-    } else {
-      appRoot.removeAttribute('inert');
-    }
-  }
-}
-
-function getFocusableElements() {
-  if (!overlay) return [];
-  return Array.from(overlay.querySelectorAll(focusableSelector)).filter((element) => {
-    if (element.disabled) return false;
-    if (element.getAttribute('aria-hidden') === 'true') return false;
-    if (element.hidden) return false;
-    const style = window.getComputedStyle(element);
-    return style.display !== 'none' && style.visibility !== 'hidden';
-  });
-}
-
-function handleKeydown(event) {
-  if (!isOpen) return;
-
-  if (event.key === 'Escape') {
-    event.preventDefault();
-    event.stopPropagation();
-    return;
-  }
-
-  if (event.key !== 'Tab') {
-    return;
-  }
-
-  const focusable = getFocusableElements();
-  if (focusable.length === 0) {
-    event.preventDefault();
-    return;
-  }
-
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-
-  if (event.shiftKey) {
-    if (document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    }
-  } else if (document.activeElement === last) {
-    event.preventDefault();
-    first.focus();
-  }
-}
+let modalElement = null;
+let contentElement = null;
+let agreeButton = null;
+let disagreeButton = null;
+let leaveLink = null;
+let titleElement = null;
+let hasLoadedDisclaimer = false;
+let isOpen = false;
 
 function handleContentScroll() {
-  if (!content || !agreeButton) return;
+  if (!contentElement || !agreeButton) return;
   if (!hasLoadedDisclaimer) {
     agreeButton.disabled = true;
     agreeButton.setAttribute('aria-disabled', 'true');
     return;
   }
-  const distanceFromBottom = content.scrollHeight - content.scrollTop - content.clientHeight;
-  const isScrollable = content.scrollHeight > content.clientHeight + 1;
+  const distanceFromBottom =
+    contentElement.scrollHeight - contentElement.scrollTop - contentElement.clientHeight;
+  const isScrollable = contentElement.scrollHeight > contentElement.clientHeight + 1;
   if (!isScrollable || distanceFromBottom <= 8) {
     agreeButton.disabled = false;
     agreeButton.removeAttribute('aria-disabled');
@@ -124,51 +54,148 @@ function handleContentScroll() {
   }
 }
 
-function openOverlay() {
-  if (!overlay) return;
-  if (isOpen) return;
+function handleDisagree(event) {
+  event.preventDefault();
+  if (!leaveLink) return;
+  leaveLink.hidden = false;
+  leaveLink.removeAttribute('aria-hidden');
+  leaveLink.tabIndex = 0;
+  leaveLink.focus();
+}
 
-  lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  overlay.hidden = false;
-  isOpen = true;
-  setBodyScrollLocked(true);
-  setAppInert(true);
-  document.addEventListener('keydown', handleKeydown, true);
+function closeDisclaimer() {
+  if (!isOpen) return;
+  modalManager.close();
+  isOpen = false;
+}
 
-  if (agreeButton) {
-    agreeButton.disabled = true;
-    agreeButton.setAttribute('aria-disabled', 'true');
+function handleAgree(event) {
+  event.preventDefault();
+  if (!agreeButton || agreeButton.disabled) {
+    return;
+  }
+  closeDisclaimer();
+}
+
+function buildDisclaimerModal() {
+  if (modalElement) {
+    return modalElement;
   }
 
-  if (content) {
-    content.scrollTop = 0;
-  }
+  modalElement = document.createElement('div');
+  modalElement.id = 'disclaimer-modal';
+  modalElement.className = 'modal-overlay disclaimer-overlay';
+  modalElement.setAttribute('aria-labelledby', 'disclaimer-title');
+  modalElement.setAttribute('aria-describedby', 'disclaimer-body');
 
-  requestAnimationFrame(() => {
-    if (titleNode) {
-      titleNode.focus();
+  const card = document.createElement('div');
+  card.className = 'modal-card disclaimer-card';
+  card.setAttribute('role', 'document');
+
+  const header = document.createElement('header');
+  header.className = 'modal-header disclaimer-header';
+
+  titleElement = document.createElement('h2');
+  titleElement.id = 'disclaimer-title';
+  titleElement.tabIndex = -1;
+  titleElement.dataset.i18n = 'disclaimer.title';
+  header.appendChild(titleElement);
+
+  contentElement = document.createElement('div');
+  contentElement.id = 'disclaimer-body';
+  contentElement.className = 'modal-body disclaimer-content';
+  contentElement.tabIndex = 0;
+  contentElement.innerHTML = `<p>${translate('disclaimer.loading')}</p>`;
+  contentElement.dataset.status = 'loading';
+
+  const actions = document.createElement('div');
+  actions.className = 'modal-actions disclaimer-actions';
+
+  disagreeButton = document.createElement('button');
+  disagreeButton.type = 'button';
+  disagreeButton.id = 'btn-disagree';
+  disagreeButton.dataset.i18n = 'disclaimer.disagree';
+
+  leaveLink = document.createElement('a');
+  leaveLink.id = 'disclaimer-leave';
+  leaveLink.className = 'disclaimer-leave';
+  leaveLink.href = 'about:blank';
+  leaveLink.hidden = true;
+  leaveLink.setAttribute('aria-hidden', 'true');
+  leaveLink.tabIndex = -1;
+  leaveLink.dataset.i18n = 'disclaimer.leave';
+
+  agreeButton = document.createElement('button');
+  agreeButton.type = 'button';
+  agreeButton.id = 'btn-agree';
+  agreeButton.disabled = true;
+  agreeButton.setAttribute('aria-disabled', 'true');
+  agreeButton.dataset.i18n = 'disclaimer.agree';
+
+  actions.append(disagreeButton, leaveLink, agreeButton);
+
+  card.append(header, contentElement, actions);
+  modalElement.appendChild(card);
+
+  contentElement.addEventListener('scroll', handleContentScroll);
+  disagreeButton.addEventListener('click', handleDisagree);
+  agreeButton.addEventListener('click', handleAgree);
+
+  applyTranslations(modalElement);
+
+  onLanguageChange(() => {
+    if (modalElement) {
+      applyTranslations(modalElement);
+      if (contentElement) {
+        if (contentElement.dataset.status === 'loading') {
+          contentElement.innerHTML = `<p>${translate('disclaimer.loading')}</p>`;
+        } else if (contentElement.dataset.status === 'error') {
+          contentElement.innerHTML = `<p>${translate('disclaimer.loadError')}</p>`;
+        }
+      }
     }
   });
+
+  return modalElement;
+}
+
+function openDisclaimer() {
+  const modal = buildDisclaimerModal();
+
+  if (isOpen) {
+    if (titleElement) {
+      titleElement.focus({ preventScroll: true });
+    }
+    return;
+  }
+
+  leaveLink.hidden = true;
+  leaveLink.setAttribute('aria-hidden', 'true');
+  leaveLink.tabIndex = -1;
+
+  agreeButton.disabled = true;
+  agreeButton.setAttribute('aria-disabled', 'true');
+
+  if (contentElement) {
+    contentElement.scrollTop = 0;
+  }
+
+  modalManager.open(modal, {
+    escToClose: false,
+    restoreFocusTo: document.getElementById('view-root') || document.body,
+  });
+
+  isOpen = true;
+
+  if (titleElement) {
+    titleElement.focus({ preventScroll: true });
+  }
 
   handleContentScroll();
 }
 
-function closeOverlay() {
-  if (!overlay || !isOpen) return;
-
-  overlay.hidden = true;
-  isOpen = false;
-  setBodyScrollLocked(false);
-  setAppInert(false);
-  document.removeEventListener('keydown', handleKeydown, true);
-
-  if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-    lastFocusedElement.focus();
-  }
-}
-
 function loadDisclaimerText() {
-  if (!content) return;
+  if (!contentElement || hasLoadedDisclaimer) return;
   fetch('./data/disclaimer.txt')
     .then((response) => {
       if (!response.ok) {
@@ -177,80 +204,22 @@ function loadDisclaimerText() {
       return response.text();
     })
     .then((text) => {
-      content.innerHTML = formatDisclaimerText(text);
-      content.scrollTop = 0;
+      contentElement.innerHTML = formatDisclaimerText(text);
+      contentElement.scrollTop = 0;
+      contentElement.dataset.status = 'loaded';
       hasLoadedDisclaimer = true;
       handleContentScroll();
     })
     .catch(() => {
-      content.innerHTML = `<p>${translate('disclaimer.loadError')}</p>`;
-      content.scrollTop = 0;
+      contentElement.innerHTML = `<p>${translate('disclaimer.loadError')}</p>`;
+      contentElement.scrollTop = 0;
+      contentElement.dataset.status = 'error';
       hasLoadedDisclaimer = true;
       handleContentScroll();
     });
 }
 
-function handleDisagree(event) {
-  event.preventDefault();
-  if (!leaveLink) return;
-  leaveLink.hidden = false;
-  leaveLink.removeAttribute('aria-hidden');
-  leaveLink.setAttribute('tabindex', '0');
-  leaveLink.focus();
-}
-
-function handleAgree(event) {
-  event.preventDefault();
-  if (agreeButton.disabled) {
-    return;
-  }
-  closeOverlay();
-}
-
-function setupElements() {
-  overlay = document.getElementById('disclaimer-overlay');
-  if (!overlay) return false;
-  content = document.getElementById('disclaimer-content');
-  agreeButton = document.getElementById('btn-agree');
-  disagreeButton = document.getElementById('btn-disagree');
-  leaveLink = document.getElementById('disclaimer-leave');
-  titleNode = document.getElementById('disclaimer-title');
-  if (leaveLink) {
-    leaveLink.setAttribute('aria-hidden', 'true');
-  }
-  if (agreeButton) {
-    agreeButton.disabled = true;
-    agreeButton.setAttribute('aria-disabled', 'true');
-  }
-  return Boolean(content && agreeButton && disagreeButton && titleNode);
-}
-
-function setupEventHandlers() {
-  if (!content || !agreeButton || !disagreeButton) return;
-  content.addEventListener('scroll', handleContentScroll);
-  agreeButton.addEventListener('click', handleAgree);
-  disagreeButton.addEventListener('click', handleDisagree);
-}
-
 export function showDisclaimerOnLoad() {
-  if (hasInitialized) {
-    openOverlay();
-    return;
-  }
-
-  if (!setupElements()) {
-    return;
-  }
-
-  hasInitialized = true;
-  overlay.addEventListener('click', (event) => {
-    if (event.target === overlay) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  });
-
+  openDisclaimer();
   loadDisclaimerText();
-  setupEventHandlers();
-  openOverlay();
 }
