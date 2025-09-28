@@ -1,4 +1,4 @@
-import { createRouter, handleEthicsRoute } from './router.js';
+import { createRouter, handleEthicsRoute, handleManualRoute } from './router.js';
 import { initTooltips } from './utils/tooltip.js';
 import { showDisclaimerOnLoad } from './disclaimer.js';
 import {
@@ -20,6 +20,7 @@ const STORAGE_KEYS = {
 const views = {
   home: document.getElementById('view-home'),
   guides: document.getElementById('view-guides'),
+  manual: document.getElementById('view-manual'),
   ethics: document.getElementById('view-ethics'),
   about: document.getElementById('view-about'),
   settings: document.getElementById('view-settings'),
@@ -89,6 +90,8 @@ function setActiveView(path) {
   Object.values(views).forEach((view) => view?.classList.remove('active'));
   if (path.startsWith('/guides')) {
     views.guides?.classList.add('active');
+  } else if (path.startsWith('/manual')) {
+    views.manual?.classList.add('active');
   } else if (path.startsWith('/ethics')) {
     views.ethics?.classList.add('active');
   } else if (path.startsWith('/about')) {
@@ -298,6 +301,11 @@ function setupRouter() {
     setActiveView('/guides');
     updateNavState('/guides');
     await guidesController?.show();
+  });
+  router.addRoute('/manual', async () => {
+    setActiveView('/manual');
+    updateNavState('/manual');
+    await handleManualRoute(document.getElementById('manual-content'));
   });
   router.addRoute('/ethics', async () => {
     setActiveView('/ethics');

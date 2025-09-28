@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "updated": "2025-09-27",
+  "introTitle": "Purpose of This Guide",
+  "intro": [
+    "This guide is provided to support you in taking direct control over your digital presence.",
+    "Following a thorough audit of your Facebook profile, you now have insight into what personal information is publicly visible, what vulnerabilities that information may present, and how it could be used—intentionally or unintentionally—by others.",
+    "With this knowledge, the next step belongs to you."
+  ],
+  "principles": [
+    "This guide does not dictate what must be done. Rather, it offers a clear, actionable framework for strengthening your privacy and security, allowing you to make informed decisions about what you choose to keep public, what you prefer to restrict, and what you may wish to remove entirely.",
+    "Each individual has different needs, comfort levels, and privacy goals. Some may act on every recommendation, while others may focus only on specific areas of concern. There is no one-size-fits-all approach, and there is no requirement to implement every step in this document. What matters is that you now have the tools to define your own boundaries.",
+    "While this guide focuses specifically on Facebook, it represents a broader step toward reclaiming your anonymity, limiting unnecessary exposure, and enhancing your overall digital safety. It is not a complete solution, but it is a strategic starting point in the process of protecting yourself online.",
+    "The power to act is now yours."
+  ],
+  "overviewTitle": "What This Guide Covers",
+  "sections": [
+    {
+      "id": "privacy-security",
+      "prefix": "A",
+      "title": "Privacy and Security Settings",
+      "description": "This section addresses the core settings that directly affect the security of your Facebook account and the visibility of your personal data. Each step is designed to reduce the risk of unauthorized access, improve control over login credentials, and determine who can view your sensitive profile information."
+    },
+    {
+      "id": "profile-exposure",
+      "prefix": "B",
+      "title": "Profile Visibility and Exposure",
+      "description": "This section focuses on the personal information listed in your profile—details that may seem harmless but can be used to identify, impersonate, or track you. Adjusting or removing these fields gives you greater control over your online identity and reduces the amount of information available to strangers, data brokers, or malicious actors."
+    },
+    {
+      "id": "posts-content",
+      "prefix": "C",
+      "title": "Posts and Content Control",
+      "description": "Your past posts, photos, and tags can reveal more than you think—locations, routines, opinions, relationships, and sensitive life events. This section gives you direct control over your Facebook history and what others have tagged you in so you can reduce visibility, remove unnecessary information, and take ownership of your content."
+    },
+    {
+      "id": "tagging-discovery",
+      "prefix": "D",
+      "title": "Tagging and Discoverability Controls",
+      "description": "Tagging and discoverability settings influence how others interact with your profile and how easily you can be found on the platform. Use these steps to prevent unwanted exposure, control who can mention you, and limit the ways strangers can locate your profile."
+    },
+    {
+      "id": "apps-ads",
+      "prefix": "E",
+      "title": "Apps and Advertising Preferences",
+      "description": "Connected apps and Facebook’s advertising system may continue to access your data long after you forget about them. This section helps you remove old integrations and restrict how your information is used to personalize ads."
+    },
+    {
+      "id": "cleanup",
+      "prefix": "F",
+      "title": "Optional Final Cleanup",
+      "description": "These steps go beyond the basics. Use them to remove stale device access, clear your search trail, download an archive, or deactivate your account entirely when you need a clean break."
+    }
+  ],
+  "finalTitle": "Final Note",
+  "final": [
+    "Your digital safety is not a one-time fix—it’s an ongoing habit. This guide has helped you take back control over your Facebook presence, but the most important factor is what you do next. Stay alert. Review your settings regularly. Be cautious with what you post and who you interact with.",
+    "Remember: every piece of personal information you hide or remove is one less thing someone else can use against you. Privacy is power—and now, that power is yours."
+  ]
+}

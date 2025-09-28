@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const CORE_CACHE = `sra-core-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `sra-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = './offline.html';
@@ -14,12 +14,15 @@ const PRECACHE_URLS = [
   './assets/js/disclaimer.js',
   './assets/js/router.js',
   './assets/js/pages/guides.js',
+  './assets/js/pages/manual.js',
   './assets/js/utils/modal.js',
   './assets/js/utils/tooltip.js',
   './data/guides.json',
+  './data/guides-facebook.json',
   './data/disclaimer.txt',
   './data/ethics.en.md',
   './data/ethics.he.md',
+  './data/manual.en.json',
   './i18n/en.json',
   './i18n/he.json',
   './icons-s/1.png',
