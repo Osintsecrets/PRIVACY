@@ -1,5 +1,3 @@
-import { renderEthics } from './pages/ethics.js';
-import { renderManual } from './pages/manual.js';
 import { translate } from './i18n.js';
 
 export function createRouter() {
@@ -136,10 +134,12 @@ export function createRouter() {
 
 export async function handleEthicsRoute(root) {
   document.title = `${translate('pages.ethics.title')} — ${translate('app.title')}`;
-  await renderEthics(root);
+  const module = await import('./pages/ethics.js');
+  await module.renderEthics(root);
 }
 
 export async function handleManualRoute(root) {
   document.title = `${translate('manual.pageTitle')} — ${translate('app.title')}`;
-  await renderManual(root);
+  const module = await import('./pages/manual.js');
+  await module.renderManual(root);
 }

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v5';
+const CACHE_VERSION = 'v6';
 const CORE_CACHE = `sra-core-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `sra-runtime-${CACHE_VERSION}`;
 const OFFLINE_URL = './offline.html';
@@ -8,13 +8,18 @@ const PRECACHE_URLS = [
   './index.html',
   './offline.html',
   './manifest.json',
-  './assets/css/styles.css',
+  './assets/css/reset.css',
+  './assets/css/tokens.css',
+  './assets/css/components.css',
+  './assets/css/responsive.css',
   './assets/js/app.js',
   './assets/js/components.js',
   './assets/js/disclaimer.js',
+  './assets/js/i18n.js',
   './assets/js/router.js',
   './assets/js/pages/guides.js',
   './assets/js/pages/manual.js',
+  './assets/js/pages/ethics.js',
   './assets/js/utils/modal.js',
   './assets/js/utils/tooltip.js',
   './data/guides.json',

@@ -1,9 +1,10 @@
-import { translate, applyTranslations, onLanguageChange, getCurrentLanguage } from '../i18n.js';
+import { translate, applyTranslations, onLanguageChange } from '../i18n.js';
 import { debounce, showToast } from '../components.js';
 import { modalManager } from '../utils/modal.js';
 
 const DATA_URL = './data/guides.json';
 const PROGRESS_KEY = 'sra:guide-progress';
+const BOOKMARK_KEY = 'sra:guide-bookmarks';
 const LEVEL_FILTERS = [
   { value: 'all', labelKey: 'guides.filterAll' },
   { value: 'basic', labelKey: 'guides.filterBasic' },
@@ -16,6 +17,7 @@ const state = {
   filter: 'all',
   search: '',
   loaded: false,
+  bookmarks: new Set(),
   elements: {
     searchInput: null,
     filterContainer: null,
@@ -28,14 +30,35 @@ const state = {
   },
   router: null,
   progress: {},
+  lastGuide: null,
 };
 
 let unsubscribeLanguage = null;
 
+function normalizeProgressEntry(raw) {
+  if (raw == null) return null;
+  if (typeof raw === 'number') {
+    return { status: 'active', step: raw };
+  }
+  if (typeof raw === 'object' && 'status' in raw) {
+    const status = raw.status === 'complete' ? 'complete' : 'active';
+    const step = typeof raw.step === 'number' ? raw.step : 0;
+    return { status, step };
+  }
+  return null;
+}
+
 function loadProgress() {
   try {
     const raw = sessionStorage.getItem(PROGRESS_KEY);
-    state.progress = raw ? JSON.parse(raw) : {};
+    const parsed = raw ? JSON.parse(raw) : {};
+    state.progress = Object.entries(parsed).reduce((acc, [key, value]) => {
+      const normalized = normalizeProgressEntry(value);
+      if (normalized) {
+        acc[key] = normalized;
+      }
+      return acc;
+    }, {});
   } catch (error) {
     console.warn('Failed to read stored progress', error); // eslint-disable-line no-console
     state.progress = {};
@@ -50,42 +73,95 @@ function persistProgress() {
   }
 }
 
-function setProgress(topicId, stepIndex) {
+function loadBookmarks() {
+  try {
+    const raw = localStorage.getItem(BOOKMARK_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      state.bookmarks = new Set(parsed);
+    }
+  } catch (error) {
+    console.warn('Failed to read bookmarks', error); // eslint-disable-line no-console
+    state.bookmarks = new Set();
+  }
+}
+
+function persistBookmarks() {
+  try {
+    localStorage.setItem(BOOKMARK_KEY, JSON.stringify(Array.from(state.bookmarks)));
+  } catch (error) {
+    console.warn('Failed to persist bookmarks', error); // eslint-disable-line no-console
+  }
+}
+
+function isBookmarked(topicId) {
+  return state.bookmarks.has(topicId);
+}
+
+function setProgress(topic, stepIndex, status = 'updated') {
+  if (!topic) return;
   if (typeof stepIndex === 'number' && stepIndex >= 0) {
-    state.progress[topicId] = stepIndex;
+    state.progress[topic.id] = { status: 'active', step: Math.min(stepIndex, topic.steps.length - 1) };
+  } else if (stepIndex === null) {
+    state.progress[topic.id] = { status: 'complete', step: topic.steps.length };
   } else {
-    delete state.progress[topicId];
+    delete state.progress[topic.id];
   }
   persistProgress();
   updateResumeButton();
+  dispatchProgressEvent(topic, status);
 }
 
 function getProgress(topicId) {
-  return typeof state.progress[topicId] === 'number' ? state.progress[topicId] : null;
+  return state.progress[topicId] || null;
+}
+
+function toggleBookmark(topic, button) {
+  if (!topic) return;
+  const isActive = isBookmarked(topic.id);
+  if (isActive) {
+    state.bookmarks.delete(topic.id);
+    if (button) {
+      button.textContent = translate('guides.bookmark');
+      button.setAttribute('aria-pressed', 'false');
+    }
+    showToast(state.elements.toastRoot, translate('guides.bookmarkRemoved', { guide: topic.title }));
+  } else {
+    state.bookmarks.add(topic.id);
+    if (button) {
+      button.textContent = translate('guides.removeBookmark');
+      button.setAttribute('aria-pressed', 'true');
+    }
+    showToast(state.elements.toastRoot, translate('guides.bookmarkAdded', { guide: topic.title }));
+  }
+  persistBookmarks();
 }
 
 function updateResumeButton() {
   const { resumeButton } = state.elements;
   if (!resumeButton) return;
-  const storedIds = Object.keys(state.progress);
-  if (!storedIds.length) {
+  const activeEntries = Object.entries(state.progress).filter(([, entry]) => entry.status === 'active');
+  if (!activeEntries.length) {
     resumeButton.hidden = true;
     resumeButton.setAttribute('aria-hidden', 'true');
     resumeButton.dataset.topic = '';
+    resumeButton.dataset.step = '';
     return;
   }
-  const topicId = storedIds[0];
+  const [topicId, entry] = activeEntries[0];
   const topic = state.topics.find((item) => item.id === topicId);
   if (!topic) {
     resumeButton.hidden = true;
     resumeButton.setAttribute('aria-hidden', 'true');
     resumeButton.dataset.topic = '';
+    resumeButton.dataset.step = '';
     return;
   }
   resumeButton.hidden = false;
   resumeButton.removeAttribute('aria-hidden');
   resumeButton.dataset.topic = topicId;
-  resumeButton.dataset.step = String(getProgress(topicId) ?? 0);
+  resumeButton.dataset.step = String(entry.step ?? 0);
   resumeButton.textContent = `${translate('guides.resume')} – ${topic.title}`;
 }
 
@@ -100,10 +176,22 @@ async function fetchGuides() {
     const topics = Array.isArray(data.topics) ? data.topics : [];
     state.topics = topics.map((topic) => ({
       ...topic,
-      level: topic.level || 'basic',
+      level: topic.level || topic.difficulty || 'basic',
       tags: Array.isArray(topic.tags) ? topic.tags : [],
       steps: Array.isArray(topic.steps) ? topic.steps : [],
+      category: topic.category || translate('guides.heading'),
+      estimatedTime: topic.estimatedTime || '5 minutes',
     }));
+    if (!state.lastGuide) {
+      const activeEntries = Object.entries(state.progress);
+      if (activeEntries.length) {
+        const [topicId] = activeEntries[0];
+        const topic = state.topics.find((item) => item.id === topicId);
+        if (topic) {
+          state.lastGuide = { id: topic.id, title: topic.title };
+        }
+      }
+    }
     state.loaded = true;
     return state.topics;
   } catch (error) {
@@ -115,12 +203,25 @@ async function fetchGuides() {
   }
 }
 
+function fuzzyMatch(query, text) {
+  if (!query) return true;
+  const needle = query.replace(/\s+/g, '').toLowerCase();
+  const haystack = text.replace(/\s+/g, '').toLowerCase();
+  let index = 0;
+  for (const char of needle) {
+    index = haystack.indexOf(char, index);
+    if (index === -1) return false;
+    index += 1;
+  }
+  return true;
+}
+
 function matchesFilters(topic) {
   const levelPass = state.filter === 'all' || topic.level === state.filter;
   if (!levelPass) return false;
   if (!state.search) return true;
-  const haystack = `${topic.title} ${topic.summary || ''} ${topic.tags.join(' ')}`.toLowerCase();
-  return haystack.includes(state.search.toLowerCase());
+  const haystack = `${topic.title} ${topic.summary || ''} ${topic.tags.join(' ')} ${topic.category}`;
+  return fuzzyMatch(state.search, haystack);
 }
 
 function renderResultCount(count) {
@@ -149,6 +250,21 @@ function announceResults(count) {
 function createTagList(tags) {
   if (!tags.length) return '';
   return tags.join(translate('common.tagJoin'));
+}
+
+function dispatchProgressEvent(topic, status = 'updated') {
+  const summary = getCompletionSummary();
+  const detail = {
+    summary,
+    summaryParams: {
+      completed: summary.completedSteps,
+      total: summary.totalSteps,
+      percent: Math.round(summary.completedSteps / (summary.totalSteps || 1) * 100),
+    },
+    status,
+    guide: topic ? { id: topic.id, title: topic.title } : null,
+  };
+  document.dispatchEvent(new CustomEvent('guideprogress', { detail }));
 }
 
 function renderCards() {
@@ -180,20 +296,56 @@ function renderCards() {
       card.appendChild(summary);
     }
 
-    const badges = document.createElement('div');
-    badges.className = 'guide-badges';
+    const metaRow = document.createElement('div');
+    metaRow.className = 'guide-meta';
+    const stepBadge = document.createElement('span');
+    stepBadge.className = 'badge';
+    stepBadge.textContent = translate('guides.stepCount', { count: topic.steps.length });
     const levelBadge = document.createElement('span');
     levelBadge.className = 'badge';
-    levelBadge.textContent = translate('guides.cardLevel', { level: translate(`guides.filter${topic.level.charAt(0).toUpperCase()}${topic.level.slice(1)}`) || topic.level });
-    badges.appendChild(levelBadge);
+    levelBadge.textContent = translate('guides.cardLevel', {
+      level: translate(`guides.filter${topic.level.charAt(0).toUpperCase()}${topic.level.slice(1)}`) || topic.level,
+    });
+    const timeBadge = document.createElement('span');
+    timeBadge.className = 'badge';
+    timeBadge.textContent = translate('guides.cardTime', { time: topic.estimatedTime });
+    const categoryBadge = document.createElement('span');
+    categoryBadge.className = 'badge';
+    categoryBadge.textContent = translate('guides.cardCategory', { category: topic.category });
+    metaRow.append(stepBadge, levelBadge, timeBadge, categoryBadge);
+    card.appendChild(metaRow);
 
     if (topic.tags.length) {
       const tagsBadge = document.createElement('span');
       tagsBadge.className = 'badge';
       tagsBadge.textContent = translate('guides.cardTags', { tags: createTagList(topic.tags) });
-      badges.appendChild(tagsBadge);
+      metaRow.appendChild(tagsBadge);
     }
-    card.appendChild(badges);
+
+    const totalSteps = Math.max(topic.steps.length, 1);
+    const progressEntry = getProgress(topic.id);
+    const completedSteps = progressEntry
+      ? progressEntry.status === 'complete'
+        ? topic.steps.length
+        : Math.max(0, Math.min(progressEntry.step, totalSteps - 1))
+      : 0;
+    const percent = Math.round((completedSteps / totalSteps) * 100);
+    const progressWrapper = document.createElement('div');
+    progressWrapper.className = 'card-progress';
+    const progressLabel = document.createElement('p');
+    progressLabel.textContent = translate('guides.progressGlobal', {
+      completed: completedSteps,
+      total: topic.steps.length,
+      percent,
+    });
+    const track = document.createElement('div');
+    track.className = 'progress-track';
+    const bar = document.createElement('div');
+    bar.className = 'progress-bar';
+    bar.style.width = `${percent}%`;
+    track.appendChild(bar);
+    progressWrapper.append(progressLabel, track);
+    card.appendChild(progressWrapper);
 
     const actionRow = document.createElement('div');
     actionRow.className = 'card-actions';
@@ -202,8 +354,18 @@ function renderCards() {
     startBtn.className = 'button';
     startBtn.dataset.topicId = topic.id;
     startBtn.textContent = translate('guides.startGuide');
-    startBtn.addEventListener('click', () => openWizard(topic, getProgress(topic.id) ?? 0, startBtn));
-    actionRow.appendChild(startBtn);
+    startBtn.addEventListener('click', () => openWizard(topic, progressEntry?.step ?? 0, startBtn));
+
+    const bookmarkBtn = document.createElement('button');
+    bookmarkBtn.type = 'button';
+    bookmarkBtn.className = 'button';
+    bookmarkBtn.dataset.topicId = topic.id;
+    const bookmarked = isBookmarked(topic.id);
+    bookmarkBtn.textContent = translate(bookmarked ? 'guides.removeBookmark' : 'guides.bookmark');
+    bookmarkBtn.setAttribute('aria-pressed', bookmarked ? 'true' : 'false');
+    bookmarkBtn.addEventListener('click', () => toggleBookmark(topic, bookmarkBtn));
+
+    actionRow.append(startBtn, bookmarkBtn);
     card.appendChild(actionRow);
 
     if (topic.notes) {
@@ -354,6 +516,7 @@ function openWizard(topic, startIndex = 0, originButton = null) {
   card.append(header, body, footer);
 
   let index = Math.min(Math.max(startIndex, 0), topic.steps.length - 1);
+  state.lastGuide = { id: topic.id, title: topic.title };
 
   function updateButtons() {
     backBtn.disabled = index === 0;
@@ -364,7 +527,7 @@ function openWizard(topic, startIndex = 0, originButton = null) {
 
   function updateStep() {
     createWizardStep(topic, index, stepContainer, notesContainer);
-    setProgress(topic.id, index);
+    setProgress(topic, index);
     updateButtons();
   }
 
@@ -377,7 +540,7 @@ function openWizard(topic, startIndex = 0, originButton = null) {
 
   nextBtn.addEventListener('click', () => {
     if (nextBtn.dataset.action === 'done') {
-      setProgress(topic.id, null);
+      setProgress(topic, null, 'completed');
       modalManager.close();
       return;
     }
@@ -392,6 +555,31 @@ function openWizard(topic, startIndex = 0, originButton = null) {
     escToClose: true,
   });
   updateStep();
+}
+
+export function getCompletionSummary() {
+  const summary = {
+    totalSteps: state.topics.reduce((acc, topic) => acc + topic.steps.length, 0),
+    completedSteps: 0,
+    activeGuide: null,
+  };
+  Object.entries(state.progress).forEach(([topicId, entry]) => {
+    const topic = state.topics.find((item) => item.id === topicId);
+    if (!topic) return;
+    if (entry.status === 'complete') {
+      summary.completedSteps += topic.steps.length;
+    } else {
+      const total = Math.max(topic.steps.length, 1);
+      summary.completedSteps += Math.max(0, Math.min(entry.step, total - 1));
+      if (!summary.activeGuide) {
+        summary.activeGuide = { id: topic.id, title: topic.title };
+      }
+    }
+  });
+  if (!summary.activeGuide && state.lastGuide) {
+    summary.activeGuide = state.lastGuide;
+  }
+  return summary;
 }
 
 export function initGuidesPage({
@@ -415,12 +603,13 @@ export function initGuidesPage({
   state.elements.toastRoot = toastRoot;
 
   loadProgress();
+  loadBookmarks();
   updateResumeButton();
 
   renderFilters();
 
   if (state.elements.searchInput) {
-    state.elements.searchInput.addEventListener('input', debounce(handleSearchInput, 250));
+    state.elements.searchInput.addEventListener('input', debounce(handleSearchInput, 200));
     state.elements.searchInput.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowDown') {
         const firstCard = cards?.querySelector('.guide-card .button');
@@ -438,7 +627,9 @@ export function initGuidesPage({
       if (!topicId) return;
       const topic = state.topics.find((item) => item.id === topicId);
       if (!topic) return;
-      openWizard(topic, getProgress(topicId) ?? 0, resumeButton);
+      const entry = getProgress(topicId);
+      openWizard(topic, entry?.step ?? 0, resumeButton);
+      showToast(state.elements.toastRoot, translate('guides.resumeToast', { guide: topic.title }));
     });
   }
 
@@ -453,6 +644,33 @@ export function initGuidesPage({
       await fetchGuides();
       renderCards();
       applyTranslations(controls?.closest('.view'));
+      dispatchProgressEvent(null);
+    },
+    focusSearch() {
+      state.elements.searchInput?.focus();
+    },
+    resumeLastGuide() {
+      const activeEntries = Object.entries(state.progress).filter(([, entry]) => entry.status === 'active');
+      if (activeEntries.length) {
+        const [topicId, entry] = activeEntries[0];
+        const topic = state.topics.find((item) => item.id === topicId);
+        if (topic) {
+          openWizard(topic, entry.step ?? 0);
+          return true;
+        }
+      }
+      if (state.lastGuide) {
+        const topic = state.topics.find((item) => item.id === state.lastGuide.id);
+        if (topic) {
+          openWizard(topic, 0);
+          return true;
+        }
+      }
+      return false;
+    },
+    getCompletionSummary,
+    getLastGuideMeta() {
+      return state.lastGuide;
     },
   };
 }

@@ -7,7 +7,16 @@
       "id": "privacy-security-foundation",
       "title": "Set core privacy and security protections",
       "level": "basic",
+      "estimatedTime": "15 minutes",
+      "category": "Security",
       "tags": ["privacy", "security"],
+      "benefits": [
+        "Stronger login security",
+        "Better awareness of connected devices"
+      ],
+      "risks": [
+        "Takes a few minutes to complete"
+      ],
       "summary": "Start in Facebook's Privacy Center to tighten account access and guard key details.",
       "steps": [
         {
@@ -44,7 +53,16 @@
       "id": "profile-visibility-control",
       "title": "Reduce what your profile reveals",
       "level": "intermediate",
+      "estimatedTime": "10 minutes",
+      "category": "Privacy",
       "tags": ["profile", "exposure"],
+      "benefits": [
+        "Less personal data exposed",
+        "Protects friends and family from unwanted attention"
+      ],
+      "risks": [
+        "Important contacts may need to request access again"
+      ],
       "summary": "Limit personal data that can be used to identify you or your family.",
       "steps": [
         {
@@ -65,7 +83,16 @@
       "id": "posts-tags-control",
       "title": "Control past posts, tags, and discoverability",
       "level": "intermediate",
+      "estimatedTime": "20 minutes",
+      "category": "Visibility",
       "tags": ["posts", "tags"],
+      "benefits": [
+        "Reduces old exposure",
+        "Stops unwanted tagging"
+      ],
+      "risks": [
+        "Friends might notice tighter tagging controls"
+      ],
       "summary": "Clean up old activity and decide how others can tag or find you.",
       "steps": [
         {
@@ -110,7 +137,16 @@
       "id": "apps-ads-cleanup",
       "title": "Revoke app access and tune ads",
       "level": "advanced",
+      "estimatedTime": "12 minutes",
+      "category": "Data Control",
       "tags": ["apps", "ads", "cleanup"],
+      "benefits": [
+        "Cuts third-party data sharing",
+        "Improves ad relevance controls"
+      ],
+      "risks": [
+        "Removed apps may lose saved progress"
+      ],
       "summary": "Limit data sharing with third parties and finish optional privacy clean-up tasks.",
       "steps": [
         {
