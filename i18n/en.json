@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Social Risk Audit",
-    "tagline": "Grandma-proof privacy fixes for Facebook.",
+    "tagline": "Focused Facebook privacy guidance.",
     "updateReady": "New version ready. Refresh to update.",
     "reload": "Refresh now",
     "installHint": "Install this guide as an app for easier access.",
@@ -12,7 +12,10 @@
     "guides": "Guides",
     "ethics": "Ethics",
     "about": "About",
-    "settings": "Settings"
+    "settings": "Settings",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuLabel": "Navigation"
   },
   "home": {
     "headline": "Take control of your Facebook privacy",
@@ -21,7 +24,9 @@
     "quickActions": "Popular fixes",
     "quickActionLock": "Lock profile",
     "quickAction2fa": "Turn on 2FA",
-    "quickActionPosts": "Limit past posts"
+    "quickActionPosts": "Limit past posts",
+    "moreComing": "There should be much more.",
+    "guideCount": "4 guides available."
   },
   "guides": {
     "heading": "Guided fixes",

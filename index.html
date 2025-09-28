@@ -9,7 +9,7 @@
     <title>Social Risk Audit</title>
     <meta
       name="description"
-      content="Grandma-proof Facebook privacy guide with installable PWA, accessibility-first."
+      content="Focused Facebook privacy guidance with an installable, accessible experience."
     />
     <link rel="manifest" href="./manifest.json" />
     <link rel="icon" type="image/png" sizes="192x192" href="./icons-s/1.png" />
@@ -22,39 +22,53 @@
     <div id="ui-portal"></div>
     <div id="app" class="app-shell">
       <header class="top-bar" role="banner">
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-expanded="false"
+          aria-controls="primary-menu"
+        >
+          <span class="menu-icon" aria-hidden="true"></span>
+          <span class="visually-hidden" data-i18n="nav.openMenu">Open menu</span>
+        </button>
         <div class="branding">
           <h1 data-i18n="app.title">Social Risk Audit</h1>
-          <p data-i18n="app.tagline">Grandma-proof privacy fixes for Facebook.</p>
+          <p data-i18n="app.tagline">Focused Facebook privacy guidance.</p>
         </div>
-        <nav class="primary-nav" aria-label="Primary navigation">
-          <a href="#/" data-nav="/" data-tooltip="Home" data-i18n="nav.home">Home</a>
-          <a href="#/guides" data-nav="/guides" data-tooltip="Guides" data-i18n="nav.guides">Guides</a>
-          <a href="#/ethics" data-nav="/ethics" data-tooltip="Ethics" data-i18n="nav.ethics">Ethics</a>
-          <a href="#/about" data-nav="/about" data-tooltip="About" data-i18n="nav.about">About</a>
-          <a href="#/settings" data-nav="/settings" data-tooltip="Settings" data-i18n="nav.settings">Settings</a>
-        </nav>
       </header>
+
+      <div id="menu-overlay" class="menu-overlay" hidden></div>
+      <nav
+        id="primary-menu"
+        class="menu-drawer"
+        aria-label="Primary navigation"
+        hidden
+        tabindex="-1"
+      >
+        <div class="menu-drawer-header">
+          <p data-i18n="nav.menuLabel">Navigation</p>
+          <button type="button" class="menu-close" id="menu-close">
+            <span aria-hidden="true">×</span>
+            <span class="visually-hidden" data-i18n="nav.closeMenu">Close menu</span>
+          </button>
+        </div>
+        <ul class="menu-drawer-list">
+          <li><a href="#/" data-nav="/" data-i18n="nav.home">Home</a></li>
+          <li><a href="#/guides" data-nav="/guides" data-i18n="nav.guides">Guides</a></li>
+          <li><a href="#/ethics" data-nav="/ethics" data-i18n="nav.ethics">Ethics</a></li>
+          <li><a href="#/about" data-nav="/about" data-i18n="nav.about">About</a></li>
+          <li><a href="#/settings" data-nav="/settings" data-i18n="nav.settings">Settings</a></li>
+        </ul>
+      </nav>
 
       <div id="offline-banner" class="offline-banner" aria-hidden="true" role="status"></div>
 
       <main id="view-root" tabindex="-1">
         <section id="view-home" class="view active" data-route="/">
-          <div class="section-heading home-hero">
-            <div>
-              <h2 data-i18n="home.headline">Take control of your Facebook privacy</h2>
-              <p data-i18n="home.lede">
-                Follow gentle, trusted steps that make your account safer in minutes.
-              </p>
-              <a href="#/guides" class="primary-button" data-i18n="home.cta">Start fixing</a>
-            </div>
-            <div class="quick-actions">
-              <h3 data-i18n="home.quickActions">Popular fixes</h3>
-              <div class="quick-actions-list">
-                <span class="chip" data-i18n="home.quickActionLock">Lock profile</span>
-                <span class="chip" data-i18n="home.quickAction2fa">Turn on 2FA</span>
-                <span class="chip" data-i18n="home.quickActionPosts">Limit past posts</span>
-              </div>
-            </div>
+          <div class="home-message">
+            <p data-i18n="home.moreComing">There should be much more.</p>
+            <p data-i18n="home.guideCount">4 guides available.</p>
           </div>
         </section>
 
@@ -170,52 +184,6 @@
 
       <div id="toast-root" class="toast-root" aria-live="assertive"></div>
 
-      <nav class="floating-dock" aria-label="Primary">
-        <a class="dock-item" href="#/" data-dock="/" data-tooltip="Home" data-i18n-attr-aria-label="nav.home">
-          <span aria-hidden="true">🏠</span>
-          <span data-i18n="nav.home">Home</span>
-        </a>
-        <a
-          class="dock-item"
-          href="#/guides"
-          data-dock="/guides"
-          data-tooltip="Guides"
-          data-i18n-attr-aria-label="nav.guides"
-        >
-          <span aria-hidden="true">📘</span>
-          <span data-i18n="nav.guides">Guides</span>
-        </a>
-        <a
-          class="dock-item"
-          href="#/ethics"
-          data-dock="/ethics"
-          data-tooltip="Ethics"
-          data-i18n-attr-aria-label="nav.ethics"
-        >
-          <span aria-hidden="true">🛡️</span>
-          <span data-i18n="nav.ethics">Ethics</span>
-        </a>
-        <a
-          class="dock-item"
-          href="#/about"
-          data-dock="/about"
-          data-tooltip="About"
-          data-i18n-attr-aria-label="nav.about"
-        >
-          <span aria-hidden="true">ℹ️</span>
-          <span data-i18n="nav.about">About</span>
-        </a>
-        <a
-          class="dock-item"
-          href="#/settings"
-          data-dock="/settings"
-          data-tooltip="Settings"
-          data-i18n-attr-aria-label="nav.settings"
-        >
-          <span aria-hidden="true">⚙️</span>
-          <span data-i18n="nav.settings">Settings</span>
-        </a>
-      </nav>
     </div>
 
     <script type="module" src="./assets/js/app.js"></script>

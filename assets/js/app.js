@@ -29,13 +29,17 @@ const viewRoot = document.getElementById('view-root');
 const offlineBanner = document.getElementById('offline-banner');
 const toastRoot = document.getElementById('toast-root');
 const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
-const dockItems = Array.from(document.querySelectorAll('.dock-item'));
 const languageSelect = document.getElementById('language-select');
 const reducedMotionToggle = document.getElementById('reduced-motion-toggle');
 const installButton = document.getElementById('install-button');
 const installHint = document.getElementById('install-hint');
 const offlineIndicator = document.getElementById('offline-indicator');
 const offlineStatusLabel = document.getElementById('offline-status-label');
+const menuToggle = document.getElementById('menu-toggle');
+const menuClose = document.getElementById('menu-close');
+const menuDrawer = document.getElementById('primary-menu');
+const menuOverlay = document.getElementById('menu-overlay');
+const body = document.body;
 
 const html = document.documentElement;
 const storedLanguage = localStorage.getItem(STORAGE_KEYS.language) || 'en';
@@ -81,6 +85,7 @@ function updateOfflineStatus() {
 }
 
 function setActiveView(path) {
+  closeMenu();
   Object.values(views).forEach((view) => view?.classList.remove('active'));
   if (path.startsWith('/guides')) {
     views.guides?.classList.add('active');
@@ -104,9 +109,59 @@ function updateNavState(path) {
     const target = link.dataset.nav || '/';
     link.classList.toggle('active', path === target || path.startsWith(`${target}/`));
   });
-  dockItems.forEach((item) => {
-    const target = item.dataset.dock || '/';
-    item.classList.toggle('active', path === target || path.startsWith(`${target}/`));
+}
+
+function setMenuState(open) {
+  if (!menuDrawer || !menuToggle || !menuOverlay) return;
+  menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (open) {
+    menuDrawer.hidden = false;
+    menuOverlay.hidden = false;
+    requestAnimationFrame(() => {
+      menuDrawer.classList.add('open');
+      menuOverlay.classList.add('active');
+    });
+    body?.classList.add('no-scroll');
+    menuDrawer.focus?.();
+  } else {
+    const finalize = () => {
+      menuDrawer.hidden = true;
+      menuOverlay.hidden = true;
+    };
+    menuDrawer.classList.remove('open');
+    menuOverlay.classList.remove('active');
+    body?.classList.remove('no-scroll');
+    if (html.dataset.rm === 'on') {
+      finalize();
+    } else {
+      const onTransitionEnd = () => {
+        finalize();
+        menuDrawer.removeEventListener('transitionend', onTransitionEnd);
+      };
+      menuDrawer.addEventListener('transitionend', onTransitionEnd);
+      setTimeout(onTransitionEnd, 220);
+    }
+  }
+}
+
+function toggleMenu() {
+  const isOpen = menuToggle?.getAttribute('aria-expanded') === 'true';
+  setMenuState(!isOpen);
+}
+
+function closeMenu() {
+  setMenuState(false);
+}
+
+function bindMenuControls() {
+  menuToggle?.addEventListener('click', toggleMenu);
+  menuClose?.addEventListener('click', closeMenu);
+  menuOverlay?.addEventListener('click', closeMenu);
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      menuToggle?.focus();
+    }
   });
 }
 
@@ -116,6 +171,7 @@ function bindNavigation() {
       event.preventDefault();
       const target = link.dataset.nav || '/';
       router.navigate(target);
+      closeMenu();
     });
   });
 }
@@ -281,6 +337,7 @@ async function bootstrap() {
   router = createRouter();
   initializeGuides(router);
   setupRouter();
+  bindMenuControls();
   bindNavigation();
   handleLanguageChange();
   handleReducedMotionToggle();

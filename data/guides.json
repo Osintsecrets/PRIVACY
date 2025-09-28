@@ -1,67 +1,144 @@
 {
   "version": 1,
   "platform": "facebook",
-  "updated": "2024-04-01",
+  "updated": "2025-01-01",
   "topics": [
     {
-      "id": "lock-profile",
-      "title": "Lock your profile",
+      "id": "privacy-security-foundation",
+      "title": "Set core privacy and security protections",
       "level": "basic",
-      "tags": ["privacy", "profile"],
-      "summary": "Stop strangers from seeing more than the basics of your profile.",
+      "tags": ["privacy", "security"],
+      "summary": "Start in Facebook's Privacy Center to tighten account access and guard key details.",
       "steps": [
-        { "id": "open-app", "text": "Open the Facebook app.", "platform": "android|ios" },
-        { "id": "menu", "text": "Tap your profile picture or name to open your profile.", "platform": "android|ios" },
-        { "id": "lock", "text": "Tap the three dots → Tap Lock profile." },
-        { "id": "confirm", "text": "Review the summary then tap Lock your profile." }
-      ],
-      "notes": "Lock profile keeps future posts limited to friends but does not change past public posts.",
-      "updated": "2024-03-14"
+        {
+          "id": "privacy-center",
+          "text": "Log into facebook.com. Click your profile picture in the top-right, choose Settings & Privacy, then open Privacy Center. Select Common Privacy Settings to see the main controls."
+        },
+        {
+          "id": "privacy-checkup",
+          "text": "From the same menu, run Privacy Checkup. Work through each section to decide who can see what you share, how people find you, how data is used, and which security alerts you want."
+        },
+        {
+          "id": "change-password",
+          "text": "Go to Settings & Privacy → Settings → Security and Login. Under Login, select Change Password, enter a strong new password, and save it."
+        },
+        {
+          "id": "enable-2fa",
+          "text": "Still in Security and Login, choose Use two-factor authentication. Pick an authenticator app (recommended), SMS, or a security key and finish setup."
+        },
+        {
+          "id": "where-logged-in",
+          "text": "Review Where You're Logged In. Click See More, scan the devices, and log out anything you do not recognize or no longer use."
+        },
+        {
+          "id": "contact-info",
+          "text": "Visit your profile → About → Contact and Basic Info. Edit each phone number or email to hide it with Only Me or remove it entirely if you no longer need it."
+        },
+        {
+          "id": "profile-visibility",
+          "text": "While you are in About, review every profile field—birthday, hometown, relationship status, and more. Use the audience selector to choose who can see each item."
+        }
+      ]
     },
     {
-      "id": "review-post-privacy",
-      "title": "Review who can see your posts",
-      "level": "basic",
-      "tags": ["posts", "audience"],
-      "summary": "Make sure only the right audience can see what you share.",
-      "steps": [
-        { "id": "privacy-shortcut", "text": "Open Facebook → tap Menu → Settings & privacy → Privacy shortcuts." },
-        { "id": "your-activity", "text": "Under Your Activity, tap Who can see your future posts?" },
-        { "id": "select-audience", "text": "Choose Friends (recommended) or a custom list." },
-        { "id": "limit-past", "text": "Tap Limit who can see past posts → Confirm." }
-      ],
-      "notes": "Limiting past posts is permanent. Download anything important first.",
-      "updated": "2024-02-28"
-    },
-    {
-      "id": "enable-2fa",
-      "title": "Enable two-factor authentication",
-      "level": "advanced",
-      "tags": ["security", "login"],
-      "summary": "Add a second step when you log in so attackers can’t reuse your password.",
-      "steps": [
-        { "id": "menu", "text": "Open Facebook → tap Menu → Settings & privacy → Settings." },
-        { "id": "security", "text": "Tap Accounts Center → Password and security." },
-        { "id": "2fa", "text": "Tap Two-factor authentication → Choose Continue." },
-        { "id": "select-method", "text": "Pick an authenticator app (recommended) or SMS and follow the prompts." }
-      ],
-      "notes": "Authenticator apps are safer than SMS. Write down backup codes and store them safely.",
-      "updated": "2024-03-02"
-    },
-    {
-      "id": "review-apps",
-      "title": "Remove risky apps",
+      "id": "profile-visibility-control",
+      "title": "Reduce what your profile reveals",
       "level": "intermediate",
-      "tags": ["apps", "permissions"],
-      "summary": "Disconnect games and websites that you no longer trust.",
+      "tags": ["profile", "exposure"],
+      "summary": "Limit personal data that can be used to identify you or your family.",
       "steps": [
-        { "id": "menu", "text": "Open Facebook → tap Menu → Settings & privacy → Settings." },
-        { "id": "apps", "text": "Tap Permissions → Apps and websites." },
-        { "id": "review", "text": "Tap the app you want to remove → Tap Remove." },
-        { "id": "confirm", "text": "Confirm by tapping Remove again and check Delete posts box if needed." }
+        {
+          "id": "hide-birthday",
+          "text": "Open your profile → About → Contact and Basic Info. Edit your birthday and set both the date and the year to Only Me, or remove them if you prefer."
+        },
+        {
+          "id": "family-visibility",
+          "text": "In About → Family and Relationships, edit each listed relative. Change the audience to Only Me or remove the connection entirely."
+        },
+        {
+          "id": "work-education",
+          "text": "Under About → Work and Education, edit each job or school. Hide sensitive entries with Only Me or delete them when they no longer need to appear."
+        }
+      ]
+    },
+    {
+      "id": "posts-tags-control",
+      "title": "Control past posts, tags, and discoverability",
+      "level": "intermediate",
+      "tags": ["posts", "tags"],
+      "summary": "Clean up old activity and decide how others can tag or find you.",
+      "steps": [
+        {
+          "id": "delete-post",
+          "text": "On your profile, find an old post, click the three dots, and move it to Trash if it no longer represents you."
+        },
+        {
+          "id": "manage-trash",
+          "text": "Open Menu → Settings & Privacy → Activity Log → Trash. Review what you deleted and permanently erase or restore items as needed."
+        },
+        {
+          "id": "limit-past-posts",
+          "text": "Go to Settings & Privacy → Settings → Privacy. Under Your Activity, use Limit Past Posts to shrink the audience of everything you once shared publicly or with friends of friends."
+        },
+        {
+          "id": "remove-tags",
+          "text": "In Activity Log, look at Posts You're Tagged In and Photos You're Tagged In. Remove tags that expose you in ways you do not want."
+        },
+        {
+          "id": "albums",
+          "text": "Visit your Photos tab → Albums. Edit each album to adjust the audience or delete entire albums that are no longer needed."
+        },
+        {
+          "id": "tagging-controls",
+          "text": "Open Settings & Privacy → Settings → Profile and Tagging. Decide who can post on your profile, who sees posts you're tagged in, and enable tag review before anything appears."
+        },
+        {
+          "id": "face-recognition",
+          "text": "If available, go to Settings & Privacy → Settings → Face Recognition. Edit the setting so Facebook does not recognize you automatically in others' photos."
+        },
+        {
+          "id": "lookup-controls",
+          "text": "In Settings & Privacy → Settings → Privacy, adjust Who can look you up using the email address or phone number you provided to Only Me or Friends."
+        },
+        {
+          "id": "friend-requests",
+          "text": "From the same Privacy page, change Who can send you friend requests? to Friends of Friends to cut down on unsolicited invitations."
+        }
+      ]
+    },
+    {
+      "id": "apps-ads-cleanup",
+      "title": "Revoke app access and tune ads",
+      "level": "advanced",
+      "tags": ["apps", "ads", "cleanup"],
+      "summary": "Limit data sharing with third parties and finish optional privacy clean-up tasks.",
+      "steps": [
+        {
+          "id": "remove-apps",
+          "text": "Open Settings & Privacy → Settings → Apps and Websites. Remove any app or website you no longer trust and delete posts the app created."
+        },
+        {
+          "id": "ad-preferences",
+          "text": "Go to Settings & Privacy → Settings → Ads. Under Ad Settings, turn off data from partners, disable off-Facebook activity targeting, and prune targeting categories or advertisers you dislike."
+        },
+        {
+          "id": "clear-devices",
+          "text": "Revisit Settings → Security and Login and remove old devices from Where You're Logged In so only current sessions remain."
+        },
+        {
+          "id": "search-history",
+          "text": "From Activity Log, open Logged Actions and Other Activity → Search History. Delete individual searches or Clear All to erase your search trail."
+        },
+        {
+          "id": "download-data",
+          "text": "Navigate to Settings → Your Facebook Information → Download Your Information. Choose the data, format, and time range you want, then create the file for your records."
+        },
+        {
+          "id": "deactivate-delete",
+          "text": "If you ever need a clean exit, go to Settings → Your Facebook Information → Deactivation and Deletion to temporarily deactivate or permanently delete your account."
+        }
       ],
-      "notes": "Removing an app does not delete what you shared inside that app. Visit the app to delete data.",
-      "updated": "2024-01-18"
+      "notes": "Complete the optional cleanup steps that match your comfort level."
     }
   ]
 }

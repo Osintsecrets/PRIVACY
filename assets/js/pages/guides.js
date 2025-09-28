@@ -115,20 +115,6 @@ async function fetchGuides() {
   }
 }
 
-function formatDate(input) {
-  if (!input) return '';
-  try {
-    const formatter = new Intl.DateTimeFormat(getCurrentLanguage() === 'he' ? 'he-IL' : 'en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
-    return formatter.format(new Date(input));
-  } catch (error) {
-    return input;
-  }
-}
-
 function matchesFilters(topic) {
   const levelPass = state.filter === 'all' || topic.level === state.filter;
   if (!levelPass) return false;
@@ -200,11 +186,6 @@ function renderCards() {
     levelBadge.className = 'badge';
     levelBadge.textContent = translate('guides.cardLevel', { level: translate(`guides.filter${topic.level.charAt(0).toUpperCase()}${topic.level.slice(1)}`) || topic.level });
     badges.appendChild(levelBadge);
-
-    const dateBadge = document.createElement('span');
-    dateBadge.className = 'badge';
-    dateBadge.textContent = translate('guides.cardUpdated', { date: formatDate(topic.updated) });
-    badges.appendChild(dateBadge);
 
     if (topic.tags.length) {
       const tagsBadge = document.createElement('span');
