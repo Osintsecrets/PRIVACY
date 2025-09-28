@@ -2,6 +2,7 @@ import { createRouter, handleEthicsRoute } from './router.js';
 import { createChip, showToast } from './components.js';
 import { initGuidesModule } from './guides.js';
 import { showDisclaimerOnLoad } from './disclaimer.js';
+import { initTooltips } from './utils/tooltip.js';
 
 const views = {
   home: document.getElementById('view-home'),
@@ -305,3 +306,6 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+  initTooltips();
+});
