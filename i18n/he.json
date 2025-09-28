@@ -5,6 +5,7 @@
   "nav.tools": "כלים",
   "nav.about": "אודות",
   "nav.settings": "הגדרות",
+
   "home.awareness": "שימו לב לסיכונים המתרחשים במהירות ברשתות החברתיות שלכם.",
   "home.bannerInfo": "למידע נוסף",
   "home.bannerTooltip": "אנחנו מציעים פעולות מהירות כדי לשמור על הנוכחות שלכם בטוחה יותר.",
@@ -19,12 +20,13 @@
   "home.loadError": "לא ניתן לטעון את הפלטפורמות.",
   "home.popoverTitle": "שימו לב לסיכונים מהירים",
   "home.popoverBody": "אנחנו מציגים סיכונים מתפתחים בפרטיות, תוכן וגישה כדי שתוכלו להגיב מהר.",
+
   "guides.heading": "מדריכים",
   "guides.detail": "פרטי מדריך",
   "guides.lede": "מדריכים מעמיקים לנטרול סיכונים צעד אחר צעד.",
-  "guides.searchLabel": "Search Facebook guides",
-  "guides.searchPlaceholder": "Type a task or risk",
-  "guides.allCategories": "All categories",
+  "guides.searchLabel": "חיפוש מדריכי פייסבוק",
+  "guides.searchPlaceholder": "הקלידו משימה או סיכון",
+  "guides.allCategories": "כל הקטגוריות",
   "guides.empty": "אין מדריכים מתאימים למסננים עדיין.",
   "guides.view": "פתחו מדריך",
   "guides.openStep": "פתחו שלב",
@@ -41,6 +43,7 @@
   "guides.notFound": "המדריך לא נמצא",
   "guides.notFoundBody": "לא הצלחנו למצוא את המדריך הזה. נסו לבחור אחר.",
   "guides.noSteps": "אין שלבים זמינים במדריך.",
+
   "settings.language": "שפה",
   "settings.languageLegend": "שפה",
   "settings.languageLabel": "בחרו שפה",
@@ -65,17 +68,20 @@
   "settings.offlineChecking": "מצב: בודק...",
   "settings.offlineStatusOnline": "מצב: מקוון",
   "settings.offlineStatusOffline": "מצב: לא מקוון (מנסה שוב...)",
-  "app.updateReady": "עדכון זמין. רעננו ליישום.",
+
+  "app.updateReady": "עדכון זמין. רעננו כדי להחיל.",
   "app.updateAvailable": "גרסה חדשה זמינה. רעננו כדי לעדכן.",
+
   "disclaimer": {
     "title": "הצהרה משפטית, אתית ומוסרית מקיפה",
     "agree": "אני מסכים/ה",
     "disagree": "אינני מסכים/ה",
-    "leave": "עזוב את האתר",
-    "loading": "טוען הצהרה...",
+    "leave": "צא/י מהאתר",
+    "loading": "טוען את ההצהרה...",
     "empty": "אין טקסט הצהרה זמין.",
     "loadError": "לא ניתן לטעון את ההצהרה. רעננו את העמוד."
   },
+
   "pages": {
     "ethics": {
       "title": "אתיקה ומוסר",
@@ -84,12 +90,15 @@
       "loadError": "לא הצלחנו לטעון את הצהרת האתיקה. נסו שוב מאוחר יותר."
     }
   },
+
   "tools.placeholderAutomation": "בדיקות אוטומטיות (בקרוב)",
   "tools.placeholderScans": "סריקות תצורה של הפלטפורמה",
   "about.mission": "המשימה שלנו: להפחית חשיפה לסיכונים חברתיים.",
   "about.audience": "מיועד לעיתונאים, פעילים וצוותים.",
+
   "links": {
     "ethics": "אתיקה"
   },
+
   "common.close": "סגירה"
 }

@@ -1,5 +1,7 @@
+// assets/js/app.js
+
 import { createRouter, handleEthicsRoute } from './router.js';
-import { createChip, showToast, createPopover, showTooltip } from './components.js';
+import { createChip, showToast, showTooltip, createPopover } from './components.js';
 import { initGuidesModule } from './guides.js';
 import { showDisclaimerOnLoad } from './disclaimer.js';
 import { initI18n, setLanguage, getCurrentLanguage, translate, applyTranslations, onLanguageChange } from './i18n.js';
@@ -29,11 +31,17 @@ const offlineIndicator = document.getElementById('offline-indicator');
 const languageSelect = document.getElementById('language-select');
 const reducedMotionToggle = document.getElementById('reduced-motion-toggle');
 
+const storedLanguage = localStorage.getItem('sra:language');
+const storedReducedMotion = localStorage.getItem('sra:reduced-motion');
+const prefersReducedMotion = storedReducedMotion === null
+  ? Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  : storedReducedMotion === 'true';
+
 const state = {
   platforms: null,
   preferences: {
-    language: localStorage.getItem('sra:language') || 'en',
-    reducedMotion: localStorage.getItem('sra:reduced-motion') === 'true',
+    language: storedLanguage || 'en',
+    reducedMotion: prefersReducedMotion,
   },
   deferredPrompt: null,
 };
@@ -57,6 +65,8 @@ function applyReducedMotionPreference() {
   if (!document.body) return;
   const shouldReduce = Boolean(state.preferences.reducedMotion);
   document.body.classList.toggle('prefers-reduced-motion', shouldReduce);
+  document.documentElement.classList.toggle('prefers-reduced-motion', shouldReduce);
+  document.documentElement.style.scrollBehavior = shouldReduce ? 'auto' : 'smooth';
 }
 
 function setActiveView(viewKey) {
@@ -69,6 +79,16 @@ function setActiveView(viewKey) {
   if (viewRoot) {
     viewRoot.focus({ preventScroll: true });
   }
+  const scrollBehavior = state.preferences.reducedMotion ? 'auto' : 'smooth';
+  window.requestAnimationFrame(() => {
+    if (typeof window.scrollTo === 'function') {
+      try {
+        window.scrollTo({ top: 0, behavior: scrollBehavior });
+      } catch (error) {
+        window.scrollTo(0, 0);
+      }
+    }
+  });
 }
 
 function setActiveDock(path) {
@@ -241,10 +261,14 @@ function initConnectivity() {
   updateStatus();
 }
 
+/**
+ * Optional UX helpers (tooltip/popover) — safe no-ops if markup is missing.
+ * Requires showTooltip/createPopover from components.js.
+ */
 function initBannerTooltip() {
   const bannerButton = document.querySelector('[data-banner-tooltip]');
   const tooltip = document.getElementById('banner-tooltip');
-  if (!bannerButton || !tooltip) return;
+  if (!bannerButton || !tooltip || typeof showTooltip !== 'function') return;
 
   let removeTooltip = null;
   const getTooltipText = () => translate('home.bannerTooltip');
@@ -252,9 +276,7 @@ function initBannerTooltip() {
   const show = () => {
     const tooltipText = getTooltipText();
     if (!tooltipText) return;
-    if (typeof removeTooltip === 'function') {
-      removeTooltip();
-    }
+    if (typeof removeTooltip === 'function') removeTooltip();
     removeTooltip = showTooltip(bannerButton, tooltipText);
   };
 
@@ -270,13 +292,13 @@ function initBannerTooltip() {
   bannerButton.addEventListener('mouseenter', show);
   bannerButton.addEventListener('mouseleave', hide);
   bannerButton.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      hide();
-    }
+    if (event.key === 'Escape') hide();
   });
 }
 
 function initInfoPopover() {
+  if (typeof createPopover !== 'function') return;
+
   let activePopover = null;
 
   document.addEventListener('click', (event) => {
@@ -428,11 +450,11 @@ async function init() {
   initSettings();
   initPWA();
   initConnectivity();
-  initBannerTooltip();
-  initInfoPopover();
   handleNavButtons();
   setupRouter();
   handleLanguageChange();
+  initBannerTooltip();
+  initInfoPopover();
   showDisclaimerOnLoad();
 }
 
