@@ -1017,3 +1017,56 @@ body.prefers-reduced-motion {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
+.view.page-ethics {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.page-ethics {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.page-ethics .glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  padding: 20px;
+}
+
+.page-ethics h1 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  margin: 0 0 12px;
+}
+
+.page-ethics h3 {
+  margin-top: 16px;
+  font-size: 1.05rem;
+}
+
+.page-ethics p {
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.page-ethics ul {
+  margin: 8px 0 8px 20px;
+}
+
+.page-ethics .back-link {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.link {
+  color: var(--accent, #0FF0FC);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
