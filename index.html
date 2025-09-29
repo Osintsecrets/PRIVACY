@@ -12,14 +12,16 @@
     <a class="skip" href="#main">Skip to content</a>
     <div class="wrapper header-row">
       <a class="brand" href="/PRIVACY/">Social Risk Audit</a>
-      <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰</button>
+      <div class="menu-container">
+        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu">☰</button>
+        <nav id="site-menu" class="menu" hidden aria-label="Primary">
+          <a href="/PRIVACY/" data-nav="home">Home</a>
+          <a href="/PRIVACY/platform.html" data-nav="platform">Platform</a>
+          <a href="/PRIVACY/ethics.html" data-nav="ethics">Ethics</a>
+          <a href="/PRIVACY/why.html" data-nav="why">Why</a>
+        </nav>
+      </div>
     </div>
-    <nav id="site-menu" class="menu" hidden aria-label="Primary">
-      <a href="/PRIVACY/" data-nav="home">Home</a>
-      <a href="/PRIVACY/platform.html" data-nav="platform">Platform</a>
-      <a href="/PRIVACY/ethics.html" data-nav="ethics">Ethics</a>
-      <a href="/PRIVACY/why.html" data-nav="why">Why</a>
-    </nav>
   </header>
   <main id="main">
     <section class="wrapper">
