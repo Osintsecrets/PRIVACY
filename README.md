@@ -1,11 +1,11 @@
 # Social Risk Audit
 
-A stripped-back, utility-first privacy guide for Facebook with ethics context and practical reasoning. The site is fully static and runs without trackers or third-party calls. Live at [https://osintsecrets.github.io/PRIVACY/](https://osintsecrets.github.io/PRIVACY/).
+A stripped-back, utility-first privacy guide for the Platform checklist with ethics context and practical reasoning. The site is fully static and runs without trackers or third-party calls. Live at [https://osintsecrets.github.io/PRIVACY/](https://osintsecrets.github.io/PRIVACY/).
 
 ## Pages
 
 - **Home** – mission statement, overview, and quick links to core content.
-- **Facebook** – expandable checklists for essential Facebook privacy tasks.
+- **Platform** – expandable checklists for essential privacy tasks.
 - **Ethics** – principles that guide how the material should be used.
 - **Why** – rationale for caring about privacy in plain language.
 
@@ -14,7 +14,7 @@ A stripped-back, utility-first privacy guide for Facebook with ethics context an
 ```
 .
 ├── index.html              # Home
-├── facebook.html           # Facebook checklist
+├── platform.html           # Platform checklist
 ├── ethics.html             # Ethics statement
 ├── why.html                # Why privacy matters
 ├── assets/
