@@ -2,10 +2,20 @@
   const btn = document.querySelector('.menu-toggle');
   const menu = document.getElementById('site-menu');
   if (!btn || !menu) return;
+  const container = btn.closest('.menu-container') || btn.parentElement;
+  const outsideClick = (event) => {
+    if (!container || container.contains(event.target)) return;
+    toggle(false);
+  };
+  const manageOutside = (listen) => {
+    const method = listen ? 'addEventListener' : 'removeEventListener';
+    document[method]('pointerdown', outsideClick);
+  };
   const toggle = (open) => {
     const isOpen = open ?? menu.hasAttribute('hidden');
     if (isOpen) menu.removeAttribute('hidden'); else menu.setAttribute('hidden', '');
     btn.setAttribute('aria-expanded', String(isOpen));
+    manageOutside(isOpen);
     if (isOpen) menu.querySelector('a')?.focus();
   };
   btn.addEventListener('click', () => toggle());
