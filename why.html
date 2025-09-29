@@ -8,17 +8,18 @@
   <link rel="stylesheet" href="/PRIVACY/assets/css/styles.css">
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
   <header>
-    <div class="wrapper">
-      <a class="site-title" href="/PRIVACY/">Social Risk Audit</a>
-      <nav aria-label="Primary">
-        <a href="/PRIVACY/">Home</a>
-        <a href="/PRIVACY/facebook.html">Facebook</a>
-        <a href="/PRIVACY/ethics.html">Ethics</a>
-        <a href="/PRIVACY/why.html" aria-current="page">Why</a>
-      </nav>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="wrapper header-row">
+      <a class="brand" href="/PRIVACY/">Social Risk Audit</a>
+      <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰</button>
     </div>
+    <nav id="site-menu" class="menu" hidden aria-label="Primary">
+      <a href="/PRIVACY/" data-nav="home">Home</a>
+      <a href="/PRIVACY/platform.html" data-nav="platform">Platform</a>
+      <a href="/PRIVACY/ethics.html" data-nav="ethics">Ethics</a>
+      <a href="/PRIVACY/why.html" data-nav="why">Why</a>
+    </nav>
   </header>
   <main id="main">
     <div class="wrapper">
