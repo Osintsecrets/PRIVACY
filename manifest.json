@@ -5,21 +5,8 @@
   "scope": "/PRIVACY/",
   "display": "standalone",
   "orientation": "any",
-  "theme_color": "#05070c",
-  "background_color": "#05070c",
-  "description": "Focused Facebook privacy guidance with accessible design.",
-  "icons": [
-    {
-      "src": "./icons-s/1.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons-s/2.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
+  "theme_color": "#0b0f14",
+  "background_color": "#0b0f14",
+  "description": "Focused privacy guidance delivered fast and tracker-free.",
+  "icons": []
 }
