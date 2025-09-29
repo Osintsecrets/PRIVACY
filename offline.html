@@ -1,46 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Offline — Social Risk Audit</title>
-    <meta name="theme-color" content="#05070c" />
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/tokens.css" />
-    <link rel="stylesheet" href="./assets/css/components.css" />
-    <style>
-      body {
-        justify-content: center;
-        align-items: center;
-      }
-      .offline-wrapper {
-        max-width: 420px;
-        text-align: center;
-        border-radius: var(--radius-lg);
-        padding: var(--spacing-6);
-        border: 1px solid var(--color-outline);
-        background: var(--color-surface-strong);
-        backdrop-filter: blur(var(--blur-medium));
-        -webkit-backdrop-filter: blur(var(--blur-medium));
-        box-shadow: var(--shadow-elevated);
-      }
-      .offline-wrapper h1 {
-        margin-top: 0;
-        font-weight: var(--font-weight-bold);
-      }
-      .offline-wrapper p {
-        color: var(--color-text-muted);
-      }
-      .offline-wrapper .button {
-        margin-top: var(--spacing-4);
-      }
-    </style>
-  </head>
-  <body>
-    <main class="offline-wrapper" aria-labelledby="offline-title">
-      <h1 id="offline-title">You are offline</h1>
-      <p>Reconnect to reload the full privacy guide.</p>
-      <button type="button" class="button" onclick="window.location.reload()">Try again</button>
-    </main>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Offline — Social Risk Audit</title>
+  <link rel="stylesheet" href="/PRIVACY/assets/css/styles.css">
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    main { text-align: center; }
+  </style>
+</head>
+<body>
+  <main class="card" aria-labelledby="offline-title">
+    <h1 id="offline-title">You are offline</h1>
+    <p class="lead">Reconnect to load the latest privacy checklists.</p>
+    <button type="button" class="button primary" onclick="window.location.reload()">Try again</button>
+  </main>
+</body>
 </html>

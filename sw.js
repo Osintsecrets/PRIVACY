@@ -1,37 +1,13 @@
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v1';
 const CORE_CACHE = `sra-core-${CACHE_VERSION}`;
-const RUNTIME_CACHE = `sra-runtime-${CACHE_VERSION}`;
-const OFFLINE_URL = './offline.html';
+const OFFLINE_URL = '/PRIVACY/offline.html';
 
 const PRECACHE_URLS = [
-  './',
-  './index.html',
-  './offline.html',
-  './manifest.json',
-  './assets/css/reset.css',
-  './assets/css/tokens.css',
-  './assets/css/components.css',
-  './assets/css/responsive.css',
-  './assets/js/app.js',
-  './assets/js/components.js',
-  './assets/js/disclaimer.js',
-  './assets/js/i18n.js',
-  './assets/js/router.js',
-  './assets/js/pages/guides.js',
-  './assets/js/pages/manual.js',
-  './assets/js/pages/ethics.js',
-  './assets/js/utils/modal.js',
-  './assets/js/utils/tooltip.js',
-  './data/guides.json',
-  './data/guides-facebook.json',
-  './data/disclaimer.txt',
-  './data/ethics.en.md',
-  './data/ethics.he.md',
-  './data/manual.en.json',
-  './i18n/en.json',
-  './i18n/he.json',
-  './icons-s/1.png',
-  './icons-s/2.png',
+  '/PRIVACY/',
+  '/PRIVACY/index.html',
+  '/PRIVACY/offline.html',
+  '/PRIVACY/assets/css/styles.css',
+  '/PRIVACY/assets/js/main.js',
 ];
 
 self.addEventListener('install', (event) => {
@@ -44,99 +20,23 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) =>
-        Promise.all(
-          keys
-            .filter((key) => key.startsWith('sra-') && key !== CORE_CACHE && key !== RUNTIME_CACHE)
-            .map((key) => caches.delete(key)),
-        ),
-      )
-      .then(() => self.clients.claim())
-      .then(() => notifyClients()),
+      .then((keys) => Promise.all(keys.filter((key) => key !== CORE_CACHE).map((key) => caches.delete(key))))
+      .then(() => self.clients.claim()),
   );
 });
-
-function notifyClients() {
-  return self.clients
-    .matchAll({ includeUncontrolled: true, type: 'window' })
-    .then((clients) => {
-      clients.forEach((client) => client.postMessage({ type: 'updateavailable' }));
-    })
-    .catch((error) => console.error('[SW] notify error', error));
-}
-
-async function cacheFirst(request) {
-  const cache = await caches.open(CORE_CACHE);
-  const cached = await cache.match(request);
-  if (cached) return cached;
-  const response = await fetch(request);
-  cache.put(request, response.clone());
-  return response;
-}
-
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
-  const cached = await cache.match(request);
-  const fetchPromise = fetch(request)
-    .then((response) => {
-      if (response && response.status === 200) {
-        cache.put(request, response.clone());
-      }
-      return response;
-    })
-    .catch(() => undefined);
-  return cached || fetchPromise;
-}
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
 
-  const url = new URL(request.url);
-
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
-          return response;
-        })
-        .catch(async () => {
-          const cached = await caches.match(request);
-          if (cached) return cached;
-          const offline = await caches.match(OFFLINE_URL);
-          return offline || Response.error();
-        }),
+      fetch(request).catch(() => caches.match(request).then((cached) => cached || caches.match(OFFLINE_URL))),
     );
     return;
   }
 
-  if (url.origin === self.location.origin) {
-    if (PRECACHE_URLS.some((path) => url.pathname.endsWith(path.replace('./', '/')))) {
-      event.respondWith(cacheFirst(request));
-      return;
-    }
-    if (request.destination === 'script' || request.destination === 'style') {
-      event.respondWith(cacheFirst(request));
-      return;
-    }
-  }
-
-  if (request.destination === 'document') {
-    event.respondWith(cacheFirst(request));
-    return;
-  }
-
-  if (request.destination === 'image' || request.destination === 'font' || request.destination === 'json') {
-    event.respondWith(staleWhileRevalidate(request));
-  }
-});
-
-self.addEventListener('message', (event) => {
-  const { data } = event;
-  if (!data) return;
-  if (data.type === 'skipWaiting' || data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
+  event.respondWith(
+    caches.match(request).then((cached) => cached || fetch(request)),
+  );
 });

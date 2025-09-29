@@ -1,272 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#05070c" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Social Risk Audit" />
-    <meta
-      name="description"
-      content="Ultimate Privacy Companion – an accessibility-first PWA that walks you through every Facebook privacy hardening step."
-    />
-    <title>Social Risk Audit</title>
-    <link rel="manifest" href="./manifest.json" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./icons-s/1.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="./icons-s/2.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="./icons-s/1.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="./icons-s/2.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="./assets/css/tokens.css" as="style" />
-    <style>
-      :root {
-        color-scheme: dark;
-        font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-        background: #010409;
-      }
-      body {
-        background: linear-gradient(160deg, rgba(5, 10, 22, 0.9), rgba(4, 14, 28, 0.95));
-        color: #e5f9ff;
-      }
-      #app {
-        opacity: 0;
-        transition: opacity 260ms ease;
-      }
-      #app.ready {
-        opacity: 1;
-      }
-    </style>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/tokens.css" />
-    <link rel="stylesheet" href="./assets/css/components.css" />
-    <link rel="stylesheet" href="./assets/css/responsive.css" />
-  </head>
-  <body>
-    <div id="ui-portal"></div>
-    <div id="app" class="app-shell" data-app-shell>
-      <header class="top-bar" role="banner">
-        <button
-          type="button"
-          class="menu-toggle"
-          id="menu-toggle"
-          aria-expanded="false"
-          aria-controls="primary-menu"
-        >
-          <span class="menu-icon" aria-hidden="true"></span>
-          <span class="visually-hidden" data-i18n="nav.openMenu">Open menu</span>
-        </button>
-        <div class="branding">
-          <h1 data-i18n="app.title">Social Risk Audit</h1>
-          <p data-i18n="app.tagline">Focused Facebook privacy guidance.</p>
-        </div>
-      </header>
-
-      <div id="menu-overlay" class="menu-overlay" hidden></div>
-      <nav
-        id="primary-menu"
-        class="menu-drawer"
-        aria-label="Primary navigation"
-        hidden
-        tabindex="-1"
-      >
-        <div class="menu-drawer-header">
-          <p data-i18n="nav.menuLabel">Navigation</p>
-          <button type="button" class="menu-close" id="menu-close">
-            <span aria-hidden="true">×</span>
-            <span class="visually-hidden" data-i18n="nav.closeMenu">Close menu</span>
-          </button>
-        </div>
-        <ul class="menu-drawer-list">
-          <li><a href="#/" data-nav="/" data-i18n="nav.home">Home</a></li>
-          <li><a href="#/guides" data-nav="/guides" data-i18n="nav.guides">Guides</a></li>
-          <li><a href="#/manual" data-nav="/manual" data-i18n="nav.manual">Manual</a></li>
-          <li><a href="#/ethics" data-nav="/ethics" data-i18n="nav.ethics">Ethics</a></li>
-          <li><a href="#/about" data-nav="/about" data-i18n="nav.about">About</a></li>
-          <li><a href="#/settings" data-nav="/settings" data-i18n="nav.settings">Settings</a></li>
-        </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Social Risk Audit — Home</title>
+  <link rel="stylesheet" href="/PRIVACY/assets/css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <div class="wrapper">
+      <a class="site-title" href="/PRIVACY/">Social Risk Audit</a>
+      <nav aria-label="Primary">
+        <a href="/PRIVACY/" aria-current="page">Home</a>
+        <a href="/PRIVACY/facebook.html">Facebook</a>
+        <a href="/PRIVACY/ethics.html">Ethics</a>
+        <a href="/PRIVACY/why.html">Why</a>
       </nav>
-
-      <div id="offline-banner" class="offline-banner" aria-hidden="true" role="status"></div>
-
-      <section class="status-bar" aria-label="Session overview">
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <span class="visually-hidden" data-i18n="app.breadcrumb">You are here</span>
-          <ol id="breadcrumb-list">
-            <li><a href="#/" data-i18n="nav.home">Home</a></li>
-          </ol>
-        </nav>
-        <div class="progress-indicator" role="status" aria-live="polite">
-          <p class="progress-label" id="global-progress-label">0% complete</p>
-          <div class="progress-track" aria-hidden="true">
-            <div class="progress-bar" id="global-progress-bar"></div>
-          </div>
-        </div>
-      </section>
-
-      <main id="view-root" tabindex="-1">
-        <section id="view-home" class="view active" data-route="/">
-          <div class="section-heading">
-            <h2 data-i18n="home.headline">Take control of your Facebook privacy</h2>
-            <p data-i18n="home.lede">
-              Follow gentle, trusted steps that make your account safer in minutes.
-            </p>
-          </div>
-          <div class="home-message">
-            <p data-i18n="home.moreComing">There should be much more.</p>
-            <p data-i18n="home.guideCount">4 guides available.</p>
-          </div>
-        </section>
-
-        <section id="view-guides" class="view" data-route="/guides">
-          <div class="section-heading">
-            <h2 data-i18n="guides.heading">Guided fixes</h2>
-            <p data-i18n="guides.lede">
-              Search, filter, and follow easy steps to lock down your account.
-            </p>
-          </div>
-          <div class="guides-controls" id="guides-controls">
-            <div class="search-field">
-              <label for="guides-search" data-i18n="guides.searchLabel">Search guides</label>
-              <input
-                id="guides-search"
-                type="search"
-                autocomplete="off"
-                spellcheck="false"
-                data-i18n-attr-placeholder="guides.searchPlaceholder"
-                aria-controls="guides-grid"
-              />
-            </div>
-            <div class="results-meta">
-              <p id="guides-result-count" aria-live="polite">Results: 0</p>
-              <div
-                class="filter-chips"
-                id="guide-filters"
-                role="toolbar"
-                data-i18n-attr-aria-label="guides.filtersLabel"
-                aria-label="Filter by level"
-              ></div>
-              <button
-                type="button"
-                id="resume-guide"
-                class="button"
-                hidden
-                aria-hidden="true"
-                data-i18n="guides.resume"
-              >
-                Resume guide
-              </button>
-            </div>
-          </div>
-          <div class="guides-grid" id="guides-grid" role="list"></div>
-          <p id="guides-empty" class="guides-empty" hidden data-i18n="guides.noResults">
-            No guides match your search yet.
-          </p>
-        </section>
-
-        <section id="view-manual" class="view" data-route="/manual">
-          <div class="section-heading">
-            <h2 data-i18n="manual.title">Facebook Privacy Manual</h2>
-            <p data-i18n="manual.subtitle">Explore every recommendation from the audit in one place.</p>
-          </div>
-          <article id="manual-content"></article>
-        </section>
-
-        <section id="view-ethics" class="view" data-route="/ethics">
-          <div class="section-heading">
-            <h2 data-i18n="ethics.title">Ethics &amp; Promise</h2>
-            <p data-i18n="ethics.lede">We protect people before profits.</p>
-          </div>
-          <article id="ethics-content"></article>
-        </section>
-
-        <section id="view-about" class="view" data-route="/about">
-          <div class="section-heading">
-            <h2 data-i18n="about.heading">About Social Risk Audit</h2>
-            <p data-i18n="about.mission">We build human-friendly privacy tools.</p>
-          </div>
-          <div class="card">
-            <p data-i18n="about.values">No ads, no trackers, no tricks—ever.</p>
-            <p data-i18n="about.roadmap">More platforms coming soon.</p>
-          </div>
-        </section>
-
-        <section id="view-settings" class="view" data-route="/settings">
-          <div class="section-heading">
-            <h2 data-i18n="settings.heading">Settings</h2>
-            <p data-i18n="settings.lede">Pick your language and comfort preferences.</p>
-          </div>
-          <form class="settings-form">
-            <fieldset class="language-select">
-              <legend data-i18n="settings.languageLabel">Choose language</legend>
-              <label for="language-select" class="visually-hidden" data-i18n="settings.languageLabel"
-                >Choose language</label
-              >
-              <select id="language-select">
-                <option value="en" data-i18n="settings.languageEnglish">English</option>
-                <option value="he" data-i18n="settings.languageHebrew">עברית</option>
-              </select>
-            </fieldset>
-
-            <fieldset>
-              <legend data-i18n="settings.reducedMotion">Reduced motion</legend>
-              <label class="toggle-row" for="reduced-motion-toggle">
-                <input type="checkbox" id="reduced-motion-toggle" />
-                <span data-i18n="settings.reducedMotion">Reduced motion</span>
-              </label>
-            </fieldset>
-
-            <fieldset>
-              <legend data-i18n="settings.fontScale">Text size</legend>
-              <label class="visually-hidden" for="font-scale-select" data-i18n="settings.fontScale">Text size</label>
-              <select id="font-scale-select">
-                <option value="compact" data-i18n="settings.fontCompact">Compact</option>
-                <option value="standard" data-i18n="settings.fontStandard">Standard</option>
-                <option value="comfortable" data-i18n="settings.fontComfortable">Comfortable</option>
-                <option value="accessible" data-i18n="settings.fontAccessible">Extra large</option>
-              </select>
-            </fieldset>
-
-            <fieldset>
-              <legend data-i18n="settings.contrast">Contrast</legend>
-              <label class="toggle-row" for="contrast-toggle">
-                <input type="checkbox" id="contrast-toggle" />
-                <span data-i18n="settings.highContrast">High contrast</span>
-              </label>
-            </fieldset>
-
-            <fieldset>
-              <legend data-i18n="settings.install">Install app</legend>
-              <button type="button" id="install-button" class="button" data-i18n="settings.install">
-                Install app
-              </button>
-              <p id="install-hint" data-i18n="settings.installUnavailable">
-                Install prompt will appear when supported.
-              </p>
-            </fieldset>
-
-            <fieldset>
-              <legend id="offline-status-label">Status</legend>
-              <p id="offline-indicator">Status: Offline</p>
-            </fieldset>
-          </form>
-        </section>
-      </main>
-
-      <div id="toast-root" class="toast-root" aria-live="assertive"></div>
-      <button
-        type="button"
-        id="quick-action"
-        class="quick-action-fab"
-        aria-describedby="global-progress-label"
-        data-i18n-attr-aria-label="app.quickAction"
-      >
-        ★
-      </button>
     </div>
-
-    <script type="module" src="./assets/js/app.js"></script>
-  </body>
+  </header>
+  <main id="main">
+    <section class="wrapper">
+      <h1>Privacy is not something that is given to you — be the master of your privacy.</h1>
+      <p class="lead">Learn practical steps to tighten your digital footprint, starting with the platforms you use every day. This site walks you through the essentials, free of noise and fluff.</p>
+      <p>We focus on clear, repeatable actions you can take today. Expect concise walkthroughs, ethical guidance, and context on why your choices matter.</p>
+      <div class="button-group" role="group" aria-label="Primary actions">
+        <a class="button primary" href="/PRIVACY/facebook.html">Get started on Facebook</a>
+        <a class="button primary" href="/PRIVACY/why.html">Why this matters</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrapper">
+      <p>Last updated: September 2023. Built for fast, private browsing.</p>
+    </div>
+  </footer>
+  <script src="/PRIVACY/assets/js/main.js" defer></script>
+</body>
 </html>
