@@ -32,6 +32,8 @@
     '/PRIVACY/platforms/tiktok.html': 'platform',
     '/PRIVACY/platforms/whatsapp.html': 'platform',
     '/PRIVACY/platforms/telegram.html': 'platform',
+    '/PRIVACY/about/': 'about',
+    '/PRIVACY/about/index.html': 'about',
     '/PRIVACY/ethics.html': 'ethics',
     '/PRIVACY/why.html': 'why'
   };
