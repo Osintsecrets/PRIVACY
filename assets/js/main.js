@@ -23,7 +23,18 @@
   menu.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggle(false); btn.focus(); } });
   menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> toggle(false)));
   // Mark current nav item
-  const map = { '/PRIVACY/':'home', '/PRIVACY/platform.html':'platform', '/PRIVACY/ethics.html':'ethics', '/PRIVACY/why.html':'why' };
+  const map = {
+    '/PRIVACY/': 'home',
+    '/PRIVACY/platform.html': 'platform',
+    '/PRIVACY/platforms/facebook.html': 'platform',
+    '/PRIVACY/platforms/instagram.html': 'platform',
+    '/PRIVACY/platforms/x.html': 'platform',
+    '/PRIVACY/platforms/tiktok.html': 'platform',
+    '/PRIVACY/platforms/whatsapp.html': 'platform',
+    '/PRIVACY/platforms/telegram.html': 'platform',
+    '/PRIVACY/ethics.html': 'ethics',
+    '/PRIVACY/why.html': 'why'
+  };
   const key = Object.keys(map).find(p => location.pathname.endsWith(p.replace('/PRIVACY','')) || location.pathname===p);
   const sel = key ? `[data-nav="${map[key]}"]` : null;
   if (sel) document.querySelector(sel)?.setAttribute('aria-current','page');
