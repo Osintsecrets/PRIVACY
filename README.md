@@ -20,10 +20,10 @@ A stripped-back, utility-first privacy guide for the Platform checklist with eth
 ├── assets/
 │   ├── css/styles.css      # Single utility-first stylesheet
 │   └── js/
-│       ├── main.js         # Progressive enhancement for navigation state
+│       ├── main.js         # Progressive enhancement for navigation state + SW registration
 │       └── pledge-gate.js  # Shared pledge enforcement redirect
 ├── manifest.json           # Minimal PWA metadata (dormant)
-├── sw.js                   # Offline cache shell (not registered by default)
+├── sw.js                   # Offline cache shell (auto-registered)
 └── offline.html            # Lightweight offline notice
 ```
 
@@ -36,7 +36,13 @@ Serve the repo root with any static server to preview:
 python -m http.server 8000
 ```
 
-Then open [http://localhost:8000/index.html](http://localhost:8000/index.html). The service worker will only activate if you register it manually during testing.
+Then open [http://localhost:8000/index.html](http://localhost:8000/index.html). The service worker registers automatically on load.
+
+To verify the offline shell:
+
+1. Visit the site in a browser and allow the initial load to complete (which installs the worker).
+2. Stop the local server or toggle the browser's network inspector to “offline”.
+3. Reload any page—navigation should fall back to `offline.html`.
 
 ## Accessibility & privacy
 
