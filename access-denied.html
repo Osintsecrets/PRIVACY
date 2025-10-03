@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./ethics-badge.css">
+  <script defer src="./ethics-badge.js"></script>
   <style>
     :root {
       --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -95,7 +97,7 @@
     }
   </style>
 </head>
-<body>
+<body data-skip-disclaimer>
   <noscript>
     <div style="background:#d64045;color:#fff;padding:0.75rem 1rem;border-radius:12px;margin-bottom:1.5rem;font-weight:600;">This site requires JavaScript to enforce the Ethics Pledge.</div>
   </noscript>
@@ -113,5 +115,27 @@
   <footer>
     <p><a href="./ethics.html">Ethics</a> &amp; <a href="./disclaimer/">Disclaimer</a> • Last updated 2025-10-03 • Terms v1.0</p>
   </footer>
+  <script src="./assets/js/disclaimer.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Disclaimer && typeof window.Disclaimer.init === 'function') {
+        const skipModal = document.body.hasAttribute('data-skip-disclaimer');
+        if (!skipModal) {
+          window.Disclaimer.init({
+            requireEachVisit: true,
+            version: 'v1.0 (2025-10-03)',
+            focusTrap: true
+          });
+        }
+      }
+    });
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.initEthicsBadge) {
+        window.initEthicsBadge();
+      }
+    });
+  </script>
 </body>
 </html>

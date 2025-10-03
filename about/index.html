@@ -152,6 +152,21 @@
   </footer>
   <script defer src="../assets/js/about.js"></script>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/disclaimer.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Disclaimer && typeof window.Disclaimer.init === 'function') {
+        const skipModal = document.body.hasAttribute('data-skip-disclaimer');
+        if (!skipModal) {
+          window.Disclaimer.init({
+            requireEachVisit: true,
+            version: 'v1.0 (2025-10-03)',
+            focusTrap: true
+          });
+        }
+      }
+    });
+  </script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       if (window.initEthicsBadge) {

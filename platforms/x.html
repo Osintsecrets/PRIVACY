@@ -6,6 +6,8 @@
   <meta name="theme-color" content="#0b0f14">
   <title>Social Risk Audit — X</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../ethics-badge.css">
+  <script defer src="../ethics-badge.js"></script>
 </head>
 <body>
   <header>
@@ -67,5 +69,27 @@
   </footer>
 
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/disclaimer.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Disclaimer && typeof window.Disclaimer.init === 'function') {
+        const skipModal = document.body.hasAttribute('data-skip-disclaimer');
+        if (!skipModal) {
+          window.Disclaimer.init({
+            requireEachVisit: true,
+            version: 'v1.0 (2025-10-03)',
+            focusTrap: true
+          });
+        }
+      }
+    });
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.initEthicsBadge) {
+        window.initEthicsBadge();
+      }
+    });
+  </script>
 </body>
 </html>

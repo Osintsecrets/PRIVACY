@@ -8,6 +8,8 @@
   <meta name="description" content="Important legal disclaimer for OSINT Secrets: educational purposes only.">
   <link rel="canonical" href="https://osintsecrets.github.io/PRIVACY/disclaimer/">
   <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../ethics-badge.css">
+  <script defer src="../ethics-badge.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -29,7 +31,7 @@
   }
   </script>
 </head>
-<body>
+<body data-skip-disclaimer>
   <header>
     <a class="skip" href="#main">Skip to content</a>
     <div class="wrapper header-row">
@@ -83,5 +85,27 @@
     </div>
   </footer>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/disclaimer.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Disclaimer && typeof window.Disclaimer.init === 'function') {
+        const skipModal = document.body.hasAttribute('data-skip-disclaimer');
+        if (!skipModal) {
+          window.Disclaimer.init({
+            requireEachVisit: true,
+            version: 'v1.0 (2025-10-03)',
+            focusTrap: true
+          });
+        }
+      }
+    });
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.initEthicsBadge) {
+        window.initEthicsBadge();
+      }
+    });
+  </script>
 </body>
 </html>

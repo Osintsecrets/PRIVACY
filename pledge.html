@@ -12,7 +12,7 @@
   <script src="./pledge.js"></script>
   <script defer src="./ethics-badge.js"></script>
 </head>
-<body data-pledge-page>
+<body data-pledge-page data-skip-disclaimer>
   <noscript>
     <div class="noscript-message">This site requires JavaScript to enforce the Ethics Pledge. Please enable JavaScript to continue.</div>
   </noscript>
@@ -106,5 +106,27 @@
   <footer class="site-footer">
     <p><a href="./ethics.html">Ethics</a> &amp; <a href="./disclaimer/">Disclaimer</a> • Last updated 2025-10-03 • Terms v1.0</p>
   </footer>
+  <script src="./assets/js/disclaimer.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.Disclaimer && typeof window.Disclaimer.init === 'function') {
+        const skipModal = document.body.hasAttribute('data-skip-disclaimer');
+        if (!skipModal) {
+          window.Disclaimer.init({
+            requireEachVisit: true,
+            version: 'v1.0 (2025-10-03)',
+            focusTrap: true
+          });
+        }
+      }
+    });
+  </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.initEthicsBadge) {
+        window.initEthicsBadge();
+      }
+    });
+  </script>
 </body>
 </html>
