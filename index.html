@@ -213,11 +213,21 @@
     });
   </script>
   <script>
-    window.addEventListener('DOMContentLoaded', function () {
-      if (window.initEthicsBadge) {
+    const triggerEthicsBadge = () => {
+      if (typeof window.initEthicsBadge === 'function') {
         window.initEthicsBadge();
+        return true;
       }
-    });
+      return false;
+    };
+    const scheduleEthicsBadge = () => {
+      if (!triggerEthicsBadge()) {
+        setTimeout(scheduleEthicsBadge, 50);
+      }
+    };
+    scheduleEthicsBadge();
+    document.addEventListener('DOMContentLoaded', triggerEthicsBadge);
+    window.addEventListener('load', triggerEthicsBadge);
   </script>
 </body>
 </html>
