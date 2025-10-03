@@ -83,6 +83,7 @@
   if (!current) {
     if (normalized === '/' || normalized === '') current = 'home';
     else if (normalized === '/tools-and-methods/' || normalized === '/tools-and-methods') current = 'tools';
+    else if (normalized === '/tools-methods.html') current = 'tools';
     else if (normalized === '/platform.html') current = 'platform';
     else if (normalized.startsWith('/platforms/')) current = 'platform';
     else if (normalized === '/ethics.html') current = 'ethics';
@@ -105,14 +106,12 @@
     if (!installTrigger) return;
     if (enabled) {
       installTrigger.removeAttribute('disabled');
-      installTrigger.setAttribute('aria-disabled', 'false');
+      installTrigger.removeAttribute('aria-disabled');
     } else {
       installTrigger.setAttribute('disabled', '');
       installTrigger.setAttribute('aria-disabled', 'true');
     }
   };
-
-  setTriggerState(false);
 
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
@@ -123,12 +122,13 @@
 
   installTrigger?.addEventListener('click', async () => {
     if (!deferredInstallPrompt) {
-      setInstallMessage('Your browser will surface the install option when it becomes available.');
+      setInstallMessage('Use your browser’s Share or menu options to add this site to your home screen.');
       return;
     }
+    let choice = null;
     try {
       deferredInstallPrompt.prompt();
-      const choice = await deferredInstallPrompt.userChoice;
+      choice = await deferredInstallPrompt.userChoice;
       if (choice?.outcome === 'accepted') {
         setInstallMessage('Installation requested. Confirm the prompt from your browser to finish.');
       } else {
@@ -139,7 +139,11 @@
       setInstallMessage('Something went wrong launching the install prompt. Please try again later.');
     } finally {
       deferredInstallPrompt = null;
-      setTriggerState(false);
+      if (choice?.outcome === 'accepted') {
+        setTriggerState(false);
+      } else {
+        setTriggerState(true);
+      }
     }
   });
 

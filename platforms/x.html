@@ -7,8 +7,6 @@
 <meta content="#0b0f14" name="theme-color"/>
 <title>Social Risk Audit — X (Twitter)</title>
 <link href="../assets/css/styles.css" rel="stylesheet"/>
-<link href="../ethics-badge.css" rel="stylesheet"/>
-<script defer src="../ethics-badge.js"></script>
 </head>
 <body>
 <header>
@@ -19,7 +17,7 @@
 <button aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu" class="menu-toggle">☰</button>
 <nav aria-label="Primary" class="menu" hidden="" id="site-menu">
 <a data-nav="home" href="../">Home</a>
-<a data-nav="tools" href="../platform.html#tools-methods">Tools and Methods</a>
+<a data-nav="tools" href="../tools-methods.html">Tools and Methods</a>
 <a data-nav="platform" href="../platform.html">Platform</a>
 <a data-nav="ethics" href="../ethics.html">Ethics</a>
 <a data-nav="why" href="../why.html">Why</a>
@@ -344,7 +342,7 @@
 <p>Utility-first build — no trackers.</p>
 <nav aria-label="Footer" class="footer-links">
 <a href="../">Home</a>
-<a href="../platform.html#tools-methods">Tools and Methods</a>
+<a href="../tools-methods.html">Tools and Methods</a>
 <a href="../platform.html">Platform</a>
 <a href="../ethics.html">Ethics</a>
 <a href="../why.html">Why</a>
@@ -357,22 +355,5 @@
 <script defer="" src="../assets/js/pledge-gate.js"></script>
 <script defer="" src="../assets/js/platform-guides.js"></script>
 <script defer="" src="../assets/js/main.js"></script>
-<script>
-const triggerEthicsBadge = () => {
-  if (typeof window.initEthicsBadge === 'function') {
-    window.initEthicsBadge();
-    return true;
-  }
-  return false;
-};
-const scheduleEthicsBadge = () => {
-  if (!triggerEthicsBadge()) {
-    setTimeout(scheduleEthicsBadge, 50);
-  }
-};
-scheduleEthicsBadge();
-document.addEventListener('DOMContentLoaded', triggerEthicsBadge);
-window.addEventListener('load', triggerEthicsBadge);
-</script>
 </body>
 </html>
