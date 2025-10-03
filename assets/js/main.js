@@ -1,4 +1,37 @@
 (function(){
+  function computeBasePrefix(customBase) {
+    if (typeof window === 'undefined') return customBase || './';
+    if (customBase) return customBase;
+    const pathname = window.location.pathname || '';
+    const anchor = '/PRIVACY/';
+    const anchorIndex = pathname.indexOf(anchor);
+    if (anchorIndex === -1) {
+      return './';
+    }
+    const afterAnchor = pathname.slice(anchorIndex + anchor.length);
+    if (!afterAnchor) {
+      return './';
+    }
+    const segments = afterAnchor.split('/').filter(Boolean);
+    const isDirectory = pathname.endsWith('/');
+    const depth = Math.max(0, segments.length - (isDirectory ? 0 : 1));
+    if (depth === 0) {
+      return './';
+    }
+    return '../'.repeat(depth);
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => {
+      if (!('serviceWorker' in navigator)) return;
+      const prefix = computeBasePrefix();
+      const workerUrl = `${prefix}sw.js`;
+      navigator.serviceWorker.register(workerUrl).catch((error) => {
+        console.error('Service worker registration failed:', error);
+      });
+    });
+  }
+
   const btn = document.querySelector('.menu-toggle');
   const menu = document.getElementById('site-menu');
   if (!btn || !menu) return;
