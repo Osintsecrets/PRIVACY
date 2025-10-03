@@ -1,72 +1,359 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f14">
-  <title>Social Risk Audit — Telegram</title>
-  <link rel="stylesheet" href="../assets/css/styles.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#0b0f14" name="theme-color"/>
+<title>Social Risk Audit — Telegram</title>
+<link href="../assets/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
-  <header>
-    <a class="skip" href="#main">Skip to content</a>
-    <div class="wrapper header-row">
-      <a class="brand" href="../">Social Risk Audit</a>
-      <div class="menu-container">
-        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu">☰</button>
-        <nav id="site-menu" class="menu" hidden aria-label="Primary">
-          <a href="../" data-nav="home">Home</a>
-          <a href="../index.html#self-audit" data-nav="self-audit">Self-audit</a>
-          <a href="../platform.html#tools-methods" data-nav="tools">Tools and Methods</a>
-          <a href="../platform.html" data-nav="platform">Platform</a>
-          <a href="../ethics.html" data-nav="ethics">Ethics</a>
-          <a href="../why.html" data-nav="why">Why</a>
-          <a href="../about/" data-nav="about">About</a>
-          <a href="../disclaimer/" data-nav="disclaimer">Disclaimer</a>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <main id="main" class="wrapper">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a class="crumb back" href="../platform.html" aria-label="Back to Platforms">← Back</a>
-    </nav>
-
-    <h1>Telegram</h1>
-    <p class="lead">Practical privacy actions you can take today on Telegram.</p>
-
-    <section class="card">
-      <h2>Quick Start</h2>
-      <details>
-        <summary>Example task — placeholder</summary>
-        <ol>
-          <li>Open the app</li>
-          <li>Go to Settings</li>
-          <li>Find Privacy &amp; Security</li>
-          <li>Adjust key controls</li>
-        </ol>
-      </details>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrapper footer-layout">
-      <p>Utility-first build — no trackers.</p>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="../">Home</a>
-        <a href="../index.html#self-audit">Self-audit</a>
-        <a href="../platform.html#tools-methods">Tools and Methods</a>
-        <a href="../platform.html">Platform</a>
-        <a href="../ethics.html">Ethics</a>
-        <a href="../why.html">Why</a>
-        <a href="../about/">About</a>
-        <a href="../disclaimer/">Disclaimer</a>
-      </nav>
-    </div>
-  </footer>
-
-  <script src="../assets/js/pledge-gate.js" defer></script>
-  <script src="../assets/js/main.js" defer></script>
+<header>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrapper header-row">
+<a class="brand" href="../">Social Risk Audit</a>
+<div class="menu-container">
+<button aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu" class="menu-toggle">☰</button>
+<nav aria-label="Primary" class="menu" hidden="" id="site-menu">
+<a data-nav="home" href="../">Home</a>
+<a data-nav="self-audit" href="../index.html#self-audit">Self-audit</a>
+<a data-nav="tools" href="../platform.html#tools-methods">Tools and Methods</a>
+<a data-nav="platform" href="../platform.html">Platform</a>
+<a data-nav="ethics" href="../ethics.html">Ethics</a>
+<a data-nav="why" href="../why.html">Why</a>
+<a data-nav="about" href="../about/">About</a>
+<a data-nav="disclaimer" href="../disclaimer/">Disclaimer</a>
+</nav>
+</div>
+</div>
+</header>
+<main class="platform-page" id="main">
+<div class="wrapper platform-wrapper">
+<div aria-hidden="true" id="page-top"></div>
+<nav aria-label="Back navigation" class="crumbs">
+<a aria-label="Back to Platforms" class="crumb back" href="../platform.html">← Back</a>
+</nav>
+<nav aria-label="Breadcrumb" class="breadcrumb">
+<ol>
+<li><a href="../">Home</a></li>
+<li><a href="../platform.html">Platforms</a></li>
+<li aria-current="page">Telegram</li>
+</ol>
+</nav>
+<header class="platform-header">
+<h1>Telegram</h1>
+<p class="lead">Practical privacy actions you can take today on Telegram.</p>
+</header>
+<form action="" class="guide-search" id="guide-search-form" method="get" role="search">
+<label class="guide-search-label" for="guide-search-input">Search Telegram privacy actions</label>
+<div class="guide-search-field">
+<input autocomplete="off" id="guide-search-input" name="q" placeholder="Search by action, keyword, or feature" type="search"/>
+<button class="guide-search-reset" type="reset">Clear</button>
+</div>
+</form>
+<p aria-live="polite" class="search-status" id="guide-search-count" role="status"></p>
+<p class="search-empty-message" hidden="" id="guide-search-empty">No actions matched your search. Try different keywords or remove filters.</p>
+<div class="platform-layout">
+<div class="platform-content" id="guide-content">
+<section class="card" id="navigation-primer">
+<h2>Navigation Primer</h2>
+<h3>Mobile (Telegram)</h3>
+<ul>
+<li><strong>Settings:</strong> iPhone: bottom-right tab. Android: tap <strong>☰</strong> (top-left) → <strong>Settings</strong>.</li>
+<li><strong>Privacy and Security:</strong> Main hub for passcode lock, two-step verification, auto-delete, and more.</li>
+<li><strong>Devices:</strong> Shows active sessions—always review after using a shared computer.</li>
+<li><strong>Search:</strong> Pull down in Settings to search for any feature by name.</li>
+</ul>
+<h3>Desktop (Telegram Desktop)</h3>
+<ul>
+<li>Open the desktop app → <strong>≡</strong> (top-left) → <strong>Settings</strong>.</li>
+<li><strong>Privacy and Security</strong> houses most of the same controls as mobile.</li>
+<li><strong>Advanced</strong> includes export tools and local storage management.</li>
+<li>Use <strong>Settings → Devices</strong> to terminate desktop sessions from any device.</li>
+</ul>
+<p class="lead">If an option is missing on desktop, adjust it on your phone—changes sync instantly across devices.</p>
+</section>
+<nav aria-label="Guides" class="card" id="guide-index">
+<h2>Guides</h2>
+<ol>
+<li class="guide-range-divider"><span>Guides #1–12</span></li>
+<li><a href="#guide-set-telegram-passcode-lock">Set a Telegram Passcode Lock</a></li>
+<li><a href="#guide-enable-telegram-two-step-verification">Enable Telegram Two-Step Verification</a></li>
+<li><a href="#guide-review-telegram-active-sessions">Review Telegram Active Sessions</a></li>
+<li><a href="#guide-hide-telegram-phone-number">Hide Your Telegram Phone Number</a></li>
+<li><a href="#guide-control-telegram-last-seen">Control Telegram Last Seen &amp; Online</a></li>
+<li><a href="#guide-limit-who-can-call-you-on-telegram">Limit Who Can Call You on Telegram</a></li>
+<li><a href="#guide-set-telegram-auto-delete">Set Telegram Auto-Delete for New Chats</a></li>
+<li><a href="#guide-limit-finding-you-by-number">Limit Who Can Find You by Phone Number</a></li>
+<li><a href="#guide-review-telegram-forwarding-permissions">Review Telegram Forwarding Permissions</a></li>
+<li><a href="#guide-remove-connected-websites-and-bots">Remove Connected Websites and Bots</a></li>
+<li><a href="#guide-manage-telegram-secret-chats">Start and Manage Telegram Secret Chats</a></li>
+<li><a href="#guide-export-telegram-data">Export Your Telegram Data</a></li>
+</ol>
+</nav>
+<h2 class="guide-range-heading" id="range-1-12">Guides #1–12</h2>
+<section class="card" id="guide-set-telegram-passcode-lock">
+<h2>Set a Telegram Passcode Lock</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Open Telegram → <strong>Settings</strong> → <strong>Privacy and Security</strong>.</li>
+<li>Tap <strong>Passcode Lock</strong> (iPhone) or <strong>Passcode &amp; Face ID</strong> / <strong>Passcode Lock</strong> (Android).</li>
+<li>Set a strong passcode and enable <strong>Unlock with Face ID/Touch ID</strong> if available.</li>
+<li>Set <strong>Auto-lock</strong> to 1 minute or less.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>≡</strong> → <strong>Settings</strong> → <strong>Privacy and Security</strong>.</li>
+<li>Enable <strong>Local passcode</strong>, create a passcode, and adjust the auto-lock timer.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Passcode locks protect chats if someone grabs your device while Telegram is open.</p>
+</section>
+<section class="card" id="guide-enable-telegram-two-step-verification">
+<h2>Enable Telegram Two-Step Verification</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Two-Step Verification</strong>.</li>
+<li>Tap <strong>Set Password</strong>, choose a strong password, and add a recovery email.</li>
+<li>Finish the setup by entering a hint (optional) and confirming the email code.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Settings</strong> → <strong>Privacy and Security</strong>.</li>
+<li>Select <strong>Two-Step Verification</strong> and follow the same steps to add a password and recovery email.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Two-step verification prevents hijackers from logging in with only your SMS code.</p>
+</section>
+<section class="card" id="guide-review-telegram-active-sessions">
+<h2>Review Telegram Active Sessions</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Devices</strong>.</li>
+<li>Review the <strong>Current session</strong> and <strong>Other sessions</strong>.</li>
+<li>Tap <strong>Terminate all other sessions</strong> or remove individual devices you do not recognize.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Settings</strong> → <strong>Devices</strong>.</li>
+<li>Review sessions and click <strong>Terminate</strong> for suspicious ones.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Check sessions monthly and after logging in on public or work devices.</p>
+</section>
+<section class="card" id="guide-hide-telegram-phone-number">
+<h2>Hide Your Telegram Phone Number</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Phone Number</strong>.</li>
+<li>Set <strong>Who can see my phone number</strong> to <strong>Nobody</strong> or <strong>My contacts</strong>.</li>
+<li>Under <strong>Who can find me by my number</strong>, select <strong>My contacts</strong> for tighter control.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Settings</strong> → <strong>Privacy and Security</strong> → <strong>Phone Number</strong>.</li>
+<li>Choose the same restrictions and save.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Hiding your number prevents strangers in groups from seeing or searching it.</p>
+</section>
+<section class="card" id="guide-control-telegram-last-seen">
+<h2>Control Telegram Last Seen &amp; Online</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Last Seen &amp; Online</strong>.</li>
+<li>Set visibility to <strong>Nobody</strong> or <strong>My contacts</strong>.</li>
+<li>Use <strong>Add Exceptions</strong> to allow trusted people or block specific users from seeing your status.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Privacy and Security</strong> → <strong>Last Seen &amp; Online</strong>.</li>
+<li>Mirror your preferred settings and save.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Limiting last seen keeps stalkers from tracking when you are active.</p>
+</section>
+<section class="card" id="guide-limit-who-can-call-you-on-telegram">
+<h2>Limit Who Can Call You on Telegram</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Calls</strong>.</li>
+<li>Set <strong>Who can call me</strong> to <strong>My contacts</strong> or <strong>Nobody</strong>.</li>
+<li>Disable <strong>Peer-to-peer</strong> calls with <strong>Nobody</strong> for maximum privacy.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Settings</strong> → <strong>Privacy and Security</strong> → <strong>Calls</strong>.</li>
+<li>Adjust the same options and save.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Restricting calls keeps unknown users from ringing you or learning your IP via peer-to-peer connections.</p>
+</section>
+<section class="card" id="guide-set-telegram-auto-delete">
+<h2>Set Telegram Auto-Delete for New Chats</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Auto-Delete Messages</strong>.</li>
+<li>Choose a default timer (24 hours, 7 days, 1 month) for all new chats.</li>
+<li>Confirm the change.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Settings</strong> → <strong>Privacy and Security</strong> → <strong>Auto-Delete Messages</strong>.</li>
+<li>Select the same timer duration and confirm.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Auto-delete limits how long messages stick around on your devices and Telegram's servers.</p>
+</section>
+<section class="card" id="guide-limit-finding-you-by-number">
+<h2>Limit Who Can Find You by Phone Number</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Phone Number</strong>.</li>
+<li>Under <strong>Who can find me by my number</strong>, select <strong>My contacts</strong>.</li>
+<li>Remove unknown users from your contacts if you no longer want them to find you.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Privacy and Security</strong> → <strong>Phone Number</strong>.</li>
+<li>Match the same setting and save.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Combining this with a hidden phone number keeps strangers from discovering your identity.</p>
+</section>
+<section class="card" id="guide-review-telegram-forwarding-permissions">
+<h2>Review Telegram Forwarding Permissions</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Forwarded Messages</strong>.</li>
+<li>Choose who can link back to your account when your messages are forwarded (<strong>Nobody</strong> is the strictest).</li>
+<li>Use exceptions to allow trusted contacts.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Privacy and Security</strong> → <strong>Forwarded Messages</strong>.</li>
+<li>Apply the same restrictions.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Limiting forwarding attribution keeps your username hidden when messages spread.</p>
+</section>
+<section class="card" id="guide-remove-connected-websites-and-bots">
+<h2>Remove Connected Websites and Bots</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Settings → <strong>Privacy and Security</strong> → <strong>Bots and Websites</strong> (or <strong>Connected Websites</strong>).</li>
+<li>Review the list of services with access to your Telegram account.</li>
+<li>Tap any service you no longer use → <strong>Terminate</strong>.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Settings</strong> → <strong>Privacy and Security</strong> → <strong>Bots and Websites</strong>.</li>
+<li>Remove unwanted connections.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Clearing old integrations stops bots or sites from messaging you or reading your basic info.</p>
+</section>
+<section class="card" id="guide-manage-telegram-secret-chats">
+<h2>Start and Manage Telegram Secret Chats</h2>
+<details open="">
+<summary>On Mobile</summary>
+<ol>
+<li>Open a chat with the person → tap their name → <strong>Start Secret Chat</strong>.</li>
+<li>Confirm the prompt to create an end-to-end encrypted chat tied to each device.</li>
+<li>Inside the secret chat, tap the <strong>⋮</strong> or <strong>More</strong> menu → <strong>Set self-destruct timer</strong> to control message lifetime.</li>
+</ol>
+</details>
+<details>
+<summary>On Desktop</summary>
+<ol>
+<li>Secret chats are mobile-only. Start them on your phone; they will not appear on desktop.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Use secret chats for sensitive topics—they enforce device-specific encryption and optional auto-delete.</p>
+</section>
+<section class="card" id="guide-export-telegram-data">
+<h2>Export Your Telegram Data</h2>
+<details open="">
+<summary>On Desktop</summary>
+<ol>
+<li>Telegram Desktop → <strong>Settings</strong> → <strong>Advanced</strong>.</li>
+<li>Select <strong>Export Telegram data</strong>.</li>
+<li>Choose the data types you need (chats, media, account data) and click <strong>Export</strong>.</li>
+</ol>
+</details>
+<details>
+<summary>On Mobile</summary>
+<ol>
+<li>Telegram mobile does not export data directly. Install Telegram Desktop on a trusted computer and follow the desktop steps.</li>
+</ol>
+</details>
+<p class="lead"><strong>Tips:</strong> Reviewing your export helps you purge old chats or media you no longer want Telegram to store.</p>
+</section>
+</div>
+<aside aria-label="On this page" class="platform-sidebar">
+<div class="card toc-card">
+<h2>On this page</h2>
+<nav aria-label="On this page">
+<ul>
+<li><a href="#navigation-primer">Navigation primer</a></li>
+<li><a href="#guide-index">Guide index</a></li>
+<li><a href="#range-1-12">Guides #1–12</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</div>
+<a class="back-to-top" href="#page-top">Back to top</a>
+</div>
+</main>
+<footer>
+<div class="wrapper footer-layout">
+<p>Utility-first build — no trackers.</p>
+<nav aria-label="Footer" class="footer-links">
+<a href="../">Home</a>
+<a href="../index.html#self-audit">Self-audit</a>
+<a href="../platform.html#tools-methods">Tools and Methods</a>
+<a href="../platform.html">Platform</a>
+<a href="../ethics.html">Ethics</a>
+<a href="../why.html">Why</a>
+<a href="../about/">About</a>
+<a href="../disclaimer/">Disclaimer</a>
+</nav>
+</div>
+</footer>
+<script defer="" src="../assets/js/pledge-gate.js"></script>
+<script defer="" src="../assets/js/platform-guides.js"></script>
+<script defer="" src="../assets/js/main.js"></script>
 </body>
 </html>
