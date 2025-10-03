@@ -23,21 +23,41 @@
   menu.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggle(false); btn.focus(); } });
   menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> toggle(false)));
   // Mark current nav item
-  const normalized = location.pathname.replace(/\/index\.html$/, '/');
+  const brand = document.querySelector('.brand');
+  let basePath = '/';
+  if (brand) {
+    try {
+      const brandURL = new URL(brand.getAttribute('href') ?? brand.href, location.href);
+      basePath = brandURL.pathname;
+    } catch (err) {
+      basePath = '/';
+    }
+  }
+  basePath = basePath.replace(/index\.html$/, '');
+  if (!basePath.endsWith('/')) basePath += '/';
+
+  let normalized = location.pathname.replace(/index\.html$/, '');
+  if (normalized === basePath.slice(0, -1)) normalized = '';
+  else if (normalized.startsWith(basePath) && basePath !== '/') normalized = normalized.slice(basePath.length);
+  else if (basePath === '/' && normalized.startsWith('/')) normalized = normalized.slice(1);
+  else if (basePath !== '/' && basePath.length > 1 && normalized.startsWith(basePath.slice(0, -1))) {
+    normalized = normalized.slice(basePath.slice(0, -1).length);
+  }
+  if (!normalized.startsWith('/')) normalized = normalized ? `/${normalized}` : '/';
   let current = null;
   const hash = location.hash;
   if (hash === '#self-audit') current = 'self-audit';
   else if (hash === '#tools-methods') current = 'tools';
   if (!current) {
-    if (normalized === '/PRIVACY/' || normalized === '/PRIVACY') current = 'home';
-    else if (normalized === '/PRIVACY/self-audit/' || normalized === '/PRIVACY/self-audit') current = 'self-audit';
-    else if (normalized === '/PRIVACY/tools-and-methods/' || normalized === '/PRIVACY/tools-and-methods') current = 'tools';
-    else if (normalized === '/PRIVACY/platform.html') current = 'platform';
-    else if (normalized.startsWith('/PRIVACY/platforms/')) current = 'platform';
-    else if (normalized === '/PRIVACY/ethics.html') current = 'ethics';
-    else if (normalized === '/PRIVACY/why.html') current = 'why';
-    else if (normalized === '/PRIVACY/about/' || normalized === '/PRIVACY/about') current = 'about';
-    else if (normalized === '/PRIVACY/disclaimer/' || normalized === '/PRIVACY/disclaimer') current = 'disclaimer';
+    if (normalized === '/' || normalized === '') current = 'home';
+    else if (normalized === '/self-audit/' || normalized === '/self-audit') current = 'self-audit';
+    else if (normalized === '/tools-and-methods/' || normalized === '/tools-and-methods') current = 'tools';
+    else if (normalized === '/platform.html') current = 'platform';
+    else if (normalized.startsWith('/platforms/')) current = 'platform';
+    else if (normalized === '/ethics.html') current = 'ethics';
+    else if (normalized === '/why.html') current = 'why';
+    else if (normalized === '/about/' || normalized === '/about') current = 'about';
+    else if (normalized === '/disclaimer/' || normalized === '/disclaimer') current = 'disclaimer';
   }
   if (current) document.querySelector(`[data-nav="${current}"]`)?.setAttribute('aria-current','page');
 })();
