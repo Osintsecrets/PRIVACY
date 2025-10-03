@@ -1,12 +1,6 @@
 /* ===== About page polish ===== */
-:root{
-  --fg:#0b0b0b; --bg:#ffffff; --muted:#6b6b6b; --ring:#cfe3ff; --card:#fff; --border:#e9e9e9;
-}
-@media (prefers-color-scheme: dark){
-  :root{--fg:#e9eef5; --bg:#0b1116; --muted:#9aa7b2; --ring:#1f3a5a; --card:#0f141a; --border:#1e2a35}
-}
 
-body{background:var(--bg); color:var(--fg)}
+body{background:var(--bg); color:var(--text)}
 .container{max-width:1200px; margin-inline:auto; padding:1rem}
 
 /* Two-column layout on desktop */
@@ -21,7 +15,7 @@ body{background:var(--bg); color:var(--fg)}
 .prose h2{font-size:1.4rem; margin:1.6rem 0 .4rem}
 .prose h3{font-size:1.15rem; margin:1.2rem 0 .3rem}
 .prose p{margin:.75rem 0}
-.prose .lede{font-size:1.1rem; color:var(--fg)}
+.prose .lede{font-size:1.1rem; color:var(--text)}
 .prose hr{border:0; border-top:1px solid var(--border); margin:1.4rem 0}
 
 /* TOC */
@@ -40,11 +34,11 @@ body{background:var(--bg); color:var(--fg)}
 .heading-anchor{margin-left:.35rem; opacity:0; text-decoration:none; border-radius:6px; padding:.1rem .25rem; border:1px solid transparent}
 .prose h2:hover .heading-anchor, .prose h3:hover .heading-anchor,
 .prose h2:focus-within .heading-anchor, .prose h3:focus-within .heading-anchor{opacity:1}
-.heading-anchor:focus{opacity:1; outline:2px solid var(--ring); border-color:var(--ring)}
+.heading-anchor:focus{opacity:1; outline:2px solid var(--accent); border-color:var(--accent)}
 
 /* Back to top */
-.back-to-top{position:fixed; right:1rem; bottom:1rem; border:1px solid var(--border); border-radius:999px; background:var(--card); color:inherit; padding:.55rem .7rem; cursor:pointer; box-shadow:0 6px 24px rgba(0,0,0,.12)}
-.back-to-top:focus{outline:2px solid var(--ring)}
+.back-to-top{position:fixed; right:1rem; bottom:1rem; border:1px solid var(--border); border-radius:999px; background:var(--card); color:var(--text); padding:.55rem .7rem; cursor:pointer; box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.back-to-top:focus{outline:2px solid var(--accent)}
 [hidden]{display:none !important}
 
 /* Smooth scroll, respectful */
@@ -61,8 +55,8 @@ html:focus-within{scroll-behavior:smooth}
 @media (max-width: 979px){
   .toc{padding:0; border:0; background:transparent}
   .toc-card{border:1px solid var(--border); border-radius:12px; background:var(--card);}
-  .toc-toggle{display:flex; align-items:center; justify-content:space-between; width:100%; border:1px solid var(--border); border-radius:12px; background:var(--card); color:inherit; padding:.65rem .8rem; font-size:1rem; font-weight:600; cursor:pointer}
-  .toc-toggle:focus{outline:2px solid var(--ring); outline-offset:2px}
+  .toc-toggle{display:flex; align-items:center; justify-content:space-between; width:100%; border:1px solid var(--border); border-radius:12px; background:var(--card); color:var(--text); padding:.65rem .8rem; font-size:1rem; font-weight:600; cursor:pointer}
+  .toc-toggle:focus{outline:2px solid var(--accent); outline-offset:2px}
   .toc[data-collapsed="false"] .toc-toggle{border-bottom-left-radius:0; border-bottom-right-radius:0}
   .toc-nav{border:1px solid var(--border); border-top:0; border-radius:0 0 12px 12px; padding:.75rem; background:var(--card)}
   .toc[data-collapsed="true"] .toc-nav{display:none}
