@@ -2,7 +2,6 @@
   const TERMS_VERSION = 'v1.0 (2025-10-03)';
   const TOKEN_KEY = 'ETHICS_PLEDGE_TOKEN';
   const TERMS_VERSION_KEY = 'TERMS_VERSION';
-  const CONFIRM_PHRASE = 'I AGREE TO USE THIS ETHICALLY';
   const REDIRECT_KEY = 'ETHICS_PLEDGE_REDIRECT_URL';
 
   function parseStoredToken(raw) {
@@ -53,38 +52,15 @@
     const countdownSpan = document.querySelector('[data-countdown]');
     const countdownChip = countdownSpan ? countdownSpan.parentElement : null;
     const countdownBar = document.querySelector('.scroll-progress-bar');
-    const continueButton = document.querySelector('[data-action="to-checkboxes"]');
+    const completeButton = document.querySelector('[data-action="complete"]');
     const scrollable = document.querySelector('[data-scrollable]');
     const scrollHint = document.querySelector('[data-scroll-hint]');
-    const panes = Array.from(document.querySelectorAll('.pane'));
-    const backToIntroButton = document.querySelector('[data-action="back-to-intro"]');
-    const toConfirmButton = document.querySelector('[data-action="to-confirm"]');
-    const backToCheckboxesButton = document.querySelector('[data-action="back-to-checkboxes"]');
-    const completeButton = document.querySelector('[data-action="complete"]');
-    const confirmInput = document.querySelector('#confirm-input');
-    const checkboxTooltip = document.querySelector('#checkbox-tooltip');
-    const checkboxes = Array.from(document.querySelectorAll('.checkbox-option input[type="checkbox"]'));
 
     let countdownInterval = null;
     const countdownSeconds = 8 + Math.floor(Math.random() * 5);
     let secondsRemaining = countdownSeconds;
     let countdownComplete = false;
     let scrolledToBottom = false;
-    let tooltipTimeout = null;
-
-    function showPane(index) {
-      panes.forEach((pane, paneIndex) => {
-        const isActive = paneIndex === index;
-        pane.hidden = !isActive;
-        pane.setAttribute('aria-hidden', String(!isActive));
-        if (isActive) {
-          const focusTarget = pane.querySelector('[data-autofocus]') || pane.querySelector('button:not([disabled]), input:not([disabled]), a[href], textarea, select, [tabindex]:not([tabindex="-1"])');
-          if (focusTarget) {
-            requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
-          }
-        }
-      });
-    }
 
     function updateCountdownDisplay() {
       if (countdownSpan) {
@@ -96,13 +72,13 @@
       }
     }
 
-    function maybeEnableContinue() {
-      if (!continueButton) return;
+    function maybeEnableComplete() {
+      if (!completeButton) return;
       const ready = countdownComplete && scrolledToBottom;
-      continueButton.disabled = !ready;
-      continueButton.setAttribute('aria-disabled', String(!ready));
+      completeButton.disabled = !ready;
+      completeButton.setAttribute('aria-disabled', String(!ready));
       if (ready) {
-        continueButton.classList.add('is-ready');
+        completeButton.classList.add('is-ready');
       }
     }
 
@@ -116,14 +92,14 @@
           if (scrollHint) {
             scrollHint.textContent = 'Thank you for reading — the timer will finish shortly.';
           }
-          maybeEnableContinue();
+          maybeEnableComplete();
         }
       } else {
         scrolledToBottom = false;
         if (scrollHint) {
-          scrollHint.textContent = 'Scroll to the end and allow the timer to complete to enable the Continue button.';
+          scrollHint.textContent = 'Scroll to the end and allow the timer to complete to enable the Enter Site button.';
         }
-        maybeEnableContinue();
+        maybeEnableComplete();
       }
     }
 
@@ -138,42 +114,9 @@
           if (countdownChip) {
             countdownChip.textContent = 'Timer complete';
           }
-          maybeEnableContinue();
+          maybeEnableComplete();
         }
       }, 1000);
-    }
-
-    function setAriaDisabled(button, isDisabled) {
-      if (!button) return;
-      button.setAttribute('aria-disabled', String(isDisabled));
-      button.classList.toggle('is-disabled', isDisabled);
-    }
-
-    function updateCheckboxState() {
-      const allChecked = checkboxes.every((box) => box.checked);
-      setAriaDisabled(toConfirmButton, !allChecked);
-      if (allChecked && checkboxTooltip) {
-        checkboxTooltip.hidden = true;
-      }
-    }
-
-    function showCheckboxTooltip() {
-      if (!checkboxTooltip) return;
-      checkboxTooltip.hidden = false;
-      if (tooltipTimeout) {
-        window.clearTimeout(tooltipTimeout);
-      }
-      tooltipTimeout = window.setTimeout(() => {
-        checkboxTooltip.hidden = true;
-      }, 3000);
-    }
-
-    function updateConfirmState() {
-      const matches = confirmInput && confirmInput.value.trim() === CONFIRM_PHRASE;
-      if (completeButton) {
-        completeButton.disabled = !matches;
-        completeButton.setAttribute('aria-disabled', String(!matches));
-      }
     }
 
     function generateToken() {
@@ -216,52 +159,6 @@
       window.location.href = './index.html';
     }
 
-    if (continueButton) {
-      continueButton.addEventListener('click', () => {
-        showPane(1);
-        const firstCheckbox = checkboxes[0];
-        if (firstCheckbox) {
-          requestAnimationFrame(() => firstCheckbox.focus({ preventScroll: true }));
-        }
-      });
-    }
-
-    if (backToIntroButton) {
-      backToIntroButton.addEventListener('click', () => {
-        showPane(0);
-        if (scrollable) {
-          requestAnimationFrame(() => scrollable.focus({ preventScroll: true }));
-        }
-      });
-    }
-
-    if (toConfirmButton) {
-      const handleAttempt = (event) => {
-        if (toConfirmButton.getAttribute('aria-disabled') === 'true') {
-          event.preventDefault();
-          showCheckboxTooltip();
-          return;
-        }
-        showPane(2);
-      };
-      toConfirmButton.addEventListener('click', handleAttempt);
-      toConfirmButton.addEventListener('keydown', (event) => {
-        if ((event.key === 'Enter' || event.key === ' ') && toConfirmButton.getAttribute('aria-disabled') === 'true') {
-          event.preventDefault();
-          showCheckboxTooltip();
-        }
-      });
-    }
-
-    if (backToCheckboxesButton) {
-      backToCheckboxesButton.addEventListener('click', () => {
-        showPane(1);
-        if (checkboxes.length) {
-          requestAnimationFrame(() => checkboxes[0].focus({ preventScroll: true }));
-        }
-      });
-    }
-
     if (completeButton) {
       completeButton.addEventListener('click', () => {
         if (completeButton.disabled) return;
@@ -269,33 +166,12 @@
       });
     }
 
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener('change', () => {
-        updateCheckboxState();
-      });
-    });
-
-    if (confirmInput) {
-      confirmInput.addEventListener('input', updateConfirmState);
-    }
-
     if (scrollable) {
       scrollable.addEventListener('scroll', handleScroll, { passive: true });
     }
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        showPane(0);
-        if (continueButton) {
-          requestAnimationFrame(() => continueButton.focus({ preventScroll: true }));
-        }
-      }
-    });
-
     handleScroll();
-    updateCheckboxState();
-    updateConfirmState();
-    showPane(0);
+    maybeEnableComplete();
     startCountdown();
   }
 
