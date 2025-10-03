@@ -31,6 +31,21 @@ h1{font-size:clamp(28px,6vw,48px);line-height:1.15;margin:0 0 var(--space) 0;}
 .button-group{display:flex;flex-direction:column;gap:12px;}
 @media (min-width:600px){.button-group{flex-direction:row;}}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:var(--space);}
+.install-card{display:flex;flex-direction:column;gap:calc(var(--space)*1.25);}
+.install-header{display:flex;flex-direction:column;gap:8px;}
+.install-layout{display:flex;flex-direction:column;gap:calc(var(--space)*1.25);}
+.install-actions{display:flex;flex-direction:column;gap:12px;max-width:320px;}
+.install-trigger[disabled]{opacity:0.6;cursor:not-allowed;}
+.install-message{margin:0;color:var(--muted);font-size:0.95rem;}
+.install-instructions h3{margin:0 0 0.5rem;font-size:1.05rem;}
+.install-instructions ol{margin:0;padding-left:1.25rem;display:flex;flex-direction:column;gap:6px;}
+.install-instructions li{line-height:1.5;}
+.install-note{margin:0.75rem 0 0;color:var(--muted);font-size:0.95rem;}
+@media (min-width:720px){
+.install-layout{flex-direction:row;align-items:flex-start;gap:calc(var(--space)*2);}
+.install-actions{flex:0 0 260px;}
+.install-instructions{flex:1;}
+}
 section+section{margin-top:calc(var(--space)*1.5);}
 .notice{border-left:4px solid var(--accent);padding:var(--space);border-radius:var(--radius);background:#0e151b;color:var(--muted);margin-bottom:calc(var(--space)*1.5);}
 .details-list details{background:#0e151b;border:1px solid var(--border);border-radius:var(--radius);padding:var(--space);} 
