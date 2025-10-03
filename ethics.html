@@ -6,8 +6,6 @@
   <meta name="theme-color" content="#0b0f14">
   <title>Social Risk Audit — Ethics</title>
   <link rel="stylesheet" href="./assets/css/styles.css">
-  <link rel="stylesheet" href="./ethics-badge.css">
-  <script defer src="./ethics-badge.js"></script>
 </head>
 <body>
   <header>
@@ -18,7 +16,7 @@
         <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu">☰</button>
         <nav id="site-menu" class="menu" hidden aria-label="Primary">
           <a href="./" data-nav="home">Home</a>
-          <a href="./platform.html#tools-methods" data-nav="tools">Tools and Methods</a>
+          <a href="./tools-methods.html" data-nav="tools">Tools and Methods</a>
           <a href="./platform.html" data-nav="platform">Platform</a>
           <a href="./ethics.html" data-nav="ethics">Ethics</a>
           <a href="./why.html" data-nav="why">Why</a>
@@ -95,7 +93,7 @@
     <div class="wrapper footer-layout">
       <nav class="footer-links" aria-label="Footer">
         <a href="./">Home</a>
-        <a href="./platform.html#tools-methods">Tools and Methods</a>
+        <a href="./tools-methods.html">Tools and Methods</a>
         <a href="./platform.html">Platform</a>
         <a href="./ethics.html" aria-current="page">Ethics</a>
         <a href="./why.html">Why</a>
@@ -108,22 +106,5 @@
   </footer>
   <script src="./assets/js/pledge-gate.js" defer></script>
   <script src="./assets/js/main.js" defer></script>
-  <script>
-    const triggerEthicsBadge = () => {
-      if (typeof window.initEthicsBadge === 'function') {
-        window.initEthicsBadge();
-        return true;
-      }
-      return false;
-    };
-    const scheduleEthicsBadge = () => {
-      if (!triggerEthicsBadge()) {
-        setTimeout(scheduleEthicsBadge, 50);
-      }
-    };
-    scheduleEthicsBadge();
-    document.addEventListener('DOMContentLoaded', triggerEthicsBadge);
-    window.addEventListener('load', triggerEthicsBadge);
-  </script>
 </body>
 </html>

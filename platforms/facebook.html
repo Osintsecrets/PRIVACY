@@ -7,8 +7,6 @@
 <meta content="#0b0f14" name="theme-color"/>
 <title>Social Risk Audit — Facebook</title>
 <link href="../assets/css/styles.css" rel="stylesheet"/>
-<link href="../ethics-badge.css" rel="stylesheet"/>
-<script defer="" src="../ethics-badge.js"></script>
 </head>
 <body>
 <header>
@@ -19,7 +17,7 @@
 <button aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu" class="menu-toggle">☰</button>
 <nav aria-label="Primary" class="menu" hidden="" id="site-menu">
 <a data-nav="home" href="../">Home</a>
-<a data-nav="tools" href="../platform.html#tools-methods">Tools and Methods</a>
+<a data-nav="tools" href="../tools-methods.html">Tools and Methods</a>
 <a data-nav="platform" href="../platform.html">Platform</a>
 <a data-nav="ethics" href="../ethics.html">Ethics</a>
 <a data-nav="why" href="../why.html">Why</a>
@@ -57,27 +55,21 @@
 <p aria-live="polite" class="search-status" id="guide-search-count" role="status"></p>
 <p class="search-empty-message" hidden="" id="guide-search-empty">No actions matched your search. Try different keywords or remove filters.</p>
 <div class="platform-layout">
-<div class="platform-content" id="guide-content">
-<!-- FB_GUIDES_START -->
-<section class="card" id="navigation-primer">
-<h2>Navigation Primer</h2>
-<h3>Mobile (Facebook app)</h3>
-<ul>
-<li><strong>App icon:</strong> Blue square with white "f". Open it and sign in.</li>
-<li><strong>Menu (=):</strong> Three horizontal lines. Usually <strong>bottom-right on iPhone</strong> and <strong>top-right on many Android</strong>. If you don't see =, tap your <strong>profile picture (small circle) at top-right</strong>, then tap <strong>Settings &amp; privacy</strong>.</li>
-<li><strong>Settings &amp; privacy then Settings:</strong> Scroll near the bottom of the Menu screen.</li>
-<li><strong>Accounts Center:</strong> Lives inside <strong>Settings</strong>. It manages <strong>Password &amp; security</strong> and some privacy controls.</li>
-</ul>
-<h3>Desktop (computer browser)</h3>
-<ul>
-<li>Go to <strong>facebook.com</strong> and sign in.</li>
-<li><strong>Profile picture (top-right):</strong> Small circular photo; click it to open the main menu.</li>
-<li><strong>Settings &amp; privacy then Settings:</strong> Found in that dropdown. On some layouts you'll see <strong>Settings</strong> first, then <strong>Accounts Center</strong> in the left sidebar.</li>
-<li><strong>Left sidebar:</strong> Navigation list on the left of the Settings page (e.g., <strong>Privacy</strong>, <strong>Your Facebook information</strong>, etc.).</li>
-</ul>
-<p class="lead">If your layout looks different, use the <strong>Settings search bar</strong> (top of the Settings page) and type the feature name (e.g., "Two-factor", "Public posts").</p>
+<div class="platform-content">
+<div class="category-browser" data-category-browser>
+<section class="card category-browser-grid" aria-label="Browse Facebook privacy categories">
+<h2 class="category-browser-title">Browse by category</h2>
+<p class="lead">Choose a category to see focused, step-by-step privacy actions.</p>
+<div class="category-grid" data-category-grid></div>
 </section>
-
+<section class="card category-browser-detail" data-category-detail hidden aria-live="polite">
+<button type="button" class="button category-back" data-category-back>← All categories</button>
+<h2 class="category-detail-title" data-category-title></h2>
+<p class="category-detail-count" data-category-count></p>
+</section>
+</div>
+<div id="guide-content">
+<!-- FB_GUIDES_START -->
 <h2 class="guide-category-heading" data-category="account-security" id="category-account-security">Account security &amp; login safeguards</h2>
 <section class="card" data-category="account-security" id="guide-change-your-password">
 <h2>Change Your Password</h2>
@@ -3266,10 +3258,10 @@
 
 <!-- FB_GUIDES_END -->
 </div>
+</div>
 <aside aria-label="On this page" class="platform-sidebar"><div class="sidebar-inner"><div class="card toc-card"><h2>On this page</h2>
 <nav aria-label="On this page">
 <ul>
-<li><a href="#navigation-primer">Navigation primer</a></li>
 <li><a href="#category-account-security">Account security &amp; login safeguards</a></li>
 <li><a href="#category-profile-privacy">Profile &amp; timeline privacy</a></li>
 <li><a href="#category-stories-sharing">Stories, Reels &amp; follower controls</a></li>
@@ -3301,7 +3293,7 @@
 <p>Utility-first build — no trackers.</p>
 <nav aria-label="Footer" class="footer-links">
 <a href="../">Home</a>
-<a href="../platform.html#tools-methods">Tools and Methods</a>
+<a href="../tools-methods.html">Tools and Methods</a>
 <a href="../platform.html">Platform</a>
 <a href="../ethics.html">Ethics</a>
 <a href="../why.html">Why</a>
@@ -3314,22 +3306,5 @@
 <script defer="" src="../assets/js/pledge-gate.js"></script>
 <script defer="" src="../assets/js/platform-guides.js"></script>
 <script defer="" src="../assets/js/main.js"></script>
-<script>
-const triggerEthicsBadge = () => {
-  if (typeof window.initEthicsBadge === 'function') {
-    window.initEthicsBadge();
-    return true;
-  }
-  return false;
-};
-const scheduleEthicsBadge = () => {
-  if (!triggerEthicsBadge()) {
-    setTimeout(scheduleEthicsBadge, 50);
-  }
-};
-scheduleEthicsBadge();
-document.addEventListener('DOMContentLoaded', triggerEthicsBadge);
-window.addEventListener('load', triggerEthicsBadge);
-</script>
 </body>
 </html>

@@ -7,7 +7,6 @@
   <link rel="manifest" href="./manifest.json">
   <title>Social Risk Audit — Home</title>
   <link rel="stylesheet" href="./assets/css/styles.css">
-  <link rel="stylesheet" href="./ethics-badge.css">
   <style>
     .ethics-footer-note {
       margin-top: 1rem;
@@ -27,7 +26,6 @@
       font-weight: 600;
     }
   </style>
-  <script defer src="./ethics-badge.js"></script>
 </head>
 <body>
   <noscript>
@@ -41,7 +39,7 @@
         <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu">☰</button>
         <nav id="site-menu" class="menu" hidden aria-label="Primary">
           <a href="./" data-nav="home">Home</a>
-          <a href="./platform.html#tools-methods" data-nav="tools">Tools and Methods</a>
+          <a href="./tools-methods.html" data-nav="tools">Tools and Methods</a>
           <a href="./platform.html" data-nav="platform">Platform</a>
           <a href="./ethics.html" data-nav="ethics">Ethics</a>
           <a href="./why.html" data-nav="why">Why</a>
@@ -64,7 +62,7 @@
         </div>
         <div class="install-layout">
           <div class="install-actions">
-            <button type="button" class="button primary install-trigger" data-install-trigger disabled aria-disabled="true">
+            <button type="button" class="button primary install-trigger" data-install-trigger>
               Add to Home Screen
             </button>
             <p class="install-message" data-install-message role="status" aria-live="polite">
@@ -88,7 +86,7 @@
     <div class="wrapper footer-layout">
       <nav class="footer-links" aria-label="Footer">
         <a href="./">Home</a>
-        <a href="./platform.html#tools-methods">Tools and Methods</a>
+        <a href="./tools-methods.html">Tools and Methods</a>
         <a href="./platform.html">Platform</a>
         <a href="./ethics.html">Ethics</a>
         <a href="./why.html">Why</a>
@@ -112,23 +110,6 @@
         });
       }
     });
-  </script>
-  <script>
-    const triggerEthicsBadge = () => {
-      if (typeof window.initEthicsBadge === 'function') {
-        window.initEthicsBadge();
-        return true;
-      }
-      return false;
-    };
-    const scheduleEthicsBadge = () => {
-      if (!triggerEthicsBadge()) {
-        setTimeout(scheduleEthicsBadge, 50);
-      }
-    };
-    scheduleEthicsBadge();
-    document.addEventListener('DOMContentLoaded', triggerEthicsBadge);
-    window.addEventListener('load', triggerEthicsBadge);
   </script>
 </body>
 </html>
