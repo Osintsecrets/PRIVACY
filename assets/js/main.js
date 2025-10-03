@@ -90,6 +90,7 @@
     else if (normalized === '/ethics.html') current = 'ethics';
     else if (normalized === '/why.html') current = 'why';
     else if (normalized === '/about/' || normalized === '/about') current = 'about';
+    else if (normalized === '/contact/' || normalized === '/contact') current = 'contact';
     else if (normalized === '/disclaimer/' || normalized === '/disclaimer') current = 'disclaimer';
   }
   if (current) document.querySelector(`[data-nav="${current}"]`)?.setAttribute('aria-current','page');
