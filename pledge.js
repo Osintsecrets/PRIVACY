@@ -185,7 +185,7 @@
 
     function completeFlow() {
       persistToken();
-      window.location.href = '/index.html';
+      window.location.href = './index.html';
     }
 
     if (continueButton) {
