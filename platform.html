@@ -6,6 +6,8 @@
   <meta name="theme-color" content="#0b0f14">
   <title>Social Risk Audit — Platforms</title>
   <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./ethics-badge.css">
+  <script defer src="./ethics-badge.js"></script>
 </head>
 <body>
   <header>
@@ -57,5 +59,22 @@
   </footer>
   <script src="./assets/js/pledge-gate.js" defer></script>
   <script src="./assets/js/main.js" defer></script>
+  <script>
+    const triggerEthicsBadge = () => {
+      if (typeof window.initEthicsBadge === 'function') {
+        window.initEthicsBadge();
+        return true;
+      }
+      return false;
+    };
+    const scheduleEthicsBadge = () => {
+      if (!triggerEthicsBadge()) {
+        setTimeout(scheduleEthicsBadge, 50);
+      }
+    };
+    scheduleEthicsBadge();
+    document.addEventListener('DOMContentLoaded', triggerEthicsBadge);
+    window.addEventListener('load', triggerEthicsBadge);
+  </script>
 </body>
 </html>
