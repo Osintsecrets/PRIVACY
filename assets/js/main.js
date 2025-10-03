@@ -23,21 +23,21 @@
   menu.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggle(false); btn.focus(); } });
   menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> toggle(false)));
   // Mark current nav item
-  const map = {
-    '/PRIVACY/': 'home',
-    '/PRIVACY/platform.html': 'platform',
-    '/PRIVACY/platforms/facebook.html': 'platform',
-    '/PRIVACY/platforms/instagram.html': 'platform',
-    '/PRIVACY/platforms/x.html': 'platform',
-    '/PRIVACY/platforms/tiktok.html': 'platform',
-    '/PRIVACY/platforms/whatsapp.html': 'platform',
-    '/PRIVACY/platforms/telegram.html': 'platform',
-    '/PRIVACY/about/': 'about',
-    '/PRIVACY/about/index.html': 'about',
-    '/PRIVACY/ethics.html': 'ethics',
-    '/PRIVACY/why.html': 'why'
-  };
-  const key = Object.keys(map).find(p => location.pathname.endsWith(p.replace('/PRIVACY','')) || location.pathname===p);
-  const sel = key ? `[data-nav="${map[key]}"]` : null;
-  if (sel) document.querySelector(sel)?.setAttribute('aria-current','page');
+  const normalized = location.pathname.replace(/\/index\.html$/, '/');
+  let current = null;
+  const hash = location.hash;
+  if (hash === '#self-audit') current = 'self-audit';
+  else if (hash === '#tools-methods') current = 'tools';
+  if (!current) {
+    if (normalized === '/PRIVACY/' || normalized === '/PRIVACY') current = 'home';
+    else if (normalized === '/PRIVACY/self-audit/' || normalized === '/PRIVACY/self-audit') current = 'self-audit';
+    else if (normalized === '/PRIVACY/tools-and-methods/' || normalized === '/PRIVACY/tools-and-methods') current = 'tools';
+    else if (normalized === '/PRIVACY/platform.html') current = 'platform';
+    else if (normalized.startsWith('/PRIVACY/platforms/')) current = 'platform';
+    else if (normalized === '/PRIVACY/ethics.html') current = 'ethics';
+    else if (normalized === '/PRIVACY/why.html') current = 'why';
+    else if (normalized === '/PRIVACY/about/' || normalized === '/PRIVACY/about') current = 'about';
+    else if (normalized === '/PRIVACY/disclaimer/' || normalized === '/PRIVACY/disclaimer') current = 'disclaimer';
+  }
+  if (current) document.querySelector(`[data-nav="${current}"]`)?.setAttribute('aria-current','page');
 })();
