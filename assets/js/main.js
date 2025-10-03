@@ -35,6 +35,19 @@
   const btn = document.querySelector('.menu-toggle');
   const menu = document.getElementById('site-menu');
   if (!btn || !menu) return;
+  let menuOpen = false;
+  const translate = (key, fallback) => {
+    if (window.I18n && typeof window.I18n.translate === 'function') {
+      const result = window.I18n.translate(key);
+      if (result) return result;
+    }
+    return fallback;
+  };
+  const updateMenuToggleLabel = () => {
+    const labelKey = menuOpen ? 'nav.closeMenu' : 'nav.openMenu';
+    const fallback = menuOpen ? 'Close menu' : 'Open menu';
+    btn.setAttribute('aria-label', translate(labelKey, fallback));
+  };
   const container = btn.closest('.menu-container') || btn.parentElement;
   const outsideClick = (event) => {
     if (!container || container.contains(event.target)) return;
@@ -48,6 +61,8 @@
     const isOpen = open ?? menu.hasAttribute('hidden');
     if (isOpen) menu.removeAttribute('hidden'); else menu.setAttribute('hidden', '');
     btn.setAttribute('aria-expanded', String(isOpen));
+    menuOpen = isOpen;
+    updateMenuToggleLabel();
     manageOutside(isOpen);
     if (isOpen) menu.querySelector('a')?.focus();
   };
@@ -55,6 +70,8 @@
   btn.addEventListener('keydown', (e)=>{ if(e.key==='ArrowDown' && btn.getAttribute('aria-expanded')==='false'){ e.preventDefault(); toggle(true);} });
   menu.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggle(false); btn.focus(); } });
   menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> toggle(false)));
+  updateMenuToggleLabel();
+  document.addEventListener('i18n:change', updateMenuToggleLabel);
   // Mark current nav item
   const brand = document.querySelector('.brand');
   let basePath = '/';

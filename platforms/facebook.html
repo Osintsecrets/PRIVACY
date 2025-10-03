@@ -10,23 +10,32 @@
 </head>
 <body>
 <header>
-<a class="skip" href="#main">Skip to content</a>
-<div class="wrapper header-row">
-<a class="brand" href="../">Social Risk Audit</a>
-<div class="menu-container">
-<button aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu" class="menu-toggle">☰</button>
-<nav aria-label="Primary" class="menu" hidden="" id="site-menu">
-<a data-nav="home" href="../">Home</a>
-<a data-nav="self-audit" href="../index.html#self-audit">Self-audit</a>
-<a data-nav="tools" href="../platform.html#tools-methods">Tools and Methods</a>
-<a data-nav="platform" href="../platform.html">Platform</a>
-<a data-nav="ethics" href="../ethics.html">Ethics</a>
-<a data-nav="why" href="../why.html">Why</a>
-<a data-nav="about" href="../about/">About</a>
-<a data-nav="disclaimer" href="../disclaimer/">Disclaimer</a>
-</nav>
-</div>
-</div>
+  <a class="skip" href="#main" data-i18n="layout.skipToContent">Skip to content</a>
+  <div class="wrapper header-row">
+    <a class="brand" href="../" data-i18n="app.title">Social Risk Audit</a>
+    <div class="header-controls">
+      <div class="menu-container">
+        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" data-i18n-attr-aria-label="nav.openMenu">☰</button>
+        <nav id="site-menu" class="menu" hidden aria-label="Primary" data-i18n-attr-aria-label="nav.menuLabel">
+          <a href="../" data-nav="home" data-i18n="nav.home">Home</a>
+          <a href="../index.html#self-audit" data-nav="self-audit" data-i18n="nav.selfAudit">Self-audit</a>
+          <a href="../platform.html#tools-methods" data-nav="tools" data-i18n="nav.toolsMethods">Tools and Methods</a>
+          <a href="../platform.html" data-nav="platform" data-i18n="nav.platform">Platform</a>
+          <a href="../ethics.html" data-nav="ethics" data-i18n="nav.ethics">Ethics</a>
+          <a href="../why.html" data-nav="why" data-i18n="nav.why">Why</a>
+          <a href="../about/" data-nav="about" data-i18n="nav.about">About</a>
+          <a href="../disclaimer/" data-nav="disclaimer" data-i18n="nav.disclaimer">Disclaimer</a>
+        </nav>
+      </div>
+      <div class="language-switcher">
+        <label class="visually-hidden" for="language-select-header" data-i18n="settings.languageLabel">Choose language</label>
+        <select id="language-select-header" class="language-select" data-i18n-attr-aria-label="settings.languageLabel">
+          <option value="en" data-i18n="settings.languageEnglish">English</option>
+          <option value="he" data-i18n="settings.languageHebrew">עברית</option>
+        </select>
+      </div>
+    </div>
+  </div>
 </header>
 <main class="platform-page" id="main">
 <div class="wrapper platform-wrapper">
@@ -3455,21 +3464,31 @@
 </div>
 </main>
 <footer>
-<div class="wrapper footer-layout">
-<p>Utility-first build — no trackers.</p>
-<nav aria-label="Footer" class="footer-links">
-<a href="../">Home</a>
-<a href="../index.html#self-audit">Self-audit</a>
-<a href="../platform.html#tools-methods">Tools and Methods</a>
-<a href="../platform.html">Platform</a>
-<a href="../ethics.html">Ethics</a>
-<a href="../why.html">Why</a>
-<a href="../about/">About</a>
-<a href="../disclaimer/">Disclaimer</a>
-</nav>
-</div>
+  <div class="wrapper footer-layout">
+    <div class="footer-controls">
+      <nav class="footer-links" aria-label="Footer">
+        <a href="../" data-i18n="nav.home">Home</a>
+        <a href="../index.html#self-audit" data-i18n="nav.selfAudit">Self-audit</a>
+        <a href="../platform.html#tools-methods" data-i18n="nav.toolsMethods">Tools and Methods</a>
+        <a href="../platform.html" data-i18n="nav.platform">Platform</a>
+        <a href="../ethics.html" data-i18n="nav.ethics">Ethics</a>
+        <a href="../why.html" data-i18n="nav.why">Why</a>
+        <a href="../about/" data-i18n="nav.about">About</a>
+        <a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
+      </nav>
+      <div class="language-switcher">
+        <label class="visually-hidden" for="language-select-footer" data-i18n="settings.languageLabel">Choose language</label>
+        <select id="language-select-footer" class="language-select" data-i18n-attr-aria-label="settings.languageLabel">
+          <option value="en" data-i18n="settings.languageEnglish">English</option>
+          <option value="he" data-i18n="settings.languageHebrew">עברית</option>
+        </select>
+      </div>
+    </div>
+    <p data-i18n="footer.utilityNote">Utility-first build — no trackers.</p>
+  </div>
 </footer>
 <script defer="" src="../assets/js/pledge-gate.js"></script>
+<script src="../assets/js/i18n.js" defer></script>
 <script defer="" src="../assets/js/platform-guides.js"></script>
 <script defer="" src="../assets/js/main.js"></script>
 </body>
