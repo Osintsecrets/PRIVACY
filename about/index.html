@@ -17,8 +17,38 @@
   <meta name="twitter:description" content="Discover the story, mission, and guiding principles behind OSINT Secrets and its focus on privacy and protection.">
   <meta name="twitter:image" content="https://osintsecrets.github.io/PRIVACY/icons-s/1.png">
   <link rel="stylesheet" href="/PRIVACY/assets/css/styles.css">
+  <link rel="stylesheet" href="/ethics-badge.css">
+  <style>
+    .ethics-footer-note {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .ethics-footer-note a {
+      color: inherit;
+      font-weight: 600;
+    }
+    .noscript-warning {
+      margin: 0;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      background: #d64045;
+      color: #fff;
+      font-weight: 600;
+    }
+  </style>
+  <script src="/pledge.js"></script>
+  <script>
+    if (!window.hasValidPledge || !window.hasValidPledge()) {
+      window.location.href = '/pledge.html';
+    }
+  </script>
+  <script defer src="/ethics-badge.js"></script>
 </head>
 <body>
+  <noscript>
+    <div class="noscript-warning">This site requires JavaScript to enforce the Ethics Pledge.</div>
+  </noscript>
   <header>
     <a class="skip" href="#main">Skip to content</a>
     <div class="wrapper header-row">
@@ -114,8 +144,16 @@
         <a href="/PRIVACY/disclaimer/">Disclaimer</a>
       </nav>
       <p>© 2025 OSINT Secrets</p>
+      <p class="ethics-footer-note"><a href="/ethics.html">Ethics</a> &amp; <a href="/disclaimer.html">Disclaimer</a> • Last updated 2025-10-03 • Terms v1.0</p>
     </div>
   </footer>
   <script src="/PRIVACY/assets/js/main.js" defer></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.initEthicsBadge) {
+        window.initEthicsBadge();
+      }
+    });
+  </script>
 </body>
 </html>

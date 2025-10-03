@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Access Denied — Ethics Pledge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --bg-gradient: linear-gradient(140deg, #f6f8ff 0%, #f9eaff 45%, #e1f7ff 100%);
+      --text-color: #1f2933;
+      --muted-color: #51606f;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-border: rgba(255, 255, 255, 0.6);
+      --accent: #5b6cff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-gradient: linear-gradient(140deg, #070b14 0%, #141d32 40%, #2a1440 100%);
+        --text-color: #f5f7ff;
+        --muted-color: #a7b3c6;
+        --card-bg: rgba(20, 28, 45, 0.82);
+        --card-border: rgba(142, 161, 255, 0.3);
+        --accent: #9fb4ff;
+      }
+    }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: var(--font-family);
+      background: var(--bg-gradient);
+      color: var(--text-color);
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 540px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 24px 48px rgba(79, 114, 205, 0.18);
+    }
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      letter-spacing: -0.02em;
+    }
+    p {
+      margin: 0 0 1rem;
+      line-height: 1.7;
+      color: var(--muted-color);
+      font-size: 1.05rem;
+    }
+    a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 18px 32px rgba(91, 108, 255, 0.35);
+      margin: 0.5rem;
+    }
+    .links {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .links a {
+      color: inherit;
+      font-weight: 600;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--muted-color);
+    }
+    footer a {
+      color: inherit;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    <div style="background:#d64045;color:#fff;padding:0.75rem 1rem;border-radius:12px;margin-bottom:1.5rem;font-weight:600;">This site requires JavaScript to enforce the Ethics Pledge.</div>
+  </noscript>
+  <main>
+    <h1>Ethics Required</h1>
+    <p>Thanks for taking a moment to reflect. Because you chose not to accept the Ethical Access Pledge, this site is unavailable to you. That’s okay — boundaries protect everyone.</p>
+    <p>If you change your mind, you can review the pledge any time and regain access by agreeing to uphold it.</p>
+    <div>
+      <a class="button" href="/pledge.html">Review the Pledge</a>
+    </div>
+    <div class="links">
+      Learn more: <a href="/ethics.html">Ethics</a> • <a href="/disclaimer.html">Disclaimer</a>
+    </div>
+  </main>
+  <footer>
+    <p><a href="/ethics.html">Ethics</a> &amp; <a href="/disclaimer.html">Disclaimer</a> • Last updated 2025-10-03 • Terms v1.0</p>
+  </footer>
+</body>
+</html>
