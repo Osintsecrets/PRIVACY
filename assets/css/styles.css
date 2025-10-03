@@ -31,26 +31,6 @@ h1{font-size:clamp(28px,6vw,48px);line-height:1.15;margin:0 0 var(--space) 0;}
 .button-group{display:flex;flex-direction:column;gap:12px;}
 @media (min-width:600px){.button-group{flex-direction:row;}}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:var(--space);}
-.audit-grid{display:grid;gap:calc(var(--space)*1.2);}
-@media (min-width:640px){.audit-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}}
-.audit-card{display:flex;flex-direction:column;gap:var(--space);}
-.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space);}
-.card-header h2{margin:0;}
-.card-subhead{margin:4px 0 0;color:var(--muted);font-size:0.95rem;}
-.progress-chip{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:4px 12px;border-radius:999px;border:1px solid var(--border);background:#0f1a22;color:var(--muted);font-size:0.85rem;font-weight:600;white-space:nowrap;}
-.progress-chip.is-complete{background:rgba(0,230,255,0.15);border-color:rgba(0,230,255,0.45);color:var(--accent);}
-.audit-details summary{font-size:1rem;}
-.audit-details[open]>summary{margin-bottom:10px;}
-.checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
-.checklist-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0e151b;transition:border-color 0.2s ease,background 0.2s ease;}
-.checklist-item input{flex:none;width:20px;height:20px;margin-top:2px;border-radius:6px;border:1px solid var(--border);background:#0b0f14;accent-color:#00d0ea;}
-.checklist-item input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-.checklist-item span{flex:1;color:var(--text);font-size:0.95rem;}
-.checklist-item input:checked+span{color:var(--accent);}
-.audit-guides{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;}
-.audit-guides .button{flex:1 1 auto;text-align:center;}
-.audit-card[data-complete="true"]{border-color:rgba(0,230,255,0.45);box-shadow:0 0 0 1px rgba(0,230,255,0.2);}
-.audit-card[data-complete="true"] .card-subhead{color:var(--accent);}
 section+section{margin-top:calc(var(--space)*1.5);}
 .notice{border-left:4px solid var(--accent);padding:var(--space);border-radius:var(--radius);background:#0e151b;color:var(--muted);margin-bottom:calc(var(--space)*1.5);}
 .details-list details{background:#0e151b;border:1px solid var(--border);border-radius:var(--radius);padding:var(--space);} 
