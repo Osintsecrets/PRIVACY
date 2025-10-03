@@ -27,9 +27,18 @@
     "ethics": "Ethics",
     "about": "About",
     "settings": "Settings",
+    "selfAudit": "Self-audit",
+    "toolsMethods": "Tools and Methods",
+    "platform": "Platform",
+    "why": "Why",
+    "contact": "Contact",
+    "disclaimer": "Disclaimer",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "menuLabel": "Navigation"
+  },
+  "layout": {
+    "skipToContent": "Skip to content"
   },
   "manual": {
     "title": "Facebook Privacy Manual",
@@ -143,6 +152,15 @@
     "title": "You are offline",
     "message": "Reconnect to reload the full privacy guide.",
     "cta": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The link you followed doesn’t exist. Return to the starting point to continue.",
+    "cta": "Back to Home"
+  },
+  "footer": {
+    "utilityNote": "Utility-first build — no trackers.",
+    "researchNote": "Built for privacy-first research and education."
   },
   "pages": {
     "ethics": {

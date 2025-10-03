@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CORE_CACHE = `sra-core-${CACHE_VERSION}`;
 const OFFLINE_URL = '/PRIVACY/offline.html';
 
@@ -8,6 +8,9 @@ const PRECACHE_URLS = [
   '/PRIVACY/offline.html',
   '/PRIVACY/assets/css/styles.css',
   '/PRIVACY/assets/js/main.js',
+  '/PRIVACY/assets/js/i18n.js',
+  '/PRIVACY/i18n/en.json',
+  '/PRIVACY/i18n/he.json',
 ];
 
 self.addEventListener('install', (event) => {

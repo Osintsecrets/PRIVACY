@@ -13,9 +13,10 @@
 </head>
 <body>
   <main class="card" aria-labelledby="offline-title">
-    <h1 id="offline-title">You are offline</h1>
-    <p class="lead">Reconnect to load the latest privacy checklists.</p>
-    <button type="button" class="button primary" onclick="window.location.reload()">Try again</button>
+    <h1 id="offline-title" data-i18n="offline.title">You are offline</h1>
+    <p class="lead" data-i18n="offline.message">Reconnect to load the latest privacy checklists.</p>
+    <button type="button" class="button primary" onclick="window.location.reload()" data-i18n="offline.cta">Try again</button>
   </main>
+  <script src="./assets/js/i18n.js" defer></script>
 </body>
 </html>
