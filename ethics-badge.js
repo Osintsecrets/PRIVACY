@@ -1,10 +1,36 @@
 (function () {
+  function computeBasePrefix(customBase) {
+    if (typeof window === 'undefined') return customBase || './';
+    if (customBase) return customBase;
+    const pathname = window.location.pathname || '';
+    const anchor = '/PRIVACY/';
+    const anchorIndex = pathname.indexOf(anchor);
+    if (anchorIndex === -1) {
+      return './';
+    }
+    const afterAnchor = pathname.slice(anchorIndex + anchor.length);
+    if (!afterAnchor) {
+      return './';
+    }
+    const segments = afterAnchor.split('/').filter(Boolean);
+    const isDirectory = pathname.endsWith('/');
+    const depth = Math.max(0, segments.length - (isDirectory ? 0 : 1));
+    if (depth === 0) {
+      return './';
+    }
+    return '../'.repeat(depth);
+  }
+
   function initEthicsBadge(options = {}) {
     if (typeof document === 'undefined') return;
     if (document.querySelector('.ethics-badge-container')) return;
 
     const target = options.containerSelector ? document.querySelector(options.containerSelector) : document.body;
     if (!target) return;
+
+    const prefix = computeBasePrefix(options.basePath);
+    const ethicsHref = `${prefix}ethics.html`;
+    const disclaimerHref = `${prefix}disclaimer/`;
 
     const container = document.createElement('div');
     container.className = 'ethics-badge-container';
@@ -37,7 +63,7 @@
         <li>Use power to protect</li>
       </ul>
       <div class="ethics-links">
-        <a href="/ethics.html">Ethics Policy</a> · <a href="/disclaimer.html">Disclaimer</a>
+        <a href="${ethicsHref}">Ethics Policy</a> · <a href="${disclaimerHref}">Disclaimer</a>
       </div>
       <div class="ethics-popover-footer">
         <span>Terms v1.0</span>
