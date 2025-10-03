@@ -92,4 +92,59 @@
     else if (normalized === '/disclaimer/' || normalized === '/disclaimer') current = 'disclaimer';
   }
   if (current) document.querySelector(`[data-nav="${current}"]`)?.setAttribute('aria-current','page');
+
+  let deferredInstallPrompt = null;
+  const installTrigger = document.querySelector('[data-install-trigger]');
+  const installMessage = document.querySelector('[data-install-message]');
+
+  const setInstallMessage = (text) => {
+    if (installMessage) installMessage.textContent = text;
+  };
+
+  const setTriggerState = (enabled) => {
+    if (!installTrigger) return;
+    if (enabled) {
+      installTrigger.removeAttribute('disabled');
+      installTrigger.setAttribute('aria-disabled', 'false');
+    } else {
+      installTrigger.setAttribute('disabled', '');
+      installTrigger.setAttribute('aria-disabled', 'true');
+    }
+  };
+
+  setTriggerState(false);
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    setTriggerState(true);
+    setInstallMessage('Ready to install. Choose “Add to Home Screen” to continue.');
+  });
+
+  installTrigger?.addEventListener('click', async () => {
+    if (!deferredInstallPrompt) {
+      setInstallMessage('Your browser will surface the install option when it becomes available.');
+      return;
+    }
+    try {
+      deferredInstallPrompt.prompt();
+      const choice = await deferredInstallPrompt.userChoice;
+      if (choice?.outcome === 'accepted') {
+        setInstallMessage('Installation requested. Confirm the prompt from your browser to finish.');
+      } else {
+        setInstallMessage('Install dismissed. You can retry from your browser menu when ready.');
+      }
+    } catch (error) {
+      console.error('Install prompt failed:', error);
+      setInstallMessage('Something went wrong launching the install prompt. Please try again later.');
+    } finally {
+      deferredInstallPrompt = null;
+      setTriggerState(false);
+    }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    setInstallMessage('Installed! Look for the Social Risk Audit icon on your device.');
+    setTriggerState(false);
+  });
 })();
