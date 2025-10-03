@@ -11,20 +11,76 @@
   }
 
   const guideSections = Array.from(document.querySelectorAll('section.card[id^="guide-"]'));
+  const guideIndexNav = document.getElementById('guide-index');
+  const categoryHeadings = new Map();
+  document.querySelectorAll('.guide-category-heading[data-category]').forEach((heading)=>{
+    const category = heading.dataset.category;
+    if (!category) return;
+    categoryHeadings.set(category, heading);
+  });
+
+  const categories = new Map();
+  guideSections.forEach((section)=>{
+    const category = section.dataset.category || 'uncategorized';
+    if (!categories.has(category)) {
+      const heading = categoryHeadings.get(category) || null;
+      const label = heading ? heading.textContent.trim() : category;
+      categories.set(category, {
+        key: category,
+        heading,
+        label,
+        items: [],
+        navDetails: null,
+        navList: null
+      });
+    }
+    categories.get(category).items.push(section);
+  });
+
+  if (guideIndexNav) {
+    guideIndexNav.innerHTML = '';
+    categories.forEach((category)=>{
+      const details = document.createElement('details');
+      details.classList.add('guide-category');
+      details.dataset.category = category.key;
+      details.open = true;
+
+      const summary = document.createElement('summary');
+      summary.textContent = category.label;
+      details.appendChild(summary);
+
+      const list = document.createElement('ol');
+      list.classList.add('guide-category-list');
+      details.appendChild(list);
+
+      guideIndexNav.appendChild(details);
+      category.navDetails = details;
+      category.navList = list;
+    });
+  }
+
   const navLinks = new Map();
   const navItems = new Map();
-  document.querySelectorAll('#guide-index ol > li:not(.guide-range-divider) > a').forEach((link)=>{
-    const id = link.getAttribute('href')?.slice(1);
-    if (!id) return;
-    navLinks.set(id, link);
-    navItems.set(id, link.parentElement);
-  });
 
   const guideData = guideSections.map((section)=>{
     const id = section.id;
     const titleEl = section.querySelector('h2');
-    const navLink = navLinks.get(id) || null;
-    const navItem = navItems.get(id) || null;
+    const category = section.dataset.category || 'uncategorized';
+    const categoryData = categories.get(category) || null;
+    let navLink = null;
+    let navItem = null;
+    if (categoryData && categoryData.navList) {
+      navItem = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      const titleHtml = titleEl ? titleEl.innerHTML : id;
+      link.innerHTML = titleHtml;
+      navItem.appendChild(link);
+      categoryData.navList.appendChild(navItem);
+      navLink = link;
+      navLinks.set(id, link);
+      navItems.set(id, navItem);
+    }
     const text = (titleEl ? titleEl.textContent : '') + ' ' + section.textContent;
     return {
       id,
@@ -32,32 +88,14 @@
       titleEl,
       navLink,
       navItem,
+      category,
       searchText: text.toLowerCase(),
       originalTitle: titleEl ? titleEl.innerHTML : '',
       originalNav: navLink ? navLink.innerHTML : ''
     };
   });
 
-  const rangeHeadings = Array.from(document.querySelectorAll('.guide-range-heading'));
-  const navDividers = Array.from(document.querySelectorAll('#guide-index .guide-range-divider'));
-  const groups = rangeHeadings.map((heading, index)=>{
-    const items = [];
-    let next = heading.nextElementSibling;
-    while (next) {
-      if (next.classList && next.classList.contains('guide-range-heading')) {
-        break;
-      }
-      if (next.matches && next.matches('section.card[id^="guide-"]')) {
-        items.push(next);
-      }
-      next = next.nextElementSibling;
-    }
-    return {
-      heading,
-      items,
-      divider: navDividers[index] || null
-    };
-  });
+  const categoryDataList = Array.from(categories.values());
 
   const totalGuides = guideData.length;
 
@@ -104,13 +142,18 @@
       }
     });
 
-    groups.forEach((group)=>{
-      const anyVisible = group.items.some((item)=>!item.classList.contains('is-hidden'));
-      if (group.heading) {
-        group.heading.classList.toggle('is-hidden', !anyVisible);
+    categoryDataList.forEach((category)=>{
+      const anyVisible = category.items.some((item)=>!item.classList.contains('is-hidden'));
+      if (category.heading) {
+        category.heading.classList.toggle('is-hidden', !anyVisible);
       }
-      if (group.divider) {
-        group.divider.classList.toggle('is-hidden', !anyVisible);
+      if (category.navDetails) {
+        category.navDetails.classList.toggle('is-hidden', !anyVisible);
+        if (!anyVisible) {
+          category.navDetails.open = false;
+        } else if (query) {
+          category.navDetails.open = true;
+        }
       }
     });
 
