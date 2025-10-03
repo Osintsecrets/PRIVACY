@@ -43,6 +43,9 @@ footer .wrapper{padding-top:var(--space);padding-bottom:var(--space);font-size:0
 .footer-links{display:flex;flex-wrap:wrap;gap:12px;}
 .footer-links a{color:var(--muted);text-decoration:none;}
 .footer-links a:hover{text-decoration:underline;}
+.ethics-footer-note{margin:1rem 0 0 0;font-size:0.85rem;color:rgba(255,255,255,0.7);}
+.ethics-footer-note a{color:inherit;font-weight:600;text-decoration:none;}
+.ethics-footer-note a:hover{text-decoration:underline;}
 :root[data-rm='on'] *,[data-rm='on'] *{transition:none!important;animation:none!important;}
 .lead{ color:var(--muted); margin-bottom: var(--space); }
 .grid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space); }
