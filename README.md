@@ -4,7 +4,7 @@ A stripped-back, utility-first privacy guide for the Platform checklist with eth
 
 ## Pages
 
-- **Home** – mission statement, overview, and quick links to core content.
+- **Home** – mission statement, overview, and interactive self-audit checklists.
 - **Platform** – expandable checklists for essential privacy tasks.
 - **Ethics** – principles that guide how the material should be used.
 - **Why** – rationale for caring about privacy in plain language.

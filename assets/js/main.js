@@ -79,11 +79,9 @@
   if (!normalized.startsWith('/')) normalized = normalized ? `/${normalized}` : '/';
   let current = null;
   const hash = location.hash;
-  if (hash === '#self-audit') current = 'self-audit';
-  else if (hash === '#tools-methods') current = 'tools';
+  if (hash === '#tools-methods') current = 'tools';
   if (!current) {
     if (normalized === '/' || normalized === '') current = 'home';
-    else if (normalized === '/self-audit/' || normalized === '/self-audit') current = 'self-audit';
     else if (normalized === '/tools-and-methods/' || normalized === '/tools-and-methods') current = 'tools';
     else if (normalized === '/platform.html') current = 'platform';
     else if (normalized.startsWith('/platforms/')) current = 'platform';
