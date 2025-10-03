@@ -19,7 +19,9 @@ A stripped-back, utility-first privacy guide for the Platform checklist with eth
 ├── why.html                # Why privacy matters
 ├── assets/
 │   ├── css/styles.css      # Single utility-first stylesheet
-│   └── js/main.js          # Progressive enhancement for navigation state
+│   └── js/
+│       ├── main.js         # Progressive enhancement for navigation state
+│       └── pledge-gate.js  # Shared pledge enforcement redirect
 ├── manifest.json           # Minimal PWA metadata (dormant)
 ├── sw.js                   # Offline cache shell (not registered by default)
 └── offline.html            # Lightweight offline notice
@@ -41,6 +43,10 @@ Then open [http://localhost:8000/index.html](http://localhost:8000/index.html). 
 - System font stack, high-contrast palette, and consistent focus outlines.
 - Skip link and semantic landmarks on every page.
 - No analytics, no external fonts, no third-party network requests.
+
+## Ethics pledge gate
+
+All public-facing pages load a shared script that checks for a valid pledge token (`ETHICS_PLEDGE_TOKEN`) and matching `TERMS_VERSION` entry in `sessionStorage`. If a visitor has not completed the pledge—or an older pledge version is detected—they are redirected to `./pledge.html` on page load to review and accept the current terms before continuing.
 
 ## Deployment
 

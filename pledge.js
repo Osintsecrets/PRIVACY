@@ -1,6 +1,7 @@
 (function () {
   const TERMS_VERSION = 'v1.0 (2025-10-03)';
   const TOKEN_KEY = 'ETHICS_PLEDGE_TOKEN';
+  const TERMS_VERSION_KEY = 'TERMS_VERSION';
   const CONFIRM_PHRASE = 'I AGREE TO USE THIS ETHICALLY';
 
   function parseStoredToken(raw) {
@@ -17,7 +18,14 @@
     if (typeof window === 'undefined') return false;
     try {
       const stored = parseStoredToken(sessionStorage.getItem(TOKEN_KEY));
-      return Boolean(stored && stored.version === TERMS_VERSION && typeof stored.token === 'string' && stored.token.length > 0);
+      if (!stored || stored.version !== TERMS_VERSION) {
+        return false;
+      }
+      const storedVersion = sessionStorage.getItem(TERMS_VERSION_KEY);
+      if (storedVersion !== TERMS_VERSION) {
+        return false;
+      }
+      return Boolean(typeof stored.token === 'string' && stored.token.length > 0);
     } catch (error) {
       console.warn('Unable to read pledge token', error);
       return false;
@@ -26,7 +34,7 @@
 
   if (typeof window !== 'undefined') {
     window.hasValidPledge = hasValidPledge;
-    window.ETHICS_PLEDGE = Object.freeze({ TERMS_VERSION, TOKEN_KEY, hasValidPledge });
+    window.ETHICS_PLEDGE = Object.freeze({ TERMS_VERSION, TOKEN_KEY, TERMS_VERSION_KEY, hasValidPledge });
   }
 
   function ready(callback) {
@@ -178,6 +186,7 @@
       const payload = { token: generateToken(), version: TERMS_VERSION, createdAt: new Date().toISOString() };
       try {
         sessionStorage.setItem(TOKEN_KEY, JSON.stringify(payload));
+        sessionStorage.setItem(TERMS_VERSION_KEY, TERMS_VERSION);
       } catch (error) {
         console.warn('Unable to store pledge token', error);
       }
