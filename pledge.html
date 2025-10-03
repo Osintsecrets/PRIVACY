@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ethical Access Gate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/pledge.css">
+  <link rel="stylesheet" href="/ethics-badge.css">
+  <script src="/pledge.js"></script>
+  <script defer src="/ethics-badge.js"></script>
+</head>
+<body data-pledge-page>
+  <noscript>
+    <div class="noscript-message">This site requires JavaScript to enforce the Ethics Pledge. Please enable JavaScript to continue.</div>
+  </noscript>
+  <main class="pledge-shell" role="main">
+    <section class="pledge-card" aria-live="polite">
+      <header class="pledge-header">
+        <h1 id="pane-title">Ethical Access Gate</h1>
+        <p class="intro-tagline">“This project exists to educate, protect, and empower — never to harm. Before you enter, please review and accept our ethical terms. The internet is already dark enough. Don’t make it darker.”</p>
+      </header>
+
+      <div class="pane" data-step="intro" aria-labelledby="pane-title" aria-describedby="intro-description">
+        <div id="intro-description" class="intro-text">Explore responsibly. Learn why our ethics matter on the <a href="/ethics.html">Ethics page</a> and review the <a href="/disclaimer.html">Disclaimer</a> before proceeding.</div>
+        <article class="pledge-scroll-card" aria-label="Pledge text" tabindex="0" data-scrollable>
+          <div class="scroll-progress" aria-hidden="true">
+            <div class="scroll-progress-bar" style="width:0%"></div>
+          </div>
+          <div class="countdown-chip" role="status" aria-live="polite"><span data-countdown>--</span> seconds remaining</div>
+          <div class="pledge-body">
+            <p>Ethical access means honoring the people, communities, and systems that make knowledge possible. You are about to enter a space that shares insights, research, and tools meant to uplift defenders and caretakers of privacy. With every technique you learn here comes the responsibility to wield it with empathy and restraint. The safeguards that protect one person should never become the weapons that dismantle another.</p>
+            <p>As you read, commit to pausing before you act. Ask whether each use respects consent, legality, and human dignity. Information can illuminate, but it can also expose. Our promise is to teach with integrity; your promise is to apply this learning with the same care. When in doubt, choose transparency, compassion, and protection.</p>
+            <p>This pledge is not a formality. It is a living ethic that keeps this project aligned with its purpose. If you cannot agree to uphold these values, you must exit now. If you can, take the time to read, reflect, and confirm. Together we can build a safer, kinder digital world.</p>
+          </div>
+        </article>
+        <p class="helper-text" data-scroll-hint>Scroll to the end and allow the timer to complete to enable the Continue button.</p>
+        <div class="pane-actions">
+          <button class="btn primary" data-action="to-checkboxes" disabled>
+            Continue
+          </button>
+          <a href="/access-denied.html" class="link-negative">No, I don’t agree</a>
+        </div>
+      </div>
+
+      <div class="pane" data-step="checkboxes" aria-labelledby="checkboxes-title" hidden>
+        <h2 id="checkboxes-title">Confirm your commitments</h2>
+        <form class="pledge-form" aria-describedby="checkboxes-note">
+          <p id="checkboxes-note">Please review each statement and acknowledge every one. Your choices are not tracked beyond this session.</p>
+          <ul class="checkbox-list">
+            <li>
+              <label class="checkbox-option">
+                <input type="checkbox" name="pledge" value="guidelines">
+                <span>I agree to follow the ethical guidelines described on this website.</span>
+              </label>
+            </li>
+            <li>
+              <label class="checkbox-option">
+                <input type="checkbox" name="pledge" value="malicious">
+                <span>I agree that I will not use any information from this site for malicious purposes.</span>
+              </label>
+            </li>
+            <li>
+              <label class="checkbox-option">
+                <input type="checkbox" name="pledge" value="doxxing">
+                <span>I agree that I will not use any information from this site to stalk, doxx, harass, scam, or spam anyone.</span>
+              </label>
+            </li>
+            <li>
+              <label class="checkbox-option">
+                <input type="checkbox" name="pledge" value="laws">
+                <span>I agree to use any tools, techniques, or methods discussed here lawfully and in compliance with my local laws.</span>
+              </label>
+            </li>
+            <li>
+              <label class="checkbox-option">
+                <input type="checkbox" name="pledge" value="responsibility">
+                <span>I am solely responsible for my actions and their consequences.</span>
+              </label>
+            </li>
+          </ul>
+        </form>
+        <div class="pane-actions">
+          <button class="btn ghost" data-action="back-to-intro">Back</button>
+          <button class="btn primary" data-action="to-confirm" aria-describedby="checkbox-tooltip">Next</button>
+          <span id="checkbox-tooltip" class="tooltip" role="status" aria-live="polite" hidden>You’ll be able to continue after checking every box.</span>
+        </div>
+      </div>
+
+      <div class="pane" data-step="confirm" aria-labelledby="confirm-title" hidden>
+        <h2 id="confirm-title">Final confirmation</h2>
+        <p>Type the following phrase exactly to confirm your understanding:</p>
+        <label class="confirm-label" for="confirm-input">I AGREE TO USE THIS ETHICALLY</label>
+        <input id="confirm-input" type="text" autocomplete="off" spellcheck="false" data-autofocus aria-describedby="confirm-helper">
+        <p id="confirm-helper" class="helper-text">Type the phrase exactly as shown above. Take your time — this isn’t a test, it’s a mindful pause.</p>
+        <p class="legal-line">“By continuing, you make a legally binding statement that you understand and agree to the above. If you do not agree, do not use this website.”</p>
+        <div class="pane-actions">
+          <button class="btn ghost" data-action="back-to-checkboxes">Back</button>
+          <button class="btn primary" data-action="complete" disabled>Create Session &amp; Enter Site</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p><a href="/ethics.html">Ethics</a> &amp; <a href="/disclaimer.html">Disclaimer</a> • Last updated 2025-10-03 • Terms v1.0</p>
+  </footer>
+</body>
+</html>
