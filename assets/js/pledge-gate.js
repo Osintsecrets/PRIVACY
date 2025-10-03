@@ -3,6 +3,7 @@
   const TERMS_VERSION_KEY = 'TERMS_VERSION';
   const TERMS_VERSION = 'v1.0 (2025-10-03)';
   const EXEMPT_FILES = new Set(['pledge.html', 'access-denied.html']);
+  const REDIRECT_KEY = 'ETHICS_PLEDGE_REDIRECT_URL';
 
   function parseToken(raw) {
     if (!raw) return null;
@@ -104,6 +105,11 @@
     if (hasValidPledge()) return;
     const redirectPath = computeRedirectPath();
     try {
+      try {
+        sessionStorage.setItem(REDIRECT_KEY, window.location.href);
+      } catch (storageError) {
+        console.warn('Unable to store requested URL for pledge redirect', storageError);
+      }
       window.location.replace(redirectPath);
     } catch (error) {
       window.location.href = redirectPath;

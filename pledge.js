@@ -3,6 +3,7 @@
   const TOKEN_KEY = 'ETHICS_PLEDGE_TOKEN';
   const TERMS_VERSION_KEY = 'TERMS_VERSION';
   const CONFIRM_PHRASE = 'I AGREE TO USE THIS ETHICALLY';
+  const REDIRECT_KEY = 'ETHICS_PLEDGE_REDIRECT_URL';
 
   function parseStoredToken(raw) {
     if (!raw) return null;
@@ -192,8 +193,26 @@
       }
     }
 
+    function consumeStoredRedirectUrl() {
+      try {
+        const stored = sessionStorage.getItem(REDIRECT_KEY);
+        if (stored) {
+          sessionStorage.removeItem(REDIRECT_KEY);
+        }
+        return stored;
+      } catch (error) {
+        console.warn('Unable to read stored redirect URL', error);
+        return null;
+      }
+    }
+
     function completeFlow() {
       persistToken();
+      const redirectUrl = consumeStoredRedirectUrl();
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+        return;
+      }
       window.location.href = './index.html';
     }
 
