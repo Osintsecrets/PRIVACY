@@ -1,0 +1,14 @@
+{
+  "name": "social-risk-audit",
+  "version": "1.0.0",
+  "description": "Static Social Risk Audit site with automated responsiveness audits",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "test": "playwright test",
+    "test:audit": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}
