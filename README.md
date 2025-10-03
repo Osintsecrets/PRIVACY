@@ -44,6 +44,17 @@ To verify the offline shell:
 2. Stop the local server or toggle the browser's network inspector to “offline”.
 3. Reload any page—navigation should fall back to `offline.html`.
 
+## Automated audits
+
+Run the Playwright-powered audit suite to exercise every public page at desktop and mobile breakpoints, confirm viewport/responsive metadata, and verify the navigation menu behaves on touch layouts:
+
+```bash
+npm install
+npm test
+```
+
+> The tests start a temporary `python -m http.server` instance and rely on Chromium. If the bundled browser download is blocked on your network, manually provide a Chromium binary and re-run `npm test`.
+
 ## Accessibility & privacy
 
 - System font stack, high-contrast palette, and consistent focus outlines.

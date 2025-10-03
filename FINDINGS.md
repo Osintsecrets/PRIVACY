@@ -25,3 +25,4 @@
 | Links respect `/PRIVACY/` base path | ✅ | Navigation and buttons use absolute prefixed URLs. |
 | No external fonts or trackers | ✅ | System font stack defined; no third-party scripts. |
 | Mobile tap targets ≥44px | ✅ | Buttons and nav links enforce min-height and padding. |
+| Automated responsiveness audit | ✅ | Playwright tests cover desktop/mobile viewports, page load errors, and mobile nav toggling. |
