@@ -34,3 +34,9 @@
 | Facebook page tasks expandable without JavaScript | ✅ |
 | Contrast meets WCAG AA with off-white on dark background | ✅ |
 | No third-party network requests detected | ✅ |
+
+## 2025-10-04 Layering Spot Check
+- Verified all public routes resolve with HTTP 200 responses from the static server.
+- Ensured skip link now renders above sticky header content when focused (`z-index: 40`).
+- Raised global/about back-to-top controls to `z-index: 60` to keep them above sticky nav and modal overlays.
+- Confirmed disclaimer modal retains `z-index: 9999` and focus trap behavior; no changes required.
