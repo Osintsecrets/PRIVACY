@@ -30,7 +30,7 @@
     <div class="wrapper header-row" role="navigation" aria-label="Primary">
       <a class="brand" href="./" data-i18n="site.brand">Social Risk Audit</a>
       <div class="menu-container">
-        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" data-i18n="nav.openMenu" data-i18n-attr="aria-label" aria-label="Open menu">☰</button>
+        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰</button>
         <nav id="site-menu" class="menu" hidden aria-label="Primary">
           <a href="./" aria-current="page" data-nav="home" data-i18n="nav.home">Home</a>
           <a href="./platform.html" data-nav="platform" data-i18n="nav.platform">Platform</a>
@@ -47,43 +47,56 @@
   <main id="main" class="wrapper">
     <section class="toolbar">
       <select id="lang" class="select" aria-label="Language">
-        <option value="en" data-i18n="settings.languageEnglish">English</option>
-        <option value="he" data-i18n="settings.languageHebrew">עברית</option>
+        <option value="en">English</option>
+        <option value="he">עברית</option>
       </select>
-      <button id="installTrigger" class="button" type="button" data-i18n="settings.install">Install App</button>
-      <button id="iosHowTo" class="button" type="button" data-i18n="homePage.iosButton">Add on iPhone</button>
-      <button class="pill" id="pledgeStatus" type="button" aria-live="polite" aria-haspopup="dialog"></button>
+      <button id="installTrigger" class="button" type="button" data-i18n="ui.installApp">Install App</button>
+      <button id="iosHowTo" class="button" type="button" data-i18n="ui.iosAdd">Add on iPhone</button>
+      <button class="pill" id="pledgeStatus" type="button" aria-live="polite" aria-haspopup="dialog">Pledge: Pending</button>
     </section>
 
     <section class="hero">
-      <h1 data-i18n="homePage.heroTitle">Be the master of your privacy.</h1>
-      <p class="lede" data-i18n="homePage.heroLede">A fast, ethics-first privacy almanac. Learn why privacy matters and take control with clear, step-by-step actions for the platforms you use.</p>
+      <h1 data-i18n="home.h1">Be the master of your privacy.</h1>
+      <p class="lede" data-i18n="home.lede">A fast, ethics-first privacy almanac. Learn why privacy matters and take control with clear, step-by-step actions for the platforms you use.</p>
       <div class="cta-grid">
         <a class="cta" href="./platform.html">
-          <span class="pill" data-i18n="homePage.ctaStartLabel">Start here</span>
-          <h2 data-i18n="homePage.ctaFixTitle">Fix my privacy on social apps</h2>
-          <p data-i18n="homePage.ctaFixDescription">Facebook today, more platforms next. Clear, screenshot-friendly steps.</p>
+          <span class="pill" data-i18n="home.cta.platform.tag">Start here</span>
+          <h2 data-i18n="home.cta.platform.title">Fix my privacy on social apps</h2>
+          <p data-i18n="home.cta.platform.body">Facebook today, more platforms next. Clear, screenshot-friendly steps.</p>
         </a>
         <a class="cta" href="./why.html">
-          <span class="pill" data-i18n="homePage.ctaWhyLabel">Mindset</span>
-          <h2 data-i18n="homePage.ctaWhyTitle">Why this matters (and to whom)</h2>
-          <p data-i18n="homePage.ctaWhyDescription">Short, compelling reasons to act—without fear or jargon.</p>
+          <span class="pill" data-i18n="home.cta.why.tag">Mindset</span>
+          <h2 data-i18n="home.cta.why.title">Why this matters (and to whom)</h2>
+          <p data-i18n="home.cta.why.body">Short, compelling reasons to act—without fear or jargon.</p>
         </a>
         <a class="cta" href="./ethics.html">
-          <span class="pill" data-i18n="homePage.ctaEthicsLabel">Ethics</span>
-          <h2 data-i18n="homePage.ctaEthicsTitle">Our line: protect, don’t expose</h2>
-          <p data-i18n="homePage.ctaEthicsDescription">Consent, dignity, and responsibility—no doxxing, no vigilantism.</p>
+          <span class="pill" data-i18n="home.cta.ethics.tag">Ethics</span>
+          <h2 data-i18n="home.cta.ethics.title">Our line: protect, don’t expose</h2>
+          <p data-i18n="home.cta.ethics.body">Consent, dignity, and responsibility—no doxxing, no vigilantism.</p>
         </a>
       </div>
+      <p class="lede" data-i18n="home.notice">You choose how deep to go. This site helps you take control—at your pace.</p>
     </section>
   </main>
 
   <dialog id="pledgeModal">
     <article>
-      <h2 data-i18n="pledge.modalTitle">Ethics Pledge</h2>
-      <p data-i18n="pledge.modalBody">Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism.</p>
+      <h2 data-i18n="pledge.title">Ethics Pledge</h2>
+      <p data-i18n="pledge.body">Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism. Proceed only if you agree.</p>
       <button id="pledgeAgree" type="button" data-i18n="pledge.agree">I agree</button>
-      <button type="button" id="pledgeRead" data-i18n="pledge.readEthics">Read ethics</button>
+      <button type="button" id="pledgeRead" data-i18n="pledge.read">Read ethics</button>
+    </article>
+  </dialog>
+
+  <dialog id="iosDialog" aria-labelledby="iosTitle">
+    <article>
+      <h2 id="iosTitle" data-i18n="ios.title">Add to Home Screen (iPhone)</h2>
+      <ol>
+        <li data-i18n="ios.step1">Open in Safari.</li>
+        <li data-i18n="ios.step2">Tap the Share icon.</li>
+        <li data-i18n="ios.step3">Choose ‘Add to Home Screen’.</li>
+      </ol>
+      <button id="iosClose" type="button" data-i18n="ui.close">Close</button>
     </article>
   </dialog>
 

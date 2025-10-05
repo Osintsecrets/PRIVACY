@@ -42,21 +42,22 @@
   <noscript>
     <div class="noscript-warning">This site requires JavaScript to enforce the Ethics Pledge.</div>
   </noscript>
+  <a class="skip" href="#main" data-i18n="site.skip">Skip to content</a>
+  <div id="ui-overlay" aria-hidden="true"></div>
   <header>
-    <a class="skip" href="#main">Skip to content</a>
     <div class="wrapper header-row">
-      <a class="brand" href="../">Social Risk Audit</a>
+      <a class="brand" href="../" data-i18n="site.brand">Social Risk Audit</a>
       <div class="menu-container">
-        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu">☰</button>
+        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰</button>
         <nav id="site-menu" class="menu" hidden aria-label="Primary">
-          <a href="../" data-nav="home">Home</a>
+          <a href="../" data-nav="home" data-i18n="nav.home">Home</a>
           <a href="../tools-methods.html" data-nav="tools">Tools and Methods</a>
-          <a href="../platform.html" data-nav="platform">Platform</a>
-          <a href="../ethics.html" data-nav="ethics">Ethics</a>
-          <a href="../why.html" data-nav="why">Why</a>
-          <a href="./" data-nav="about">About</a>
-          <a href="../contact/" data-nav="contact">Contact</a>
-          <a href="../disclaimer/" data-nav="disclaimer">Disclaimer</a>
+          <a href="../platform.html" data-nav="platform" data-i18n="nav.platform">Platform</a>
+          <a href="../ethics.html" data-nav="ethics" data-i18n="nav.ethics">Ethics</a>
+          <a href="../why.html" data-nav="why" data-i18n="nav.why">Why</a>
+          <a href="./" data-nav="about" data-i18n="nav.about">About</a>
+          <a href="../contact/" data-nav="contact" data-i18n="nav.contact">Contact</a>
+          <a href="../disclaimer/" data-nav="disclaimer" data-i18n="nav.disclaimer">Disclaimer</a>
         </nav>
       </div>
     </div>
@@ -132,22 +133,23 @@
 
   <button id="backToTop" class="back-to-top" aria-label="Back to top" hidden>↑</button>
 
-  <footer>
+  <footer id="site-footer">
     <div class="wrapper footer-layout">
       <nav class="footer-links" aria-label="Footer">
-        <a href="../">Home</a>
+        <a href="../" data-i18n="nav.home">Home</a>
         <a href="../tools-methods.html">Tools and Methods</a>
-        <a href="../platform.html">Platform</a>
-        <a href="../ethics.html">Ethics</a>
-        <a href="../why.html">Why</a>
-        <a href="./" aria-current="page">About</a>
-        <a href="../contact/">Contact</a>
-        <a href="../disclaimer/">Disclaimer</a>
+        <a href="../platform.html" data-i18n="nav.platform">Platform</a>
+        <a href="../ethics.html" data-i18n="nav.ethics">Ethics</a>
+        <a href="../why.html" data-i18n="nav.why">Why</a>
+        <a href="./" aria-current="page" data-i18n="nav.about">About</a>
+        <a href="../contact/" data-i18n="nav.contact">Contact</a>
+        <a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
       </nav>
       <p>© 2025 OSINT Secrets</p>
-      <p class="ethics-footer-note"><a href="../ethics.html">Ethics</a> &amp; <a href="../disclaimer/">Disclaimer</a> • Last updated 2025-10-03 • Terms v1.0</p>
+      <p class="ethics-footer-note"><a href="../ethics.html" data-i18n="nav.ethics">Ethics</a> &amp; <a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a> • <span data-i18n="footer.updated">Last updated</span> 2025-10-03 • Terms v1.0</p>
     </div>
   </footer>
+  <script src="../assets/js/i18n.js" defer></script>
   <script src="../assets/js/pledge-gate.js" defer></script>
   <script defer src="../assets/js/about.js"></script>
   <script src="../assets/js/main.js" defer></script>

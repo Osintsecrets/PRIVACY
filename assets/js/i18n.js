@@ -1,219 +1,112 @@
+/* Minimal i18n: EN/HE with RTL toggle + ?lang= param + localStorage */
 (function(){
-  const DEFAULT_LANG = 'en';
-  const SUPPORTED = new Set(['en', 'he']);
-  const STORAGE_KEY = 'preferred-language';
-  const callbacks = new Set();
-  const cache = new Map();
-  let currentLang = DEFAULT_LANG;
-  let currentTranslations = {};
-
-  function computeBasePrefix(customBase) {
-    if (typeof window === 'undefined') return customBase || './';
-    if (customBase) return customBase;
-    const pathname = window.location.pathname || '';
-    const anchor = '/PRIVACY/';
-    const anchorIndex = pathname.indexOf(anchor);
-    if (anchorIndex === -1) {
-      return './';
-    }
-    const afterAnchor = pathname.slice(anchorIndex + anchor.length);
-    if (!afterAnchor) {
-      return './';
-    }
-    const segments = afterAnchor.split('/').filter(Boolean);
-    const isDirectory = pathname.endsWith('/');
-    const depth = Math.max(0, segments.length - (isDirectory ? 0 : 1));
-    if (depth === 0) {
-      return './';
-    }
-    return '../'.repeat(depth);
-  }
-
-  function resolveTranslation(source, path) {
-    if (!source) return undefined;
-    return path.split('.').reduce((acc, key) => {
-      if (acc && Object.prototype.hasOwnProperty.call(acc, key)) {
-        return acc[key];
-      }
-      return undefined;
-    }, source);
-  }
-
-  function applyTranslations(map) {
-    if (typeof document === 'undefined') return;
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach((element) => {
-      const key = element.getAttribute('data-i18n');
-      if (!key) return;
-      const value = resolveTranslation(map, key);
-      if (value == null) return;
-      const attrTarget = element.getAttribute('data-i18n-attr');
-      if (attrTarget) {
-        if (attrTarget === 'html') {
-          element.innerHTML = value;
-        } else if (attrTarget === 'value') {
-          element.value = value;
-        } else {
-          element.setAttribute(attrTarget, value);
-        }
-        return;
-      }
-      if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-        element.value = value;
-      } else {
-        element.textContent = value;
-      }
-    });
-  }
-
-  function setDocumentLanguage(lang) {
-    if (typeof document === 'undefined') return;
-    const html = document.documentElement;
-    if (!html) return;
-    html.lang = lang;
-    html.dir = lang === 'he' ? 'rtl' : 'ltr';
-    if (typeof document.body !== 'undefined' && document.body) {
-      document.body.dataset.dir = html.dir;
-    }
-  }
-
-  async function fetchTranslations(lang) {
-    if (cache.has(lang)) {
-      return cache.get(lang);
-    }
-    const prefix = computeBasePrefix();
-    const url = `${prefix}i18n/${lang}.json`;
-    const response = await fetch(url, { credentials: 'same-origin' });
-    if (!response.ok) {
-      throw new Error(`Unable to load ${lang} translations`);
-    }
-    const data = await response.json();
-    cache.set(lang, data);
-    return data;
-  }
-
-  function storePreference(lang) {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, lang);
-    } catch (error) {
-      console.warn('Unable to persist language preference', error);
-    }
-  }
-
-  function getStoredPreference() {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (stored && SUPPORTED.has(stored)) {
-        return stored;
-      }
-    } catch (error) {
-      console.warn('Unable to read language preference', error);
-    }
-    return null;
-  }
-
-  async function setLanguage(lang, { persist = true } = {}) {
-    const requested = SUPPORTED.has(lang) ? lang : DEFAULT_LANG;
-    let translations;
-    try {
-      translations = await fetchTranslations(requested);
-    } catch (error) {
-      if (requested !== DEFAULT_LANG) {
-        console.warn(`Falling back to ${DEFAULT_LANG} after failing to load ${requested}`, error);
-        translations = await fetchTranslations(DEFAULT_LANG);
-        lang = DEFAULT_LANG;
-      } else {
-        console.error('Unable to load translations', error);
-        return;
-      }
-    }
-    currentLang = requested;
-    currentTranslations = translations;
-    applyTranslations(translations);
-    setDocumentLanguage(requested);
-    callbacks.forEach((cb) => {
-      try {
-        cb(requested, translations);
-      } catch (error) {
-        console.error('i18n callback error', error);
-      }
-    });
-    if (persist) {
-      storePreference(requested);
-    }
-    window.dispatchEvent(new CustomEvent('i18n:change', { detail: { lang: requested, translations } }));
-  }
-
-  function detectInitialLanguage() {
-    const stored = typeof window !== 'undefined' ? getStoredPreference() : null;
-    if (stored) return stored;
-    if (typeof document !== 'undefined' && document.documentElement && SUPPORTED.has(document.documentElement.lang)) {
-      return document.documentElement.lang;
-    }
-    if (typeof navigator !== 'undefined') {
-      const languages = Array.isArray(navigator.languages) ? navigator.languages : [navigator.language];
-      for (const candidate of languages) {
-        if (!candidate) continue;
-        const code = candidate.toLowerCase().split('-')[0];
-        if (SUPPORTED.has(code)) {
-          return code;
-        }
-      }
-    }
-    return DEFAULT_LANG;
-  }
-
-  function ready(callback) {
-    if (typeof document === 'undefined') return;
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', callback, { once: true });
-    } else {
-      callback();
-    }
-  }
-
-  function initialize() {
-    const select = document.getElementById('lang');
-    const initialLang = detectInitialLanguage();
-    setLanguage(initialLang, { persist: false }).then(() => {
-      if (select) {
-        select.value = initialLang;
-      }
-    });
-    if (select) {
-      select.addEventListener('change', (event) => {
-        const nextLang = event.target.value;
-        setLanguage(nextLang);
-      });
-    }
-  }
-
-  const api = {
-    get lang() {
-      return currentLang;
+  const STR = {
+    en: {
+      "site.title": "Social Risk Audit — Privacy Almanac",
+      "site.brand": "Social Risk Audit",
+      "nav.home": "Home",
+      "nav.platform": "Platform",
+      "nav.why": "Why",
+      "nav.ethics": "Ethics",
+      "nav.about": "About",
+      "nav.contact": "Contact",
+      "nav.disclaimer": "Disclaimer",
+      "ui.installApp": "Install App",
+      "ui.iosAdd": "Add on iPhone",
+      "ui.close": "Close",
+      "home.h1": "Be the master of your privacy.",
+      "home.lede": "A fast, ethics-first privacy almanac. Learn why privacy matters and take control with clear, step-by-step actions for the platforms you use.",
+      "home.cta.platform.tag": "Start here",
+      "home.cta.platform.title": "Fix my privacy on social apps",
+      "home.cta.platform.body": "Facebook today, more platforms next. Clear, screenshot-friendly steps.",
+      "home.cta.why.tag": "Mindset",
+      "home.cta.why.title": "Why this matters (and to whom)",
+      "home.cta.why.body": "Short, compelling reasons to act—without fear or jargon.",
+      "home.cta.ethics.tag": "Ethics",
+      "home.cta.ethics.title": "Our line: protect, don’t expose",
+      "home.cta.ethics.body": "Consent, dignity, and responsibility—no doxxing, no vigilantism.",
+      "home.notice": "You choose how deep to go. This site helps you take control—at your pace.",
+      "pledge.title": "Ethics Pledge",
+      "pledge.body": "Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism. Proceed only if you agree.",
+      "pledge.agree": "I agree",
+      "pledge.read": "Read ethics",
+      "ios.title": "Add to Home Screen (iPhone)",
+      "ios.step1": "Open in Safari.",
+      "ios.step2": "Tap the Share icon.",
+      "ios.step3": "Choose ‘Add to Home Screen’.",
+      "footer.updated": "Last updated",
     },
-    t(key) {
-      const translation = resolveTranslation(currentTranslations, key);
-      if (translation != null) {
-        return translation;
-      }
-      return key;
-    },
-    onChange(callback) {
-      if (typeof callback !== 'function') return () => {};
-      callbacks.add(callback);
-      try {
-        callback(currentLang, currentTranslations);
-      } catch (error) {
-        console.error('i18n callback error', error);
-      }
-      return () => callbacks.delete(callback);
+    he: {
+      "site.title": "Social Risk Audit — אלמנך פרטיות",
+      "site.brand": "Social Risk Audit",
+      "nav.home": "בית",
+      "nav.platform": "פלטפורמה",
+      "nav.why": "למה",
+      "nav.ethics": "אתיקה",
+      "nav.about": "אודות",
+      "nav.contact": "צור קשר",
+      "nav.disclaimer": "הצהרה משפטית",
+      "ui.installApp": "התקן אפליקציה",
+      "ui.iosAdd": "הוסף לאייפון",
+      "ui.close": "סגור",
+      "home.h1": "תהיה המאסטר של הפרטיות שלך.",
+      "home.lede": "אלמנך פרטיות מהיר עם אתיקה תחילה. למד מדוע זה חשוב וקבל שליטה עם צעדים ברורים לפי פלטפורמה.",
+      "home.cta.platform.tag": "התחל כאן",
+      "home.cta.platform.title": "לשפר פרטיות באפליקציות חברתיות",
+      "home.cta.platform.body": "פייסבוק היום, ועוד בקרוב. צעדים ברורים שמתאימים לצילומי מסך.",
+      "home.cta.why.tag": "תודעה",
+      "home.cta.why.title": "למה זה חשוב (ולמי)",
+      "home.cta.why.body": "סיבות קצרות ומשכנעות לפעול—בלי פחד או ז׳רגון.",
+      "home.cta.ethics.tag": "אתיקה",
+      "home.cta.ethics.title": "הקו שלנו: להגן, לא לחשוף",
+      "home.cta.ethics.body": "הסכמה, כבוד ואחריות—בלי דוקסינג ובלי ויג׳ילנטיות.",
+      "home.notice": "את/ה קובע/ת כמה עמוק להיכנס. האתר עוזר לך לשלוט—בקצב שלך.",
+      "pledge.title": "התחייבות אתית",
+      "pledge.body": "השתמש/י במדריך כדי להגן—not לפגוע. אין דוקסינג, אין הטרדה, אין ויג׳ילנטיות. המשך/י רק אם את/ה מסכימ/ה.",
+      "pledge.agree": "מסכימ/ה",
+      "pledge.read": "קרא/י אתיקה",
+      "ios.title": "הוספה למסך הבית (iPhone)",
+      "ios.step1": "פתח/י בספארי.",
+      "ios.step2": "הקש/י על שיתוף.",
+      "ios.step3": "בחר/י ‘הוסף למסך הבית’.",
+      "footer.updated": "עודכן לאחרונה",
     }
   };
 
-  if (typeof window !== 'undefined') {
-    window.I18N = api;
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+  function getLangFromQuery() {
+    const m = location.search.match(/[?&]lang=(en|he)\b/);
+    return m ? m[1] : null;
+  }
+  function setDir(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+  }
+  function applyI18n(lang) {
+    const dict = STR[lang] || STR.en;
+    $$('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    document.title = dict['site.title'] || document.title;
   }
 
-  ready(initialize);
+  const saved = localStorage.getItem('sra_lang');
+  const query = getLangFromQuery();
+  const lang = query || saved || 'en';
+  setDir(lang);
+  applyI18n(lang);
+
+  const langSel = $('#lang');
+  if (langSel) {
+    langSel.value = lang;
+    langSel.addEventListener('change', () => {
+      const v = langSel.value;
+      localStorage.setItem('sra_lang', v);
+      setDir(v);
+      applyI18n(v);
+    });
+  }
 })();
