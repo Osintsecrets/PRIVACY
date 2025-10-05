@@ -79,12 +79,17 @@
     </section>
   </main>
 
-  <dialog id="pledgeModal">
+  <!-- Ethics pledge modal (polished) -->
+  <dialog id="pledgeModal" aria-labelledby="pledgeTitle" aria-describedby="pledgeDesc">
     <article>
-      <h2 data-i18n="pledge.title">Ethics Pledge</h2>
-      <p data-i18n="pledge.body">Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism. Proceed only if you agree.</p>
-      <button id="pledgeAgree" type="button" data-i18n="pledge.agree">I agree</button>
-      <button type="button" id="pledgeRead" data-i18n="pledge.read">Read ethics</button>
+      <h2 id="pledgeTitle">Ethics Pledge</h2>
+      <p id="pledgeDesc">
+        Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism. Proceed only if you agree.
+      </p>
+      <div class="button-group">
+        <button id="pledgeAgree" class="button primary">I agree</button>
+        <button id="pledgeRead" class="button" onclick="location.href='./ethics.html'">Read ethics</button>
+      </div>
     </article>
   </dialog>
 
