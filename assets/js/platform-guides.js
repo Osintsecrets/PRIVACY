@@ -19,6 +19,9 @@
 
   const guideSections = Array.from(document.querySelectorAll('section.card[id^="guide-"]'));
   const guideIndexNav = document.getElementById('guide-index');
+  const guideIndexHeading = guideIndexNav ? guideIndexNav.querySelector('h2') : null;
+  const guideIndexHeadingClone = guideIndexHeading ? guideIndexHeading.cloneNode(true) : null;
+  const guideIndexHeadingText = guideIndexHeading ? guideIndexHeading.textContent.trim() : '';
   const categoryHeadings = new Map();
   document.querySelectorAll('.guide-category-heading[data-category]').forEach((heading)=>{
     const category = heading.dataset.category;
@@ -31,7 +34,11 @@
     const category = section.dataset.category || 'uncategorized';
     if (!categories.has(category)) {
       const heading = categoryHeadings.get(category) || null;
-      const label = heading ? heading.textContent.trim() : category;
+      const label = heading
+        ? heading.textContent.trim()
+        : category === 'uncategorized'
+          ? (guideIndexHeadingText || 'Guides')
+          : category;
       categories.set(category, {
         key: category,
         heading,
@@ -44,9 +51,32 @@
     categories.get(category).items.push(section);
   });
 
+  const categoryDataList = Array.from(categories.values());
+
   if (guideIndexNav) {
     guideIndexNav.innerHTML = '';
+    const singleUncategorized = categoryDataList.length === 1 && categoryDataList[0].key === 'uncategorized';
+
+    if (singleUncategorized) {
+      if (guideIndexHeadingClone) {
+        guideIndexNav.appendChild(guideIndexHeadingClone);
+      } else {
+        const heading = document.createElement('h2');
+        heading.textContent = categoryDataList[0].label || 'Guides';
+        guideIndexNav.appendChild(heading);
+      }
+    }
+
     categories.forEach((category)=>{
+      if (singleUncategorized && category.key === 'uncategorized') {
+        const list = document.createElement('ol');
+        list.classList.add('guide-category-list');
+        guideIndexNav.appendChild(list);
+        category.navDetails = null;
+        category.navList = list;
+        return;
+      }
+
       const details = document.createElement('details');
       details.classList.add('guide-category');
       details.dataset.category = category.key;
@@ -101,8 +131,6 @@
       originalNav: navLink ? navLink.innerHTML : ''
     };
   });
-
-  const categoryDataList = Array.from(categories.values());
 
   const totalGuides = guideData.length;
 
