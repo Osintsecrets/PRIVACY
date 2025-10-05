@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0f14">
+  <title data-i18n="self.h1">Self‑audit — Take control of your social privacy</title>
+  <meta name="description" content="Learn how to audit your own social media privacy settings—clear steps, checklists, and a mindset that keeps you in control.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="ui-overlay" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrapper header-row" role="navigation" aria-label="Primary">
+      <a class="brand" href="./" data-i18n="site.brand">Social Risk Audit</a>
+      <div class="menu-container">
+        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false">☰</button>
+        <nav id="site-menu" class="menu" hidden aria-label="Primary">
+          <a href="./" data-i18n="nav.home">Home</a>
+          <a href="./self-audit.html" aria-current="page" data-i18n="nav.selfaudit">Self‑audit</a>
+          <a href="./platform.html" data-i18n="nav.platform">Platform</a>
+          <a href="./why.html" data-i18n="nav.why">Why</a>
+          <a href="./ethics.html" data-i18n="nav.ethics">Ethics</a>
+          <a href="./about/" data-i18n="nav.about">About</a>
+          <a href="./disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrapper">
+    <section class="toolbar" aria-label="Quick controls">
+      <label for="lang" class="sr-only">Language</label>
+      <select id="lang" class="select" aria-label="Language">
+        <option value="en">English</option>
+        <option value="he">עברית</option>
+      </select>
+      <button id="installTrigger" class="button" data-i18n="ui.installApp">Install App</button>
+      <button id="iosHowTo" class="button" data-i18n="ui.iosAdd">Add on iPhone</button>
+      <span class="pill" id="pledgeStatus"></span>
+    </section>
+
+    <section class="hero">
+      <h1 data-i18n="self.h1">Self‑audit: Learn to assess and tighten your social privacy</h1>
+      <p class="lede" data-i18n="self.lede">This page teaches you how to review your own accounts and make smart changes—at your pace. Start with mindset, then move to simple checklists, then deeper controls.</p>
+    </section>
+
+    <!-- Scaffold blocks only (content to be filled next step) -->
+    <section class="prose" aria-labelledby="tocTitle">
+      <h2 id="tocTitle" data-i18n="self.toc">On this page</h2>
+      <ul>
+        <li><a href="#mindset" data-i18n="self.toc.mindset">Mindset & goals</a></li>
+        <li><a href="#quick">Quick wins checklist</a></li>
+        <li><a href="#audit">Step‑by‑step audit flow</a></li>
+        <li><a href="#evidence">Proof & screenshots</a></li>
+        <li><a href="#next" data-i18n="self.toc.next">What to do next</a></li>
+      </ul>
+    </section>
+
+    <section id="mindset" class="prose">
+      <h2 data-i18n="self.mindset.h2">Mindset: you stay in control</h2>
+      <p data-i18n="self.mindset.p1">Pick your depth. You don’t need to do everything. Start with the biggest risks that matter to you, then go deeper if it’s useful.</p>
+    </section>
+
+    <section id="quick" class="cards">
+      <article class="card">
+        <h3>Quick win #1</h3>
+        <p>Placeholder. We’ll fill specific actions here (e.g., enable 2FA, lock down who can look you up by phone, etc.).</p>
+      </article>
+      <article class="card">
+        <h3>Quick win #2</h3>
+        <p>Placeholder.</p>
+      </article>
+      <article class="card">
+        <h3>Quick win #3</h3>
+        <p>Placeholder.</p>
+      </article>
+    </section>
+
+    <section id="audit" class="prose">
+      <h2>Step‑by‑step audit flow</h2>
+      <ol>
+        <li>Pick a platform (start with <a href="./platforms/facebook.html">Facebook</a>).</li>
+        <li>Follow the guided actions (screenshots friendly).</li>
+        <li>Note your changes and take screenshots as proof.</li>
+      </ol>
+    </section>
+
+    <section id="evidence" class="prose">
+      <h2>Proof & screenshots</h2>
+      <p>Placeholder: how to capture, name, and store screenshots so you can re‑use them later.</p>
+    </section>
+
+    <section id="next" class="prose">
+      <h2 data-i18n="self.next.h2">What to do next</h2>
+      <ul>
+        <li>Move to another platform.</li>
+        <li>Revisit this monthly or quarterly.</li>
+        <li>Share the guide with someone who needs it.</li>
+      </ul>
+    </section>
+  </main>
+
+  <dialog id="pledgeModal" aria-labelledby="pledgeTitle" aria-describedby="pledgeDesc">
+    <article>
+      <h2 id="pledgeTitle" data-i18n="pledge.title">Ethics Pledge</h2>
+      <p id="pledgeDesc" data-i18n="pledge.body">Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism. Proceed only if you agree.</p>
+      <div class="button-group">
+        <button id="pledgeAgree" class="button primary" data-i18n="pledge.agree">I agree</button>
+        <button id="pledgeRead" class="button" onclick="location.href='./ethics.html'" data-i18n="pledge.read">Read ethics</button>
+      </div>
+    </article>
+  </dialog>
+
+  <footer id="site-footer">
+    <nav aria-label="Footer">
+      <a href="./" data-i18n="nav.home">Home</a>
+      <a href="./self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
+      <a href="./platform.html" data-i18n="nav.platform">Platform</a>
+      <a href="./ethics.html" data-i18n="nav.ethics">Ethics</a>
+      <a href="./why.html" data-i18n="nav.why">Why</a>
+      <a href="./about/" data-i18n="nav.about">About</a>
+      <a href="./disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
+    </nav>
+  </footer>
+
+  <script src="./assets/js/i18n.js" defer></script>
+  <script src="./assets/js/install.js" defer></script>
+  <script src="./assets/js/pledge-gate.js" defer></script>
+  <script src="./assets/js/main.js" defer></script>
+</body>
+</html>

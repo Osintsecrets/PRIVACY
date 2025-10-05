@@ -18,7 +18,7 @@ const ROUTES = [
   '/platforms/x.html',
   '/platforms/whatsapp.html',
   '/about/',
-  '/contact/',
+  '/self-audit.html',
   '/disclaimer/',
   '/pledge.html',
   '/access-denied.html',
