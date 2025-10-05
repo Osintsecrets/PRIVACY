@@ -269,3 +269,23 @@ html[dir="rtl"] .select { padding: 10px 12px 10px 38px; background-position: lef
   .mission { break-inside: avoid; box-shadow:none; border-color:#b8cbd0; }
   .progress { display:none; }
 }
+
+/* HUD */
+.hud { display:flex; gap:12px; align-items:center; margin:10px 0 16px; }
+.hud-item { display:flex; align-items:center; gap:6px; padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:var(--card); box-shadow:0 2px 8px rgba(0,0,0,.18); }
+.hud-item .label { font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+.hud-item .value { font-weight:800; font-variant-numeric:tabular-nums; }
+
+/* Mission header progress accent (visual feedback per phase) */
+.mission { position:relative; }
+.mission::before { content:""; position:absolute; inset:0 0 auto 0; height:4px; background:linear-gradient(90deg,#2fb171,#53d1a0); width:var(--phase-pct,0%); border-top-left-radius:10px; border-top-right-radius:10px; }
+
+/* Locked state (for linear mode) */
+.mission.is-locked { opacity:.55; filter:saturate(.7); }
+.mission.is-locked .quest, .mission.is-locked .actions, .mission.is-locked .note { pointer-events:none; }
+
+/* Achievements */
+.achievements { margin-top:24px; }
+.ach-list { display:grid; gap:6px; grid-template-columns:1fr; }
+@media(min-width:560px){ .ach-list{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+.ach-list li { list-style:none; padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:var(--card); box-shadow:0 2px 8px rgba(0,0,0,.12); }

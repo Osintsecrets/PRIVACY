@@ -65,6 +65,11 @@
       </div>
     </section>
 
+    <section class="hud" aria-label="Status">
+      <div class="hud-item"><span class="label">XP</span><span id="xpTotal" class="value">0</span></div>
+      <div class="hud-item"><span class="label">Threat</span><span id="threatLabel" class="value">Exposed</span></div>
+    </section>
+
     <!-- Overview Cards -->
     <section class="missions" aria-label="DARK missions">
       <article class="mission" data-phase="D">
@@ -144,6 +149,11 @@
     <section class="prose" style="margin-top:18px">
       <button class="button" id="resetAll">Reset All Progress</button>
       <span class="pill" id="lastUpdated">Last updated: —</span>
+    </section>
+
+    <section class="prose achievements" aria-labelledby="achTitle">
+      <h2 id="achTitle">Achievements</h2>
+      <ul id="achList" class="ach-list"></ul>
     </section>
   </main>
 
