@@ -70,9 +70,16 @@
       <div class="hud-item"><span class="label">Threat</span><span id="threatLabel" class="value">Exposed</span></div>
     </section>
 
+    <section class="stepper" aria-label="Progress steps">
+      <button class="step" data-step="D" aria-current="false">D</button>
+      <button class="step" data-step="A" aria-current="false" disabled>A</button>
+      <button class="step" data-step="R" aria-current="false" disabled>R</button>
+      <button class="step" data-step="K" aria-current="false" disabled>K</button>
+    </section>
+
     <!-- Overview Cards -->
-    <section class="missions" aria-label="DARK missions">
-      <article class="mission" data-phase="D">
+    <section class="missions wizard" aria-label="DARK missions">
+      <article class="mission collapsible" data-phase="D">
         <span class="kicker">Phase 1</span>
         <h2>🕵️‍♂️ Discover — Hunt for clues</h2>
         <p class="why">This is your collection phase. Find out what exists about you online — posts, photos, mentions, tags, accounts, leaks.</p>
@@ -91,7 +98,7 @@
         </div>
       </article>
 
-      <article class="mission" data-phase="A">
+      <article class="mission collapsible" data-phase="A">
         <span class="kicker">Phase 2</span>
         <h2>🧠 Analyze — Think like an attacker</h2>
         <p class="why">Turn data into a threat map. Who could use it, how, and why?</p>
@@ -109,7 +116,7 @@
         </div>
       </article>
 
-      <article class="mission" data-phase="R">
+      <article class="mission collapsible" data-phase="R">
         <span class="kicker">Phase 3</span>
         <h2>🛠️ Reduce — Shrink your exposure</h2>
         <p class="why">Decide what stays, what goes, and what changes. Make a plan — don’t execute everything yet.</p>
@@ -127,7 +134,7 @@
         </div>
       </article>
 
-      <article class="mission" data-phase="K">
+      <article class="mission collapsible" data-phase="K">
         <span class="kicker">Phase 4</span>
         <h2>🔐 Keep Safe — Make it a habit</h2>
         <p class="why">Implement your plan and keep it alive over time.</p>
@@ -151,10 +158,10 @@
       <span class="pill" id="lastUpdated">Last updated: —</span>
     </section>
 
-    <section class="prose achievements" aria-labelledby="achTitle">
-      <h2 id="achTitle">Achievements</h2>
+    <details class="prose achievements" aria-labelledby="achTitle">
+      <summary><h2 id="achTitle">Achievements</h2></summary>
       <ul id="achList" class="ach-list"></ul>
-    </section>
+    </details>
   </main>
 
   <!-- Ethics pledge modal (unchanged ids for existing JS) -->
