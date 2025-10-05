@@ -256,3 +256,16 @@ select option { background: var(--card); color: var(--text); }
 /* RTL: chevron on the left */
 html[dir="rtl"] .select { padding: 10px 12px 10px 38px; background-position: left 12px center; }
 
+
+/* Mission cards & checklists (shared) */
+.cards, .missions { gap: 12px; }
+.mission .button.primary { background: #174f3c; border:1px solid #25795b; }
+.mission .button.primary:hover { background:#1a5e46; }
+.mission .button { background:#0f1f26; border:1px solid var(--border); }
+
+/* Print-friendly tweak for self-audit */
+@media print {
+  header, footer, .toolbar, #ui-overlay { display:none !important; }
+  .mission { break-inside: avoid; box-shadow:none; border-color:#b8cbd0; }
+  .progress { display:none; }
+}
