@@ -20,6 +20,11 @@
     },
     "shortcutsClose": "Close shortcuts"
   },
+  "site": {
+    "title": "Social Risk Audit — Privacy Almanac",
+    "brand": "Social Risk Audit",
+    "skip": "Skip to content"
+  },
   "nav": {
     "home": "Home",
     "guides": "Guides",
@@ -29,7 +34,11 @@
     "settings": "Settings",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "menuLabel": "Navigation"
+    "menuLabel": "Navigation",
+    "platform": "Platform",
+    "why": "Why",
+    "contact": "Contact",
+    "disclaimer": "Disclaimer"
   },
   "manual": {
     "title": "Facebook Privacy Manual",
@@ -51,6 +60,21 @@
     "quickActionPosts": "Limit past posts",
     "moreComing": "There should be much more.",
     "guideCount": "4 guides available."
+  },
+  "homePage": {
+    "heroTitle": "Be the master of your privacy.",
+    "heroLede": "A fast, ethics-first privacy almanac. Learn why privacy matters and take control with clear, step-by-step actions for the platforms you use.",
+    "ctaStartLabel": "Start here",
+    "ctaFixTitle": "Fix my privacy on social apps",
+    "ctaFixDescription": "Facebook today, more platforms next. Clear, screenshot-friendly steps.",
+    "ctaWhyLabel": "Mindset",
+    "ctaWhyTitle": "Why this matters (and to whom)",
+    "ctaWhyDescription": "Short, compelling reasons to act—without fear or jargon.",
+    "ctaEthicsLabel": "Ethics",
+    "ctaEthicsTitle": "Our line: protect, don’t expose",
+    "ctaEthicsDescription": "Consent, dignity, and responsibility—no doxxing, no vigilantism.",
+    "iosButton": "Add on iPhone",
+    "installFallback": "Use your browser options to add this site to your home screen."
   },
   "guides": {
     "heading": "Guided fixes",
@@ -117,6 +141,14 @@
     "offlineStatus": "Status: {status}",
     "statusOnline": "Online",
     "statusOffline": "Offline"
+  },
+  "pledge": {
+    "modalTitle": "Ethics Pledge",
+    "modalBody": "Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism.",
+    "agree": "I agree",
+    "readEthics": "Read ethics",
+    "statusComplete": "Pledge signed",
+    "statusRequired": "Pledge required"
   },
   "disclaimer": {
     "title": "Read before you continue",
