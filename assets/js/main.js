@@ -21,9 +21,97 @@
     return '../'.repeat(depth);
   }
 
+  const overlayController = (function(){
+    if (typeof document === 'undefined') {
+      return {
+        overlay: null,
+        show(){},
+        hide(){},
+        lock(){},
+        unlock(){},
+        inert(){},
+        isActive(){ return false; }
+      };
+    }
+    const overlayId = 'ui-overlay';
+    let overlay = document.getElementById(overlayId);
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = overlayId;
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.insertBefore(overlay, document.body.firstChild || null);
+    }
+    const owners = new Set();
+    const locks = new Set();
+    const inertRegistry = new Map();
+
+    function syncOverlay() {
+      if (!overlay) return;
+      overlay.setAttribute('aria-hidden', owners.size ? 'false' : 'true');
+    }
+
+    function show(owner) {
+      if (!overlay) return;
+      owners.add(owner);
+      syncOverlay();
+    }
+
+    function hide(owner) {
+      if (!overlay) return;
+      owners.delete(owner);
+      syncOverlay();
+    }
+
+    function lock(owner) {
+      if (!document.body) return;
+      locks.add(owner);
+      document.body.classList.add('is-locked');
+    }
+
+    function unlock(owner) {
+      if (!document.body) return;
+      locks.delete(owner);
+      if (!locks.size) {
+        document.body.classList.remove('is-locked');
+      }
+    }
+
+    function inert(element, owner, enable) {
+      if (!element) return;
+      let record = inertRegistry.get(element);
+      if (!record) {
+        record = new Set();
+        inertRegistry.set(element, record);
+      }
+      if (enable) {
+        record.add(owner);
+        element.setAttribute('inert', '');
+        return;
+      }
+      record.delete(owner);
+      if (!record.size) {
+        element.removeAttribute('inert');
+        inertRegistry.delete(element);
+      }
+    }
+
+    return {
+      overlay,
+      show,
+      hide,
+      lock,
+      unlock,
+      inert,
+      isActive(){ return owners.size > 0; }
+    };
+  })();
+
   if (typeof window !== 'undefined') {
+    window.__UIOverlay = overlayController;
+  }
+
+  if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      if (!('serviceWorker' in navigator)) return;
       const prefix = computeBasePrefix();
       const workerUrl = `${prefix}sw.js`;
       navigator.serviceWorker.register(workerUrl).catch((error) => {
@@ -32,30 +120,90 @@
     });
   }
 
-  const btn = document.querySelector('.menu-toggle');
-  const menu = document.getElementById('site-menu');
-  if (!btn || !menu) return;
-  const container = btn.closest('.menu-container') || btn.parentElement;
-  const outsideClick = (event) => {
-    if (!container || container.contains(event.target)) return;
-    toggle(false);
-  };
-  const manageOutside = (listen) => {
-    const method = listen ? 'addEventListener' : 'removeEventListener';
-    document[method]('pointerdown', outsideClick);
-  };
-  const toggle = (open) => {
-    const isOpen = open ?? menu.hasAttribute('hidden');
-    if (isOpen) menu.removeAttribute('hidden'); else menu.setAttribute('hidden', '');
-    btn.setAttribute('aria-expanded', String(isOpen));
-    manageOutside(isOpen);
-    if (isOpen) menu.querySelector('a')?.focus();
-  };
-  btn.addEventListener('click', () => toggle());
-  btn.addEventListener('keydown', (e)=>{ if(e.key==='ArrowDown' && btn.getAttribute('aria-expanded')==='false'){ e.preventDefault(); toggle(true);} });
-  menu.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggle(false); btn.focus(); } });
-  menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> toggle(false)));
-  // Mark current nav item
+  const toggle = typeof document !== 'undefined' ? document.querySelector('.menu-toggle') : null;
+  const menu = typeof document !== 'undefined' ? document.getElementById('site-menu') : null;
+  if (!toggle || !menu) {
+    return;
+  }
+
+  const main = document.getElementById('main');
+  const footer = document.getElementById('site-footer') || document.querySelector('footer');
+  const header = document.querySelector('header');
+  let menuOpen = false;
+
+  function setInertState(owner, state) {
+    overlayController.inert(main, owner, state);
+    overlayController.inert(footer, owner, state);
+    overlayController.inert(header, owner, state);
+  }
+
+  function openMenu() {
+    if (menuOpen) return;
+    menu.hidden = false;
+    menuOpen = true;
+    toggle.setAttribute('aria-expanded', 'true');
+    overlayController.show('menu');
+    overlayController.lock('menu');
+    setInertState('menu', true);
+    const firstLink = menu.querySelector('a');
+    if (firstLink) {
+      firstLink.focus();
+    }
+  }
+
+  function closeMenu() {
+    if (!menuOpen) return;
+    menu.hidden = true;
+    menuOpen = false;
+    toggle.setAttribute('aria-expanded', 'false');
+    overlayController.hide('menu');
+    overlayController.unlock('menu');
+    setInertState('menu', false);
+    if (!header || !header.hasAttribute('inert')) {
+      toggle.focus();
+    }
+  }
+
+  toggle.addEventListener('click', () => {
+    if (menuOpen || !menu.hidden) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  toggle.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown' && !menuOpen) {
+      event.preventDefault();
+      openMenu();
+    }
+  });
+
+  menu.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      closeMenu();
+    }
+  });
+
+  menu.querySelectorAll('a').forEach((anchor) => {
+    anchor.addEventListener('click', () => closeMenu());
+  });
+
+  if (overlayController.overlay) {
+    overlayController.overlay.addEventListener('click', () => {
+      if (menuOpen) {
+        closeMenu();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menuOpen) {
+      closeMenu();
+    }
+  });
+
   const brand = document.querySelector('.brand');
   let basePath = '/';
   if (brand) {
@@ -92,63 +240,5 @@
     else if (normalized === '/contact/' || normalized === '/contact') current = 'contact';
     else if (normalized === '/disclaimer/' || normalized === '/disclaimer') current = 'disclaimer';
   }
-  if (current) document.querySelector(`[data-nav="${current}"]`)?.setAttribute('aria-current','page');
-
-  let deferredInstallPrompt = null;
-  const installTrigger = document.querySelector('[data-install-trigger]');
-  const installMessage = document.querySelector('[data-install-message]');
-
-  const setInstallMessage = (text) => {
-    if (installMessage) installMessage.textContent = text;
-  };
-
-  const setTriggerState = (enabled) => {
-    if (!installTrigger) return;
-    if (enabled) {
-      installTrigger.removeAttribute('disabled');
-      installTrigger.removeAttribute('aria-disabled');
-    } else {
-      installTrigger.setAttribute('disabled', '');
-      installTrigger.setAttribute('aria-disabled', 'true');
-    }
-  };
-
-  window.addEventListener('beforeinstallprompt', (event) => {
-    event.preventDefault();
-    deferredInstallPrompt = event;
-    setTriggerState(true);
-    setInstallMessage('Ready to install. Choose “Add to Home Screen” to continue.');
-  });
-
-  installTrigger?.addEventListener('click', async () => {
-    if (!deferredInstallPrompt) {
-      setInstallMessage('Use your browser’s Share or menu options to add this site to your home screen.');
-      return;
-    }
-    let choice = null;
-    try {
-      deferredInstallPrompt.prompt();
-      choice = await deferredInstallPrompt.userChoice;
-      if (choice?.outcome === 'accepted') {
-        setInstallMessage('Installation requested. Confirm the prompt from your browser to finish.');
-      } else {
-        setInstallMessage('Install dismissed. You can retry from your browser menu when ready.');
-      }
-    } catch (error) {
-      console.error('Install prompt failed:', error);
-      setInstallMessage('Something went wrong launching the install prompt. Please try again later.');
-    } finally {
-      deferredInstallPrompt = null;
-      if (choice?.outcome === 'accepted') {
-        setTriggerState(false);
-      } else {
-        setTriggerState(true);
-      }
-    }
-  });
-
-  window.addEventListener('appinstalled', () => {
-    setInstallMessage('Installed! Look for the Social Risk Audit icon on your device.');
-    setTriggerState(false);
-  });
+  if (current) document.querySelectorAll(`[data-nav="${current}"]`).forEach((navItem) => navItem.setAttribute('aria-current', 'page'));
 })();
