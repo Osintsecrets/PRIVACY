@@ -223,3 +223,13 @@ dialog p { margin: 0; color: var(--muted); font-size: 1.05rem; }
 
 /* RTL alignment for dropdown */
 html[dir="rtl"] .menu { right:auto; left:0; }
+
+/* Extra header stacking guard */
+.header-row { position: relative; z-index: calc(var(--z-header) + 1); }
+
+/* Pledge pill states */
+:root { --ok:#2fb171; --warn:#e6a700; }
+#pledgeStatus.pill { background: var(--card); color: var(--text); box-shadow: 0 2px 6px rgba(0,0,0,.18); font-weight:700; }
+#pledgeStatus.pill.is-ok { border-color: color-mix(in lab, var(--ok) 60%, var(--border)); color: var(--ok); }
+#pledgeStatus.pill.is-warn { border-color: color-mix(in lab, var(--warn) 60%, var(--border)); color: var(--warn); }
+

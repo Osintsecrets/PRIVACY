@@ -30,6 +30,8 @@
       "pledge.body": "Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism. Proceed only if you agree.",
       "pledge.agree": "I agree",
       "pledge.read": "Read ethics",
+      "pledge.status.agreed": "Pledge: Agreed",
+      "pledge.status.pending": "Pledge: Pending",
       "ios.title": "Add to Home Screen (iPhone)",
       "ios.step1": "Open in Safari.",
       "ios.step2": "Tap the Share icon.",
@@ -65,6 +67,8 @@
       "pledge.body": "השתמש/י במדריך כדי להגן—not לפגוע. אין דוקסינג, אין הטרדה, אין ויג׳ילנטיות. המשך/י רק אם את/ה מסכימ/ה.",
       "pledge.agree": "מסכימ/ה",
       "pledge.read": "קרא/י אתיקה",
+      "pledge.status.agreed": "התחייבות: אושר",
+      "pledge.status.pending": "התחייבות: ממתין",
       "ios.title": "הוספה למסך הבית (iPhone)",
       "ios.step1": "פתח/י בספארי.",
       "ios.step2": "הקש/י על שיתוף.",
@@ -72,6 +76,9 @@
       "footer.updated": "עודכן לאחרונה",
     }
   };
+
+  // Expose STR to window so other scripts (pledge-gate) can read i18n safely
+  window.__SRA_STR = STR;
 
   const $ = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
