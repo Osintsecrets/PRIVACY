@@ -281,7 +281,7 @@ html[dir="rtl"] .select { padding: 10px 12px 10px 38px; background-position: lef
 .mission::before { content:""; position:absolute; inset:0 0 auto 0; height:4px; background:linear-gradient(90deg,#2fb171,#53d1a0); width:var(--phase-pct,0%); border-top-left-radius:10px; border-top-right-radius:10px; }
 
 /* Locked state (for linear mode) */
-.mission.is-locked { opacity:.55; filter:saturate(.7); }
+.mission.is-locked { opacity:.6; filter:saturate(.7); }
 .mission.is-locked .quest, .mission.is-locked .actions, .mission.is-locked .note { pointer-events:none; }
 
 /* Achievements */
@@ -289,3 +289,29 @@ html[dir="rtl"] .select { padding: 10px 12px 10px 38px; background-position: lef
 .ach-list { display:grid; gap:6px; grid-template-columns:1fr; }
 @media(min-width:560px){ .ach-list{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
 .ach-list li { list-style:none; padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:var(--card); box-shadow:0 2px 8px rgba(0,0,0,.12); }
+
+/* Cleaner layout + calmer visuals */
+.wrapper { max-width: 1040px; }
+.missions.wizard { margin-top: 12px; }
+.mission { box-shadow: 0 8px 28px rgba(0,0,0,.22); border-radius: 14px; border-color: rgba(160, 200, 210, .28); }
+.mission .why { color: var(--muted); }
+.mission .actions { margin-top: 4px; }
+
+/* Collapsible behavior for non-active phases */
+.mission.is-collapsed { display: none; }
+.mission.is-active { outline: 1px solid rgba(90, 170, 160, .35); }
+
+/* Minimal stepper */
+.stepper { display:flex; gap:8px; margin:10px 0 8px; align-items:center; }
+.stepper .step { min-width:40px; min-height:40px; border-radius:999px; border:1px solid var(--border); background:var(--card); color:var(--text); font-weight:800; box-shadow:0 2px 8px rgba(0,0,0,.16); }
+.stepper .step[aria-current="step"] { border-color:#2fb171; box-shadow:0 0 0 2px rgba(47,177,113,.2) inset; }
+.stepper .step:disabled { opacity:.5; }
+
+/* HUD subtle */
+.hud { margin-top: 8px; }
+
+/* Achievements collapsed by default uses native <details> */
+.achievements summary { cursor:pointer; }
+
+/* RTL consistency */
+html[dir="rtl"] .stepper { direction: rtl; }
