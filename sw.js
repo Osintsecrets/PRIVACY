@@ -1,13 +1,15 @@
 const CACHE_VERSION = 'v1';
 const CORE_CACHE = `sra-core-${CACHE_VERSION}`;
-const OFFLINE_URL = '/PRIVACY/offline.html';
+const base = new URL('./', self.registration.scope);
+const withBase = (path) => new URL(path, base).toString();
+const OFFLINE_URL = withBase('offline.html');
 
 const PRECACHE_URLS = [
-  '/PRIVACY/',
-  '/PRIVACY/index.html',
-  '/PRIVACY/offline.html',
-  '/PRIVACY/assets/css/styles.css',
-  '/PRIVACY/assets/js/main.js',
+  withBase(''),
+  withBase('index.html'),
+  OFFLINE_URL,
+  withBase('assets/css/styles.css'),
+  withBase('assets/js/main.js'),
 ];
 
 self.addEventListener('install', (event) => {
