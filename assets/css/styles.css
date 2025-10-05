@@ -190,3 +190,50 @@ html[dir="rtl"] .menu { right: auto; left: 0; }
 /* Optional: Dialog base if not present */
 dialog { border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; background:var(--card); color:var(--text); max-width:min(680px, 90vw); }
 dialog::backdrop { background: rgba(0,0,0,.5); }
+
+/* ---- Layering scale (bumped for safety) ---- */
+:root {
+  --z-header: 1200;   /* sticky header baseline */
+  --z-overlay: 1500;  /* page-dimming overlay */
+  --z-menu: 2000;     /* header dropdown menu */
+  --z-dialog: 3000;   /* modal dialogs */
+}
+
+/* Ensure menu creates its own stacking context above overlay */
+.menu-container { position: relative; isolation: isolate; }
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: var(--z-menu);
+  pointer-events: auto; /* guarantee interactivity */
+}
+
+/* Overlay always below menu, above page */
+#ui-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: var(--z-overlay);
+  opacity: 0; pointer-events: none; transition: opacity .15s ease;
+}
+#ui-overlay[aria-hidden="false"] { opacity: 1; pointer-events: auto; }
+
+/* Lock scroll while any overlay/menu is open */
+body.is-locked { overflow: hidden; position: relative; touch-action: none; }
+
+/* Dialog above everything + visual polish */
+dialog { z-index: var(--z-dialog); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+dialog article { display: flex; flex-direction: column; gap: 16px; }
+dialog h2 { margin: 0; font-size: clamp(20px, 3.6vw, 28px); }
+dialog p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.button-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Keep menu clickable even when nested inside header */
+header { position: sticky; top: 0; z-index: var(--z-header); }
+
+/* Optional: clearer hover click target in menu */
+#site-menu a { padding: 10px 12px; border-radius: 10px; }
+#site-menu a:hover { background: #0f1f26; }
+
+/* RTL alignment for dropdown */
+html[dir="rtl"] .menu { right: auto; left: 0; }
