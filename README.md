@@ -66,7 +66,7 @@ npm test
 
 ## Ethics pledge gate
 
-All public-facing pages load a shared script that checks for a valid pledge token (`ETHICS_PLEDGE_TOKEN`) and matching `TERMS_VERSION` entry in `sessionStorage`. If a visitor has not completed the pledge—or an older pledge version is detected—they are redirected to `./pledge.html` on page load to review and accept the current terms before continuing.
+All public-facing pages load a shared script that checks for a valid pledge token (`ETHICS_PLEDGE_TOKEN`) and matching `TERMS_VERSION` entry in `sessionStorage`. If a visitor has not completed the pledge—or an older pledge version is detected—they are redirected to `./pledge.html` on page load to review and accept the current terms before continuing. Inline pledge modals (such as the home page prompt) now seed the exact same structured payload in `sessionStorage`—and mirror it to `localStorage` for status badges—so both entry points stay in sync.
 
 ## Deployment
 
