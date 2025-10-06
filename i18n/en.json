@@ -29,6 +29,7 @@
     "home": "Home",
     "guides": "Guides",
     "manual": "Manual",
+    "selfaudit": "Self-audit",
     "ethics": "Ethics",
     "about": "About",
     "settings": "Settings",
@@ -39,6 +40,11 @@
     "why": "Why",
     "contact": "Contact",
     "disclaimer": "Disclaimer"
+  },
+  "ui": {
+    "installApp": "Install App",
+    "iosAdd": "Add on iPhone",
+    "close": "Close"
   },
   "manual": {
     "title": "Facebook Privacy Manual",
@@ -53,13 +59,38 @@
   "home": {
     "headline": "Take control of your Facebook privacy",
     "lede": "Follow gentle, trusted steps that make your account safer in minutes.",
-    "cta": "Start fixing",
+    "ctaLabel": "Start fixing",
     "quickActions": "Popular fixes",
     "quickActionLock": "Lock profile",
     "quickAction2fa": "Turn on 2FA",
     "quickActionPosts": "Limit past posts",
     "moreComing": "There should be much more.",
-    "guideCount": "4 guides available."
+    "guideCount": "4 guides available.",
+    "h1": "Be the master of your privacy.",
+    "notice": "You choose how deep to go. This site helps you take control—at your pace.",
+    "cta": {
+      "platform": {
+        "tag": "Start here",
+        "title": "Fix my privacy on social apps",
+        "body": "Facebook today, more platforms next. Clear, screenshot-friendly steps."
+      },
+      "why": {
+        "tag": "Mindset",
+        "title": "Why this matters (and to whom)",
+        "body": "Short, compelling reasons to act—without fear or jargon."
+      },
+      "ethics": {
+        "tag": "Ethics",
+        "title": "Our line: protect, don’t expose",
+        "body": "Consent, dignity, and responsibility—no doxxing, no vigilantism."
+      }
+    }
+  },
+  "ios": {
+    "title": "Add to Home Screen (iPhone)",
+    "step1": "Open in Safari.",
+    "step2": "Tap the Share icon.",
+    "step3": "Choose ‘Add to Home Screen’."
   },
   "homePage": {
     "heroTitle": "Be the master of your privacy.",
@@ -148,7 +179,10 @@
     "agree": "I agree",
     "readEthics": "Read ethics",
     "statusComplete": "Pledge signed",
-    "statusRequired": "Pledge required"
+    "statusRequired": "Pledge required",
+    "title": "Ethics Pledge",
+    "body": "Use this guide to protect, not to harm. No doxxing, no harassment, no vigilantism. Proceed only if you agree.",
+    "read": "Read ethics"
   },
   "disclaimer": {
     "title": "Read before you continue",
@@ -165,11 +199,22 @@
     "loading": "Loading ethics statement...",
     "error": "We could not load the ethics statement."
   },
+  "self": {
+    "title": "Self-audit — The DARK Threat Model",
+    "h1": "Self-audit: The DARK Threat Model",
+    "preface": "There isn’t a switch you can flip or a magic button that makes you safe online. Privacy is a process — one you can learn and apply. The DARK Threat Model is a framework I created to guide you through that process step by step.",
+    "progress": {
+      "label": "Progress"
+    }
+  },
   "about": {
     "heading": "About Social Risk Audit",
     "mission": "We build human-friendly privacy tools for families, activists, and journalists.",
     "values": "No ads, no trackers, no tricks—ever.",
     "roadmap": "More platforms coming soon."
+  },
+  "footer": {
+    "updated": "Last updated"
   },
   "offline": {
     "title": "You are offline",
