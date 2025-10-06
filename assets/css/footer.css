@@ -1,0 +1,27 @@
+:root {
+  --footer-fg: rgba(255,255,255,.72);
+  --footer-fg-muted: rgba(255,255,255,.56);
+  --footer-border: rgba(255,255,255,.12);
+}
+@media (prefers-color-scheme: light) {
+  :root { --footer-fg: rgba(0,0,0,.72); --footer-fg-muted: rgba(0,0,0,.60); --footer-border: rgba(0,0,0,.10); }
+}
+.site-footer {
+  margin-top: 48px;
+  padding: 20px 16px;
+  border-top: 1px solid var(--footer-border);
+  font-size: 0.9rem;
+  color: var(--footer-fg);
+}
+.site-footer .footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.site-footer a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.site-footer .sep { opacity: .6; }
