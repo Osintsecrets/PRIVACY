@@ -36,7 +36,10 @@ Serve the repo root with any static server to preview:
 python -m http.server 8000
 ```
 
-Then open [http://localhost:8000/index.html](http://localhost:8000/index.html). The service worker registers automatically on load.
+Then open [http://localhost:8000/index.html](http://localhost:8000/index.html). The service worker registers automatically on load and
+resolves the correct scope for both local preview and the GitHub Pages `/PRIVACY/` base path. Registration successes and failures are
+logged to the console for troubleshooting. The “Install App” button stays disabled until the browser fires `beforeinstallprompt`, at which
+point it becomes interactive.
 
 To verify the offline shell:
 

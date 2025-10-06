@@ -10,17 +10,23 @@
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    if (installBtn) installBtn.disabled = false;
+    if (installBtn) {
+      installBtn.disabled = false;
+      installBtn.setAttribute('aria-disabled', 'false');
+      console.debug('[pwa] beforeinstallprompt fired');
+    }
   });
 
   if (installBtn) {
     installBtn.disabled = true;
+    installBtn.setAttribute('aria-disabled', 'true');
     installBtn.addEventListener('click', async () => {
       if (!deferredPrompt) return;
       deferredPrompt.prompt();
       await deferredPrompt.userChoice;
       deferredPrompt = null;
       installBtn.disabled = true;
+      installBtn.setAttribute('aria-disabled', 'true');
     });
   }
 
