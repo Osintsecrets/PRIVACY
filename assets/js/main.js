@@ -74,3 +74,38 @@
     overlay.addEventListener('click', closeMenu);
   }
 })();
+
+/* Service worker bootstrap: register once the page is ready and log outcomes */
+(function(){
+  if (!('serviceWorker' in navigator)) {
+    return;
+  }
+
+  const scriptEl = document.currentScript || Array.from(document.querySelectorAll('script')).find(s => (s.src || '').includes('/assets/js/main.js'));
+  let swPath = '/sw.js';
+
+  if (scriptEl && scriptEl.src) {
+    try {
+      const scriptUrl = new URL(scriptEl.src, window.location.href);
+      const basePath = scriptUrl.pathname.replace(/assets\/js\/main\.js$/, '');
+      if (basePath) swPath = `${basePath}sw.js`;
+    } catch (error) {
+      console.error('[pwa] Failed to resolve service worker path', error);
+    }
+  }
+
+  const register = async () => {
+    try {
+      const registration = await navigator.serviceWorker.register(swPath);
+      console.debug('[pwa] Service worker registered', registration.scope);
+    } catch (error) {
+      console.error('[pwa] Service worker registration failed', error);
+    }
+  };
+
+  if (document.readyState === 'complete') {
+    register();
+  } else {
+    window.addEventListener('load', register, { once: true });
+  }
+})();
