@@ -204,6 +204,8 @@ Codex must attach exactly one category per card. Add buttons for each category i
 
 Provide an **ordered list** of action titles per platform. Example (TikTok):
 
+> ✅ Ready-made list: `tools/action-lists/tiktok-actions.txt` contains the full 130-item TikTok action list you can paste directly into Codex when generating the platform page.
+
 ```
 [TikTok]
 1) Enable Two-Factor Authentication (2FA)

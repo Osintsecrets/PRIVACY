@@ -1,0 +1,131 @@
+[TikTok]
+1) Enable Two-Factor Authentication (2FA)
+2) Change Password
+3) Review Active Devices & Log Out Unknown Sessions
+4) Turn On Login Alerts / Security Notifications
+5) Add/Verify Email and Phone; Remove Old Recovery Info
+6) Make Account Private
+7) Limit Who Can Send You Direct Messages
+8) Limit Who Can Mention You
+9) Limit Who Can Tag You
+10) Filter Comments with Keyword Lists
+11) Turn On Comment Filters for Spam and Offensive Content
+12) Limit Comments to Followers or Friends
+13) Turn Off Commenting on a Specific Video
+14) Delete an Individual Comment You Made
+15) Delete Comments on Your Video
+16) Pin or Unpin a Comment on Your Video
+17) Limit Who Can View Your Videos (Friends Only)
+18) Hide Videos from Specific Users
+19) Limit Who Can Duet Your Videos
+20) Limit Who Can Stitch Your Videos
+21) Turn Off Video Downloads
+22) Turn Off Photo Downloads (Photo Mode)
+23) Disable Save to Device for Your Own Posts
+24) Disable Allow GIFs from Your Videos (if shown)
+25) Disable Q&A on Your Account
+26) Disable Suggest Your Account to Others
+27) Disable Contacts and Facebook Friends Sync
+28) Delete Uploaded Contacts and Facebook Friends Data
+29) Disable Personalized Ads
+30) Limit Ad Topics and Sensitive Categories
+31) Review Interests and Inferred Topics (Clear/Reset where possible)
+32) Review Advertisers You’ve Interacted With (Remove)
+33) Clear Watch History
+34) Clear Search History
+35) Clear Individual Search Terms
+36) Clear Suggested Accounts (Remove Suggestions)
+37) Manage For You Page Personalization (Reduce personalization)
+38) Reset “Not Interested” Feedback (start fresh)
+39) Mark Video as Not Interested (per-item)
+40) Turn Off Video Autoplay (if available)
+41) Turn Off Live Autoplay and Live Notifications
+42) Limit Who Can Invite You to Live
+43) Hide Your Live from Specific Users
+44) Turn Off Live Replay Publishing
+45) Mute or Block a User
+46) Report a User
+47) Report a Video
+48) Report a Comment or Message
+49) Restrict a User (limited interactions)
+50) Remove a Follower (without blocking)
+51) Bulk Remove Followers (Manage Followers)
+52) Delete a Video
+53) Bulk Delete Multiple Videos (Manage posts)
+54) Archive a Video (if offered)
+55) Unarchive a Video
+56) Make a Video Private (Change visibility)
+57) Edit Video Privacy After Posting
+58) Delete a Photo Post (Photo Mode)
+59) Delete a Live Replay
+60) Delete a Draft Video
+61) Delete All Drafts (Bulk)
+62) Disable Story Replies
+63) Limit Story Replies to Followers/Friends
+64) Hide Stories from Specific Users
+65) Delete a Story
+66) Disable Story Downloads
+67) Disable Story Sharing (to messages)
+68) Manage Story Viewer List (Remove viewers via hide)
+69) Turn Off Duet for a Specific Video
+70) Turn Off Stitch for a Specific Video
+71) Turn Off Comments for a Specific Video
+72) Turn Off Downloads for a Specific Video
+73) Remove Yourself from a Tagged Video/Photo
+74) Review and Remove All Tags (bulk)
+75) Review Third-Party App Access (Revoke)
+76) Review Connected Devices (Log out specific devices)
+77) Log Out of All Devices
+78) Disable Face Effects Data Sharing (if shown)
+79) Disable Research or Diagnostic Data Sharing (if shown)
+80) Disable Ad Measurement / Off-TikTok Activity (if offered)
+81) Opt Out of Audience Expansion (Ads)
+82) Limit Data Sharing with Business/Partners (if shown)
+83) Turn Off Location Services for TikTok (OS setting)
+84) Turn Off Camera Access (OS setting)
+85) Turn Off Microphone Access (OS setting)
+86) Turn Off Photos/Media Library Access or Use Selected Photos (OS)
+87) Turn Off Bluetooth Access (OS)
+88) Turn Off Local Network Access (iOS)
+89) Turn Off Motion & Fitness Access (iOS)
+90) Disable Background App Refresh (iOS) / Background Data (Android)
+91) Disable Precise Location (if offered)
+92) Disable Sync with Contacts Calendar (if any prompts)
+93) Manage Push Notifications (reduce security/engagement pings)
+94) Mute Specific Notification Types (Lives, Suggestions)
+95) Disable Suggested Account Notifications
+96) Disable “People You May Know” Notifications
+97) Disable “Allow Others to Find You” by Contact
+98) Disable “Allow Others to Find You” by Facebook Friends
+99) Hide Liked Videos (set to Only me)
+100) Hide Following List (Friends/Only me if offered)
+101) Hide Followers List (where available)
+102) Hide Activity Status (if offered)
+103) Hide Viewed Videos Activity (if offered)
+104) Hide Who Can See Your Reposts
+105) Turn Off Repost Feature (if available)
+106) Remove a Repost
+107) Remove Likes from Videos (unlike history)
+108) Remove Video from Favorites
+109) Delete a Collection (Favorites)
+110) Remove Items from a Favorites Collection
+111) Manage Saved Effects (remove)
+112) Manage Saved Sounds (remove)
+113) Manage Saved Hashtags (remove)
+114) Manage Saved Places (remove)
+115) Clear In-App Browser Data (if available)
+116) Clear TikTok App Cache (Android)
+117) Offload/Remove TikTok and Reinstall (iOS cache workaround)
+118) Download Your Data
+119) Cancel a Data Download Request
+120) Delete Your Account (Permanent)
+121) Deactivate Your Account (Temporary)
+122) Request Username Change (securely)
+123) Remove Phone Number from Account (use email instead)
+124) Remove Email from Account (use phone instead)
+125) Review and Reset Two-Step Verification Methods (codes/app/SMS)
+126) Generate New Backup Codes (if supported)
+127) Review Security Emails from TikTok (verify authenticity)
+128) Turn Off Live Location in Live (if shown)
+129) Limit “Who Can View Your Likes” (double-check)
+130) Turn Off “Suggest Your Account to Others” (all toggles)
