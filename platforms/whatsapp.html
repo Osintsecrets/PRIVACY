@@ -1,356 +1,3615 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="#0b0f14" name="theme-color"/>
-<title>Social Risk Audit — WhatsApp</title>
-<link href="../assets/css/styles.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp Privacy & Security Guides</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
-<body>
-<a class="skip" href="#main" data-i18n="site.skip">Skip to content</a>
-<div id="ui-overlay" aria-hidden="true"></div>
-<header>
-<div class="wrapper header-row">
-<a class="brand" href="../" data-i18n="site.brand">Social Risk Audit</a>
-<div class="menu-container">
-<button aria-controls="site-menu" aria-expanded="false" aria-haspopup="true" aria-label="Open menu" class="menu-toggle">☰</button>
-<nav aria-label="Primary" class="menu" hidden="" id="site-menu">
-<a href="../" data-i18n="nav.home">Home</a>
-<a href="../self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
-<a href="../tools-methods.html">Tools and Methods</a>
-<a href="../platform.html" data-i18n="nav.platform">Platform</a>
-<a href="../why.html" data-i18n="nav.why">Why</a>
-<a href="../ethics.html" data-i18n="nav.ethics">Ethics</a>
-<a href="../about/" data-i18n="nav.about">About</a>
-<a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
-</nav>
-</div>
-</div>
-</header>
-<main class="platform-page" id="main">
-<div class="wrapper platform-wrapper">
-<div aria-hidden="true" id="page-top"></div>
-<nav aria-label="Back navigation" class="crumbs">
-<a aria-label="Back to Platforms" class="crumb back" href="../platform.html">← Back</a>
-</nav>
-<nav aria-label="Breadcrumb" class="breadcrumb">
-<ol>
-<li><a href="../" data-i18n="nav.home">Home</a></li>
-<li><a href="../platform.html">Platforms</a></li>
-<li aria-current="page">WhatsApp</li>
-</ol>
-</nav>
-<header class="platform-header">
-<h1>WhatsApp</h1>
-<p class="lead">Practical privacy actions you can take today on WhatsApp.</p>
-</header>
-<form action="" class="guide-search" id="guide-search-form" method="get" role="search">
-<label class="guide-search-label" for="guide-search-input">Search WhatsApp privacy actions</label>
-<div class="guide-search-field">
-<input autocomplete="off" id="guide-search-input" name="q" placeholder="Search by action, keyword, or feature" type="search"/>
-<button class="guide-search-reset" type="reset">Clear</button>
-</div>
-</form>
-<p aria-live="polite" class="search-status" id="guide-search-count" role="status"></p>
-<p class="search-empty-message" hidden="" id="guide-search-empty">No actions matched your search. Try different keywords or remove filters.</p>
-<div class="platform-layout">
-<div class="platform-content" id="guide-content">
-<section class="card" id="navigation-primer">
-<h2>Navigation Primer</h2>
-<h3>Mobile (WhatsApp)</h3>
-<ul>
-<li><strong>Settings:</strong> iPhone: bottom-right tab. Android: tap <strong>⋮</strong> (top-right) → <strong>Settings</strong>.</li>
-<li><strong>Account:</strong> Houses security, two-step verification, and request info controls.</li>
-<li><strong>Privacy:</strong> Inside Settings, controls visibility, groups, status, and disappearing messages.</li>
-<li><strong>Linked devices:</strong> Manage computers and tablets connected to your account.</li>
-</ul>
-<h3>Desktop (WhatsApp Desktop/Web)</h3>
-<ul>
-<li>Open the WhatsApp desktop app or web.whatsapp.com and link your phone if needed.</li>
-<li>Click your <strong>profile picture</strong> or the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
-<li>Desktop mirrors many privacy toggles but some (like backups) remain phone-only.</li>
-<li>Use <strong>Log out</strong> under Linked Devices when you finish on shared machines.</li>
-</ul>
-<p class="lead">If you cannot find a control on desktop, open WhatsApp on your phone—mobile settings always take precedence.</p>
-</section>
-<nav aria-label="Guides" class="card" id="guide-index">
-<h2>Guides</h2>
-<ol>
-<li class="guide-range-divider"><span>Guides #1–12</span></li>
-<li><a href="#guide-enable-whatsapp-two-step-verification">Enable WhatsApp Two-Step Verification</a></li>
-<li><a href="#guide-update-whatsapp-two-step-email">Update WhatsApp Two-Step Email</a></li>
-<li><a href="#guide-turn-on-end-to-end-encrypted-backups">Turn On End-to-End Encrypted Backups</a></li>
-<li><a href="#guide-set-default-disappearing-messages">Set a Default Disappearing Messages Timer</a></li>
-<li><a href="#guide-control-whatsapp-last-seen-and-online">Control WhatsApp Last Seen and Online Status</a></li>
-<li><a href="#guide-limit-who-sees-your-profile-photo">Limit Who Sees Your Profile Photo</a></li>
-<li><a href="#guide-limit-whatsapp-group-invites">Limit Who Can Add You to Groups</a></li>
-<li><a href="#guide-limit-whatsapp-status-audience">Limit Your Status Audience</a></li>
-<li><a href="#guide-lock-whatsapp-with-biometric">Lock WhatsApp with Biometric or Passcode</a></li>
-<li><a href="#guide-manage-linked-devices-on-whatsapp">Manage Linked Devices on WhatsApp</a></li>
-<li><a href="#guide-clear-old-chat-backups">Clear Old Chat Backups</a></li>
-<li><a href="#guide-request-your-whatsapp-account-info">Request Your WhatsApp Account Info</a></li>
-</ol>
-</nav>
-<h2 class="guide-range-heading" id="range-1-12">Guides #1–12</h2>
-<section class="card" id="guide-enable-whatsapp-two-step-verification">
-<h2>Enable WhatsApp Two-Step Verification</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>Open WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
-<li>Tap <strong>Two-step verification</strong> → <strong>Turn on</strong>.</li>
-<li>Create a 6-digit PIN and add an email address for recovery.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Open WhatsApp Desktop/Web → <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Account</strong>.</li>
-<li>Select <strong>Two-step verification</strong> and follow the prompts (you may be asked to finish on your phone).</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Two-step verification blocks attackers even if they hijack your SMS code.</p>
-</section>
-<section class="card" id="guide-update-whatsapp-two-step-email">
-<h2>Update WhatsApp Two-Step Email</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Account</strong> → <strong>Two-step verification</strong>.</li>
-<li>Tap <strong>Change email address</strong>.</li>
-<li>Enter a private email you control, confirm it, then tap <strong>Save</strong>.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web → <strong>Settings</strong> → <strong>Account</strong> → <strong>Two-step verification</strong>.</li>
-<li>Choose <strong>Change email</strong> and update it (desktop may prompt you to finish on mobile).</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Keeping the recovery email current ensures you can disable the PIN if you forget it.</p>
-</section>
-<section class="card" id="guide-turn-on-end-to-end-encrypted-backups">
-<h2>Turn On End-to-End Encrypted Backups</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
-<li>Tap <strong>End-to-end encrypted backup</strong> → <strong>Turn on</strong>.</li>
-<li>Create a password or 64-digit encryption key and confirm.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web will direct you to your phone: open WhatsApp on mobile and follow the steps above.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Encrypted backups ensure that cloud providers cannot read your message history.</p>
-</section>
-<section class="card" id="guide-set-default-disappearing-messages">
-<h2>Set a Default Disappearing Messages Timer</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
-<li>Tap <strong>Default message timer</strong>.</li>
-<li>Select a duration (24 hours, 7 days, 90 days) for new chats.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web → <strong>Settings</strong> → <strong>Privacy</strong> → <strong>Default message timer</strong>.</li>
-<li>Choose your preferred auto-delete window.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Disappearing messages keep new chats from storing long-term history by default.</p>
-</section>
-<section class="card" id="guide-control-whatsapp-last-seen-and-online">
-<h2>Control WhatsApp Last Seen and Online Status</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Privacy</strong> → <strong>Last seen and online</strong>.</li>
-<li>Set <strong>Last seen</strong> to <strong>My contacts</strong> or <strong>Nobody</strong>.</li>
-<li>Choose <strong>Same as last seen</strong> for <strong>Who can see when I'm online</strong>.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
-<li>Adjust <strong>Last seen and online</strong> to the strictest options.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Limiting online status prevents contacts from tracking your activity patterns.</p>
-</section>
-<section class="card" id="guide-limit-who-sees-your-profile-photo">
-<h2>Limit Who Sees Your Profile Photo</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Privacy</strong> → <strong>Profile photo</strong>.</li>
-<li>Select <strong>My contacts</strong> or <strong>My contacts except…</strong> to hide from specific people.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web → <strong>Settings</strong> → <strong>Privacy</strong> → <strong>Profile photo</strong>.</li>
-<li>Pick who can view your photo and confirm.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Restricting your profile photo minimizes what unknown numbers see when they message you.</p>
-</section>
-<section class="card" id="guide-limit-whatsapp-group-invites">
-<h2>Limit Who Can Add You to Groups</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Privacy</strong> → <strong>Groups</strong>.</li>
-<li>Select <strong>My contacts</strong> or <strong>My contacts except…</strong>.</li>
-<li>When set to <strong>My contacts except…</strong>, you can leave only trusted contacts allowed to add you directly.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web → <strong>Settings</strong> → <strong>Privacy</strong> → <strong>Groups</strong>.</li>
-<li>Choose the same restrictions as on mobile.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Restricting group invites keeps spammers from adding you without approval.</p>
-</section>
-<section class="card" id="guide-limit-whatsapp-status-audience">
-<h2>Limit Your Status Audience</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Status</strong> tab → <strong>Privacy</strong> (iPhone: <strong>Privacy</strong> button; Android: <strong>⋮</strong> → <strong>Status privacy</strong>).</li>
-<li>Select <strong>My contacts</strong>, <strong>My contacts except…</strong>, or <strong>Only share with…</strong>.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web → <strong>Status</strong> → <strong>Status privacy</strong>.</li>
-<li>Set the audience to your preferred group.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Narrow status visibility to reduce exposure of photos or updates to casual contacts.</p>
-</section>
-<section class="card" id="guide-lock-whatsapp-with-biometric">
-<h2>Lock WhatsApp with Biometric or Passcode</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
-<li>Scroll to <strong>Screen lock</strong> (iPhone) or <strong>Fingerprint lock</strong> (Android).</li>
-<li>Toggle it on and choose how quickly the app locks after inactivity.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web currently relies on your computer's lock screen. Use a strong device password and log out when done.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> App locking prevents people with physical access to your phone from reading chats.</p>
-</section>
-<section class="card" id="guide-manage-linked-devices-on-whatsapp">
-<h2>Manage Linked Devices on WhatsApp</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Linked devices</strong>.</li>
-<li>Review each device and tap it → <strong>Log out</strong> if you do not recognize it.</li>
-<li>Use <strong>Link a device</strong> only on trusted computers.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web → <strong>⋮</strong> menu → <strong>Log out</strong> (to disconnect the current computer).</li>
-<li>For other devices, check your phone under <strong>Linked devices</strong> and remove them there.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Regularly pruning devices stops old computers from re-opening your chats.</p>
-</section>
-<section class="card" id="guide-clear-old-chat-backups">
-<h2>Clear Old Chat Backups</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>iPhone: <strong>Settings</strong> app → <strong>Apple ID</strong> → <strong>iCloud</strong> → <strong>Manage Account Storage</strong> → <strong>Backups</strong> → delete outdated WhatsApp backups.</li>
-<li>Android: Open <strong>Google Drive</strong> → <strong>Backups</strong> → find WhatsApp backups → <strong>Delete backup</strong>.</li>
-<li>Return to WhatsApp → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong> to confirm encryption is still on.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web cannot manage cloud backups; use your phone's iCloud or Google Drive settings instead.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Removing old unencrypted backups reduces what attackers could restore.</p>
-</section>
-<section class="card" id="guide-request-your-whatsapp-account-info">
-<h2>Request Your WhatsApp Account Info</h2>
-<details open="">
-<summary>On Mobile</summary>
-<ol>
-<li>WhatsApp → <strong>Settings</strong> → <strong>Account</strong> → <strong>Request account info</strong>.</li>
-<li>Tap <strong>Request report</strong>. WhatsApp will prepare it within about 3 days.</li>
-<li>Return to this screen to download the report before the expiry date.</li>
-</ol>
-</details>
-<details>
-<summary>On Desktop</summary>
-<ol>
-<li>Desktop/Web shows a shortcut but requires completing the request on your phone.</li>
-</ol>
-</details>
-<p class="lead"><strong>Tips:</strong> Reviewing the report reveals metadata WhatsApp keeps so you can adjust settings accordingly.</p>
-</section>
-</div>
-<aside aria-label="On this page" class="platform-sidebar">
-<div class="card toc-card">
-<h2>On this page</h2>
-<nav aria-label="On this page">
-<ul>
-<li><a href="#navigation-primer">Navigation primer</a></li>
-<li><a href="#guide-index">Guide index</a></li>
-<li><a href="#range-1-12">Guides #1–12</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</div>
-<a class="back-to-top" href="#page-top">Back to top</a>
-</div>
-</main>
-<footer id="site-footer">
-<div class="wrapper footer-layout">
-<p>Utility-first build — no trackers.</p>
-<nav aria-label="Footer" class="footer-links">
-<a href="../" data-i18n="nav.home">Home</a>
-<a href="../self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
-<a href="../tools-methods.html">Tools and Methods</a>
-<a href="../platform.html" data-i18n="nav.platform">Platform</a>
-<a href="../why.html" data-i18n="nav.why">Why</a>
-<a href="../ethics.html" data-i18n="nav.ethics">Ethics</a>
-<a href="../about/" data-i18n="nav.about">About</a>
-<a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
-</nav>
-</div>
-</footer>
-<script defer="" src="../assets/js/i18n.js"></script>
-<script defer="" src="../assets/js/pledge-gate.js"></script>
-<script defer="" src="../assets/js/platform-guides.js"></script>
-<script defer="" src="../assets/js/main.js"></script>
+<body class="theme-dark">
+  <header class="site-header">
+    <a href="../index.html" class="logo">Social Risk Audit</a>
+    <nav class="site-nav">
+      <a href="../index.html">Home</a>
+      <a href="../self-audit.html">Self‑audit</a>
+      <a href="../platform.html" aria-current="page">Platform</a>
+      <a href="../about/index.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">WhatsApp — Privacy & Security</h1>
+
+    <section class="guide-filters">
+      <input id="guide-search" type="search" placeholder="Search guides" aria-label="Search guides">
+      <div class="guide-categories">
+        <button type="button" class="category-filter is-active" data-category="all">All</button>
+        <button type="button" class="category-filter" data-category="Account Security & Login">Account Security & Login</button>
+        <button type="button" class="category-filter" data-category="Privacy (Profile/Status/Last seen)">Privacy (Profile/Status/Last seen)</button>
+        <button type="button" class="category-filter" data-category="Groups & Communities">Groups & Communities</button>
+        <button type="button" class="category-filter" data-category="Messages & Media">Messages & Media</button>
+        <button type="button" class="category-filter" data-category="Disappearing & View-Once">Disappearing & View-Once</button>
+        <button type="button" class="category-filter" data-category="Linked Devices & Sessions">Linked Devices & Sessions</button>
+        <button type="button" class="category-filter" data-category="Backups & Encryption">Backups & Encryption</button>
+        <button type="button" class="category-filter" data-category="Data & Export">Data & Export</button>
+        <button type="button" class="category-filter" data-category="Business Features">Business Features</button>
+        <button type="button" class="category-filter" data-category="App Permissions">App Permissions</button>
+      </div>
+    </section>
+
+    <section id="guides" class="guide-grid">
+      <article id="whatsapp-enable-two-step-verification" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="two-step verification,2fa,pin,recovery,email,six-digit,security lock">
+        <h3 class="guide-title">Enable Two-Step Verification PIN</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Two-step verification</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong> → <strong>Turn on</strong>.</li>
+            <li>Create a 6-digit PIN, confirm it, then add an email address for recovery.</li>
+            <li>Tap <strong>Save</strong> to finish.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Choose <strong>Two-step verification</strong> → <strong>Turn on</strong>.</li>
+            <li>Enter and confirm a 6-digit PIN, then add an email address.</li>
+            <li>Tap <strong>Save</strong> to enable it.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-update-two-step-pin" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="update pin,two-step verification,change pin,security code,account lock">
+        <h3 class="guide-title">Update Two-Step Verification PIN</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Two-step verification</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong> → <strong>Change PIN</strong>.</li>
+            <li>Enter your current PIN, then set and confirm a new PIN.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Select <strong>Two-step verification</strong> → <strong>Change PIN</strong>.</li>
+            <li>Enter the existing PIN, then enter and confirm the new PIN.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-add-recovery-email" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="add email,recovery email,two-step verification,reset pin,account recovery">
+        <h3 class="guide-title">Add Recovery Email to Two-Step Verification</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Two-step verification</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong> → <strong>Add email address</strong>.</li>
+            <li>Enter your email twice and tap <strong>Next</strong>.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong> → <strong>Add email address</strong>.</li>
+            <li>Type the email twice, then tap <strong>Done</strong>.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-reset-two-step-pin" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="reset pin,two-step verification,forgot pin,email reset,account access">
+        <h3 class="guide-title">Reset Two-Step Verification PIN via Email</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Two-step verification</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → enter your email on the PIN prompt → tap <strong>Forgot PIN?</strong>.</li>
+            <li>Tap <strong>Send email</strong> to receive the reset link.</li>
+            <li>Open the email on your phone and tap the reset link.</li>
+            <li>Set and confirm a new PIN, then tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Forgot PIN?</strong> on the verification screen.</li>
+            <li>Choose <strong>Send email</strong> to receive a reset link.</li>
+            <li>Open the email and follow the link in Safari.</li>
+            <li>Create and confirm a new PIN, then tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-enable-security-notifications" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="security notifications,device alerts,encryption code change,account security,alerts">
+        <h3 class="guide-title">Enable Security Notifications</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Security notifications</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Security notifications</strong>.</li>
+            <li>Toggle <strong>Show security notifications on this phone</strong> on.</li>
+            <li>Return to save the setting.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Security notifications</strong>.</li>
+            <li>Turn on <strong>Show security notifications</strong>.</li>
+            <li>Back out to apply the change.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-verify-contact-security-code" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="verify security code,encryption code,scan qr,contact safety,compare digits">
+        <h3 class="guide-title">Verify a Contact's Security Code</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Contact info → Encryption</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Encryption</strong>.</li>
+            <li>Scan the QR code with your phone or compare the 60-digit number with your contact.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Scroll to <strong>Encryption</strong> and tap it.</li>
+            <li>Scan the QR code or compare the digits.</li>
+            <li>Tap <strong>Verify</strong> if prompted.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Encryption</strong>.</li>
+            <li>Scan the QR code or compare the digits.</li>
+            <li>Tap <strong>Verify</strong> if prompted.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-change-phone-number" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="change number,phone number update,account phone,migrate account,new number">
+        <h3 class="guide-title">Change Your WhatsApp Phone Number</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Change number</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Change number</strong> → <strong>Next</strong>.</li>
+            <li>Enter your old number and new number with country codes.</li>
+            <li>Tap <strong>Next</strong> and follow the verification prompts.</li>
+            <li><em>Confirm:</em> Tap <strong>Done</strong> after entering the SMS code.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Change number</strong> → <strong>Next</strong>.</li>
+            <li>Enter old and new phone numbers with country codes.</li>
+            <li>Tap <strong>Next</strong> and verify via SMS.</li>
+            <li><em>Confirm:</em> Tap <strong>Done</strong> to finish.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-confirm-email-address" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="confirm email,address verification,account email,login recovery,security email">
+        <h3 class="guide-title">Confirm Your WhatsApp Email Address</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Email address</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Email address</strong>.</li>
+            <li>Enter your email, then tap <strong>Next</strong>.</li>
+            <li>Open the verification email and tap the confirmation link.</li>
+            <li>Return to WhatsApp to see the confirmed status.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Email address</strong>.</li>
+            <li>Type your email and tap <strong>Next</strong>.</li>
+            <li>Use the emailed link to confirm.</li>
+            <li>Reopen WhatsApp to verify it shows as confirmed.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-lock-app-with-biometric" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="fingerprint lock,face id lock,screen lock,app lock,biometric security">
+        <h3 class="guide-title">Require Fingerprint or Face ID to Unlock WhatsApp</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Screen lock</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Scroll to <strong>Fingerprint lock</strong> and tap it.</li>
+            <li>Turn on <strong>Unlock with fingerprint</strong> and set the auto-lock timer.</li>
+            <li>Tap <strong>OK</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>WhatsApp → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Screen Lock</strong>.</li>
+            <li>Toggle on <strong>Require Face ID</strong> or <strong>Require Touch ID</strong>.</li>
+            <li>Choose the time interval and exit to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-delete-account" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="delete account,remove account,close account,erase data,account removal">
+        <h3 class="guide-title">Delete Your WhatsApp Account</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Delete my account</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Delete my account</strong>.</li>
+            <li>Enter your phone number with country code.</li>
+            <li>Tap <strong>Delete my account</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete my account</strong> again to finalize.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Delete my account</strong>.</li>
+            <li>Enter your phone number and tap <strong>Delete my account</strong>.</li>
+            <li>Select a reason if prompted.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete my account</strong> again.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-revoke-registration-code" class="guide-card" data-platform="whatsapp" data-category="Account Security & Login" data-keywords="registration code,revoke code,login code compromise,secure account,sms code">
+        <h3 class="guide-title">Revoke a Compromised Registration Code</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Two-step verification</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → <strong>⋮</strong> → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong> → <strong>Disable</strong>.</li>
+            <li>Tap <strong>Disable</strong> to remove the old PIN.</li>
+            <li>Tap <strong>Enable</strong> and create a new PIN immediately.</li>
+            <li>Add or update your recovery email, then tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Two-step verification</strong> → <strong>Turn off</strong>.</li>
+            <li>Tap <strong>Turn off</strong> again to remove it.</li>
+            <li>Tap <strong>Turn on</strong> and create a fresh PIN.</li>
+            <li>Add your email address and tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-hide-last-seen" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="last seen,online status,privacy,seen status,hide activity">
+        <h3 class="guide-title">Hide Last Seen and Online Status</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Last seen and Online</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Last seen and online</strong>.</li>
+            <li>Choose <strong>Nobody</strong> for Last seen.</li>
+            <li>Select <strong>Same as Last seen</strong> for Online status.</li>
+            <li>Click <strong>Done</strong> to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Last seen and online</strong>.</li>
+            <li>Select <strong>Nobody</strong> under Last seen.</li>
+            <li>Choose <strong>Same as Last seen</strong> for Who can see when you're online.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Last Seen & Online</strong>.</li>
+            <li>Tap <strong>Nobody</strong> under Last Seen.</li>
+            <li>Choose <strong>Same as Last Seen</strong> for Online status.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-last-seen-contacts" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="last seen,my contacts,online privacy,seen visibility,contacts only">
+        <h3 class="guide-title">Share Last Seen with Contacts Only</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Last seen and Online</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Last seen and online</strong>.</li>
+            <li>Choose <strong>My contacts</strong> under Last seen.</li>
+            <li>Set Online status to <strong>Same as Last seen</strong>.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Last seen and online</strong>.</li>
+            <li>Tap <strong>My contacts</strong>.</li>
+            <li>Leave Online status as <strong>Same as Last seen</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Last Seen & Online</strong>.</li>
+            <li>Select <strong>My Contacts</strong>.</li>
+            <li>Keep Online status at <strong>Same as Last Seen</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-profile-photo-contacts" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="profile photo privacy,my contacts,display picture,dp visibility,profile picture">
+        <h3 class="guide-title">Limit Profile Photo to Contacts</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Profile photo</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Profile photo</strong>.</li>
+            <li>Select <strong>My contacts</strong>.</li>
+            <li>Click <strong>Done</strong> to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Profile photo</strong>.</li>
+            <li>Choose <strong>My contacts</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Profile Photo</strong>.</li>
+            <li>Tap <strong>My Contacts</strong>.</li>
+            <li>Tap <strong>Done</strong> to save.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-hide-profile-photo" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="hide profile photo,nobody can see,profile picture privacy,dp hidden,avatar privacy">
+        <h3 class="guide-title">Hide Profile Photo from Everyone</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Profile photo</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Profile photo</strong>.</li>
+            <li>Select <strong>Nobody</strong>.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Profile photo</strong>.</li>
+            <li>Tap <strong>Nobody</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Profile Photo</strong>.</li>
+            <li>Choose <strong>Nobody</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-about-my-contacts-except" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="about info,about privacy,my contacts except,status text,profile about">
+        <h3 class="guide-title">Limit About Info with Exceptions</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → About</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>About</strong>.</li>
+            <li>Select <strong>My contacts except…</strong>.</li>
+            <li>Pick contacts to exclude and click <strong>Done</strong>.</li>
+            <li>Click <strong>Done</strong> again to confirm.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>About</strong>.</li>
+            <li>Tap <strong>My contacts except…</strong>.</li>
+            <li>Select contacts to exclude and tap the check mark.</li>
+            <li>Tap <strong>Done</strong> to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>About</strong>.</li>
+            <li>Choose <strong>My Contacts Except…</strong>.</li>
+            <li>Select contacts to exclude → tap <strong>Done</strong>.</li>
+            <li>Tap <strong>Done</strong> again to save.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-turn-off-read-receipts" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="read receipts,blue ticks,privacy,seen messages,disable read receipts">
+        <h3 class="guide-title">Turn Off Read Receipts</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Read receipts</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Read receipts</strong>.</li>
+            <li>Toggle <strong>Read receipts</strong> off.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Read receipts</strong>.</li>
+            <li>Turn off the <strong>Read receipts</strong> switch.</li>
+            <li>Back out to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Read Receipts</strong>.</li>
+            <li>Toggle off <strong>Read Receipts</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-turn-on-read-receipts" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="read receipts on,blue ticks,seen messages,enable read receipts,privacy">
+        <h3 class="guide-title">Turn On Read Receipts</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Read receipts</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Read receipts</strong>.</li>
+            <li>Toggle <strong>Read receipts</strong> on.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Read receipts</strong>.</li>
+            <li>Turn on the <strong>Read receipts</strong> switch.</li>
+            <li>Back out to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Read Receipts</strong>.</li>
+            <li>Toggle on <strong>Read Receipts</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-status-only-contacts" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="status privacy,my contacts,status audience,status updates,stories privacy">
+        <h3 class="guide-title">Share Status Updates with Contacts Only</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Status</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Status</strong>.</li>
+            <li>Select <strong>My contacts</strong>.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Status</strong>.</li>
+            <li>Choose <strong>My contacts</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Status</strong>.</li>
+            <li>Tap <strong>My Contacts</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-status-contacts-except" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="status exceptions,my contacts except,hide status,specific people,privacy">
+        <h3 class="guide-title">Exclude Contacts from Status Updates</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Status</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Status</strong>.</li>
+            <li>Choose <strong>My contacts except…</strong>.</li>
+            <li>Select contacts to exclude and click <strong>Done</strong>.</li>
+            <li>Click <strong>Done</strong> again to finish.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Status</strong>.</li>
+            <li>Tap <strong>My contacts except…</strong>.</li>
+            <li>Select people to exclude → tap the check mark.</li>
+            <li>Tap <strong>Done</strong> to confirm.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Status</strong>.</li>
+            <li>Choose <strong>My Contacts Except…</strong>.</li>
+            <li>Pick contacts to exclude → tap <strong>Done</strong>.</li>
+            <li>Tap <strong>Done</strong> again.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-stop-live-location" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="live location,stop sharing,location privacy,location sharing,end location">
+        <h3 class="guide-title">Stop Sharing Live Location</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Live location</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Live location</strong>.</li>
+            <li>Tap the chat listed with <strong>Live</strong>.</li>
+            <li>Tap <strong>Stop sharing</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Stop</strong> to end live location.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Live Location</strong>.</li>
+            <li>Tap the chat showing Live.</li>
+            <li>Tap <strong>Stop Sharing</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Stop</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-silence-unknown-callers" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="silence unknown callers,call privacy,block unknown,spam calls,call settings">
+        <h3 class="guide-title">Silence Unknown Callers</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Calls</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Calls</strong>.</li>
+            <li>Turn on <strong>Silence unknown callers</strong>.</li>
+            <li>Back out to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Calls</strong>.</li>
+            <li>Enable <strong>Silence Unknown Callers</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-blocked-contacts" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="blocked contacts,block number,stop messages,privacy block,block user">
+        <h3 class="guide-title">Add Someone to Blocked Contacts</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Blocked contacts</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Blocked contacts</strong>.</li>
+            <li>Click <strong>Add blocked contact</strong>.</li>
+            <li>Search for the contact and click it.</li>
+            <li>Click <strong>Block</strong> to confirm.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Blocked contacts</strong>.</li>
+            <li>Tap <strong>Add</strong>.</li>
+            <li>Select the contact you want to block.</li>
+            <li>Tap <strong>Block</strong> to confirm.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Blocked</strong>.</li>
+            <li>Tap <strong>Add New…</strong>.</li>
+            <li>Choose the contact to block.</li>
+            <li><em>Confirm:</em> Tap <strong>Block</strong> when prompted.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-unblock-contact" class="guide-card" data-platform="whatsapp" data-category="Privacy (Profile/Status/Last seen)" data-keywords="unblock contact,restore messages,allow contact,remove block,contact privacy">
+        <h3 class="guide-title">Unblock a Contact</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Blocked contacts</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Blocked contacts</strong>.</li>
+            <li>Hover over the name and click <strong>X</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Unblock</strong> to allow messages.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Blocked contacts</strong>.</li>
+            <li>Tap the contact you want to unblock.</li>
+            <li>Tap <strong>Unblock</strong> to allow messages again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Blocked</strong>.</li>
+            <li>Swipe left on the contact name.</li>
+            <li>Tap <strong>Unblock</strong> to confirm.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-limit-group-invites" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="group invites,my contacts,group privacy,invite control,groups">
+        <h3 class="guide-title">Limit Who Can Add You to Groups</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Groups</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Groups</strong>.</li>
+            <li>Select <strong>My contacts</strong> or <strong>My contacts except…</strong>.</li>
+            <li>Click <strong>Done</strong> to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Groups</strong>.</li>
+            <li>Choose <strong>My contacts</strong> or <strong>My contacts except…</strong>.</li>
+            <li>If needed, pick exceptions and tap the check mark.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Groups</strong>.</li>
+            <li>Tap <strong>My Contacts</strong> or <strong>My Contacts Except…</strong>.</li>
+            <li>Select exceptions if needed → tap <strong>Done</strong>.</li>
+            <li>Tap <strong>Done</strong> again.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-approve-new-group-participants" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="approve participants,group approval,group privacy,admin approval,group settings">
+        <h3 class="guide-title">Require Admin Approval for New Group Participants</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info → Group settings</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Group settings</strong>.</li>
+            <li>Click <strong>Approve new participants</strong>.</li>
+            <li>Toggle <strong>Approve new participants</strong> on.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Group settings</strong>.</li>
+            <li>Tap <strong>Approve new participants</strong>.</li>
+            <li>Turn on <strong>Approve new participants</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Group Settings</strong>.</li>
+            <li>Tap <strong>Approve New Participants</strong>.</li>
+            <li>Enable <strong>Approve New Participants</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-review-community-announcements" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="community announcements,restrict posts,community settings,announcement control">
+        <h3 class="guide-title">Restrict Community Announcement Posts</h3>
+        <p class="settings-path"><strong>Path:</strong> Community → Community info → Announcement group settings</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Community settings</strong>.</li>
+            <li>Choose <strong>Announcement group</strong>.</li>
+            <li>Set posting permissions to <strong>Only admins</strong>.</li>
+            <li>Click <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Community settings</strong>.</li>
+            <li>Tap <strong>Announcement group</strong>.</li>
+            <li>Select <strong>Only admins</strong>.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Community Settings</strong>.</li>
+            <li>Tap <strong>Announcement Group</strong>.</li>
+            <li>Choose <strong>Only Admins</strong>.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-leave-group-quietly" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="leave group,exit group,quiet exit,group privacy,group leave">
+        <h3 class="guide-title">Leave a Group Quietly</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Scroll down and click <strong>Exit group</strong>.</li>
+            <li>Choose <strong>Leave group</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Leave</strong> to exit quietly.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Scroll down and tap <strong>Exit group</strong>.</li>
+            <li>Tap <strong>Exit</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Exit</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Scroll to the bottom and tap <strong>Exit Group</strong>.</li>
+            <li>Tap <strong>Exit</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Exit Group</strong> to finish.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-mute-group-notifications" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="mute group,notification control,group alerts,quiet group,group notifications">
+        <h3 class="guide-title">Mute Group Notifications</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info → Mute notifications</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Mute notifications</strong>.</li>
+            <li>Choose a duration (8 hours, 1 week, Always).</li>
+            <li>Click <strong>Mute</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Mute notifications</strong>.</li>
+            <li>Pick a duration and optionally disable show notifications.</li>
+            <li>Tap <strong>OK</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Mute</strong>.</li>
+            <li>Select 8 Hours, 1 Week, or Always.</li>
+            <li>Tap <strong>Mute</strong> to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-set-group-send-messages-admins" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="group messaging,admins only,group privacy,send messages setting,group control">
+        <h3 class="guide-title">Allow Only Admins to Send Group Messages</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info → Group settings</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Group settings</strong>.</li>
+            <li>Select <strong>Send messages</strong>.</li>
+            <li>Choose <strong>Only admins</strong>.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Group settings</strong>.</li>
+            <li>Tap <strong>Send messages</strong>.</li>
+            <li>Select <strong>Only admins</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Group Settings</strong>.</li>
+            <li>Tap <strong>Send Messages</strong>.</li>
+            <li>Pick <strong>Only Admins</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-reset-group-invite-link" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="reset invite link,group invite,link revoke,group security,new invite">
+        <h3 class="guide-title">Reset a Group Invite Link</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info → Invite via link</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Invite to group via link</strong>.</li>
+            <li>Click <strong>Reset link</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Reset link</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Invite via link</strong>.</li>
+            <li>Tap <strong>Reset link</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Reset link</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Invite Via Link</strong>.</li>
+            <li>Tap <strong>Reset Link</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Reset Link</strong> to generate a new link.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-report-group" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="report group,abuse report,group safety,spam group,report community">
+        <h3 class="guide-title">Report a Group</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Scroll down and click <strong>Report group</strong>.</li>
+            <li>Check <strong>Exit group</strong> if you want to leave.</li>
+            <li><em>Confirm:</em> Click <strong>Report</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Scroll to <strong>Report group</strong> and tap it.</li>
+            <li>Choose whether to block future messages.</li>
+            <li><em>Confirm:</em> Tap <strong>Report</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Scroll down and tap <strong>Report Group</strong>.</li>
+            <li>Select block options if needed.</li>
+            <li><em>Confirm:</em> Tap <strong>Report</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-community-notifications" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="community notifications,announcement alerts,community mute,notification control">
+        <h3 class="guide-title">Manage Community Notifications</h3>
+        <p class="settings-path"><strong>Path:</strong> Community → Community info → Notifications</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Notifications</strong>.</li>
+            <li>Choose the notification level you prefer.</li>
+            <li>Click <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Notifications</strong>.</li>
+            <li>Pick All messages, Mentions, or None.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Notifications</strong>.</li>
+            <li>Choose All Messages, Mentions, or None.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-pending-group-requests" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="pending requests,group requests,approve join,group members,requests review">
+        <h3 class="guide-title">Review Pending Group Requests</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info → Pending participants</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Pending participants</strong>.</li>
+            <li>Review each request and click <strong>Approve</strong> or <strong>Reject</strong>.</li>
+            <li>Decisions save instantly.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Pending participants</strong>.</li>
+            <li>Tap <strong>Approve</strong> or <strong>Reject</strong> beside each name.</li>
+            <li>Exit when done.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Pending Participants</strong>.</li>
+            <li>Choose <strong>Approve</strong> or <strong>Reject</strong> for each request.</li>
+            <li>Return to finish.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-hide-group-media" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="group media visibility,hide photos,group gallery,media privacy">
+        <h3 class="guide-title">Hide Group Media from Gallery</h3>
+        <p class="settings-path"><strong>Path:</strong> Group chat → Group info → Media visibility</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Media visibility</strong>.</li>
+            <li>Select <strong>No</strong>.</li>
+            <li>Click <strong>OK</strong> to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Media visibility</strong>.</li>
+            <li>Choose <strong>No</strong>.</li>
+            <li>Tap <strong>OK</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Save to Camera Roll</strong>.</li>
+            <li>Select <strong>Never</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-community-directory" class="guide-card" data-platform="whatsapp" data-category="Groups & Communities" data-keywords="community directory,hide community,community privacy,remove listing">
+        <h3 class="guide-title">Remove Community from Directory</h3>
+        <p class="settings-path"><strong>Path:</strong> Community → Community info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Edit community details</strong>.</li>
+            <li>Toggle off <strong>Show in directory</strong>.</li>
+            <li>Click <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Edit</strong> next to community details.</li>
+            <li>Turn off <strong>Show in directory</strong>.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Edit</strong> in Community Info.</li>
+            <li>Disable <strong>Show in Directory</strong>.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-mute-individual-chat" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="mute chat,stop alerts,notification mute,quiet chat,silence conversation">
+        <h3 class="guide-title">Mute an Individual Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Mute notifications</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Mute notifications</strong>.</li>
+            <li>Select a duration and click <strong>Mute</strong>.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Mute notifications</strong>.</li>
+            <li>Choose 8 hours, 1 week, or Always and tap <strong>OK</strong>.</li>
+            <li>Optionally disable show notifications.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Mute</strong>.</li>
+            <li>Select a duration.</li>
+            <li>Tap <strong>Mute</strong> to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-archive-chat" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="archive chat,hide chat,list cleanup,chat archive,organize chats">
+        <h3 class="guide-title">Archive a Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chats list</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and hover over the chat.</li>
+            <li>Click the <strong>▾</strong> arrow → <strong>Archive chat</strong>.</li>
+            <li>The chat moves to Archived.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>In Chats, tap and hold the conversation.</li>
+            <li>Tap the <strong>Archive</strong> icon (box with arrow).</li>
+            <li>The chat moves to Archived.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>In Chats, swipe left on the conversation.</li>
+            <li>Tap <strong>Archive</strong>.</li>
+            <li>The chat moves to Archived.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-pin-chat" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="pin chat,top conversation,favorite chat,chat pinning,priority chat">
+        <h3 class="guide-title">Pin a Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chats list</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and hover over the chat.</li>
+            <li>Click the <strong>▾</strong> arrow → <strong>Pin chat</strong>.</li>
+            <li>Pinned chats stay at the top.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>In Chats, tap and hold the conversation.</li>
+            <li>Tap the <strong>Pin</strong> icon.</li>
+            <li>The chat remains at the top.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>In Chats, swipe right on the conversation.</li>
+            <li>Tap <strong>Pin</strong>.</li>
+            <li>The chat is pinned.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-turn-off-media-auto-download-mobile" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="auto-download mobile data,media download,storage control,data usage,photos download">
+        <h3 class="guide-title">Turn Off Media Auto-Download on Mobile Data</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Storage and data → Media auto-download</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Storage and data</strong>.</li>
+            <li>Tap <strong>When using mobile data</strong>.</li>
+            <li>Uncheck all media types.</li>
+            <li>Tap <strong>OK</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Storage and Data</strong>.</li>
+            <li>Tap <strong>Photos</strong>, <strong>Audio</strong>, <strong>Video</strong>, and <strong>Documents</strong> under Mobile Data.</li>
+            <li>Set each to <strong>Never</strong>.</li>
+            <li>Return to save.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-turn-off-media-auto-download-wifi" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="auto-download wifi,media download,wifi usage,storage control,photos wifi">
+        <h3 class="guide-title">Turn Off Media Auto-Download on Wi-Fi</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Storage and data → Media auto-download</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Storage and data</strong>.</li>
+            <li>Tap <strong>When connected on Wi-Fi</strong>.</li>
+            <li>Uncheck all media types.</li>
+            <li>Tap <strong>OK</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Storage and Data</strong>.</li>
+            <li>Under Wi-Fi, set Photos, Audio, Video, and Documents to <strong>Never</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-turn-off-media-auto-download-roaming" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="auto-download roaming,roaming data,media control,travel data,media download">
+        <h3 class="guide-title">Turn Off Media Auto-Download on Roaming</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Storage and data → Media auto-download</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Storage and data</strong>.</li>
+            <li>Tap <strong>When roaming</strong>.</li>
+            <li>Uncheck all media types.</li>
+            <li>Tap <strong>OK</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Storage and Data</strong>.</li>
+            <li>Under Roaming, set each media type to <strong>Never</strong>.</li>
+            <li>Return to save.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-stop-saving-media-gallery" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="media visibility,gallery save,auto save photos,media privacy,download control">
+        <h3 class="guide-title">Stop Saving Media to Phone Gallery</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Media visibility</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong>.</li>
+            <li>Turn off <strong>Media visibility</strong>.</li>
+            <li>Exit to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong>.</li>
+            <li>Toggle off <strong>Save to Camera Roll</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-clear-chat" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="clear chat,delete messages,chat cleanup,empty chat,remove messages">
+        <h3 class="guide-title">Clear All Messages in a Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Clear chat</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Scroll down and click <strong>Clear messages</strong>.</li>
+            <li>Choose whether to keep starred messages.</li>
+            <li><em>Confirm:</em> Click <strong>Clear</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>More</strong> → <strong>Clear chat</strong>.</li>
+            <li>Choose whether to keep starred messages.</li>
+            <li><em>Confirm:</em> Tap <strong>Clear chat</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Clear Chat</strong>.</li>
+            <li>Choose whether to keep starred messages.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete All Messages</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-delete-message-for-everyone" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="delete for everyone,remove message,unsend message,chat privacy,delete sent message">
+        <h3 class="guide-title">Delete a Message for Everyone</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Message → Delete</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and hover over the message.</li>
+            <li>Click the <strong>▾</strong> arrow → <strong>Delete message</strong>.</li>
+            <li>Select <strong>Delete for everyone</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Delete</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the message.</li>
+            <li>Tap the <strong>Delete</strong> icon.</li>
+            <li>Tap <strong>Delete for everyone</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>OK</strong> if prompted.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the message.</li>
+            <li>Tap <strong>Delete</strong> → select the message.</li>
+            <li>Tap <strong>Delete</strong> again → <strong>Delete for Everyone</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-star-message" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="star message,bookmark message,important message,quick access,flag message">
+        <h3 class="guide-title">Star an Important Message</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Message options</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and hover over the message.</li>
+            <li>Click the <strong>▾</strong> arrow → <strong>Star message</strong>.</li>
+            <li>The star icon appears.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the message.</li>
+            <li>Tap the <strong>Star</strong> icon.</li>
+            <li>The message shows a star.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the message.</li>
+            <li>Tap <strong>Star</strong>.</li>
+            <li>The message is starred.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-media-visibility-chat" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="media visibility chat,stop saving media,chat media settings,media privacy">
+        <h3 class="guide-title">Turn Off Media Visibility for a Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Media visibility</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Media visibility</strong>.</li>
+            <li>Select <strong>No</strong>.</li>
+            <li>Click <strong>OK</strong> to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Media visibility</strong>.</li>
+            <li>Choose <strong>No</strong>.</li>
+            <li>Tap <strong>OK</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Save to Camera Roll</strong>.</li>
+            <li>Select <strong>Never</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-export-chat-text" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="export chat,email chat,text export,send chat,chat history">
+        <h3 class="guide-title">Export a Chat with Text Only</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Export chat</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>More</strong> → <strong>Export chat</strong>.</li>
+            <li>Select <strong>Without media</strong>.</li>
+            <li>Choose how to share the export.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Export Chat</strong>.</li>
+            <li>Choose <strong>Without Media</strong>.</li>
+            <li>Select the app to send the export.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-export-chat-media" class="guide-card" data-platform="whatsapp" data-category="Messages & Media" data-keywords="export chat with media,chat backup,email chat,send chat media">
+        <h3 class="guide-title">Export a Chat with Media</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Export chat</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>More</strong> → <strong>Export chat</strong>.</li>
+            <li>Choose <strong>Include media</strong>.</li>
+            <li>Pick a destination app to send the export.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Export Chat</strong>.</li>
+            <li>Select <strong>Include Media</strong>.</li>
+            <li>Choose where to send the export.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-default-disappearing-messages" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="default disappearing,auto delete,disappearing timer,privacy timer,auto delete chats">
+        <h3 class="guide-title">Set a Default Disappearing Messages Timer</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Default message timer</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Click the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Click <strong>Default message timer</strong>.</li>
+            <li>Select 24 hours, 7 days, or 90 days.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Default message timer</strong>.</li>
+            <li>Choose 24 hours, 7 days, or 90 days.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Default Message Timer</strong>.</li>
+            <li>Select 24 Hours, 7 Days, or 90 Days.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-enable-chat-disappearing" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="disappearing messages,auto delete chat,chat timer,temporary messages">
+        <h3 class="guide-title">Turn On Disappearing Messages for a Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Disappearing messages</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Disappearing messages</strong>.</li>
+            <li>Select a timer duration.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing messages</strong>.</li>
+            <li>Choose a timer.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing Messages</strong>.</li>
+            <li>Select a timer.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-disable-chat-disappearing" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="disable disappearing,keep messages,chat timer off,permanent messages">
+        <h3 class="guide-title">Turn Off Disappearing Messages for a Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Disappearing messages</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Disappearing messages</strong>.</li>
+            <li>Select <strong>Off</strong>.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing messages</strong>.</li>
+            <li>Select <strong>Off</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing Messages</strong>.</li>
+            <li>Choose <strong>Off</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-send-view-once-photo" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="view once photo,self-destruct image,disappearing photo,one-time view">
+        <h3 class="guide-title">Send a View-Once Photo</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Attachment → Camera</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat → tap <strong>Attachment</strong> → <strong>Camera</strong>.</li>
+            <li>Capture or select a photo.</li>
+            <li>Tap the <strong>1</strong> icon to enable view once.</li>
+            <li>Tap <strong>Send</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat → tap <strong>+</strong> → <strong>Camera</strong>.</li>
+            <li>Take or choose a photo.</li>
+            <li>Tap the <strong>1</strong> icon.</li>
+            <li>Tap <strong>Send</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-send-view-once-video" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="view once video,disappearing video,one-time video,temporary video">
+        <h3 class="guide-title">Send a View-Once Video</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Attachment → Camera</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat → tap <strong>Attachment</strong> → <strong>Camera</strong>.</li>
+            <li>Record or choose a video.</li>
+            <li>Tap the <strong>1</strong> icon for view once.</li>
+            <li>Tap <strong>Send</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat → tap <strong>+</strong> → <strong>Camera</strong>.</li>
+            <li>Record or pick a video.</li>
+            <li>Tap the <strong>1</strong> icon.</li>
+            <li>Tap <strong>Send</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-check-disappearing-timer" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="disappearing timer,chat info,expiration timer,auto delete length">
+        <h3 class="guide-title">Check a Chat's Disappearing Message Timer</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Disappearing messages</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Disappearing messages</strong> to view the current timer.</li>
+            <li>Close the dialog when done.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing messages</strong> to view the active timer.</li>
+            <li>Tap <strong>Done</strong> when finished.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing Messages</strong> to see the timer.</li>
+            <li>Tap <strong>Done</strong> to close.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-extend-disappearing-timer" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="extend timer,longer disappearing,change timer,auto delete duration">
+        <h3 class="guide-title">Extend a Disappearing Message Timer</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Disappearing messages</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Disappearing messages</strong>.</li>
+            <li>Choose a longer duration.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing messages</strong>.</li>
+            <li>Select a longer timer option.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing Messages</strong>.</li>
+            <li>Pick a longer timer.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-reduce-disappearing-timer" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="shorter timer,reduce disappearing,change timer,auto delete interval">
+        <h3 class="guide-title">Shorten a Disappearing Message Timer</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Chat info → Disappearing messages</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Disappearing messages</strong>.</li>
+            <li>Choose a shorter duration.</li>
+            <li>Click <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing messages</strong>.</li>
+            <li>Select a shorter timer option.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Disappearing Messages</strong>.</li>
+            <li>Pick a shorter timer.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-keep-disappearing-message" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="keep disappearing message,save message,keep in chat,prevent deletion">
+        <h3 class="guide-title">Keep a Disappearing Message</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Message → Keep</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and hover over the disappearing message.</li>
+            <li>Click the <strong>▾</strong> arrow → <strong>Keep</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Keep</strong> to prevent deletion.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the disappearing message.</li>
+            <li>Tap <strong>Keep</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Keep</strong> when prompted.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the disappearing message.</li>
+            <li>Tap <strong>Keep</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Keep</strong> to save it.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-unkeep-disappearing-message" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="remove kept message,unkeep message,restore disappearing,delete kept">
+        <h3 class="guide-title">Remove a Kept Disappearing Message</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Message → Unkeep</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and hover over the kept message.</li>
+            <li>Click the <strong>▾</strong> arrow → <strong>Unkeep</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Unkeep</strong> to restore auto deletion.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the kept message.</li>
+            <li>Tap <strong>Unkeep</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Remove</strong> to allow deletion.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat and tap and hold the kept message.</li>
+            <li>Tap <strong>Unkeep</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Remove</strong> to restore the timer.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-view-once-indicator" class="guide-card" data-platform="whatsapp" data-category="Disappearing & View-Once" data-keywords="view once indicator,view once status,check view once,disappearing media">
+        <h3 class="guide-title">Check if a Message Was View Once</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → Media info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click the view-once media bubble.</li>
+            <li>View the indicator that it can be opened only once.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap the view-once bubble once.</li>
+            <li>Read the prompt showing it will disappear after viewing.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap the view-once icon once.</li>
+            <li>Review the message that it can be opened one time only.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-link-new-device" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="link device,web login,companion mode,device pairing,desktop link">
+        <h3 class="guide-title">Link a New Device</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices → Link a device</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Go to click the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Click <strong>Link a device</strong> for instructions.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Tap <strong>Link a device</strong>.</li>
+            <li>Scan the QR code shown on the device you are linking.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Tap <strong>Link a Device</strong>.</li>
+            <li>Scan the QR code on the device you want to add.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-remove-linked-device" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="remove device,log out device,linked sessions,device security">
+        <h3 class="guide-title">Remove a Linked Device</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Go to click the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Click the device → <strong>Log out</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Log out</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Tap the device you want to remove.</li>
+            <li>Tap <strong>Log out</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Log out</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Tap the device to remove.</li>
+            <li>Tap <strong>Log Out</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Log Out</strong> again.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-log-out-all-devices" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="log out all devices,remove sessions,linked device security,log out everywhere">
+        <h3 class="guide-title">Log Out of All Linked Devices</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Go to click the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Click <strong>Log out from all devices</strong> if shown.</li>
+            <li><em>Confirm:</em> Click <strong>Log out</strong> to remove all sessions.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Tap <strong>Log out from all devices</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Log out</strong> to clear sessions.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Tap <strong>Log Out from All Devices</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Log Out</strong> to finish.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-enable-companion-mode" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="companion mode,secondary phone,link phone,multi-device,link another phone">
+        <h3 class="guide-title">Enable Companion Mode on a Secondary Phone</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices → Link a device</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Tap <strong>Link a device</strong>.</li>
+            <li>On the secondary phone, open WhatsApp → tap <strong>Link this device</strong>.</li>
+            <li>Scan the primary phone's QR code.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Tap <strong>Link a Device</strong>.</li>
+            <li>On the secondary phone, open WhatsApp and choose <strong>Link this device</strong>.</li>
+            <li>Scan the primary phone's QR code.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-remove-secondary-phone" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="remove companion phone,unlink phone,secondary device,linked phone">
+        <h3 class="guide-title">Remove a Companion Mode Phone</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Go to click the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Click the secondary phone entry.</li>
+            <li>Click <strong>Log out</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Log out</strong> to remove.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Tap the companion phone listing.</li>
+            <li>Tap <strong>Log out</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Log out</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Tap the companion phone entry.</li>
+            <li>Tap <strong>Log Out</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Log Out</strong> to finish.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-check-linked-device-activity" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="linked device activity,last active,session info,device monitoring">
+        <h3 class="guide-title">Check Linked Device Activity</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Go to click the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Review each device's last active time.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Review the last active details shown under each device.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Review the last active information for each device.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-enable-desktop-screen-lock" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="desktop screen lock,app lock desktop,protect desktop,screen lock">
+        <h3 class="guide-title">Enable Screen Lock on WhatsApp Desktop</h3>
+        <p class="settings-path"><strong>Path:</strong> Desktop app → Settings → Privacy</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open the WhatsApp desktop app and click your profile picture.</li>
+            <li>Click <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Toggle on <strong>Screen Lock</strong> and set a password.</li>
+            <li>Confirm the password to enable the lock.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-disable-desktop-screen-lock" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="disable screen lock,desktop unlock,remove lock,screen lock off">
+        <h3 class="guide-title">Disable Screen Lock on WhatsApp Desktop</h3>
+        <p class="settings-path"><strong>Path:</strong> Desktop app → Settings → Privacy</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open WhatsApp Desktop → click your profile picture → <strong>Settings</strong> → <strong>Privacy</strong>.</li>
+            <li>Toggle off <strong>Screen Lock</strong>.</li>
+            <li><em>Confirm:</em> Enter your password to remove the lock.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-toggle-keep-device-logged-in" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="keep signed in,web login,stay logged in,remember device">
+        <h3 class="guide-title">Toggle Keep Me Signed In on Web</h3>
+        <p class="settings-path"><strong>Path:</strong> web.whatsapp.com login screen</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong>.</li>
+            <li>Check or uncheck <strong>Keep me signed in</strong> before scanning the QR code.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-view-linked-device-help" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="linked devices help,device support,session help,learn more">
+        <h3 class="guide-title">Open Linked Devices Help</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices → Help</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Go to click the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Click <strong>Help</strong> to open the support article.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Tap <strong>Help</strong>.</li>
+            <li>Read the support article for guidance.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Tap <strong>Help</strong>.</li>
+            <li>Review the linked devices instructions.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-login-approvals" class="guide-card" data-platform="whatsapp" data-category="Linked Devices & Sessions" data-keywords="login approvals,approve login,device prompt,session approval">
+        <h3 class="guide-title">Review Login Approval Prompts</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Linked devices → Pending approvals</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and link your phone.</li>
+            <li>Go to click the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Open <strong>Pending approvals</strong> if listed.</li>
+            <li>Approve or deny pending requests.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Linked devices</strong>.</li>
+            <li>Tap <strong>Pending approvals</strong> when shown.</li>
+            <li>Approve or deny any login prompts.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Linked Devices</strong>.</li>
+            <li>Tap <strong>Pending Approvals</strong> if available.</li>
+            <li>Approve or deny pending login requests.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-enable-encrypted-backups" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="encrypted backups,end-to-end backup,secure backup,password backup,encryption">
+        <h3 class="guide-title">Enable End-to-End Encrypted Backups</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat backup → End-to-end encrypted backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
+            <li>Tap <strong>End-to-end encrypted backup</strong>.</li>
+            <li>Tap <strong>Turn on</strong>.</li>
+            <li>Create a password or 64-digit key and tap <strong>Create</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat Backup</strong>.</li>
+            <li>Tap <strong>End-to-End Encrypted Backup</strong>.</li>
+            <li>Tap <strong>Turn On</strong>.</li>
+            <li>Create a password or 64-digit key and tap <strong>Create</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-change-backup-password" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="change backup password,update backup key,encrypted backup password">
+        <h3 class="guide-title">Change Your Encrypted Backup Password</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat backup → End-to-end encrypted backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
+            <li>Tap <strong>End-to-end encrypted backup</strong>.</li>
+            <li>Tap <strong>Change password</strong>.</li>
+            <li>Enter the current password, then set a new password.</li>
+            <li>Tap <strong>Next</strong> to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat Backup</strong>.</li>
+            <li>Tap <strong>End-to-End Encrypted Backup</strong>.</li>
+            <li>Tap <strong>Change Password</strong>.</li>
+            <li>Enter your current password and set a new one.</li>
+            <li>Tap <strong>Done</strong> to save.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-disable-encrypted-backups" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="disable encrypted backup,turn off encryption,remove backup password">
+        <h3 class="guide-title">Disable End-to-End Encrypted Backups</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat backup → End-to-end encrypted backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
+            <li>Tap <strong>End-to-end encrypted backup</strong>.</li>
+            <li>Tap <strong>Turn off</strong>.</li>
+            <li><em>Confirm:</em> Enter your password and tap <strong>Turn off</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat Backup</strong>.</li>
+            <li>Tap <strong>End-to-End Encrypted Backup</strong>.</li>
+            <li>Tap <strong>Turn Off</strong>.</li>
+            <li><em>Confirm:</em> Enter your password and tap <strong>Turn Off</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-change-google-drive-frequency" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="google drive backup frequency,android backup schedule,auto backup">
+        <h3 class="guide-title">Change Google Drive Backup Frequency</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
+            <li>Tap <strong>Back up to Google Drive</strong>.</li>
+            <li>Choose Never, Only when I tap Back up, Daily, Weekly, or Monthly.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-change-icloud-frequency" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="icloud backup frequency,ios backup schedule,auto backup">
+        <h3 class="guide-title">Change iCloud Backup Frequency</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat Backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat Backup</strong>.</li>
+            <li>Tap <strong>Auto Backup</strong>.</li>
+            <li>Choose Off, Daily, Weekly, or Monthly.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-turn-off-google-drive-backup" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="disable google drive backup,turn off android backup,stop google backup">
+        <h3 class="guide-title">Turn Off Google Drive Backups</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
+            <li>Tap <strong>Back up to Google Drive</strong>.</li>
+            <li>Select <strong>Never</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-turn-off-icloud-backup" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="disable icloud backup,stop ios backup,turn off icloud">
+        <h3 class="guide-title">Turn Off iCloud Backups</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat Backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat Backup</strong>.</li>
+            <li>Tap <strong>Auto Backup</strong>.</li>
+            <li>Select <strong>Off</strong>.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-delete-google-drive-backup" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="delete google drive backup,remove backup,erase cloud backup">
+        <h3 class="guide-title">Delete Google Drive Chat Backup</h3>
+        <p class="settings-path"><strong>Path:</strong> Google Drive → Storage → Backups → WhatsApp</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Go to <strong>drive.google.com</strong> → click <strong>Storage</strong>.</li>
+            <li>Open <strong>Backups</strong> → select the WhatsApp backup.</li>
+            <li>Click <strong>Delete backup</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Delete</strong> to remove it.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-delete-icloud-backup" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="delete icloud backup,remove backup,erase icloud,chat backup">
+        <h3 class="guide-title">Delete iCloud Chat Backup</h3>
+        <p class="settings-path"><strong>Path:</strong> iPhone Settings → Apple ID → iCloud → Manage Account Storage → WhatsApp Messenger</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → tap your name → <strong>iCloud</strong>.</li>
+            <li>Tap <strong>Manage Account Storage</strong> → <strong>WhatsApp Messenger</strong>.</li>
+            <li>Tap <strong>Delete Data</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete</strong> to remove the backup.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-back-up-now-android" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="manual backup android,back up now,google drive backup">
+        <h3 class="guide-title">Run a Manual Backup on Android</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
+            <li>Tap <strong>Back Up</strong> to start an immediate backup.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-back-up-now-ios" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="manual backup ios,back up now,icloud backup">
+        <h3 class="guide-title">Run a Manual Backup on iOS</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat Backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat Backup</strong>.</li>
+            <li>Tap <strong>Back Up Now</strong> to start an immediate backup.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-local-backup" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="local backup android,delete local backup,manage local storage">
+        <h3 class="guide-title">Manage Local Chat Backups on Android</h3>
+        <p class="settings-path"><strong>Path:</strong> Android Files → Internal storage → WhatsApp → Databases</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open your device file manager → go to <strong>Internal storage</strong> → <strong>WhatsApp</strong> → <strong>Databases</strong>.</li>
+            <li>Delete older backup files you no longer need.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete</strong> when prompted.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-verify-backup-status" class="guide-card" data-platform="whatsapp" data-category="Backups & Encryption" data-keywords="backup status,backup date,last backup,check backup">
+        <h3 class="guide-title">Verify Backup Status</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Chat backup</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat backup</strong>.</li>
+            <li>Review the date and time under Last backup.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong> → <strong>Chat Backup</strong>.</li>
+            <li>Check the Last Backup time displayed.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-request-account-info" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="request account info,download data,account report,data export">
+        <h3 class="guide-title">Request Your Account Info</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Request account info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request account info</strong>.</li>
+            <li>Tap <strong>Request report</strong>.</li>
+            <li>A report will be ready in about 3 days.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request Account Info</strong>.</li>
+            <li>Tap <strong>Request Report</strong>.</li>
+            <li>Wait for the availability notification.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-download-account-info" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="download report,account data,export info,account summary">
+        <h3 class="guide-title">Download Your Account Info Report</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Request account info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request account info</strong>.</li>
+            <li>Tap <strong>Download report</strong>.</li>
+            <li>Choose where to save or send the .zip file.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request Account Info</strong>.</li>
+            <li>Tap <strong>Download Report</strong>.</li>
+            <li>Select the app to store the .zip file.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-cancel-account-info" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="cancel request,account report,stop download,data request">
+        <h3 class="guide-title">Cancel an Account Info Request</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Request account info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request account info</strong>.</li>
+            <li>Tap <strong>Cancel request</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Cancel</strong> to stop it.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request Account Info</strong>.</li>
+            <li>Tap <strong>Cancel Request</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Cancel</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-storage-usage" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="storage usage,manage storage,clear files,data control">
+        <h3 class="guide-title">Manage Storage Usage</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Storage and data → Manage storage</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Storage and data</strong>.</li>
+            <li>Tap <strong>Manage storage</strong>.</li>
+            <li>Review chats under Larger than 5 MB or Forwarded many times.</li>
+            <li>Select items to delete and tap <strong>Delete</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Storage and Data</strong>.</li>
+            <li>Tap <strong>Manage Storage</strong>.</li>
+            <li>Select chats or media to remove.</li>
+            <li>Tap <strong>Delete</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete</strong> again.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-delete-large-files" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="delete large files,free space,storage cleanup,manage media">
+        <h3 class="guide-title">Delete Large Files from Storage</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Storage and data → Manage storage</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Storage and data</strong>.</li>
+            <li>Tap <strong>Manage storage</strong>.</li>
+            <li>Tap <strong>Larger than 5 MB</strong>.</li>
+            <li>Select files to remove and tap <strong>Delete</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete</strong> again.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Storage and Data</strong>.</li>
+            <li>Tap <strong>Manage Storage</strong>.</li>
+            <li>Tap <strong>Larger than 5 MB</strong>.</li>
+            <li>Select files → tap <strong>Delete</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-clear-search-history" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="clear search history,search data,privacy,search reset">
+        <h3 class="guide-title">Clear WhatsApp Search History</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Privacy → Clear search history</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Clear search history</strong>.</li>
+            <li>Tap <strong>Clear search history</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Clear</strong> to erase.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong>.</li>
+            <li>Tap <strong>Privacy</strong>.</li>
+            <li>Tap <strong>Clear Search History</strong>.</li>
+            <li>Tap <strong>Clear Search History</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Clear</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-delete-call-history" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="delete call history,clear calls,call log,privacy">
+        <h3 class="guide-title">Delete Call History</h3>
+        <p class="settings-path"><strong>Path:</strong> Calls tab → Edit → Clear</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> → click <strong>Calls</strong>.</li>
+            <li>Click <strong>⋮</strong> → <strong>Clear call log</strong>.</li>
+            <li><em>Confirm:</em> Click <strong>Clear</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → go to <strong>Calls</strong>.</li>
+            <li>Tap the <strong>⋮</strong> menu → <strong>Clear call log</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Clear</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Calls</strong>.</li>
+            <li>Tap <strong>Edit</strong> → <strong>Clear</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Clear Call Log</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-delete-chat-history" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="delete all chats,clear chats,erase messages,reset chats">
+        <h3 class="guide-title">Delete All Chats</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Delete all chats</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong>.</li>
+            <li>Tap <strong>Chat history</strong>.</li>
+            <li>Tap <strong>Delete all chats</strong>.</li>
+            <li><em>Confirm:</em> Enter your phone number and tap <strong>Delete</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong>.</li>
+            <li>Tap <strong>Delete All Chats</strong>.</li>
+            <li>Enter your phone number if prompted.</li>
+            <li><em>Confirm:</em> Tap <strong>Delete All Chats</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-clear-chat-history" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="clear chats,remove chats,empty chats,chat cleanup">
+        <h3 class="guide-title">Clear All Chats</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Chats → Clear all chats</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Chats</strong>.</li>
+            <li>Tap <strong>Chat history</strong>.</li>
+            <li>Tap <strong>Clear all chats</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Clear</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Chats</strong>.</li>
+            <li>Tap <strong>Clear All Chats</strong>.</li>
+            <li>Tap <strong>Clear All Chats</strong> again to confirm.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-export-stickers" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="export stickers,save stickers,share stickers,sticker data">
+        <h3 class="guide-title">Export Custom Stickers</h3>
+        <p class="settings-path"><strong>Path:</strong> Sticker manager → My Stickers</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open a chat → tap the emoji icon → <strong>Stickers</strong> tab.</li>
+            <li>Tap <strong>+</strong> → <strong>My Stickers</strong>.</li>
+            <li>Tap the pack → <strong>Share</strong>.</li>
+            <li>Choose how to export the sticker pack.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open a chat → tap the sticker icon.</li>
+            <li>Tap <strong>My Stickers</strong> → choose a pack.</li>
+            <li>Tap <strong>Share</strong>.</li>
+            <li>Select where to export the pack.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-download-media-summary" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="download media summary,storage summary,media report,data usage">
+        <h3 class="guide-title">Download a Media Summary</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Storage and data → Manage storage</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Storage and data</strong>.</li>
+            <li>Tap <strong>Manage storage</strong>.</li>
+            <li>Tap <strong>Export report</strong> if available.</li>
+            <li>Choose where to save the summary.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Storage and Data</strong>.</li>
+            <li>Tap <strong>Manage Storage</strong>.</li>
+            <li>Tap <strong>Export Report</strong> if shown.</li>
+            <li>Select the destination.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-review-data-downloads" class="guide-card" data-platform="whatsapp" data-category="Data & Export" data-keywords="data downloads history,download logs,account data history">
+        <h3 class="guide-title">Review Past Data Downloads</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Account → Request account info</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request account info</strong>.</li>
+            <li>View completed or expired reports in the list.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Account</strong>.</li>
+            <li>Tap <strong>Request Account Info</strong>.</li>
+            <li>Review the status of available reports.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-update-business-profile" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="business profile,update profile,business details,about business">
+        <h3 class="guide-title">Update Business Profile Details</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Business profile</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Business profile</strong>.</li>
+            <li>Edit business name, description, and address.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Business Profile</strong>.</li>
+            <li>Update business details.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-set-business-hours" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="business hours,operating hours,open times,working hours">
+        <h3 class="guide-title">Set Business Hours</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Business hours</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Business hours</strong>.</li>
+            <li>Set open and close times for each day.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Business Hours</strong>.</li>
+            <li>Adjust the hours per day.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-quick-replies" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="quick replies,shortcuts,responses,business messaging">
+        <h3 class="guide-title">Manage Quick Replies</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Quick replies</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Quick replies</strong>.</li>
+            <li>Tap <strong>Add</strong> to create a shortcut.</li>
+            <li>Enter message and shortcut → tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Quick Replies</strong>.</li>
+            <li>Tap <strong>+</strong> to add a shortcut.</li>
+            <li>Enter the reply and tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-set-away-message" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="away message,auto reply,business away,auto message">
+        <h3 class="guide-title">Set an Away Message</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Away message</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Away message</strong>.</li>
+            <li>Toggle it on and edit the message.</li>
+            <li>Set schedule and recipients → tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Away Message</strong>.</li>
+            <li>Enable the toggle and customize the text.</li>
+            <li>Set schedule and recipients → tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-set-greeting-message" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="greeting message,auto greeting,new customers,welcome message">
+        <h3 class="guide-title">Set a Greeting Message</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Greeting message</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Greeting message</strong>.</li>
+            <li>Turn it on and customize the greeting.</li>
+            <li>Set recipients → tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Greeting Message</strong>.</li>
+            <li>Enable the toggle and edit the text.</li>
+            <li>Select recipients → tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-catalog" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="business catalog,product catalog,manage products,whatsapp business">
+        <h3 class="guide-title">Manage Business Catalog</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Catalog</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Catalog</strong>.</li>
+            <li>Add or edit catalog items.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Catalog</strong>.</li>
+            <li>Add or edit catalog items.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-share-short-link" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="short link,click to chat,business link,share link">
+        <h3 class="guide-title">Share Your Business Short Link</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Short link</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Short link</strong>.</li>
+            <li>Tap <strong>Copy link</strong> or <strong>Share link</strong> to send it.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Short Link</strong>.</li>
+            <li>Tap <strong>Copy Link</strong> or <strong>Share Link</strong> to distribute it.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-reset-short-link" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="reset short link,new short link,regenerate link,business link">
+        <h3 class="guide-title">Reset Your Business Short Link</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Short link</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Short link</strong>.</li>
+            <li>Tap <strong>Reset link</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Reset</strong> to generate a new link.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Short Link</strong>.</li>
+            <li>Tap <strong>Reset Link</strong>.</li>
+            <li><em>Confirm:</em> Tap <strong>Reset</strong> to create a new link.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-label-chat" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="label chat,business labels,organize chats,customer label">
+        <h3 class="guide-title">Label a Chat</h3>
+        <p class="settings-path"><strong>Path:</strong> Chat → More → Label chat</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and select the chat.</li>
+            <li>Click the contact or group name to open info.</li>
+            <li>Click <strong>Label chat</strong>.</li>
+            <li>Select or create a label.</li>
+            <li>Click <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>More</strong> → <strong>Label chat</strong>.</li>
+            <li>Select labels or create a new one.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open the chat.</li>
+            <li>Tap the contact or group name to open info.</li>
+            <li>Tap <strong>Label Chat</strong>.</li>
+            <li>Choose labels or add a new label.</li>
+            <li>Tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-filter-labeled-chats" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="filter labels,view labeled chats,business labels,chat filter">
+        <h3 class="guide-title">Filter by Labeled Chats</h3>
+        <p class="settings-path"><strong>Path:</strong> Chats tab → Filter → Labels</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>Open <strong>web.whatsapp.com</strong> and click <strong>Filter</strong> above the chat list.</li>
+            <li>Choose <strong>Labels</strong>.</li>
+            <li>Select the label to view matching chats.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → go to <strong>Chats</strong>.</li>
+            <li>Tap the <strong>Filter</strong> icon → <strong>Labels</strong>.</li>
+            <li>Select a label to filter conversations.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Chats</strong>.</li>
+            <li>Tap <strong>Filter</strong> → <strong>Labels</strong>.</li>
+            <li>Choose a label to view labeled chats.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-set-catalog-message-button" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="catalog message button,call-to-action,product button,catalog contact">
+        <h3 class="guide-title">Set a Catalog Message Button</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Business tools → Catalog</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Business tools</strong>.</li>
+            <li>Tap <strong>Catalog</strong>.</li>
+            <li>Tap a product → <strong>Edit</strong>.</li>
+            <li>Enable <strong>Message business</strong> and tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Business Tools</strong>.</li>
+            <li>Tap <strong>Catalog</strong>.</li>
+            <li>Open a product → tap <strong>Edit</strong>.</li>
+            <li>Enable <strong>Message Business</strong> and tap <strong>Save</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-whatsapp-payments" class="guide-card" data-platform="whatsapp" data-category="Business Features" data-keywords="whatsapp payments,payment settings,business payments,receive payments">
+        <h3 class="guide-title">Manage WhatsApp Payments</h3>
+        <p class="settings-path"><strong>Path:</strong> Settings → Payments</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open WhatsApp → tap the <strong>⋮</strong> menu → <strong>Settings</strong> → <strong>Payments</strong>.</li>
+            <li>Tap <strong>Payment methods</strong>.</li>
+            <li>Add or remove bank accounts.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open WhatsApp → tap <strong>Settings</strong> → <strong>Payments</strong>.</li>
+            <li>Tap <strong>Payment Methods</strong>.</li>
+            <li>Add or remove bank accounts.</li>
+            <li>Tap <strong>Done</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-camera-permission" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="camera permission,allow camera,deny camera,app access">
+        <h3 class="guide-title">Manage Camera Permission</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Apps → WhatsApp → Permissions → Camera</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Permissions</strong> → <strong>Camera</strong>.</li>
+            <li>Select <strong>Allow only while using the app</strong> or <strong>Deny</strong>.</li>
+            <li>Return to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Privacy & Security</strong> → <strong>Camera</strong>.</li>
+            <li>Find WhatsApp and toggle access on or off.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-microphone-permission" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="microphone permission,allow microphone,deny microphone,voice access">
+        <h3 class="guide-title">Manage Microphone Permission</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Apps → WhatsApp → Permissions → Microphone</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Permissions</strong> → <strong>Microphone</strong>.</li>
+            <li>Select <strong>Allow only while using the app</strong> or <strong>Deny</strong>.</li>
+            <li>Return to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Privacy & Security</strong> → <strong>Microphone</strong>.</li>
+            <li>Toggle WhatsApp access on or off.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-contacts-permission" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="contacts permission,access contacts,deny contacts,phone book">
+        <h3 class="guide-title">Manage Contacts Permission</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Apps → WhatsApp → Permissions → Contacts</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Permissions</strong> → <strong>Contacts</strong>.</li>
+            <li>Choose <strong>Allow</strong> or <strong>Deny</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Privacy & Security</strong> → <strong>Contacts</strong>.</li>
+            <li>Toggle WhatsApp access on or off.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-photos-permission" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="photos permission,photo access,limited photos,allow photos">
+        <h3 class="guide-title">Manage Photos Permission on iOS</h3>
+        <p class="settings-path"><strong>Path:</strong> iPhone Settings → Privacy & Security → Photos → WhatsApp</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Privacy & Security</strong> → <strong>Photos</strong>.</li>
+            <li>Tap <strong>WhatsApp</strong>.</li>
+            <li>Choose <strong>None</strong>, <strong>Selected Photos</strong>, or <strong>All Photos</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-storage-permission" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="storage permission,file access,android storage,manage files">
+        <h3 class="guide-title">Manage Storage Permission on Android</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Apps → WhatsApp → Permissions → Files and media</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Permissions</strong> → <strong>Files and media</strong>.</li>
+            <li>Select <strong>Allow management of all files</strong> or <strong>Allow only while using the app</strong>.</li>
+            <li>Return to save.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-location-permission" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="location permission,allow location,deny location,location access">
+        <h3 class="guide-title">Manage Location Permission</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Apps → WhatsApp → Permissions → Location</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Permissions</strong> → <strong>Location</strong>.</li>
+            <li>Choose <strong>Allow all the time</strong>, <strong>Allow only while using the app</strong>, or <strong>Deny</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Privacy & Security</strong> → <strong>Location Services</strong>.</li>
+            <li>Tap <strong>WhatsApp</strong>.</li>
+            <li>Select <strong>Never</strong>, <strong>Ask Next Time</strong>, or <strong>While Using the App</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-limit-background-data" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="background data,android data saver,restrict data,network usage">
+        <h3 class="guide-title">Limit Background Data on Android</h3>
+        <p class="settings-path"><strong>Path:</strong> Android Settings → Apps → WhatsApp → Mobile data & Wi-Fi</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Mobile data & Wi-Fi</strong>.</li>
+            <li>Toggle off <strong>Background data</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-allow-notifications" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="allow notifications,enable alerts,notification permission">
+        <h3 class="guide-title">Allow WhatsApp Notifications</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Notifications → WhatsApp</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Notifications</strong>.</li>
+            <li>Turn on <strong>Allow notifications</strong> and adjust channels.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Notifications</strong>.</li>
+            <li>Tap <strong>WhatsApp</strong>.</li>
+            <li>Enable <strong>Allow Notifications</strong> and adjust alert styles.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-hide-notification-previews" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="hide previews,notification privacy,lock screen,notification content">
+        <h3 class="guide-title">Hide Notification Previews</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Notifications → WhatsApp</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Notifications</strong>.</li>
+            <li>Tap <strong>Message notifications</strong> → <strong>Lock screen</strong>.</li>
+            <li>Select <strong>Hide content</strong>.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Notifications</strong>.</li>
+            <li>Tap <strong>WhatsApp</strong>.</li>
+            <li>Set <strong>Show Previews</strong> to <strong>When Unlocked</strong> or <strong>Never</strong>.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-siri-integration" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="siri integration,siri access,voice assistant,app shortcuts">
+        <h3 class="guide-title">Manage Siri Integration</h3>
+        <p class="settings-path"><strong>Path:</strong> iPhone Settings → Siri & Search → WhatsApp</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Siri & Search</strong>.</li>
+            <li>Scroll to <strong>WhatsApp</strong>.</li>
+            <li>Toggle features like <strong>Learn from this App</strong> and <strong>Show in Search</strong> as needed.</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-picture-in-picture" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="picture in picture,pip calls,overlay permission,video call overlay">
+        <h3 class="guide-title">Manage Picture-in-Picture Calls</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Apps → WhatsApp → Picture-in-picture</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>Special app access</strong>.</li>
+            <li>Tap <strong>Picture-in-picture</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Toggle allow picture-in-picture on or off.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-manage-battery-optimization" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="battery optimization,background activity,android battery,allow background">
+        <h3 class="guide-title">Disable Battery Optimization for WhatsApp</h3>
+        <p class="settings-path"><strong>Path:</strong> Android Settings → Apps → WhatsApp → Battery</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Apps</strong> → <strong>WhatsApp</strong>.</li>
+            <li>Tap <strong>Battery</strong>.</li>
+            <li>Set <strong>Unrestricted</strong> or <strong>Optimized</strong> as needed.</li>
+            <li>Return to apply.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+      </article>
+      <article id="whatsapp-control-app-permissions-summary" class="guide-card" data-platform="whatsapp" data-category="App Permissions" data-keywords="permissions summary,app access review,privacy check">
+        <h3 class="guide-title">Review App Permissions Summary</h3>
+        <p class="settings-path"><strong>Path:</strong> Device settings → Privacy → Permission manager</p>
+        <details open>
+          <summary>Web (browser)</summary>
+          <ol>
+            <li>(Not available on Web)</li>
+          </ol>
+        </details>
+        <details>
+          <summary>Android app</summary>
+          <ol>
+            <li>Open Android <strong>Settings</strong> → <strong>Privacy</strong> → <strong>Permission manager</strong>.</li>
+            <li>Select each permission type and review WhatsApp's access.</li>
+            <li>Adjust permissions if necessary.</li>
+          </ol>
+        </details>
+        <details>
+          <summary>iOS app</summary>
+          <ol>
+            <li>Open iPhone <strong>Settings</strong> → <strong>Privacy & Security</strong>.</li>
+            <li>Review sections like Contacts, Microphone, and Camera for WhatsApp.</li>
+            <li>Adjust access in each section.</li>
+          </ol>
+        </details>
+      </article>
+    </section>
+
+    <p class="coming-soon" id="more-platforms-note" data-i18n="platforms.moreComing">More platforms are coming soon.</p>
+
+    <button class="back-to-top" aria-label="Back to top">↑</button>
+  </main>
+
+  <script src="../assets/js/self-audit.js" defer></script>
 </body>
 </html>
