@@ -4,9 +4,7 @@
   footer.className = 'site-footer';
   footer.innerHTML = `
     <div class="footer-inner">
-      <span>© <a href="/PRIVACY/" rel="home">OSINT.Secrets</a></span>
-      <span class="sep">·</span>
-      <a href="https://www.instagram.com/osintsecrets/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <span>© <a href="/PRIVACY/" rel="home">OSINTSecrets</a></span>
     </div>
   `;
   (document.body || document.documentElement).appendChild(footer);

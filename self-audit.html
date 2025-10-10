@@ -8,26 +8,6 @@
   <meta name="description" content="A gamified, step‑by‑step self‑audit using the DARK Threat Model: Discover, Analyze, Reduce, Keep Safe.">
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./assets/css/styles.css">
-  <style>
-    /* Page‑local critical styles (rest appended in styles.css) */
-    .progress { display:flex; align-items:center; gap:8px; }
-    .progress-bar { position:relative; height:10px; flex:1; background:rgba(160,200,210,.22); border-radius:999px; overflow:hidden; }
-    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg, #2fb171, #53d1a0); transition: width .3s ease; }
-    .missions { display:grid; gap:12px; grid-template-columns:1fr; }
-    @media (min-width:740px){ .missions{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
-    .mission { display:flex; flex-direction:column; gap:10px; border:1px solid var(--border); background:var(--card); border-radius:var(--radius); padding:14px; box-shadow:0 3px 14px rgba(0,0,0,.22); }
-    .mission h2 { margin:.1rem 0 .25rem; font-size:1.2rem; }
-    .mission .kicker { font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
-    .quests { display:flex; flex-direction:column; gap:8px; margin:.25rem 0; }
-    .quest { display:flex; align-items:flex-start; gap:10px; padding:10px; border:1px dashed var(--border); border-radius:10px; background: rgba(120,170,180,.06); }
-    .quest input { margin-top:2px; }
-    .quest .why { font-size:.9rem; color:var(--muted); }
-    .mission .actions { display:flex; gap:8px; flex-wrap:wrap; }
-    .badge { font-size:.75rem; padding:.25rem .5rem; border:1px solid var(--border); border-radius:999px; color:var(--muted); }
-    .xp { color:#2fb171; font-weight:700; }
-    .meter { font-variant-numeric: tabular-nums; }
-    .note { width:100%; min-height:72px; border:1px solid var(--border); background:var(--bg); color:var(--text); border-radius:10px; padding:10px; }
-  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -52,116 +32,35 @@
   </header>
 
   <main id="main" class="wrapper">
-    <!-- Preface / Hook -->
     <section class="hero">
       <h1 data-i18n="self.h1">Self‑audit: The DARK Threat Model</h1>
       <p class="lede" data-i18n="self.preface">
         There isn’t a switch you can flip or a magic button that makes you safe online. Privacy is a process — one you can learn and apply. The DARK Threat Model is a framework I created to guide you through that process step by step.
       </p>
-      <div class="progress" aria-label="Overall progress">
-        <span class="badge" data-i18n="self.progress.label">Progress</span>
-        <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="overallFill"></div></div>
-        <span class="meter" id="overallPct">0%</span>
-      </div>
     </section>
 
-    <section class="hud" aria-label="Status">
-      <div class="hud-item"><span class="label">XP</span><span id="xpTotal" class="value">0</span></div>
-      <div class="hud-item"><span class="label">Threat</span><span id="threatLabel" class="value">Exposed</span></div>
-    </section>
-
-    <section class="stepper" aria-label="Progress steps">
-      <button class="step" data-step="D" aria-current="false">D</button>
-      <button class="step" data-step="A" aria-current="false" disabled>A</button>
-      <button class="step" data-step="R" aria-current="false" disabled>R</button>
-      <button class="step" data-step="K" aria-current="false" disabled>K</button>
-    </section>
-
-    <!-- Overview Cards -->
-    <section class="missions wizard" aria-label="DARK missions">
-      <article class="mission collapsible" data-phase="D">
-        <span class="kicker">Phase 1</span>
-        <h2>🕵️‍♂️ Discover — Hunt for clues</h2>
-        <p class="why">This is your collection phase. Find out what exists about you online — posts, photos, mentions, tags, accounts, leaks.</p>
-        <div class="quests">
-          <label class="quest"><input type="checkbox" data-quest="d1"> <span>Search your name, usernames, email and phone on major search engines and platforms.<div class="why">Map what’s easily discoverable.</div></span></label>
-          <label class="quest"><input type="checkbox" data-quest="d2"> <span>Use “View As Public” (or log out) on your profiles.<div class="why">See what strangers see.</div></span></label>
-          <label class="quest"><input type="checkbox" data-quest="d3"> <span>Review tags, comments, group posts, and old photos.<div class="why">Others’ posts can expose you too.</div></span></label>
-          <label class="quest"><input type="checkbox" data-quest="d4"> <span>Check breach/lookup services for email/phone exposure.<div class="why">Leaked data raises targeted‑risk.</div></span></label>
-          <label class="quest"><input type="checkbox" data-quest="d5"> <span>List every account/alias you find and where it appears.<div class="why">Build your footprint inventory.</div></span></label>
-        </div>
-        <textarea class="note" placeholder="Notes: what did you find? (saved locally)"></textarea>
-        <div class="actions">
-          <span class="badge xp" data-phase-xp>D +25 XP</span>
-          <button class="button primary" data-complete>Mark Phase Complete</button>
-          <button class="button" data-reset>Reset Phase</button>
-        </div>
+    <section class="phase-tiles" aria-label="Self-audit phases">
+      <article class="phase-tile">
+        <h2 data-i18n="phases.discover.title">Discover — Hunt for clues</h2>
+        <p data-i18n="phases.discover.lede">Find what exists about you; map what’s public.</p>
+        <a class="button" href="./self-audit/discover.html" data-i18n="self.hub.openPhase">Open phase</a>
       </article>
-
-      <article class="mission collapsible" data-phase="A">
-        <span class="kicker">Phase 2</span>
-        <h2>🧠 Analyze — Think like an attacker</h2>
-        <p class="why">Turn data into a threat map. Who could use it, how, and why?</p>
-        <div class="quests">
-          <label class="quest"><input type="checkbox" data-quest="a1"> <span>Sort each data point: personal, location, contact, financial, professional, social.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="a2"> <span>For each item, ask: how could it be combined to harm me?</span></label>
-          <label class="quest"><input type="checkbox" data-quest="a3"> <span>Consider perspectives: scammer, stalker, employer, journalist, government.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="a4"> <span>Highlight the high‑risk items that could enable impersonation, stalking, or account resets.</span></label>
-        </div>
-        <textarea class="note" placeholder="Notes: risks you identified (saved locally)"></textarea>
-        <div class="actions">
-          <span class="badge xp" data-phase-xp>A +25 XP</span>
-          <button class="button primary" data-complete>Mark Phase Complete</button>
-          <button class="button" data-reset>Reset Phase</button>
-        </div>
+      <article class="phase-tile">
+        <h2 data-i18n="phases.analyze.title">Analyze — Think like an attacker</h2>
+        <p data-i18n="phases.analyze.lede">Sort and rate risk; combine data points.</p>
+        <a class="button" href="./self-audit/analyze.html" data-i18n="self.hub.openPhase">Open phase</a>
       </article>
-
-      <article class="mission collapsible" data-phase="R">
-        <span class="kicker">Phase 3</span>
-        <h2>🛠️ Reduce — Shrink your exposure</h2>
-        <p class="why">Decide what stays, what goes, and what changes. Make a plan — don’t execute everything yet.</p>
-        <div class="quests">
-          <label class="quest"><input type="checkbox" data-quest="r1"> <span>Mark each discovery: ✅ keep, 🗑️ delete, 🔒 restrict.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="r2"> <span>List accounts to delete or rename; revoke unused third‑party apps.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="r3"> <span>Define audience defaults and discovery settings you’ll change.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="r4"> <span>Create a timeline: today, this week, later.</span></label>
-        </div>
-        <textarea class="note" placeholder="Notes: your reduction plan (saved locally)"></textarea>
-        <div class="actions">
-          <span class="badge xp" data-phase-xp>R +25 XP</span>
-          <button class="button primary" data-complete>Mark Phase Complete</button>
-          <button class="button" data-reset>Reset Phase</button>
-        </div>
+      <article class="phase-tile">
+        <h2 data-i18n="phases.reduce.title">Reduce — Lock it down</h2>
+        <p data-i18n="phases.reduce.lede">Change settings; prune content; minimize exposure.</p>
+        <a class="button" href="./self-audit/reduce.html" data-i18n="self.hub.openPhase">Open phase</a>
       </article>
-
-      <article class="mission collapsible" data-phase="K">
-        <span class="kicker">Phase 4</span>
-        <h2>🔐 Keep Safe — Make it a habit</h2>
-        <p class="why">Implement your plan and keep it alive over time.</p>
-        <div class="quests">
-          <label class="quest"><input type="checkbox" data-quest="k1"> <span>Carry out your plan: delete, restrict, update.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="k2"> <span>Enable 2FA, use a password manager, review sessions monthly.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="k3"> <span>Set a reminder to re‑audit every 3–6 months.</span></label>
-          <label class="quest"><input type="checkbox" data-quest="k4"> <span>Turn small habits into defaults: check audience before posting; review app access.</span></label>
-        </div>
-        <textarea class="note" placeholder="Notes: habits & schedule (saved locally)"></textarea>
-        <div class="actions">
-          <span class="badge xp" data-phase-xp>K +25 XP</span>
-          <button class="button primary" data-complete>Mark Phase Complete</button>
-          <button class="button" data-reset>Reset Phase</button>
-        </div>
+      <article class="phase-tile">
+        <h2 data-i18n="phases.keepsafe.title">Keep safe — Stay private over time</h2>
+        <p data-i18n="phases.keepsafe.lede">Habits and reviews to keep risk low.</p>
+        <a class="button" href="./self-audit/keep-safe.html" data-i18n="self.hub.openPhase">Open phase</a>
       </article>
     </section>
-
-    <section class="prose" style="margin-top:18px">
-      <button class="button" id="resetAll">Reset All Progress</button>
-      <span class="pill" id="lastUpdated">Last updated: —</span>
-    </section>
-
-    <details class="prose achievements" aria-labelledby="achTitle">
-      <summary><h2 id="achTitle">Achievements</h2></summary>
-      <ul id="achList" class="ach-list"></ul>
-    </details>
   </main>
 
   <!-- Ethics pledge modal (unchanged ids for existing JS) -->
@@ -176,22 +75,15 @@
     </article>
   </dialog>
 
-  <footer id="site-footer">
-    <nav aria-label="Footer">
-      <a href="./" data-i18n="nav.home">Home</a>
-      <a href="./self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
-      <a href="./platform.html" data-i18n="nav.platform">Platform</a>
-      <a href="./ethics.html" data-i18n="nav.ethics">Ethics</a>
-      <a href="./why.html" data-i18n="nav.why">Why</a>
-      <a href="./about/" data-i18n="nav.about">About</a>
-      <a href="./disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
-    </nav>
+  <footer id="site-footer" class="site-footer">
+    <div class="footer-inner">
+      <span>© <a href="./" rel="home">OSINTSecrets</a></span>
+    </div>
   </footer>
 
   <script src="./assets/js/i18n.js" defer></script>
   <script src="./assets/js/install.js" defer></script>
   <script src="./assets/js/pledge-gate.js" defer></script>
   <script src="./assets/js/main.js" defer></script>
-  <script src="./assets/js/self-audit.js" defer></script>
 </body>
 </html>
