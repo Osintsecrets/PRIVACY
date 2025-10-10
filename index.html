@@ -15,10 +15,6 @@
     .hero { display:grid; gap:1rem; padding:clamp(18px,4vw,32px) 0; }
     .hero h1 { font-size:clamp(28px,6vw,52px); line-height:1.1; margin:0; letter-spacing:0.2px; }
     .hero .lede { font-size:clamp(16px,3.6vw,19px); max-width:60ch; color:var(--muted); }
-    .cta-grid { display:grid; gap:12px; grid-template-columns:1fr; }
-    @media (min-width:720px){ .cta-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
-    .cta { display:flex; flex-direction:column; gap:8px; padding:16px; border:1px solid var(--border); border-radius:var(--radius); background:var(--card); text-decoration:none; color:var(--text); }
-    .cta:hover{ background:#0f1f26; }
     .pill { display:inline-block; font-size:.75rem; padding:.25rem .5rem; border:1px solid var(--border); border-radius:999px; color:var(--muted);}
   </style>
 </head>
@@ -59,23 +55,6 @@
     <section class="hero">
       <h1 data-i18n="home.h1">Be the master of your privacy.</h1>
       <p class="lede" data-i18n="home.lede">A fast, ethics-first privacy almanac. Learn why privacy matters and take control with clear, step-by-step actions for the platforms you use.</p>
-      <div class="cta-grid">
-        <a class="cta" href="./platform.html">
-          <span class="pill" data-i18n="home.cta.platform.tag">Start here</span>
-          <h2 data-i18n="home.cta.platform.title">Fix my privacy on social apps</h2>
-          <p data-i18n="home.cta.platform.body">Facebook today, more platforms next. Clear, screenshot-friendly steps.</p>
-        </a>
-        <a class="cta" href="./why.html">
-          <span class="pill" data-i18n="home.cta.why.tag">Mindset</span>
-          <h2 data-i18n="home.cta.why.title">Why this matters (and to whom)</h2>
-          <p data-i18n="home.cta.why.body">Short, compelling reasons to act—without fear or jargon.</p>
-        </a>
-        <a class="cta" href="./ethics.html">
-          <span class="pill" data-i18n="home.cta.ethics.tag">Ethics</span>
-          <h2 data-i18n="home.cta.ethics.title">Our line: protect, don’t expose</h2>
-          <p data-i18n="home.cta.ethics.body">Consent, dignity, and responsibility—no doxxing, no vigilantism.</p>
-        </a>
-      </div>
       <p class="lede" data-i18n="home.notice">You choose how deep to go. This site helps you take control—at your pace.</p>
     </section>
   </main>
@@ -106,16 +85,10 @@
     </article>
   </dialog>
 
-  <footer id="site-footer">
-    <nav>
-      <a href="./" data-i18n="nav.home">Home</a>
-      <a href="./self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
-      <a href="./platform.html" data-i18n="nav.platform">Platform</a>
-      <a href="./why.html" data-i18n="nav.why">Why</a>
-      <a href="./ethics.html" data-i18n="nav.ethics">Ethics</a>
-      <a href="./about/" data-i18n="nav.about">About</a>
-      <a href="./disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
-    </nav>
+  <footer id="site-footer" class="site-footer">
+    <div class="footer-inner">
+      <span>© <a href="./" rel="home">OSINTSecrets</a></span>
+    </div>
   </footer>
 
   <script src="./assets/js/i18n.js"></script>
