@@ -251,8 +251,14 @@
     },
     "session": {
       "new": "New session",
-      "load": "Load saved session"
+      "load": "Load saved session",
+      "saveAs": "Save session as…",
+      "list": "Load saved…",
+      "name": "Session name"
     },
+    "score": "Score",
+    "encrypt": "Encrypt & Export",
+    "print": "Print report",
     "wizardTitle": "3) Guided checklist (A→Z)",
     "prev": "Back",
     "next": "Next",

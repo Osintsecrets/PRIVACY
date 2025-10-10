@@ -2,47 +2,22 @@
   const $ = sel => document.querySelector(sel);
   const $$ = sel => Array.from(document.querySelectorAll(sel));
   const storeKey = 'sra_discover_session';
+  const bankKey = 'sra_discover_bank';
 
-  // Platforms and A→Z checklists (Facebook: detailed; others: stubs you can extend later)
-  const CHECKLISTS = {
-    facebook: [
-      {t:'Profile header', d:'Open your profile. Record display name, username/vanity URL, profile URL. Note account type (personal/business, public/private).'},
-      {t:'Cover/banner photos', d:'Review all cover photos. Inspect comments & likes. Look for background info (street signs, school, plates).'},
-      {t:'Profile photo', d:'Does it reveal face, uniform, workplace, school?'},
-      {t:'Bio / About', d:'Work, education, hometown/current city, relationship, websites. Any PII?'},
-      {t:'Contact info', d:'Phone, email, address visible? Note and flag PII.'},
-      {t:'Friends / Followers / Following', d:'Counts; unknown contacts; sensitive connections (employer, family).'},
-      {t:'Photos & Albums', d:'Own photos + tagged photos. Sensitive media? Location clues?'},
-      {t:'Posts by you', d:'Scan recent posts; then older posts (>2y). Flag high-risk posts and copy URLs/paths.'},
-      {t:'Posts you are tagged in', d:'Review visibility; consider untagging later.'},
-      {t:'Stories / Reels', d:'Anything risky archived or highlighted?'},
-      {t:'Groups', d:'Public groups revealing interests/location?'},
-      {t:'Pages liked / Follows', d:'Pages that reveal politics, religion, employer, minors’ schools.'},
-      {t:'Events / Check-ins', d:'Past events expose routine or home/work?'},
-      {t:'Marketplace', d:'Listings with phone, address, license plate in photos?'},
-      {t:'Search your name on Facebook', d:'Search variations of your name/username; see what’s discoverable.'},
-      {t:'Apps & Integrations', d:'Third-party apps connected?'},
-      {t:'Devices & Sessions', d:'Review logged-in devices (Settings > Security).'},
-      {t:'Messages (optional)', d:'If auditing DMs, look for shared PII (phones, addresses).'},
-      {t:'Cross-links', d:'Links to other platforms in bio/posts.'}
-    ],
-    instagram: [
-      {t:'Profile basics', d:'Name, username, bio, link-in-bio; account type; public/private.'},
-      {t:'Posts & Highlights', d:'Photos/videos; background clues; tagged posts.'}
-    ],
-    x: [
-      {t:'Profile basics', d:'Display name, handle, bio, location, website; public/private.'},
-      {t:'Tweets', d:'Old tweets; media; replies exposing PII; external links.'}
-    ],
-    tiktok: [
-      {t:'Profile basics', d:'Display name, username, bio; links; public/private.'},
-      {t:'Videos', d:'Backgrounds; captions; geotags.'}
-    ],
-    whatsapp: [
-      {t:'Profile basics', d:'Name, photo, about; privacy settings.'},
-      {t:'Groups', d:'Group names; participants visible; exported media.'}
-    ]
-  };
+  function listSessions(){ try{ return JSON.parse(localStorage.getItem(bankKey))||[] }catch(e){ return [] } }
+  function saveSession(name){
+    const all = listSessions().filter(s=>s.name!==name);
+    all.push({name, state});
+    localStorage.setItem(bankKey, JSON.stringify(all));
+  }
+
+  // Platforms and A→Z checklists (loaded from data file)
+  let CHECKLISTS = {};
+
+  async function loadSteps(){
+    const res = await fetch('../assets/data/platform-steps.json');
+    CHECKLISTS = await res.json();
+  }
 
   let state = {
     platform: null,
@@ -95,9 +70,21 @@
     details.appendChild(el('summary',{},['Add a note (optional)']));
     const ta = el('textarea',{class:'note',placeholder:'Notes, URL, path to content (e.g., Profile → Posts → 2023‑01‑12)'},[]);
     ta.value = state.notes[state.idx] || '';
-    ta.addEventListener('input', ()=>{ state.notes[state.idx]=ta.value; save(); });
+    ta.addEventListener('input', ()=>{ state.notes[state.idx]=ta.value; save(); renderHeatmap(); });
     details.appendChild(ta);
     card.appendChild(details);
+
+    const tagsWrap = el('div',{class:'chips'},[]);
+    // Quick chips (e.g., #high-risk)
+    ['pii','phone','email','address','photo','message','high-risk'].forEach(tag=>{
+      const b = el('button',{class:'btn ghost',type:'button'},['#'+tag]);
+      b.addEventListener('click',()=>{
+        const cur = (state.notes[state.idx]||'');
+        state.notes[state.idx] = (cur + (cur? ' ':'') + '#'+tag).trim(); save(); ta.value = state.notes[state.idx]; renderHeatmap();
+      });
+      tagsWrap.appendChild(b);
+    });
+    card.appendChild(tagsWrap);
 
     const doneWrap = el('label',{},[]);
     const cb = el('input',{type:'checkbox'});
@@ -111,30 +98,71 @@
     updateProgress();
   }
 
+  function riskScore(){
+    if(!state.steps || !state.steps.length) return 0;
+    let base = 0;
+    state.steps.forEach((s,i)=>{
+      if(s.done) base += 1;
+      if((state.notes[i]||'').match(/phone|address|email|id|passport|license/i)) base += 2;
+    });
+    return Math.min(100, Math.round((base / (state.steps.length*3)) * 100));
+  }
+
   function updateProgress(){
     const total = state.steps.length || 1;
     const done = state.steps.filter(s=>s.done).length;
     const pct = Math.round((done/total)*100);
-    $('#progress-bar').style.width = pct+'%';
+    const bar = $('#progress-bar');
+    if(bar) bar.style.width = pct+'%';
+    const scoreEl = $('#score');
+    if(scoreEl) scoreEl.textContent = riskScore();
+    renderHeatmap();
   }
+
+  function renderHeatmap(){
+    const el = document.getElementById('heatmap'); if(!el) return;
+    const cats = ['phone','email','address','photo','message'];
+    const counts = cats.map(c => (JSON.stringify(state.notes).match(new RegExp(c,'ig'))||[]).length);
+    const max = Math.max(1, ...counts);
+    const bars = counts.map((n,i)=>`<rect x="${i*22}" y="${40-(n/max*40)}" width="18" height="${(n/max*40)}" rx="2" />`).join('');
+    el.innerHTML = `<svg viewBox="0 0 120 40">${bars}</svg>`;
+  }
+
+  function runTour(){ alert('Welcome! 1) Pick a platform. 2) Follow A→Z. 3) Use PII helper. 4) Export when done.'); }
 
   function next(){ if(state.idx < state.steps.length-1){ state.idx++; save(); renderStep(); } }
   function prev(){ if(state.idx > 0){ state.idx--; save(); renderStep(); } }
 
   function exportJSON(){ const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `discover_${state.platform||'session'}.json`; a.click(); }
 
-  function exportMD(){
-    const lines = [];
-    lines.push(`# Discover log — ${state.platform||'unspecified'}`);
-    lines.push('');
-    state.steps.forEach((s,i)=>{
-      const mark = s.done ? '✅' : '⬜';
-      const note = (state.notes[i]||'').trim();
-      lines.push(`- ${mark} **${i+1}. ${s.t}** — ${s.d}`);
-      if(note) lines.push(`  - Note: ${note}`);
-    });
-    const blob = new Blob([lines.join('\n')], {type:'text/markdown'});
+  async function buildMarkdown(){
+    const lines = []; lines.push(`# Discover log — ${state.platform||'unspecified'}`, '');
+    state.steps.forEach((s,i)=>{ const mark = s.done?'✅':'⬜'; const note=(state.notes[i]||'').trim(); lines.push(`- ${mark} **${i+1}. ${s.t}** — ${s.d}`); if(note) lines.push(`  - Note: ${note}`); });
+    return lines.join('\n');
+  }
+
+  async function exportMD(){
+    const md = await buildMarkdown();
+    const blob = new Blob([md], {type:'text/markdown'});
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `discover_${state.platform||'session'}.md`; a.click();
+  }
+
+  async function encryptText(text, pass){
+    const enc = new TextEncoder();
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const key = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const aes = await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'}, key, {name:'AES-GCM',length:256}, false, ['encrypt']);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv}, aes, enc.encode(text)));
+    const out = new Uint8Array(salt.length+iv.length+ct.length); out.set(salt,0); out.set(iv,16); out.set(ct,28);
+    return btoa(String.fromCharCode(...out));
+  }
+  async function exportEncrypted(){
+    const pass = prompt('Passphrase for encryption (do not forget this!)'); if(!pass) return;
+    const md = await buildMarkdown();
+    const payload = await encryptText(md, pass);
+    const blob = new Blob([payload], {type:'text/plain'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `discover_${state.platform||'session'}.enc.txt`; a.click();
   }
 
   function bindEvents(){
@@ -142,14 +170,46 @@
     $('#btn-next').addEventListener('click', next);
     $('#btn-export-json').addEventListener('click', exportJSON);
     $('#btn-export-md').addEventListener('click', exportMD);
+    $('#btn-export-enc')?.addEventListener('click', ()=>{ exportEncrypted(); });
     $('#btn-new-session').addEventListener('click', ()=>{ localStorage.removeItem(storeKey); state={platform:null,steps:[],idx:0,progress:0,notes:{}}; save(); location.reload(); });
     $('#btn-load-session').addEventListener('click', ()=>{ load(); if(state.platform){ $('#wizard').classList.add('active'); renderStep(); }});
     $('#btn-pii').addEventListener('click', ()=> $('#pii-modal').classList.add('open'));
     $('#btn-pii-close').addEventListener('click', ()=> $('#pii-modal').classList.remove('open'));
+    const s = document.getElementById('search'); if(s){ s.addEventListener('input',()=>{
+      const q = s.value.toLowerCase(); if(!q) return; const hit = Object.entries(state.notes).find(([i,v])=> (v||'').toLowerCase().includes(q));
+      if(hit){ state.idx = parseInt(hit[0],10); save(); renderStep(); }
+    }); }
+    $('#btn-tour')?.addEventListener('click', runTour);
+    $('#btn-print')?.addEventListener('click', ()=>{ window.print(); });
+    $('#btn-save-named')?.addEventListener('click',()=>{ const input = $('#session-name'); const n = (input?.value||'').trim()||('session-'+Date.now()); save(); saveSession(n); alert('Saved: '+n); });
+    $('#btn-list')?.addEventListener('click',()=>{ const all = listSessions(); const n = prompt('Type a session name to load:\n'+all.map(s=>'- '+s.name).join('\n')); const found = all.find(s=>s.name===n); if(found){ state = found.state; save(); $('#wizard').classList.add('active'); renderStep(); }});
   }
 
+  function openPalette(){
+    const q = prompt('Command (e.g., "facebook", "next", "prev", "export md")');
+    if(!q) return;
+    const s = q.toLowerCase();
+    if(CHECKLISTS[s]) return startPlatform(s);
+    if(s==='next') return next();
+    if(s==='prev') return prev();
+    if(s==='export md') return exportMD();
+    if(s==='export json') return exportJSON();
+  }
+
+  window.addEventListener('keydown', (e)=>{
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); openPalette(); }
+  });
+
+  function diag(){
+    if(location.hash!=='#debug') return;
+    const d = document.createElement('pre'); d.style.whiteSpace='pre-wrap'; d.style.border='1px solid var(--line)'; d.style.padding='.5rem'; d.textContent = JSON.stringify({steps:state.steps?.length||0, notes:Object.keys(state.notes||{}).length, score:riskScore()}, null, 2);
+    document.body.appendChild(d);
+  }
+  window.addEventListener('DOMContentLoaded', diag);
+
   // Init
-  document.addEventListener('DOMContentLoaded', ()=>{
+  document.addEventListener('DOMContentLoaded', async ()=>{
+    await loadSteps();
     load();
     renderPlatformPicker();
     if(state.platform){ $('#wizard').classList.add('active'); renderStep(); }
