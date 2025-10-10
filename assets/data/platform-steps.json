@@ -1,43 +1,78 @@
 {
-  "facebook": [
-    {"t":"Profile header","d":"Display name, username/vanity URL, profile URL, account type (personal/business, public/private)."},
-    {"t":"Cover/banner photos","d":"Review all cover photos. Inspect comments & likes. Look for background info (street signs, school, plates)."},
-    {"t":"Profile photo","d":"Face/uniform/workplace/school cues?"},
-    {"t":"Bio / About","d":"Work, education, hometown/current city, relationship, websites. Any PII?"},
-    {"t":"Contact info","d":"Phone, email, address visible?"},
-    {"t":"Friends / Followers / Following","d":"Counts; unknown contacts; sensitive connections (employer, family)."},
-    {"t":"Photos & Albums","d":"Own + tagged; sensitive media; location clues."},
-    {"t":"Posts by you","d":"Scan recent; then older (>2y). Flag high-risk posts and copy URLs/paths."},
-    {"t":"Tagged posts","d":"Visibility + untag options (later)."},
-    {"t":"Stories / Reels","d":"Archived/highlighted risk."},
-    {"t":"Groups","d":"Public groups revealing interests/location?"},
-    {"t":"Pages liked / Follows","d":"Pages that reveal sensitive affiliations."},
-    {"t":"Events / Check-ins","d":"Exposes routine/home/work?"},
-    {"t":"Marketplace","d":"Listings with phone, address, license plate?"},
-    {"t":"Search your name","d":"Search variations; see discoverability."},
-    {"t":"Apps & Integrations","d":"Third-party apps connected?"},
-    {"t":"Devices & Sessions","d":"Review logged-in devices."},
-    {"t":"Messages (optional)","d":"PII shared in DMs?"},
-    {"t":"Cross-links","d":"Links to other platforms in bio/posts."}
-  ],
-  "instagram": [
-    {"t":"Profile basics","d":"Name, username, bio, link-in-bio; public/private."},
-    {"t":"Posts & Highlights","d":"Photos/videos; background clues; tagged posts."},
-    {"t":"Followers/Following","d":"Counts; suspicious followers."},
-    {"t":"Stories","d":"Archived highlights with PII?"}
-  ],
-  "x": [
-    {"t":"Profile basics","d":"Display name, handle, bio, location, website; public/private."},
-    {"t":"Tweets & Media","d":"Old tweets; replies; external links; EXIF-leak media."},
-    {"t":"Follows & Lists","d":"Lists that reveal affiliations."}
-  ],
-  "tiktok": [
-    {"t":"Profile basics","d":"Display name, username, bio; links; public/private."},
-    {"t":"Videos","d":"Backgrounds/captions/geotags."},
-    {"t":"Followers/Following","d":"Counts; social graph exposure."}
-  ],
-  "whatsapp": [
-    {"t":"Profile","d":"Name, photo, about; who can see."},
-    {"t":"Groups","d":"Group names; participants; shared media."}
-  ]
+  "facebook": {
+    "Profile": [
+      {"t": "Profile header", "d": "Display name, username/vanity URL, URL, account type (personal/business, public/private)."},
+      {"t": "Cover/banner photos", "d": "Review all cover photos. Comments/likes. Background clues (street signs, school, plates)."},
+      {"t": "Profile photo", "d": "Face/uniform/workplace/school cues?"},
+      {"t": "Bio / About", "d": "Work, education, hometown/current city, relationship, websites. Any PII?"},
+      {"t": "Contact info", "d": "Phone, email, address visible? Limit discoverability."}
+    ],
+    "Connections": [
+      {"t": "Friends / Followers / Following", "d": "Counts; unknown contacts; sensitive ties (employer, family)."},
+      {"t": "Groups", "d": "Public groups revealing interests/location?"},
+      {"t": "Pages liked / Follows", "d": "Pages revealing sensitive affiliations."}
+    ],
+    "Content": [
+      {"t": "Photos & Albums", "d": "Own + tagged; sensitive media; location clues.", "subs": ["License plates", "Street signs", "School logos", "Children or minors", "Home exterior/interior"]},
+      {"t": "Posts by you", "d": "Scan recent; then older (>2y). Flag high-risk posts and copy URLs/paths.", "subs": ["PII mentions", "Travel dates / routines", "Financial info", "Workplace details"]},
+      {"t": "Tagged posts", "d": "Check visibility; request removals/untag later."},
+      {"t": "Stories / Reels", "d": "Archived/highlighted sensitive media?"},
+      {"t": "Events / Check-ins", "d": "Past events expose home/work/routine?"},
+      {"t": "Marketplace", "d": "Listings with phone/address or plates?"}
+    ],
+    "Security": [
+      {"t": "Search your name", "d": "Search variations; what’s discoverable?"},
+      {"t": "Apps & Integrations", "d": "Third-party apps connected?"},
+      {"t": "Devices & Sessions", "d": "Review logged-in devices."},
+      {"t": "Messages (optional)", "d": "PII shared in DMs?"},
+      {"t": "Cross-links", "d": "Links to other platforms in bio/posts."}
+    ]
+  },
+  "instagram": {
+    "Profile": [
+      {"t": "Basics", "d": "Name, username, bio, link-in-bio; public/private."},
+      {"t": "Contact", "d": "Email/phone in bio?"}
+    ],
+    "Content": [
+      {"t": "Posts", "d": "Photos/videos background clues.", "subs": ["House numbers", "Street names", "Uniforms/badges", "Workplace signage"]},
+      {"t": "Highlights & Stories", "d": "Highlights that expose routine, kids’ school, locations."},
+      {"t": "Tagged", "d": "Risky tags; request removals."}
+    ],
+    "Security": [
+      {"t": "Followers/Following", "d": "Suspicious followers? Doxxing/scraping risk."},
+      {"t": "Cross-links", "d": "Link-in-bio leads to other platforms?"}
+    ]
+  },
+  "x": {
+    "Profile": [
+      {"t": "Basics", "d": "Display name, handle, bio, location, website; public/private."}
+    ],
+    "Content": [
+      {"t": "Tweets & Media", "d": "Old tweets; replies; external links; media.", "subs": ["Faces of minors", "Home exterior", "Geo hints in photos"]}
+    ],
+    "Security": [
+      {"t": "Lists & Follows", "d": "Lists reveal affiliations?"},
+      {"t": "Discoverability", "d": "Email/phone discoverability"}
+    ]
+  },
+  "tiktok": {
+    "Profile": [
+      {"t": "Basics", "d": "Name, username, bio; links; public/private."}
+    ],
+    "Content": [
+      {"t": "Videos", "d": "Backgrounds/captions/geotags.", "subs": ["Street signs", "School uniforms", "License plates", "Inside home"]}
+    ],
+    "Security": [
+      {"t": "Followers/Following", "d": "Counts; social graph exposure."}
+    ]
+  },
+  "whatsapp": {
+    "Profile": [
+      {"t": "Profile", "d": "Name, photo, about; who can see."}
+    ],
+    "Security": [
+      {"t": "Groups", "d": "Group names; participants; shared media."},
+      {"t": "Linked devices", "d": "Review linked devices; web sessions"}
+    ]
+  }
 }

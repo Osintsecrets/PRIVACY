@@ -285,7 +285,12 @@
       },
       "note": "Even a name can be high risk if it’s very unique or linked with city, workplace, or relatives."
     },
-    "close": "Close"
+    "close": "Close",
+    "category": "Category",
+    "subs": "Sub-checks",
+    "path": "Path",
+    "url": "URL",
+    "platform": "Platform"
   },
   "common": {
     "close": "Close",

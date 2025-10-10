@@ -331,3 +331,9 @@ html[dir="rtl"] .stepper { direction: rtl; }
 [dir="rtl"] .sticky-tools{left:1rem;right:auto}
 kbd,kbd.kbd{font-family:ui-monospace,monospace;background:rgba(255,255,255,.08);padding:.05rem .35rem;border-radius:6px}
 @media print{ .no-print{display:none !important;} }
+
+@media (max-width: 640px){
+  .chips{gap:.35rem}
+  .wizard-actions{flex-direction:column; align-items:stretch}
+  .wizard-actions .btn{width:100%}
+}
