@@ -229,6 +229,58 @@
       "loadError": "We could not load the ethics promise. Please refresh."
     }
   },
+  "breadcrumbs": {
+    "home": "Home",
+    "selfaudit": "Self‑audit"
+  },
+  "discover": {
+    "title": "Discover — Collect everything that exists about you",
+    "titleShort": "Discover",
+    "lede": "Prepare, then methodically collect your online footprint. This is a process, not a one‑click fix. Everything you enter here stays on your device. Do not paste passwords.",
+    "tip": {
+      "onePlatform": "Tip: work one platform at a time to avoid overwhelm."
+    },
+    "pickPlatform": "1) Choose a platform to start",
+    "pickPlatformHelp": "We recommend starting with the platform you use most. You can come back and repeat for others.",
+    "prep": {
+      "title": "2) Preparation",
+      "notebook": "Open a notebook or doc for raw notes.",
+      "assets": "List your usernames, emails, phone(s), and known accounts.",
+      "scope": "Pick scope: this platform only (recommended) or full footprint.",
+      "safety": "Don’t paste passwords here; if needed, record counts like \"same password on 3 accounts\"."
+    },
+    "session": {
+      "new": "New session",
+      "load": "Load saved session"
+    },
+    "wizardTitle": "3) Guided checklist (A→Z)",
+    "prev": "Back",
+    "next": "Next",
+    "export": {
+      "md": "Export Markdown",
+      "json": "Export JSON"
+    },
+    "pii": {
+      "title": "What is PII? Risk levels",
+      "lede": "PII = information that can identify, locate, impersonate you. Risk depends on context and uniqueness.",
+      "high": "High risk",
+      "medium": "Medium risk",
+      "low": "Lower risk (often public)",
+      "items": {
+        "phone": "Phone numbers",
+        "address": "Exact home/work address",
+        "credentials": "Credentials, tokens, auth screenshots",
+        "gov": "Government IDs, DOB + full name + city combined",
+        "email": "Emails (esp. primary), work place + role",
+        "unique": "Unique full names or rare usernames",
+        "photos": "Photos with location clues (street signs, plates)",
+        "firstname": "First name alone",
+        "generic": "Generic interests without location"
+      },
+      "note": "Even a name can be high risk if it’s very unique or linked with city, workplace, or relatives."
+    },
+    "close": "Close"
+  },
   "common": {
     "close": "Close",
     "updated": "Updated {date}",

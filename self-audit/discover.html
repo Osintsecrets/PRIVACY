@@ -1,57 +1,148 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="auto">
+<!doctype html>
+<html lang="en" data-i18n-scope="discover">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f14">
-  <title data-i18n="phases.discover.title">Discover — Hunt for clues</title>
-  <meta name="description" content="Map what exists about you online before diving into detailed checklists.">
+  <title data-i18n="discover.title">Discover — Self‑audit</title>
+  <link rel="stylesheet" href="../assets/css/site.css">
   <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <style>
+    /* Minimal, page‑local helpers (keep small) */
+    .discover-hero {margin: 1.5rem 0}
+    .discover-hero h1 {font-size: clamp(1.6rem, 2.2vw, 2.2rem); margin: 0 0 .5rem}
+    .discover-hero p {opacity:.9}
+    .grid {display:grid; gap:1rem}
+    .grid.cols-2 {grid-template-columns: repeat(auto-fit,minmax(260px,1fr))}
+    .panel {background: var(--card-bg, #0e0f12); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:1rem}
+    .muted {opacity:.8}
+    .btn {display:inline-flex; align-items:center; gap:.5rem; border:1px solid rgba(255,255,255,.16); padding:.55rem .9rem; border-radius:10px; background:transparent; color:inherit; cursor:pointer}
+    .btn.primary {background:#1a73e8; border-color:#1a73e8; color:white}
+    .btn.ghost {background:transparent}
+    .progress {height:10px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden}
+    .progress > i {display:block; height:100%; width:0%; background:#1a73e8}
+    .chips {display:flex; flex-wrap:wrap; gap:.5rem}
+    .chip {padding:.25rem .6rem; border:1px dashed rgba(255,255,255,.25); border-radius:999px; font-size:.85rem}
+    .wizard {display:none}
+    .wizard.active {display:block}
+    .wizard-step {border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:1rem; margin:.75rem 0}
+    .wizard-step h3 {margin:.25rem 0 .35rem}
+    .wizard-step details {margin:.35rem 0}
+    .wizard-actions {display:flex; gap:.5rem; justify-content:space-between; margin-top:1rem}
+    .sticky-tools {position:fixed; right:1rem; bottom:1rem; display:flex; flex-direction:column; gap:.5rem; z-index:9999}
+    .sticky-tools .fab {border-radius:999px; width:48px; height:48px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.16); background:#1a73e8; color:#fff}
+    .modal {position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; padding:1rem}
+    .modal.open {display:flex}
+    .modal .sheet {max-width:720px; width:100%; background:#111319; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:1rem 1.2rem; max-height:80vh; overflow:auto}
+    .kbd {font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.85em; background:rgba(255,255,255,.08); padding:.05rem .35rem; border-radius:6px}
+    .note {width:100%; min-height:64px; background:#0c0d10; color:inherit; border:1px solid rgba(255,255,255,.16); border-radius:8px; padding:.5rem}
+  </style>
 </head>
 <body>
-  <a class="skip" href="#main" data-i18n="site.skip">Skip to content</a>
-  <div id="ui-overlay" aria-hidden="true"></div>
-
   <header>
     <div class="wrapper header-row" role="navigation" aria-label="Primary">
-      <a class="brand" href="../" data-i18n="site.brand">Social Risk Audit</a>
+      <a class="brand" href="/PRIVACY/" data-i18n="site.brand">Social Risk Audit</a>
       <div class="menu-container">
-        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰</button>
+        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false">☰</button>
         <nav id="site-menu" class="menu" hidden aria-label="Primary">
-          <a href="../" data-i18n="nav.home">Home</a>
-          <a href="../self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
-          <a href="../platform.html" data-i18n="nav.platform">Platform</a>
-          <a href="../why.html" data-i18n="nav.why">Why</a>
-          <a href="../ethics.html" data-i18n="nav.ethics">Ethics</a>
-          <a href="../about/" data-i18n="nav.about">About</a>
-          <a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
+          <a href="/PRIVACY/" data-i18n="nav.home">Home</a>
+          <a href="/PRIVACY/self-audit.html" aria-current="page" data-i18n="nav.selfaudit">Self‑audit</a>
+          <a href="/PRIVACY/platform.html" data-i18n="nav.platform">Platform</a>
+          <a href="/PRIVACY/why.html" data-i18n="nav.why">Why</a>
+          <a href="/PRIVACY/ethics.html" data-i18n="nav.ethics">Ethics</a>
+          <a href="/PRIVACY/about/" data-i18n="nav.about">About</a>
+          <a href="/PRIVACY/disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main id="main" class="wrapper">
+  <main class="panel" id="content" aria-live="polite">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="../" data-i18n="breadcrumbs.home">Home</a>
+      <a href="/PRIVACY/" data-i18n="breadcrumbs.home">Home</a>
       <span aria-hidden="true">›</span>
-      <a href="../self-audit.html" data-i18n="breadcrumbs.selfaudit">Self‑audit</a>
+      <a href="/PRIVACY/self-audit.html" data-i18n="breadcrumbs.selfaudit">Self‑audit</a>
       <span aria-hidden="true">›</span>
-      <span data-i18n="breadcrumbs.discover">Discover</span>
+      <span data-i18n="discover.titleShort">Discover</span>
     </nav>
 
-    <h1 data-i18n="phases.discover.title">Discover — Hunt for clues</h1>
-    <p class="lede" data-i18n="phases.discover.lede">Find what exists about you; map what’s public.</p>
+    <section class="discover-hero">
+      <h1 data-i18n="discover.title">Discover — Collect everything that exists about you</h1>
+      <p class="muted" data-i18n="discover.lede">Prepare, then methodically collect your online footprint. This is a process, not a one‑click fix. Everything you enter here stays on your device. Do not paste passwords.</p>
+      <div class="chips" style="margin:.75rem 0 0">
+        <span class="chip" data-i18n="discover.tip.onePlatform">Tip: work **one platform at a time** to avoid overwhelm.</span>
+      </div>
+    </section>
 
-    <section id="phase-checklists" class="phase-checklists"></section>
+    <section class="panel">
+      <div class="grid cols-2">
+        <div>
+          <h2 data-i18n="discover.pickPlatform">1) Choose a platform to start</h2>
+          <p class="muted" data-i18n="discover.pickPlatformHelp">We recommend starting with the platform you use most. You can come back and repeat for others.</p>
+          <div id="platform-picker" class="grid cols-2"></div>
+        </div>
+        <div>
+          <h2 data-i18n="discover.prep.title">2) Preparation</h2>
+          <ul>
+            <li data-i18n="discover.prep.notebook">Open a notebook or doc for raw notes.</li>
+            <li data-i18n="discover.prep.assets">List your usernames, emails, phone(s), and known accounts.</li>
+            <li data-i18n="discover.prep.scope">Pick scope: this platform only (recommended) or full footprint.</li>
+            <li data-i18n="discover.prep.safety">Don’t paste passwords here; if needed, record counts like “same password on 3 accounts”.</li>
+          </ul>
+          <button class="btn" id="btn-new-session" data-i18n="discover.session.new">New session</button>
+          <button class="btn" id="btn-load-session" data-i18n="discover.session.load">Load saved session</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 data-i18n="discover.wizardTitle">3) Guided checklist (A→Z)</h2>
+      <div class="progress" aria-label="Progress"><i id="progress-bar"></i></div>
+      <div id="wizard" class="wizard" aria-live="polite"></div>
+      <div class="wizard-actions">
+        <div>
+          <button class="btn" id="btn-prev" data-i18n="discover.prev">Back</button>
+          <button class="btn primary" id="btn-next" data-i18n="discover.next">Next</button>
+        </div>
+        <div>
+          <button class="btn" id="btn-export-md" data-i18n="discover.export.md">Export Markdown</button>
+          <button class="btn" id="btn-export-json" data-i18n="discover.export.json">Export JSON</button>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer id="site-footer" class="site-footer">
-    <div class="footer-inner">
-      <span>© <a href="../" rel="home">OSINTSecrets</a></span>
+  <!-- PII helper floating button + modal -->
+  <div class="sticky-tools">
+    <button class="fab" id="btn-pii" title="PII helper" aria-haspopup="dialog">PII</button>
+  </div>
+  <div id="pii-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="pii-title">
+    <div class="sheet">
+      <h2 id="pii-title" data-i18n="discover.pii.title">What is PII? Risk levels</h2>
+      <p data-i18n="discover.pii.lede">PII = information that can identify, locate, impersonate you. Risk depends on context and uniqueness.</p>
+      <h3 data-i18n="discover.pii.high">High risk</h3>
+      <ul>
+        <li data-i18n="discover.pii.items.phone">Phone numbers</li>
+        <li data-i18n="discover.pii.items.address">Exact home/work address</li>
+        <li data-i18n="discover.pii.items.credentials">Credentials, tokens, auth screenshots</li>
+        <li data-i18n="discover.pii.items.gov">Government IDs, DOB + full name + city combined</li>
+      </ul>
+      <h3 data-i18n="discover.pii.medium">Medium risk</h3>
+      <ul>
+        <li data-i18n="discover.pii.items.email">Emails (esp. primary), work place + role</li>
+        <li data-i18n="discover.pii.items.unique">Unique full names or rare usernames</li>
+        <li data-i18n="discover.pii.items.photos">Photos with location clues (street signs, plates)</li>
+      </ul>
+      <h3 data-i18n="discover.pii.low">Lower risk (often public)</h3>
+      <ul>
+        <li data-i18n="discover.pii.items.firstname">First name alone</li>
+        <li data-i18n="discover.pii.items.generic">Generic interests without location</li>
+      </ul>
+      <p class="muted" data-i18n="discover.pii.note">Even a name can be high risk if it’s very unique or linked with city, workplace, or relatives.</p>
+      <div style="text-align:right"><button class="btn" id="btn-pii-close" data-i18n="discover.close">Close</button></div>
     </div>
-  </footer>
+  </div>
 
-  <script src="../assets/js/i18n.js" defer></script>
-  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/discover.js" defer></script>
 </body>
 </html>
