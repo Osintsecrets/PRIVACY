@@ -1,57 +1,68 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="auto">
+<!doctype html>
+<html lang="en" data-i18n-scope="analyze">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f14">
-  <title data-i18n="phases.analyze.title">Analyze — Think like an attacker</title>
-  <meta name="description" content="Turn discoveries into a threat map and prioritize what matters most.">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="analyze.title">Analyze — Risk triage</title>
+  <link rel="stylesheet" href="../assets/css/site.css">
   <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <style>
+    .grid{display:grid;gap:1rem}
+    .cols{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem}
+    .pill{padding:.25rem .55rem;border-radius:999px;border:1px solid var(--line)}
+    .risk-high{background:rgba(255,0,0,.12);border-color:rgba(255,0,0,.3)}
+    .risk-med{background:rgba(255,165,0,.12);border-color:rgba(255,165,0,.3)}
+    .risk-low{background:rgba(0,128,0,.12);border-color:rgba(0,128,0,.3)}
+    .toolbar{display:flex;gap:.5rem;flex-wrap:wrap}
+    .list{display:grid;gap:.5rem}
+    .item{border:1px solid var(--line);border-radius:10px;padding:.6rem}
+    .item h4{margin:.2rem 0}
+    .kv{opacity:.85;font-size:.9em}
+    .sticky-tools{position:sticky;top:.5rem}
+  </style>
 </head>
 <body>
-  <a class="skip" href="#main" data-i18n="site.skip">Skip to content</a>
-  <div id="ui-overlay" aria-hidden="true"></div>
+<header id="site-header"></header>
+<main class="container stack" aria-live="polite">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/PRIVACY/" data-i18n="breadcrumbs.home">Home</a> ›
+    <a href="/PRIVACY/self-audit.html" data-i18n="breadcrumbs.selfaudit">Self‑audit</a> ›
+    <span data-i18n="analyze.short">Analyze</span>
+  </nav>
 
-  <header>
-    <div class="wrapper header-row" role="navigation" aria-label="Primary">
-      <a class="brand" href="../" data-i18n="site.brand">Social Risk Audit</a>
-      <div class="menu-container">
-        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰</button>
-        <nav id="site-menu" class="menu" hidden aria-label="Primary">
-          <a href="../" data-i18n="nav.home">Home</a>
-          <a href="../self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
-          <a href="../platform.html" data-i18n="nav.platform">Platform</a>
-          <a href="../why.html" data-i18n="nav.why">Why</a>
-          <a href="../ethics.html" data-i18n="nav.ethics">Ethics</a>
-          <a href="../about/" data-i18n="nav.about">About</a>
-          <a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
-        </nav>
-      </div>
+  <section class="card stack">
+    <h1 data-i18n="analyze.h1">Analyze — Turn findings into risk</h1>
+    <p class="muted" data-i18n="analyze.lede">Load your Discover session, cluster findings, and mark priorities. Nothing is uploaded; all local.</p>
+    <div class="toolbar">
+      <input id="choose-session" placeholder="Session name"/>
+      <button class="btn" id="btn-load" data-i18n="analyze.load">Load</button>
+      <select id="filter-platform"></select>
+      <select id="filter-risk">
+        <option value="" data-i18n="analyze.risk.all">All risks</option>
+        <option value="high" data-i18n="analyze.risk.high">High</option>
+        <option value="medium" data-i18n="analyze.risk.medium">Medium</option>
+        <option value="low" data-i18n="analyze.risk.low">Low</option>
+      </select>
+      <input id="search" type="search" placeholder="Search notes/tags"/>
+      <button class="btn" id="btn-export-md" data-i18n="analyze.export.md">Export triage (MD)</button>
     </div>
-  </header>
+  </section>
 
-  <main id="main" class="wrapper">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="../" data-i18n="breadcrumbs.home">Home</a>
-      <span aria-hidden="true">›</span>
-      <a href="../self-audit.html" data-i18n="breadcrumbs.selfaudit">Self‑audit</a>
-      <span aria-hidden="true">›</span>
-      <span data-i18n="breadcrumbs.analyze">Analyze</span>
-    </nav>
+  <section class="grid cols">
+    <aside class="card sticky-tools">
+      <h3 data-i18n="analyze.summary">Summary</h3>
+      <div id="summary"></div>
+      <h3 data-i18n="analyze.tags">Top tags</h3>
+      <div id="tags" class="chips"></div>
+    </aside>
 
-    <h1 data-i18n="phases.analyze.title">Analyze — Think like an attacker</h1>
-    <p class="lede" data-i18n="phases.analyze.lede">Sort and rate risk; combine data points.</p>
-
-    <section id="phase-checklists" class="phase-checklists"></section>
-  </main>
-
-  <footer id="site-footer" class="site-footer">
-    <div class="footer-inner">
-      <span>© <a href="../" rel="home">OSINTSecrets</a></span>
-    </div>
-  </footer>
-
-  <script src="../assets/js/i18n.js" defer></script>
-  <script src="../assets/js/main.js" defer></script>
+    <section class="card">
+      <h3 data-i18n="analyze.items">Items</h3>
+      <div id="list" class="list"></div>
+    </section>
+  </section>
+</main>
+<script type="module" src="../assets/js/analyze.js" defer></script>
 </body>
 </html>
