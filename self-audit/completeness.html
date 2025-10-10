@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-i18n-scope="complete">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="complete.title">Completeness — Coverage by platform</title>
+  <link rel="stylesheet" href="../assets/css/site.css"><link rel="stylesheet" href="../assets/css/styles.css"><link rel="stylesheet" href="../assets/css/footer.css">
+  <style>.grid{display:grid;gap:1rem}.cols{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem}.bar{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:#1a73e8;width:0}</style>
+</head>
+<body>
+<header id="site-header"></header>
+<main class="container stack">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/PRIVACY/" data-i18n="breadcrumbs.home">Home</a> ›
+    <a href="/PRIVACY/self-audit.html" data-i18n="breadcrumbs.selfaudit">Self‑audit</a> ›
+    <span data-i18n="complete.short">Completeness</span>
+  </nav>
+  <section class="card stack">
+    <h1 data-i18n="complete.h1">Completeness — How much have you covered?</h1>
+    <p class="muted" data-i18n="complete.lede">Shows coverage by platform/category for your current Discover session. All local.</p>
+    <div id="report" class="grid cols"></div>
+  </section>
+</main>
+<script type="module" src="../assets/js/completeness.js" defer></script>
+</body>
+</html>
