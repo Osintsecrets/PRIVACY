@@ -310,7 +310,8 @@
     "summary": "Summary",
     "tags": "Top tags",
     "items": "Items",
-    "tile": "Turn findings into risk and priorities."
+    "tile": "Turn findings into risk and priorities.",
+    "keywords": "Keyword sets loaded"
   },
   "reduce": {
     "title": "Reduce — Lock it down",
@@ -320,7 +321,8 @@
     "queue": "Backlog (from Analyze)",
     "checklists": "Common actions",
     "export": "Export actions (MD)",
-    "tile": "Turn priorities into actions and mark them done."
+    "tile": "Turn priorities into actions and mark them done.",
+    "keywords": "Keyword sets loaded"
   },
   "keepsafe": {
     "title": "Keep Safe — Stay private over time",

@@ -1,4 +1,10 @@
-import { loadDiscover, listDiscoverSessions, pickSessionByName, extractTags, approximateRiskFromText, download } from './sra-utils.js';
+import { loadDiscover, listDiscoverSessions, pickSessionByName, extractTags, download } from './sra-utils.js';
+
+let KEYWORDS = { high:[], medium:[], low:[] };
+async function loadKeywords(){
+  const res = await fetch('../assets/data/analyze-keywords.json');
+  KEYWORDS = await res.json();
+}
 
 let session = null; // {platform, steps, notes, ...}
 let items = []; // normalized from Discover: one item per step with note
@@ -10,7 +16,12 @@ function normalize(dis){
   });
   return out;
 }
-function inferRisk(text){ const v = approximateRiskFromText(text); return v>=6? 'high' : v>=3? 'medium' : 'low'; }
+function inferRisk(text){
+  const t=(text||'').toLowerCase();
+  if(KEYWORDS.high.some(k=>t.includes(k))) return 'high';
+  if(KEYWORDS.medium.some(k=>t.includes(k))) return 'medium';
+  return 'low';
+}
 
 function renderFilters(){
   const sel = document.getElementById('filter-platform'); sel.innerHTML='';
@@ -73,4 +84,7 @@ function bind(){
   });
 }
 
-document.addEventListener('DOMContentLoaded', bind);
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadKeywords();
+  bind();
+});
