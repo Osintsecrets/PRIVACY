@@ -1,0 +1,43 @@
+{
+  "facebook": [
+    {"t":"Profile header","d":"Display name, username/vanity URL, profile URL, account type (personal/business, public/private)."},
+    {"t":"Cover/banner photos","d":"Review all cover photos. Inspect comments & likes. Look for background info (street signs, school, plates)."},
+    {"t":"Profile photo","d":"Face/uniform/workplace/school cues?"},
+    {"t":"Bio / About","d":"Work, education, hometown/current city, relationship, websites. Any PII?"},
+    {"t":"Contact info","d":"Phone, email, address visible?"},
+    {"t":"Friends / Followers / Following","d":"Counts; unknown contacts; sensitive connections (employer, family)."},
+    {"t":"Photos & Albums","d":"Own + tagged; sensitive media; location clues."},
+    {"t":"Posts by you","d":"Scan recent; then older (>2y). Flag high-risk posts and copy URLs/paths."},
+    {"t":"Tagged posts","d":"Visibility + untag options (later)."},
+    {"t":"Stories / Reels","d":"Archived/highlighted risk."},
+    {"t":"Groups","d":"Public groups revealing interests/location?"},
+    {"t":"Pages liked / Follows","d":"Pages that reveal sensitive affiliations."},
+    {"t":"Events / Check-ins","d":"Exposes routine/home/work?"},
+    {"t":"Marketplace","d":"Listings with phone, address, license plate?"},
+    {"t":"Search your name","d":"Search variations; see discoverability."},
+    {"t":"Apps & Integrations","d":"Third-party apps connected?"},
+    {"t":"Devices & Sessions","d":"Review logged-in devices."},
+    {"t":"Messages (optional)","d":"PII shared in DMs?"},
+    {"t":"Cross-links","d":"Links to other platforms in bio/posts."}
+  ],
+  "instagram": [
+    {"t":"Profile basics","d":"Name, username, bio, link-in-bio; public/private."},
+    {"t":"Posts & Highlights","d":"Photos/videos; background clues; tagged posts."},
+    {"t":"Followers/Following","d":"Counts; suspicious followers."},
+    {"t":"Stories","d":"Archived highlights with PII?"}
+  ],
+  "x": [
+    {"t":"Profile basics","d":"Display name, handle, bio, location, website; public/private."},
+    {"t":"Tweets & Media","d":"Old tweets; replies; external links; EXIF-leak media."},
+    {"t":"Follows & Lists","d":"Lists that reveal affiliations."}
+  ],
+  "tiktok": [
+    {"t":"Profile basics","d":"Display name, username, bio; links; public/private."},
+    {"t":"Videos","d":"Backgrounds/captions/geotags."},
+    {"t":"Followers/Following","d":"Counts; social graph exposure."}
+  ],
+  "whatsapp": [
+    {"t":"Profile","d":"Name, photo, about; who can see."},
+    {"t":"Groups","d":"Group names; participants; shared media."}
+  ]
+}

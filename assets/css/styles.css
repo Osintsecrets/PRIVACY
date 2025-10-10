@@ -324,3 +324,10 @@ html[dir="rtl"] .select { padding: 10px 12px 10px 38px; background-position: lef
 
 /* RTL consistency */
 html[dir="rtl"] .stepper { direction: rtl; }
+:root{ --gap-1:.5rem; --gap-2:.75rem; --gap-3:1rem; --radius:12px; --card:#0e0f12; --line:rgba(255,255,255,.12); --line-weak:rgba(255,255,255,.07); }
+.container{max-width:1080px;margin:0 auto;padding:0 1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:var(--gap-3)}
+.stack>*{margin:0 0 var(--gap-2)}
+[dir="rtl"] .sticky-tools{left:1rem;right:auto}
+kbd,kbd.kbd{font-family:ui-monospace,monospace;background:rgba(255,255,255,.08);padding:.05rem .35rem;border-radius:6px}
+@media print{ .no-print{display:none !important;} }

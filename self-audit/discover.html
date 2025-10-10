@@ -72,6 +72,8 @@
       <div class="chips" style="margin:.75rem 0 0">
         <span class="chip" data-i18n="discover.tip.onePlatform">Tip: work **one platform at a time** to avoid overwhelm.</span>
       </div>
+      <button class="btn ghost" id="btn-tour" aria-describedby="tour-help" aria-label="Quick tour">Quick tour</button>
+      <small id="tour-help" class="muted">Press <span class="kbd">Ctrl/Cmd+K</span> anytime to open the command palette.</small>
     </section>
 
     <section class="panel">
@@ -91,6 +93,9 @@
           </ul>
           <button class="btn" id="btn-new-session" data-i18n="discover.session.new">New session</button>
           <button class="btn" id="btn-load-session" data-i18n="discover.session.load">Load saved session</button>
+          <input id="session-name" placeholder="Session name" class="no-print" style="width:100%;margin:.5rem 0"/>
+          <button class="btn" id="btn-save-named" aria-label="Save session as…">Save session as…</button>
+          <button class="btn" id="btn-list" aria-label="Load saved…">Load saved…</button>
         </div>
       </div>
     </section>
@@ -98,6 +103,11 @@
     <section class="panel">
       <h2 data-i18n="discover.wizardTitle">3) Guided checklist (A→Z)</h2>
       <div class="progress" aria-label="Progress"><i id="progress-bar"></i></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:.5rem 0" class="no-print">
+        <small>Score: <strong id="score">0</strong>/100</small>
+        <div id="heatmap"></div>
+      </div>
+      <input id="search" type="search" placeholder="Search notes/tags" class="no-print" style="width:100%;margin:.5rem 0" />
       <div id="wizard" class="wizard" aria-live="polite"></div>
       <div class="wizard-actions">
         <div>
@@ -107,6 +117,8 @@
         <div>
           <button class="btn" id="btn-export-md" data-i18n="discover.export.md">Export Markdown</button>
           <button class="btn" id="btn-export-json" data-i18n="discover.export.json">Export JSON</button>
+          <button class="btn" id="btn-export-enc" aria-label="Encrypt &amp; Export">Encrypt &amp; Export</button>
+          <button class="btn no-print" id="btn-print" aria-label="Print report">Print report</button>
         </div>
       </div>
     </section>
@@ -144,5 +156,8 @@
   </div>
 
   <script src="../assets/js/discover.js" defer></script>
+  <script>
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('/PRIVACY/service-worker.js').catch(()=>{}); }
+  </script>
 </body>
 </html>
