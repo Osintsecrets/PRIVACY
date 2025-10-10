@@ -1,3 +1,5 @@
+import { loadEvidence, saveEvidence } from './evidence.js';
+
 (function(){
   const $ = sel => document.querySelector(sel);
   const $$ = sel => Array.from(document.querySelectorAll(sel));
@@ -91,6 +93,48 @@
     renderStep();
   }
 
+  function renderEvidence(area, idx){
+    const wrap = el('div',{class:'evidence-block','data-step':idx},[]);
+    const list = el('div',{class:'evidence-list'},[]);
+    const name = el('input',{type:'text',placeholder:'Filename (e.g., fb_post_2023-01-12.png)',style:'width:100%'});
+    const kind = el('select',{},[]);
+    ['screenshot','export','link','other'].forEach(k=> kind.appendChild(el('option',{value:k},[k])));
+    const cap = el('input',{type:'text',placeholder:'Short caption',style:'width:100%'});
+    const add = el('button',{class:'btn',type:'button'},['Add evidence']);
+
+    function refresh(){
+      list.innerHTML='';
+      (loadEvidence(idx)||[]).forEach((ev,i)=>{
+        const row = el('div',{class:'evi-row'},[]);
+        row.appendChild(el('span',{},[`[${ev.kind}] ${ev.name} — ${ev.caption||''}`]));
+        const rm = el('button',{class:'btn ghost',type:'button'},['Remove']);
+        rm.addEventListener('click',()=>{
+          const cur=loadEvidence(idx);
+          cur.splice(i,1);
+          saveEvidence(idx,cur);
+          refresh();
+        });
+        row.appendChild(rm);
+        list.appendChild(row);
+      });
+    }
+
+    add.addEventListener('click',()=>{
+      const itemName = name.value.trim();
+      const caption = cap.value.trim();
+      if(!itemName) return;
+      const cur=loadEvidence(idx);
+      cur.push({name:itemName, kind:kind.value, caption});
+      saveEvidence(idx,cur);
+      name.value='';
+      cap.value='';
+      refresh();
+    });
+    refresh();
+    wrap.append(list,name,kind,cap,add);
+    area.appendChild(wrap);
+  }
+
   function renderStep(){
     const wrap = $('#wizard');
     wrap.innerHTML = '';
@@ -130,6 +174,8 @@
     path.addEventListener('input', savePath);
     pathWrap.append(url, path);
     card.appendChild(pathWrap);
+
+    renderEvidence(card, state.idx);
 
     const tagsWrap = el('div',{class:'chips'},[]);
     // Quick chips (e.g., #high-risk)
@@ -232,6 +278,11 @@
         if(saved.path) lines.push(`  - Path: ${saved.path}`);
       }
       if(note) lines.push(`  - Note: ${note}`);
+      const ev = loadEvidence(i);
+      if(ev && ev.length){
+        lines.push('  - Evidence:');
+        ev.forEach(e => lines.push(`    - [${e.kind}] ${e.name}${e.caption? ' — '+e.caption: ''}`));
+      }
     });
     return lines.join('\n');
   }

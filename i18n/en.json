@@ -337,5 +337,11 @@
     "habits": "Habits",
     "reminders": "Local reminders",
     "tile": "Build habits and periodic reviews."
+  },
+  "complete": {
+    "title": "Completeness — Coverage by platform",
+    "short": "Completeness",
+    "h1": "Completeness — How much have you covered?",
+    "lede": "Shows coverage by platform/category for your current Discover session."
   }
 }

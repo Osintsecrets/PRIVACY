@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>i18n Linter</title>
+  <link rel="stylesheet" href="../assets/css/site.css"><link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<main class="container stack">
+  <h1>i18n Linter</h1>
+  <p>Loads a target page, extracts data-i18n keys, and reports which are missing in en/he JSON.</p>
+  <input id="target" placeholder="/PRIVACY/self-audit/discover.html" style="width:100%" />
+  <button class="btn" id="run">Run</button>
+  <pre id="out" style="white-space:pre-wrap"></pre>
+</main>
+<script type="module">
+async function getJSON(p){ const r=await fetch(p); return await r.json(); }
+async function getHTML(p){ const r=await fetch(p); return await r.text(); }
+function extractKeys(html){ const m=[...html.matchAll(/data-i18n=\"([^\"]+)\"/g)]; return [...new Set(m.map(x=>x[1]))]; }
+function lint(keys,en,he){ const missEn=keys.filter(k=> !has(en,k)); const missHe=keys.filter(k=> !has(he,k)); return {missEn, missHe}; }
+function has(obj,path){ return path.split('.').reduce((o,k)=> (o&&k in o)? o[k]: null, obj) !== null }
+
+document.getElementById('run').onclick = async ()=>{
+  const t=document.getElementById('target').value.trim();
+  const [html,en,he] = await Promise.all([getHTML(t), getJSON('../i18n/en.json'), getJSON('../i18n/he.json')]);
+  const keys = extractKeys(html);
+  const {missEn, missHe} = lint(keys,en,he);
+  document.getElementById('out').textContent = 'Keys found: '+keys.length+'\nMissing EN: '+missEn.length+'\n'+missEn.join('\n')+'\n\nMissing HE: '+missHe.length+'\n'+missHe.join('\n');
+};
+</script>
+</body>
+</html>
