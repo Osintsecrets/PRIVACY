@@ -24,11 +24,37 @@
     steps: [],
     idx: 0,
     progress: 0,
-    notes: {} // {stepIndex: note}
+    notes: {}, // {stepIndex: note}
+    subs: {} // {stepIndex: [sub labels]}
   };
 
   function save(){ localStorage.setItem(storeKey, JSON.stringify(state)); }
-  function load(){ try { const s = JSON.parse(localStorage.getItem(storeKey)); if(s) state = s; } catch(e){} }
+  function load(){
+    try {
+      const s = JSON.parse(localStorage.getItem(storeKey));
+      if(s){
+        state = Object.assign({}, state, s);
+        state.notes = s.notes || {};
+        state.subs = s.subs || {};
+        state.steps = Array.isArray(s.steps) ? s.steps : [];
+        if(state.platform && CHECKLISTS[state.platform]){
+          const raw = CHECKLISTS[state.platform];
+          const flat = [];
+          Object.entries(raw).forEach(([cat, items])=>{
+            (items||[]).forEach(item=> flat.push(Object.assign({}, item, {'cat': cat})));
+          });
+          if(flat.length){
+            const previous = state.steps;
+            state.steps = flat.map((item, idx)=>{
+              const prev = previous[idx] || {};
+              return Object.assign({}, item, {done: !!prev.done});
+            });
+            if(state.idx >= state.steps.length) state.idx = Math.max(0, state.steps.length-1);
+          }
+        }
+      }
+    } catch(e){}
+  }
 
   function el(tag, attrs={}, children=[]) {
     const node = document.createElement(tag);
@@ -50,7 +76,17 @@
   }
 
   function startPlatform(key){
-    state.platform = key; state.steps = CHECKLISTS[key].map(s=>({...s, done:false})); state.idx = 0; state.notes = {}; save();
+    const raw = CHECKLISTS[key] || {};
+    const flat = [];
+    Object.entries(raw).forEach(([cat, items])=>{
+      (items||[]).forEach(item=> flat.push(Object.assign({}, item, {'cat': cat})));
+    });
+    state.platform = key;
+    state.steps = flat.map(s=> Object.assign({}, s, {done:false}));
+    state.idx = 0;
+    state.notes = {};
+    state.subs = {};
+    save();
     $('#wizard').classList.add('active');
     renderStep();
   }
@@ -60,9 +96,13 @@
     wrap.innerHTML = '';
     if(!state.steps || state.steps.length===0){ wrap.textContent = 'No steps.'; return; }
     const step = state.steps[state.idx];
+    if(!step){ wrap.textContent = 'No steps.'; return; }
 
     const card = el('div',{class:'wizard-step'});
     card.appendChild(el('div',{class:'muted'},[document.createTextNode((state.idx+1)+' / '+state.steps.length+' — '+ (state.platform||''))]));
+    if(step.cat){
+      card.appendChild(el('div',{class:'muted'},[document.createTextNode(step.cat)]));
+    }
     card.appendChild(el('h3',{},[step.t]));
     card.appendChild(el('p',{},[step.d]));
 
@@ -73,6 +113,23 @@
     ta.addEventListener('input', ()=>{ state.notes[state.idx]=ta.value; save(); renderHeatmap(); });
     details.appendChild(ta);
     card.appendChild(details);
+
+    const pathWrap = el('div',{},[]);
+    const url = el('input',{type:'url',placeholder:'URL (optional)',style:'width:100%;margin:.25rem 0'});
+    const path = el('input',{type:'text',placeholder:'Path (e.g., Profile → Posts → 2023‑01‑12)',style:'width:100%;'});
+    const pathKey = 'p_'+state.idx;
+    try {
+      const saved = JSON.parse(localStorage.getItem(pathKey)||'null');
+      if(saved){
+        url.value = saved.url || '';
+        path.value = saved.path || '';
+      }
+    } catch(e){}
+    function savePath(){ localStorage.setItem(pathKey, JSON.stringify({url:url.value, path:path.value})); }
+    url.addEventListener('input', savePath);
+    path.addEventListener('input', savePath);
+    pathWrap.append(url, path);
+    card.appendChild(pathWrap);
 
     const tagsWrap = el('div',{class:'chips'},[]);
     // Quick chips (e.g., #high-risk)
@@ -85,6 +142,30 @@
       tagsWrap.appendChild(b);
     });
     card.appendChild(tagsWrap);
+
+    if(Array.isArray(step.subs) && step.subs.length){
+      const subsWrap = el('div',{class:'chips'},[]);
+      const key = String(state.idx);
+      const chosen = new Set(state.subs[key]||[]);
+      step.subs.forEach((label,si)=>{
+        const id = `sub_${state.idx}_${si}`;
+        const box = el('div',{},[]);
+        const cb = el('input',{type:'checkbox',id});
+        cb.checked = chosen.has(label);
+        cb.addEventListener('change', ()=>{
+          const cur = new Set(state.subs[key]||[]);
+          if(cb.checked) cur.add(label); else cur.delete(label);
+          state.subs[key] = Array.from(cur);
+          if(state.subs[key].length===0) delete state.subs[key];
+          save();
+        });
+        const lab = el('label',{'for':id},[label]);
+        box.appendChild(cb);
+        box.appendChild(lab);
+        subsWrap.appendChild(box);
+      });
+      card.appendChild(subsWrap);
+    }
 
     const doneWrap = el('label',{},[]);
     const cb = el('input',{type:'checkbox'});
@@ -136,8 +217,22 @@
   function exportJSON(){ const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `discover_${state.platform||'session'}.json`; a.click(); }
 
   async function buildMarkdown(){
-    const lines = []; lines.push(`# Discover log — ${state.platform||'unspecified'}`, '');
-    state.steps.forEach((s,i)=>{ const mark = s.done?'✅':'⬜'; const note=(state.notes[i]||'').trim(); lines.push(`- ${mark} **${i+1}. ${s.t}** — ${s.d}`); if(note) lines.push(`  - Note: ${note}`); });
+    const lines=[]; lines.push(`# Discover log — ${state.platform||'unspecified'}`,'');
+    state.steps.forEach((s,i)=>{
+      const mark = s.done ? '✅' : '⬜';
+      const note = (state.notes[i]||'').trim();
+      const subs = state.subs[String(i)] || [];
+      let saved = null;
+      try { saved = JSON.parse(localStorage.getItem('p_'+i)||'null'); } catch(e){}
+      const catLabel = s.cat || 'General';
+      lines.push(`- ${mark} **${i+1}. ${catLabel} / ${s.t}** — ${s.d}`);
+      if(Array.isArray(subs) && subs.length) lines.push(`  - Sub‑checks: ${subs.join(', ')}`);
+      if(saved && (saved.url || saved.path)){
+        if(saved.url) lines.push(`  - URL: ${saved.url}`);
+        if(saved.path) lines.push(`  - Path: ${saved.path}`);
+      }
+      if(note) lines.push(`  - Note: ${note}`);
+    });
     return lines.join('\n');
   }
 
