@@ -1,57 +1,58 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="auto">
+<!doctype html>
+<html lang="en" data-i18n-scope="keepsafe">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f14">
-  <title data-i18n="phases.keepsafe.title">Keep safe — Stay private over time</title>
-  <meta name="description" content="Build habits that keep your privacy posture strong long after cleanup.">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="keepsafe.title">Keep Safe — Stay private over time</title>
+  <link rel="stylesheet" href="../assets/css/site.css">
   <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <style>
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem}
+    .list{display:grid;gap:.5rem}
+    .item{border:1px solid var(--line);border-radius:10px;padding:.6rem}
+    .grid{display:grid;gap:1rem}
+    .cols{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  </style>
 </head>
 <body>
-  <a class="skip" href="#main" data-i18n="site.skip">Skip to content</a>
-  <div id="ui-overlay" aria-hidden="true"></div>
+<header id="site-header"></header>
+<main class="container stack no-print">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/PRIVACY/" data-i18n="breadcrumbs.home">Home</a> ›
+    <a href="/PRIVACY/self-audit.html" data-i18n="breadcrumbs.selfaudit">Self‑audit</a> ›
+    <span data-i18n="keepsafe.short">Keep safe</span>
+  </nav>
 
-  <header>
-    <div class="wrapper header-row" role="navigation" aria-label="Primary">
-      <a class="brand" href="../" data-i18n="site.brand">Social Risk Audit</a>
-      <div class="menu-container">
-        <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">☰</button>
-        <nav id="site-menu" class="menu" hidden aria-label="Primary">
-          <a href="../" data-i18n="nav.home">Home</a>
-          <a href="../self-audit.html" data-i18n="nav.selfaudit">Self‑audit</a>
-          <a href="../platform.html" data-i18n="nav.platform">Platform</a>
-          <a href="../why.html" data-i18n="nav.why">Why</a>
-          <a href="../ethics.html" data-i18n="nav.ethics">Ethics</a>
-          <a href="../about/" data-i18n="nav.about">About</a>
-          <a href="../disclaimer/" data-i18n="nav.disclaimer">Disclaimer</a>
-        </nav>
+  <section class="card stack">
+    <h1 data-i18n="keepsafe.h1">Keep Safe — Habits and reviews</h1>
+    <p class="muted" data-i18n="keepsafe.lede">Build privacy habits and schedule periodic reviews. All reminders are stored locally.</p>
+
+    <div class="grid cols">
+      <div>
+        <h3 data-i18n="keepsafe.habits">Habits</h3>
+        <ul id="habits" class="list"></ul>
+      </div>
+      <div>
+        <h3 data-i18n="keepsafe.reminders">Local reminders</h3>
+        <div class="list">
+          <input id="rem-title" placeholder="Title"/>
+          <select id="rem-every">
+            <option value="weekly">Weekly</option>
+            <option value="monthly" selected>Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+          <button class="btn" id="rem-add">Add reminder</button>
+        </div>
+        <ul id="rem-list" class="list"></ul>
       </div>
     </div>
-  </header>
-
-  <main id="main" class="wrapper">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="../" data-i18n="breadcrumbs.home">Home</a>
-      <span aria-hidden="true">›</span>
-      <a href="../self-audit.html" data-i18n="breadcrumbs.selfaudit">Self‑audit</a>
-      <span aria-hidden="true">›</span>
-      <span data-i18n="breadcrumbs.keepsafe">Keep safe</span>
-    </nav>
-
-    <h1 data-i18n="phases.keepsafe.title">Keep safe — Stay private over time</h1>
-    <p class="lede" data-i18n="phases.keepsafe.lede">Habits and reviews to keep risk low.</p>
-
-    <section id="phase-checklists" class="phase-checklists"></section>
-  </main>
-
-  <footer id="site-footer" class="site-footer">
-    <div class="footer-inner">
-      <span>© <a href="../" rel="home">OSINTSecrets</a></span>
+    <div>
+      <button class="btn" id="btn-print">Print checklist</button>
+      <button class="btn" id="btn-export-md">Export habits (MD)</button>
     </div>
-  </footer>
-
-  <script src="../assets/js/i18n.js" defer></script>
-  <script src="../assets/js/main.js" defer></script>
+  </section>
+</main>
+<script type="module" src="../assets/js/keep-safe.js" defer></script>
 </body>
 </html>

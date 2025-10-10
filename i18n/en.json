@@ -291,5 +291,44 @@
     "close": "Close",
     "updated": "Updated {date}",
     "tagJoin": ", "
+  },
+  "analyze": {
+    "title": "Analyze — Risk triage",
+    "short": "Analyze",
+    "h1": "Analyze — Turn findings into risk",
+    "lede": "Load your Discover session, cluster findings, and mark priorities.",
+    "load": "Load",
+    "risk": {
+      "all": "All risks",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "export": {
+      "md": "Export triage (MD)"
+    },
+    "summary": "Summary",
+    "tags": "Top tags",
+    "items": "Items",
+    "tile": "Turn findings into risk and priorities."
+  },
+  "reduce": {
+    "title": "Reduce — Lock it down",
+    "short": "Reduce",
+    "h1": "Reduce — Lock it down",
+    "lede": "Turn triage into action. Work one platform at a time.",
+    "queue": "Backlog (from Analyze)",
+    "checklists": "Common actions",
+    "export": "Export actions (MD)",
+    "tile": "Turn priorities into actions and mark them done."
+  },
+  "keepsafe": {
+    "title": "Keep Safe — Stay private over time",
+    "short": "Keep safe",
+    "h1": "Keep Safe — Habits and reviews",
+    "lede": "Build privacy habits and schedule periodic reviews.",
+    "habits": "Habits",
+    "reminders": "Local reminders",
+    "tile": "Build habits and periodic reviews."
   }
 }
