@@ -1,0 +1,82 @@
+{
+  "facebook": {
+    "High": [
+      "Make profile private or limit past posts visibility",
+      "Remove phone number from profile/contact info",
+      "Hide friends list or set to 'Only me'",
+      "Review and delete risky photos; remove location metadata (if any visible)",
+      "Untag yourself from risky posts/photos",
+      "Disable face recognition (if applicable)",
+      "Review apps and websites — remove unused",
+      "Turn on two-factor auth; rotate password; update recovery methods"
+    ],
+    "Medium": [
+      "Review old posts (>2y) for oversharing",
+      "Limit who can look you up via email/phone",
+      "Hide pages you like if sensitive"
+    ],
+    "Low": [
+      "Review public groups/pages follows",
+      "Check events/check-ins visibility"
+    ]
+  },
+  "instagram": {
+    "High": [
+      "Switch to private account",
+      "Remove phone/email from bio if public",
+      "Review tagged photos; request removals",
+      "Turn on two-factor auth; rotate password"
+    ],
+    "Medium": [
+      "Hide activity status",
+      "Limit story replies and mentions"
+    ],
+    "Low": [
+      "Review highlights for PII"
+    ]
+  },
+  "x": {
+    "High": [
+      "Protect your Tweets (private)",
+      "Remove phone number; limit discoverability",
+      "Review media and old tweets",
+      "Turn on two-factor auth; rotate password"
+    ],
+    "Medium": [
+      "Disable location in tweets",
+      "Review lists you appear in"
+    ],
+    "Low": [
+      "Check bio/website for PII"
+    ]
+  },
+  "tiktok": {
+    "High": [
+      "Private account",
+      "Restrict who can message/comment/tag",
+      "Family Pairing (if applicable)",
+      "Rotate password; enable 2FA if available"
+    ],
+    "Medium": [
+      "Limit who can download your videos",
+      "Review past videos for PII in backgrounds"
+    ],
+    "Low": [
+      "Review suggested accounts / contacts sync"
+    ]
+  },
+  "whatsapp": {
+    "High": [
+      "Set Last Seen, Photo, About to 'Nobody' or 'My Contacts'",
+      "Turn on two-step verification",
+      "Disable cloud previews on lock screen"
+    ],
+    "Medium": [
+      "Leave risky groups; restrict adding to groups",
+      "Review live location and linked devices"
+    ],
+    "Low": [
+      "Review profile photo for PII"
+    ]
+  }
+}

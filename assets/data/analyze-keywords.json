@@ -1,0 +1,5 @@
+{
+  "high": ["credential","password","token","passcode","phone","address","passport","license","id"],
+  "medium": ["email","work","employer","school","children","family","geotag","location"],
+  "low": ["hobby","interest","friend","like"]
+}
