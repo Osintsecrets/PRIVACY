@@ -266,6 +266,11 @@
       "md": "Export Markdown",
       "json": "Export JSON"
     },
+    "analytics": "Analytics",
+    "sessionBlob": {
+      "export": "Export encrypted session",
+      "import": "Import encrypted session"
+    },
     "pii": {
       "title": "What is PII? Risk levels",
       "lede": "PII = information that can identify, locate, impersonate you. Risk depends on context and uniqueness.",
@@ -312,6 +317,11 @@
     "export": {
       "md": "Export triage (MD)"
     },
+    "analytics": "Analytics",
+    "sessionBlob": {
+      "export": "Export encrypted session",
+      "import": "Import encrypted session"
+    },
     "summary": "Summary",
     "tags": "Top tags",
     "items": "Items",
@@ -326,6 +336,11 @@
     "queue": "Backlog (from Analyze)",
     "checklists": "Common actions",
     "export": "Export actions (MD)",
+    "analytics": "Analytics",
+    "sessionBlob": {
+      "export": "Export encrypted session",
+      "import": "Import encrypted session"
+    },
     "tile": "Turn priorities into actions and mark them done.",
     "keywords": "Keyword sets loaded"
   },

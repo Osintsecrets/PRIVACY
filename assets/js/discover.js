@@ -1,4 +1,5 @@
 import { loadEvidence, saveEvidence } from './evidence.js';
+import { bar } from '../assets/js/analytics.js';
 
 (function(){
   const $ = sel => document.querySelector(sel);
@@ -235,6 +236,13 @@ import { loadEvidence, saveEvidence } from './evidence.js';
     return Math.min(100, Math.round((base / (state.steps.length*3)) * 100));
   }
 
+  function renderAnalyticsStrip(){
+    if(!document.getElementById('analytics-discover')) return;
+    const lbl=['phone','email','address','photo','message'];
+    const counts = lbl.map(k=> (JSON.stringify(state.notes).match(new RegExp('#?'+k,'ig'))||[]).length);
+    bar('analytics-discover', lbl.map(s=>s[0].toUpperCase()), counts);
+  }
+
   function updateProgress(){
     const total = state.steps.length || 1;
     const done = state.steps.filter(s=>s.done).length;
@@ -244,6 +252,7 @@ import { loadEvidence, saveEvidence } from './evidence.js';
     const scoreEl = $('#score');
     if(scoreEl) scoreEl.textContent = riskScore();
     renderHeatmap();
+    renderAnalyticsStrip();
   }
 
   function renderHeatmap(){
@@ -311,12 +320,38 @@ import { loadEvidence, saveEvidence } from './evidence.js';
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `discover_${state.platform||'session'}.enc.txt`; a.click();
   }
 
+  async function exportSessionEncrypted(){
+    const pass = prompt('Passphrase to encrypt this session'); if(!pass) return;
+    const payload = JSON.stringify(state);
+    const enc = new TextEncoder(); const salt = crypto.getRandomValues(new Uint8Array(16)); const iv = crypto.getRandomValues(new Uint8Array(12));
+    const keyMat = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'}, keyMat, {name:'AES-GCM',length:256}, false, ['encrypt']);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv}, key, enc.encode(payload)));
+    const out = new Uint8Array(salt.length+iv.length+ct.length); out.set(salt,0); out.set(iv,16); out.set(ct,28);
+    const b64 = btoa(String.fromCharCode(...out));
+    const blob = new Blob([b64], {type:'text/plain'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`discover_session.enc.txt`; a.click();
+  }
+  async function importSessionEncrypted(){
+    const pass = prompt('Passphrase to decrypt'); if(!pass) return;
+    const file = await new Promise(r=>{ const inp=document.createElement('input'); inp.type='file'; inp.accept='.txt'; inp.onchange=()=> r(inp.files[0]); inp.click(); });
+    const b64 = await file.text(); const raw = Uint8Array.from(atob(b64), c=>c.charCodeAt(0));
+    const salt=raw.slice(0,16), iv=raw.slice(16,28), data=raw.slice(28);
+    const enc = new TextEncoder(); const keyMat = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'}, keyMat, {name:'AES-GCM',length:256}, false, ['decrypt']);
+    const dec = await crypto.subtle.decrypt({name:'AES-GCM',iv}, key, data);
+    const next = JSON.parse(new TextDecoder().decode(new Uint8Array(dec)));
+    state = next; save(); $('#wizard').classList.add('active'); renderStep(); alert('Imported session loaded.');
+  }
+
   function bindEvents(){
     $('#btn-prev').addEventListener('click', prev);
     $('#btn-next').addEventListener('click', next);
     $('#btn-export-json').addEventListener('click', exportJSON);
     $('#btn-export-md').addEventListener('click', exportMD);
     $('#btn-export-enc')?.addEventListener('click', ()=>{ exportEncrypted(); });
+    $('#btn-export-session')?.addEventListener('click', exportSessionEncrypted);
+    $('#btn-import-session')?.addEventListener('click', importSessionEncrypted);
     $('#btn-new-session').addEventListener('click', ()=>{ localStorage.removeItem(storeKey); state={platform:null,steps:[],idx:0,progress:0,notes:{}}; save(); location.reload(); });
     $('#btn-load-session').addEventListener('click', ()=>{ load(); if(state.platform){ $('#wizard').classList.add('active'); renderStep(); }});
     $('#btn-pii').addEventListener('click', ()=> $('#pii-modal').classList.add('open'));

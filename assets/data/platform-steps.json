@@ -30,49 +30,74 @@
   },
   "instagram": {
     "Profile": [
-      {"t": "Basics", "d": "Name, username, bio, link-in-bio; public/private."},
-      {"t": "Contact", "d": "Email/phone in bio?"}
+      {"t":"Basics","d":"Name, username, bio, link-in-bio; public/private."},
+      {"t":"Contact","d":"Email/phone in bio?","subs":["Phone in bio","Email in bio","Messaging links","External contact forms"]},
+      {"t":"Account type","d":"Personal/Creator/Business; connected FB page?","subs":["Creator","Business","Personal","Connected Facebook"]}
     ],
     "Content": [
-      {"t": "Posts", "d": "Photos/videos background clues.", "subs": ["House numbers", "Street names", "Uniforms/badges", "Workplace signage"]},
-      {"t": "Highlights & Stories", "d": "Highlights that expose routine, kids’ school, locations."},
-      {"t": "Tagged", "d": "Risky tags; request removals."}
+      {"t":"Posts","d":"Photos/videos; background clues.","subs":["House numbers","Street names","Uniforms/badges","Workplace signage","Children/minors","License plates","Inside home","Mail/package labels"]},
+      {"t":"Highlights & Stories","d":"Highlights exposing routine/locations.","subs":["Home routine","Commute","Gym/club","Kids’ school","Religious venue","Medical visits"]},
+      {"t":"Tagged","d":"Risky tags; request removals.","subs":["Photos posted by others","Mentions in captions","Tagged products/shops"]},
+      {"t":"Reels","d":"Audio/location cues; on-screen text."}
+    ],
+    "Connections": [
+      {"t":"Followers/Following","d":"Suspicious followers; stalker patterns.","subs":["Unknown accounts","Brand-new accounts","No posts/odd names","High-activity lurkers"]},
+      {"t":"Close friends","d":"Who has access to private Stories?"}
     ],
     "Security": [
-      {"t": "Followers/Following", "d": "Suspicious followers? Doxxing/scraping risk."},
-      {"t": "Cross-links", "d": "Link-in-bio leads to other platforms?"}
+      {"t":"Account linking","d":"Cross-links to other platforms.","subs":["Link-in-bio hubs","Direct platform links","Email domains"]},
+      {"t":"Sensitive content controls","d":"Filters and limits active?"}
     ]
   },
   "x": {
     "Profile": [
-      {"t": "Basics", "d": "Display name, handle, bio, location, website; public/private."}
+      {"t":"Basics","d":"Display name, handle, bio, location, website; public/private."},
+      {"t":"Verification & visibility","d":"Protected tweets? Verified?","subs":["Protected","Verified","Allow DMs from anyone"]}
     ],
     "Content": [
-      {"t": "Tweets & Media", "d": "Old tweets; replies; external links; media.", "subs": ["Faces of minors", "Home exterior", "Geo hints in photos"]}
+      {"t":"Tweets","d":"Old tweets; replies; quote tweets; external links.","subs":["Old identifiers (phone/email)","Address mentions","Workplace clues","Children/minors","Exact geos","Docs/photos with PII"]},
+      {"t":"Media","d":"Images/video EXIF visible? On-image PII.","subs":["Screenshots of credentials","Badges/uniforms","Mail/packages","Computer screens"]}
+    ],
+    "Connections": [
+      {"t":"Follows & Followers","d":"Lists that reveal affiliations.","subs":["Political","Religious","Employer/union","Sensitive hobbies"]},
+      {"t":"Lists","d":"Public lists you’re in or own"}
     ],
     "Security": [
-      {"t": "Lists & Follows", "d": "Lists reveal affiliations?"},
-      {"t": "Discoverability", "d": "Email/phone discoverability"}
+      {"t":"Discoverability","d":"Email/phone discoverability settings"},
+      {"t":"Apps & sessions","d":"Connected apps; active sessions."}
     ]
   },
   "tiktok": {
     "Profile": [
-      {"t": "Basics", "d": "Name, username, bio; links; public/private."}
+      {"t":"Basics","d":"Name, username, bio; links; public/private."},
+      {"t":"Contact","d":"Email/phone in profile or linked pages"}
     ],
     "Content": [
-      {"t": "Videos", "d": "Backgrounds/captions/geotags.", "subs": ["Street signs", "School uniforms", "License plates", "Inside home"]}
+      {"t":"Videos","d":"Backgrounds/captions/geotags.","subs":["Street signs","School uniforms","License plates","Inside home","Out-the-window views","Reflections/mirrors","Metadata in overlays"]},
+      {"t":"LIVE/Streams","d":"Real-time location/routine risk"},
+      {"t":"Stitches/duets","d":"Exposures via others’ content"}
+    ],
+    "Connections": [
+      {"t":"Followers/Following","d":"Graph exposures; creators you interact with"}
     ],
     "Security": [
-      {"t": "Followers/Following", "d": "Counts; social graph exposure."}
+      {"t":"Recommendation settings","d":"Personalization risks"},
+      {"t":"Family Pairing","d":"Linked guardian/child controls"}
     ]
   },
   "whatsapp": {
     "Profile": [
-      {"t": "Profile", "d": "Name, photo, about; who can see."}
+      {"t":"Profile","d":"Name, photo, about; visibility."},
+      {"t":"Contact exposure","d":"Who can find you by phone?"}
+    ],
+    "Chats & Groups": [
+      {"t":"Groups","d":"Names; participants; shared media.","subs":["Open invite links","Large public groups","Work/school groups","Location-based groups"]},
+      {"t":"Media visibility","d":"Auto-save media to gallery?"},
+      {"t":"Backups","d":"Cloud backups encryption state"}
     ],
     "Security": [
-      {"t": "Groups", "d": "Group names; participants; shared media."},
-      {"t": "Linked devices", "d": "Review linked devices; web sessions"}
+      {"t":"Two-step verification","d":"Enabled? Recovery email set?"},
+      {"t":"Linked devices","d":"Active sessions; Web/Desktop"}
     ]
   }
 }
