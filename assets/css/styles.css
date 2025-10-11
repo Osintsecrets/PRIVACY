@@ -341,3 +341,8 @@ kbd,kbd.kbd{font-family:ui-monospace,monospace;background:rgba(255,255,255,.08);
 .evidence-block{border-top:1px dashed var(--line);margin-top:.5rem;padding-top:.5rem}
 .evidence-list{display:grid;gap:.35rem;margin-bottom:.5rem}
 .evi-row{display:flex;justify-content:space-between;gap:.5rem}
+@media (max-width:640px){
+  .card{padding:.75rem}
+  .chips{gap:.3rem}
+  input[type="text"], input[type="url"], select{font-size:16px} /* prevent iOS input zoom */
+}

@@ -1,4 +1,5 @@
 import { loadDiscover, listDiscoverSessions, pickSessionByName, extractTags, download } from './sra-utils.js';
+import { bar } from '../assets/js/analytics.js';
 
 let KEYWORDS = { high:[], medium:[], low:[] };
 async function loadKeywords(){
@@ -38,6 +39,14 @@ function renderSummary(){
   Object.entries(tags).sort((a,b)=>b[1]-a[1]).slice(0,10).forEach(([t,c])=>{
     const b=document.createElement('button'); b.className='btn ghost'; b.textContent='#'+t+' ('+c+')'; b.onclick=()=> applySearch('#'+t); tagWrap.appendChild(b);
   });
+  renderAnalytics();
+}
+
+function renderAnalytics(){
+  if(!document.getElementById('analytics-analyze')) return;
+  const lbl=['phone','email','address','photo','message'];
+  const counts = lbl.map(k=> (JSON.stringify((session&&session.notes)||{}).match(new RegExp('#?'+k,'ig'))||[]).length);
+  bar('analytics-analyze', lbl.map(s=>s[0].toUpperCase()), counts);
 }
 
 function renderList(){
